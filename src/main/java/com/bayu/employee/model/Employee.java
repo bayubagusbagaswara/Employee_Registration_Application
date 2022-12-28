@@ -6,13 +6,10 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.GenericGenerator;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
-@Table(name = "employee")
+@Table(name = "employees")
 @Data
 @Builder
 @NoArgsConstructor
@@ -24,7 +21,12 @@ public class Employee {
     @GeneratedValue(generator = "system-uuid")
     private String id;
 
+    @Column(name = "first_name")
     private String firstName;
 
+    @Column(name = "last_name")
     private String lastName;
+
+    @Column(name = "email")
+    private String email;
 }
