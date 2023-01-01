@@ -23,6 +23,13 @@ public class EmployeeController {
         return "index";
     }
 
-
+    // handle showEmployeeForm
+    @GetMapping("/showNewEmployeeForm")
+    public String showNewEmployeeForm(Model model) {
+        // create model attribute to bind form data
+        Employee employee = new Employee();
+        model.addAttribute("employee", employee);
+        return "new_employee";
+    }
 
 }
