@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -21,5 +22,18 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     public void saveEmployee(Employee employee) {
         employeeRepository.save(employee);
+    }
+
+    @Override
+    public Employee getEmployeeById(String id) {
+        Optional<Employee> optionalEmployee = employeeRepository.findById(id);
+        Employee employee = null;
+
+        if (optionalEmployee.isPresent()) {
+            employee = optionalEmployee.get();
+        } else {
+            throw new RuntimeException("Employee not found for id : " + id);
+        }
+        return employee;
     }
 }
