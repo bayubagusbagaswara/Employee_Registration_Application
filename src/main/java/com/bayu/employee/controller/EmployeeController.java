@@ -6,6 +6,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
 
@@ -30,6 +32,17 @@ public class EmployeeController {
         Employee employee = new Employee();
         model.addAttribute("employee", employee);
         return "new_employee";
+    }
+
+    // handle for saveEmployee
+    @PostMapping("/saveEmployee")
+    public String saveEmployee(@ModelAttribute("employee") Employee employee) {
+
+        // save employee to database
+        employeeService.saveEmployee(employee);
+        // redirect ke halaman listEmployee, yakni index.html
+        return "redirect:/";
+
     }
 
 }
