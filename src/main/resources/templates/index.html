@@ -25,6 +25,14 @@
                 <td th:text="${employee.firstName}"></td>
                 <td th:text="${employee.lastName}"></td>
                 <td th:text="${employee.email}"></td>
+                <td>
+                    <a href="@{/showFormForUpdate}/{id}(id=${employee.id})}" class="btn btn-primary">
+                        Update
+                    </a>
+                    <a href="@{/deleteEmployee/{id}(id=${employee.id})}" class="btn btn-danger">
+                        Delete
+                    </a>
+                </td>
             </tr>
             </tbody>
         </table>
