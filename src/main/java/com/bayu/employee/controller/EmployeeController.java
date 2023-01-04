@@ -3,6 +3,7 @@ package com.bayu.employee.controller;
 import com.bayu.employee.model.Employee;
 import com.bayu.employee.service.EmployeeService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,9 +22,8 @@ public class EmployeeController {
     // display list of employees
     @GetMapping("/")
     public String viewHomePage(Model model) {
-        List<Employee> employees = employeeService.getAllEmployees();
-        model.addAttribute("listEmployees", employees);
-        return "index";
+        // default pageNo = 1
+        return findPaginated(1, model);
     }
 
     // handle showEmployeeForm
@@ -64,6 +64,26 @@ public class EmployeeController {
         // call delete employee method
         employeeService.deleteEmployeeById(id);
         return "redirect:/";
+    }
+
+
+    // handler for paginated
+    @GetMapping("/page/{pageNo}")
+    public String findPaginated(@PathVariable(value = "pageNo") int pageNo,
+                                Model model) {
+        // default size 5
+        int pageSize = 5;
+
+        Page<Employee> page = employeeService.findPaginated(pageNo, pageSize);
+        List<Employee> listEmployees = page.getContent();
+
+        model.addAttribute("currentPage", pageNo);
+        model.addAttribute("totalPages", page.getTotalPages());
+        model.addAttribute("totalItems", page.getTotalElements());
+        model.addAttribute("listEmployees", listEmployees);
+
+        // return to page index.html
+        return "index";
     }
 
 }
