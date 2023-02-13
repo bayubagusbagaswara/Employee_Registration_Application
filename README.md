@@ -1,7 +1,19 @@
-# Employee Form
+# Employee Registration Application
 
-## Technologies
+# Registration
 
-- Frontend Thymeleaf
+# Login
 
-- Kita contoh pada project Java Guides - Employee Management System
+# Role 
+
+- ADMIN
+- ROLE
+
+# Menu : User 
+
+# Menu : Educational Background
+
+# Menu : Job Experience
+
+# Menu : Training History
+
