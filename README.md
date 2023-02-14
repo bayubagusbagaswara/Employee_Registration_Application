@@ -9,7 +9,7 @@
 - ADMIN
 - ROLE
 
-# Menu : User 
+# Menu : Employee Profile 
 
 # Menu : Educational Background
 
@@ -17,3 +17,7 @@
 
 # Menu : Training History
 
+# Feature
+
+- Remember Me
+- Changing Password
