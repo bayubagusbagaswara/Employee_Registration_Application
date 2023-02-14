@@ -1,7 +1,8 @@
-package com.bayu.employee.service;
+package com.bayu.employee.service.impl;
 
 import com.bayu.employee.model.Employee;
 import com.bayu.employee.repository.EmployeeRepository;
+import com.bayu.employee.service.EmployeeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
