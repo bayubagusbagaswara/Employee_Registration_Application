@@ -16,7 +16,6 @@ public class EmployeeController {
 
     private final EmployeeService employeeService;
 
-    // display list of employees
     @GetMapping("/")
     public String viewHomePage(Model model) {
         // default pageNo = 1
