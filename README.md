@@ -1,5 +1,15 @@
 # Employee Registration Application
 
+# Step-Step
+
+1. Buat template untuk Register, Login, dan HomePage atau index.html
+
+# Flow Bisnis
+
+1. Pertama, harus registrasi dulu dengan memasukkan username dan password
+2. Kedua, kita diarahkan untuk login. Login dengan memasukkan username dan password
+3. Ketiga, kita mengisi form biodata employee, lalu save
+
 # Registration
 
 # Login
