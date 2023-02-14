@@ -1,19 +1,21 @@
 package com.bayu.employee.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
 
 @Entity
-@Table(name = "employees")
-@Data
+@Table(name = "employees", uniqueConstraints = {
+        @UniqueConstraint(name = "employee_nik_unique", columnNames = "nik"),
+        @UniqueConstraint(name = "employee_email_unique", columnNames = "email")
+})
+@Getter
+@Setter
 @Builder
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 public class Employee {
 
     @Id
@@ -21,12 +23,12 @@ public class Employee {
     @GeneratedValue(generator = "system-uuid")
     private String id;
 
-    @Column(name = "first_name")
-    private String firstName;
+    @Column(name = "name")
+    private String name;
 
-    @Column(name = "last_name")
-    private String lastName;
+    @Column(name = "age")
+    private Integer age;
 
-    @Column(name = "email")
-    private String email;
+    @Column(name = "address")
+    private String address;
 }
