@@ -8,14 +8,18 @@ public class AuthController {
 
 
     // view form register
-    @GetMapping("/login")
-    public String login() {
-        return "auth/login";
+    @GetMapping("/register")
+    public String register() {
+        return "auth/register";
     }
 
     // post data register
 
     // view form login
+    @GetMapping("/login")
+    public String login() {
+        return "auth/login";
+    }
 
     // post data login
 
