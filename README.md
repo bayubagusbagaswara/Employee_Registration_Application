@@ -4,6 +4,9 @@
 
 1. Buat template untuk Register, Login, dan HomePage atau index.html (DONE)
 2. Kita coba flow register dan login, kita implementasi spring security
+3. REGISTER (DONE)
+4. Validasi, kita coba taruh validasi, pesan error terdapat dibawah tiap kolom, kita contoh dari WPU
+5. Login, kita coba login dengan user yang sudah ada di database, jika berhasil login, maka redirect ke controller testing "/login/success"
 
 # Flow Bisnis
 
