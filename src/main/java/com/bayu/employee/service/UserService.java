@@ -1,13 +1,17 @@
 package com.bayu.employee.service;
 
-import com.bayu.employee.payload.LoginRequest;
-import com.bayu.employee.payload.LoginResponse;
-import com.bayu.employee.payload.RegistrationRequest;
-import com.bayu.employee.payload.RegistrationResponse;
+import com.bayu.employee.payload.*;
 
 public interface UserService {
 
-    RegistrationResponse register(RegistrationRequest registrationRequest);
+    Boolean checkUsernameIsExists(String username);
+
+    Boolean checkEmailIsExists(String email);
+
+    void register(RegistrationRequest registrationRequest);
 
     LoginResponse login(LoginRequest loginRequest);
+
+    UserDTO getUserByEmail(String email);
+
 }
