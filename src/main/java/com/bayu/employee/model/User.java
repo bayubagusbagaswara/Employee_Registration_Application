@@ -4,10 +4,12 @@ import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
 
 @Entity
 @Table(name = "users", uniqueConstraints = {
-        @UniqueConstraint(name = "user_username_unique", columnNames = "username")
+        @UniqueConstraint(name = "user_username_unique", columnNames = "username"),
+        @UniqueConstraint(name = "user_email_unique", columnNames = "email")
 })
 @Getter
 @Setter
@@ -23,6 +25,10 @@ public class User {
 
     @Column(name = "username")
     private String username;
+
+    @Email
+    @Column(name = "email")
+    private String email;
 
     @Column(name = "password")
     private String password;
