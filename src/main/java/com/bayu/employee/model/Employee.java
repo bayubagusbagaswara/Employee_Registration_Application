@@ -7,10 +7,7 @@ import javax.persistence.*;
 import javax.validation.constraints.Email;
 
 @Entity
-@Table(name = "employees", uniqueConstraints = {
-        @UniqueConstraint(name = "employee_nik_unique", columnNames = "nik"),
-        @UniqueConstraint(name = "employee_email_unique", columnNames = "email")
-})
+@Table(name = "employees")
 @Getter
 @Setter
 @Builder
