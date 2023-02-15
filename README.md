@@ -2,7 +2,8 @@
 
 # Step-Step
 
-1. Buat template untuk Register, Login, dan HomePage atau index.html
+1. Buat template untuk Register, Login, dan HomePage atau index.html (DONE)
+2. Kita coba flow register dan login, kita implementasi spring security
 
 # Flow Bisnis
 
