@@ -7,7 +7,14 @@ import com.bayu.employee.model.enumerator.RoleName;
 import com.bayu.employee.payload.*;
 import com.bayu.employee.repository.RoleRepository;
 import com.bayu.employee.repository.UserRepository;
+import com.bayu.employee.security.CustomUserDetails;
 import com.bayu.employee.service.UserService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -17,16 +24,19 @@ import java.util.Set;
 @Service
 public class UserServiceImpl implements UserService {
 
+    private static final Logger log = LoggerFactory.getLogger(UserServiceImpl.class);
     private static final String USER_ROLE_NOT_SET = "User role not set";
 
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
     private final PasswordEncoder passwordEncoder;
+    private final AuthenticationManager authenticationManager;
 
-    public UserServiceImpl(UserRepository userRepository, RoleRepository roleRepository, PasswordEncoder passwordEncoder) {
+    public UserServiceImpl(UserRepository userRepository, RoleRepository roleRepository, PasswordEncoder passwordEncoder, AuthenticationManager authenticationManager) {
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
         this.passwordEncoder = passwordEncoder;
+        this.authenticationManager = authenticationManager;
     }
 
     @Override
@@ -49,12 +59,29 @@ public class UserServiceImpl implements UserService {
                 .enabled(true)
                 .build();
 
+        Set<Role> roleSet = new HashSet<>();
+
+        roleSet.add(roleRepository.getByName(RoleName.USER.name())
+                .orElseThrow(() -> new AppException(USER_ROLE_NOT_SET)));
+
+        user.setRoles(roleSet);
+
         userRepository.save(user);
     }
 
     @Override
-    public LoginResponse login(LoginRequest loginRequest) {
-        return null;
+    public AuthenticationResponse login(LoginRequest loginRequest) {
+        Authentication authentication = authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(
+                        loginRequest.getUsername(), loginRequest.getPassword()
+                ));
+
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+        CustomUserDetails customUserDetails = (CustomUserDetails) authentication.getPrincipal();
+        log.info("Current User Login : {}", customUserDetails.getEmail());
+        return AuthenticationResponse.builder()
+                .username(customUserDetails.getUsername())
+                .build();
     }
 
     @Override
@@ -100,13 +127,6 @@ public class UserServiceImpl implements UserService {
                 .build();
 
         Set<Role> roleSet = new HashSet<>();
-        if (userRepository.count() == 0) {
-            roleSet.add(roleRepository.getByName(RoleName.ADMIN.name())
-                    .orElseThrow(() -> new AppException(USER_ROLE_NOT_SET)));
-            roleSet.add(roleRepository.getByName(RoleName.USER.name())
-                    .orElseThrow(() -> new AppException(USER_ROLE_NOT_SET)));
-        }
-
         roleSet.add(roleRepository.getByName(RoleName.USER.name())
                 .orElseThrow(() -> new AppException(USER_ROLE_NOT_SET)));
 
