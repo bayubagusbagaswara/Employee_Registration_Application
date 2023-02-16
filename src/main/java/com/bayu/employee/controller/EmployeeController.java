@@ -57,4 +57,9 @@ public class EmployeeController {
     }
 
 
+    // handler Get All Employee hanya bisa diakses oleh /admin/**
+    // handler Delete Employee hanya bisa diakses oleh /admin/**
+
+
+
 }
