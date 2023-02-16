@@ -12,6 +12,12 @@ public interface UserService {
 
     LoginResponse login(LoginRequest loginRequest);
 
+    UserDTO createUser(CreateUserRequest createUserRequest);
+
+    UserDTO getUserById(String id);
+
+    UserDTO getUserByUsername(String username);
+
     UserDTO getUserByEmail(String email);
 
 }
