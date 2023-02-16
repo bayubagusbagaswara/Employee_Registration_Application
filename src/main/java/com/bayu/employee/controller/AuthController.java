@@ -1,16 +1,10 @@
 package com.bayu.employee.controller;
 
-import com.bayu.employee.payload.LoginRequest;
-import com.bayu.employee.payload.LoginResponse;
 import com.bayu.employee.payload.RegistrationRequest;
-import com.bayu.employee.payload.RegistrationResponse;
 import com.bayu.employee.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
-import org.springframework.security.authentication.AnonymousAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -79,26 +73,25 @@ public class AuthController {
 
         userService.register(registrationRequest);
 
-        return "redirect:/login";
+        return "redirect:/signin";
     }
 
-    // kalau endpoint ini dibah menjadi /signin
     @GetMapping("/signin")
     public String showLoginPage(Model model) {
         model.addAttribute("title", "Login Page");
         return "auth/login";
     }
 
-//    @PostMapping("/login")
-//    public String doLogin() {
-        // harusnya disini terjadi autentikasi username dan password
-
+//    @PostMapping("/signin")
+//    public String doLogin(@ModelAttribute LoginRequest loginRequest) {
+//        // harusnya disini terjadi autentikasi username dan password
+//
 //        log.info("Username: {}", loginRequest.getUsername());
 //        log.info("Password: {}", loginRequest.getPassword());
-//
+////
 //        userService.login(loginRequest);
-
-//        return "redirect:/"; // ini mengarah ke register.html
+//
+//        return "home"; // ini mengarah ke register.html, harusnya mengarah ke home.html
 //    }
 
 
