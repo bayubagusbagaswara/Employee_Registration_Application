@@ -10,7 +10,11 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+/**
+ * Yang bisa dilakukan oleh endpoint ini adalah selain get employee
+ */
 @Controller
+@RequestMapping("/employees")
 @RequiredArgsConstructor
 public class EmployeeController {
 
