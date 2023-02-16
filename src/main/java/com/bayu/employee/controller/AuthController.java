@@ -1,5 +1,6 @@
 package com.bayu.employee.controller;
 
+import com.bayu.employee.payload.LoginRequest;
 import com.bayu.employee.payload.RegistrationRequest;
 import com.bayu.employee.service.UserService;
 import org.slf4j.Logger;
@@ -79,7 +80,9 @@ public class AuthController {
     }
 
     @GetMapping("/login")
-    public String login() {
+    public String showFormLogin(@ModelAttribute("loginRequest") LoginRequest loginRequest,
+                                Model model) {
+        model.addAttribute("loginRequest", loginRequest);
         return "auth/login";
     }
 
