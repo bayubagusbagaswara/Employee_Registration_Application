@@ -22,6 +22,8 @@ public interface UserRepository extends JpaRepository<User, String> {
 
     List<User> findByUsernameContainingIgnoreCase(String username);
 
+    Optional<User> findByUsernameOrEmail(String username, String email);
+
     @Query("SELECT u FROM User u WHERE u.username LIKE %:username%")
     List<User> searchByUsernameLike(@Param("username") String username);
 }
