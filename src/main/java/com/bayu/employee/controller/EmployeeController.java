@@ -16,7 +16,6 @@ public class EmployeeController {
 
     private final EmployeeService employeeService;
 
-    // handle showEmployeeForm
     @GetMapping("/showNewEmployeeForm")
     public String showNewEmployeeForm(Model model) {
         // create model attribute to bind form data
@@ -25,7 +24,6 @@ public class EmployeeController {
         return "";
     }
 
-    // handle for saveEmployee
     @PostMapping("/saveEmployee")
     public String saveEmployee(@ModelAttribute("employee") Employee employee) {
 
