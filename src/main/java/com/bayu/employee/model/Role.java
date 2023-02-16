@@ -6,7 +6,7 @@ import lombok.*;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "roles")
+@Table(name = "roles", uniqueConstraints = @UniqueConstraint(name = "role_name_unique", columnNames = "name"))
 @Getter
 @Setter
 @Builder
@@ -19,5 +19,6 @@ public class Role {
     private Long id;
 
     @Enumerated(EnumType.STRING)
-    private RoleName roleName;
+    @Column(name = "name", length = 20, nullable = false)
+    private RoleName name;
 }
