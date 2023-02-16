@@ -27,11 +27,9 @@
                                     <h1 class="h4 text-gray-900 mb-4">Create an Account!</h1>
                                 </div>
 
-                                <div th:if="${message}">
-                                    <p th:text="${message}"></p>
-                                </div>
+                                <div class="alert alert-info" th:if="${message}" th:text="${message}"></div>
 
-                                <form th:action="@{/registration}" method="post" th:object="${registrationRequest}" class="user">
+                                <form th:action="@{/registration}" method="post" action="#" th:object="${registrationRequest}" class="user">
                                     <div class="form-group">
                                         <input type="text"
                                                class="form-control form-control-user"
@@ -43,7 +41,7 @@
                                         <small th:if="${#fields.hasErrors('username')}" th:errors="*{username}" class="text-danger pl-3"></small>
                                     </div>
                                     <div class="form-group">
-                                        <input type="email"
+                                        <input type="text"
                                                class="form-control form-control-user"
                                                id="email"
                                                name="email"
@@ -96,13 +94,13 @@
 
 
 <!-- Bootstrap core JavaScript-->
-<script src="/vendor/jquery/jquery.min.js"></script>
-<script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script th:src="@{/vendor/jquery/jquery.min.js}"></script>
+<script th:src="@{/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
 
 <!-- Core plugin JavaScript-->
-<script src="/vendor/jquery-easing/jquery.easing.min.js"></script>
+<script th:src="@{/vendor/jquery-easing/jquery.easing.min.js}"></script>
 
 <!-- Custom scripts for all pages-->
-<script src="/js/sb-admin-2.min.js"></script>
+<script th:src="@{/js/sb-admin-2.min.js}"></script>
 </body>
 </html>
