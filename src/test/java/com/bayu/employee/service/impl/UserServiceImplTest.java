@@ -51,7 +51,26 @@ class UserServiceImplTest {
         log.info("Username: {}", user.getUsername());
         log.info("Email: {}", user.getEmail());
         log.info("Password: {}", user.getPassword());
-        log.info("Role: {}", user.getRoles());
+        log.info("Role: {}", user.getRoles().toString());
+    }
+
+    @Test
+    void createAdmin() {
+        CreateUserRequest createUserRequest = CreateUserRequest.builder()
+                .username("albert")
+                .email("albert@mail.com")
+                .password("albert123")
+                .build();
+
+        UserDTO user = userService.createAdmin(createUserRequest);
+
+        assertNotNull(user.getId());
+
+        log.info("ID: {}", user.getId());
+        log.info("Username: {}", user.getUsername());
+        log.info("Email: {}", user.getEmail());
+        log.info("Password: {}", user.getPassword());
+        log.info("Role: {}", user.getRoles().toString());
     }
 
     @Test
@@ -65,4 +84,6 @@ class UserServiceImplTest {
     @Test
     void getUserByEmail() {
     }
+
+
 }
