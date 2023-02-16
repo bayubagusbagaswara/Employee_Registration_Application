@@ -12,6 +12,8 @@ public interface UserService {
 
     LoginResponse login(LoginRequest loginRequest);
 
+    UserDTO createAdmin(CreateUserRequest createUserRequest);
+
     UserDTO createUser(CreateUserRequest createUserRequest);
 
     UserDTO getUserById(String id);
