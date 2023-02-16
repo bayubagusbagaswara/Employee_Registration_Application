@@ -59,4 +59,5 @@ public class User {
             removeRole(role);
         }
     }
+
 }
