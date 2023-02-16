@@ -1,20 +1,22 @@
 package com.bayu.employee.controller;
 
 import com.bayu.employee.payload.LoginRequest;
+import com.bayu.employee.payload.LoginResponse;
 import com.bayu.employee.payload.RegistrationRequest;
+import com.bayu.employee.payload.RegistrationResponse;
 import com.bayu.employee.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.InitBinder;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
@@ -36,17 +38,18 @@ public class AuthController {
         webDataBinder.registerCustomEditor(String.class, stringTrimmerEditor);
     }
 
-    @GetMapping("/register")
-    public String showFormRegistration(@ModelAttribute("registrationRequest") RegistrationRequest registrationRequest,
-                                       Model model) {
+    @GetMapping("/registration")
+    public String showFormRegistration(Model model) {
 
+        RegistrationRequest registrationRequest = new RegistrationRequest();
         model.addAttribute("registrationRequest", registrationRequest);
         return "auth/register";
     }
 
-    @PostMapping("/register")
-    public String doRegistration(@Valid RegistrationRequest registrationRequest,
+    @PostMapping("/registration")
+    public String doRegistration(@Valid @ModelAttribute RegistrationRequest registrationRequest,
                                  BindingResult bindingResult,
+                                 Model model,
                                  RedirectAttributes redirectAttributes) {
 
         log.info("Registration User: {}", registrationRequest.toString());
@@ -72,24 +75,32 @@ public class AuthController {
             return "auth/register";
         }
 
-        redirectAttributes.addFlashAttribute("message", "Success! your registration is now complete");
+        redirectAttributes.addFlashAttribute("message", "Registration berhasil. Silahkan login!!");
 
         userService.register(registrationRequest);
 
         return "redirect:/login";
     }
 
-    @GetMapping("/login")
-    public String showFormLogin(@ModelAttribute("loginRequest") LoginRequest loginRequest,
-                                Model model) {
-        model.addAttribute("loginRequest", loginRequest);
+    // kalau endpoint ini dibah menjadi /signin
+    @GetMapping("/signin")
+    public String showLoginPage(Model model) {
+        model.addAttribute("title", "Login Page");
         return "auth/login";
     }
 
-    @GetMapping("/login/success")
-    public String loginSuccess() {
-        return "Login Success!!";
-    }
+//    @PostMapping("/login")
+//    public String doLogin() {
+        // harusnya disini terjadi autentikasi username dan password
+
+//        log.info("Username: {}", loginRequest.getUsername());
+//        log.info("Password: {}", loginRequest.getPassword());
+//
+//        userService.login(loginRequest);
+
+//        return "redirect:/"; // ini mengarah ke register.html
+//    }
+
 
     // /admin/index
     // /user/index
