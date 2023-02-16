@@ -16,12 +16,6 @@ public class EmployeeController {
 
     private final EmployeeService employeeService;
 
-    @GetMapping("/")
-    public String viewHomePage(Model model) {
-        // default pageNo = 1
-        return "";
-    }
-
     // handle showEmployeeForm
     @GetMapping("/showNewEmployeeForm")
     public String showNewEmployeeForm(Model model) {
