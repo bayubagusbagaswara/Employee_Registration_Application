@@ -10,7 +10,7 @@ public interface UserService {
 
     void register(RegistrationRequest registrationRequest);
 
-    LoginResponse login(LoginRequest loginRequest);
+    AuthenticationResponse login(LoginRequest loginRequest);
 
     UserDTO createAdmin(CreateUserRequest createUserRequest);
 
