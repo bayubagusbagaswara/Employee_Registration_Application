@@ -46,6 +46,7 @@ public class SecurityConfiguration {
 //                                    .antMatchers("/signin").permitAll()
                                     .antMatchers("/admin/**").hasRole("ADMIN")
                                     .antMatchers("/user/**").hasRole("USER")
+                                    .antMatchers("/employees/**").hasRole("USER")
                                     .anyRequest().authenticated();
                         }
                 )
