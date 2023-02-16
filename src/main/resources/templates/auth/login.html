@@ -27,16 +27,16 @@
                                     <div class="text-center">
                                         <h1 class="h4 text-gray-900 mb-4">Login Page!</h1>
                                     </div>
+                                    <div class="alert alert-info text-center" th:if="${message}" th:text="${message}">
+                                    </div>
                                     <form th:action="@{/login}" method="post" th:object="${loginRequest}" class="user">
                                         <div class="form-group">
                                             <input type="text" class="form-control form-control-user" id="username"
-                                                   th:value="*{username}"
                                                    th:field="*{username}"
                                                    placeholder="Enter Username...">
                                         </div>
                                         <div class="form-group">
                                             <input type="password" class="form-control form-control-user" id="password"
-                                                   th:value="*{password}"
                                                    th:field="*{password}"
                                                    placeholder="Password">
                                         </div>
