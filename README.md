@@ -11,6 +11,7 @@
 7. Role Admin => /admin/. Role ADMIN & USER => /admin/. Role USER => /index/
 8. Artinya secara default user yang memiliki ROLE ADMIN, akan diredirect langsung ke /admin
 9. Jadi misal di AdminController hanya menangani /admin, tapi seumpama kita hit URL /admin/edit-user, apakah bisa redirect ke endpont /edit-user, dimana misalnya /edit-user ini dimiliki oleh UserController yang hanya bisa diakses yang memiliki Role USER
+10. Sekarang kita coba bikin form untuk User Home
 
 # Flow Bisnis
 
@@ -29,11 +30,33 @@
 
 # Menu : Employee Profile 
 
+- Posisi yang dilamar
+- Nama Depan 
+- Nama Belakang
+- No. KTP
+- Tempat Lahir
+- Tanggal Lahir
+- Jenis Kelamin
+- Agama
+- Golongan Darah
+- Status Pernikahan
+- Alamat KTP
+- Alamat Tinggal/Domisili
+- Email
+- No. Telp
+- Orang terdekat yang dapat dihubungi
+
 # Menu : Educational Background
 
 # Menu : Job Experience
 
 # Menu : Training History
+
+# Menu : Additional
+
+- Skill
+- Bersedia ditempatkan di seluruh kantor perusahaan ? Ya atau Tidak (Checkbox)
+- Penghasilan yang diharapkan
 
 # Feature
 
