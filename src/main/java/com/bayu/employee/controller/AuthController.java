@@ -94,6 +94,17 @@ public class AuthController {
 //        return "home"; // ini mengarah ke register.html, harusnya mengarah ke home.html
 //    }
 
+//    @RequestMapping(value = "/login", method = RequestMethod.POST)
+//    public void login(@RequestParam("username") final String username, @RequestParam("password") final String password, final HttpServletRequest request) {
+//        UsernamePasswordAuthenticationToken authReq =
+//                new UsernamePasswordAuthenticationToken(username, password);
+//        Authentication auth = authManager.authenticate(authReq);
+//        SecurityContext sc = SecurityContextHolder.getContext();
+//        sc.setAuthentication(auth);
+//        HttpSession session = request.getSession(true);
+//        session.setAttribute("SPRING_SECURITY_CONTEXT", sc);
+//    }
+
 
     // /admin/index
     // /user/index
