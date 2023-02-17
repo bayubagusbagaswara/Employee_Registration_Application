@@ -51,6 +51,7 @@ public class SecurityConfiguration {
                                     .antMatchers("/registration").permitAll()
                                     .antMatchers("/admin/**").hasAuthority("ADMIN")
                                     .antMatchers("/index/**").hasAuthority("USER")
+                                    .antMatchers("/test/**").permitAll()
                                     .anyRequest().authenticated();
                         }
                 )
