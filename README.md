@@ -7,7 +7,10 @@
 3. REGISTER (DONE)
 4. Validasi untuk registration (DONE), validasi untuk login (DONE) jika error muncul "Invalid username or password"
 5. Login (DONE)
-6. Kondisi terakhir untuk login belum bisa menyesuaikan role user. User yang tidak memiliki Role masih bisa login. Dan inginnya setelah login, maka endpoint selanjutnya akan disesuaikan oleh Role User tersebut
+6. Redirect Page based on Role (DONE)
+7. Role Admin => /admin/. Role ADMIN & USER => /admin/. Role USER => /index/
+8. Artinya secara default user yang memiliki ROLE ADMIN, akan diredirect langsung ke /admin
+9. Jadi misal di AdminController hanya menangani /admin, tapi seumpama kita hit URL /admin/edit-user, apakah bisa redirect ke endpont /edit-user, dimana misalnya /edit-user ini dimiliki oleh UserController yang hanya bisa diakses yang memiliki Role USER
 
 # Flow Bisnis
 
