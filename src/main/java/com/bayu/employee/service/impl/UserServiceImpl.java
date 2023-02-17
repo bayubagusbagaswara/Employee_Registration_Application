@@ -97,6 +97,34 @@ public class UserServiceImpl implements UserService {
 
         roleSet.add(roleRepository.getByName(RoleName.ADMIN.name())
                 .orElseThrow(() -> new AppException(USER_ROLE_NOT_SET)));
+
+        user.setRoles(roleSet);
+
+        userRepository.save(user);
+
+        return UserDTO.builder()
+                .id(user.getId())
+                .username(user.getUsername())
+                .email(user.getEmail())
+                .password(user.getPassword())
+                .enabled(String.valueOf(user.isEnabled()))
+                .roles(user.getRoles())
+                .build();
+    }
+
+    @Override
+    public UserDTO createAdminAndUser(CreateUserRequest createUserRequest) {
+        User user = User.builder()
+                .username(createUserRequest.getUsername())
+                .email(createUserRequest.getEmail())
+                .password(passwordEncoder.encode(createUserRequest.getPassword()))
+                .enabled(true)
+                .build();
+
+        Set<Role> roleSet = new HashSet<>();
+
+        roleSet.add(roleRepository.getByName(RoleName.ADMIN.name())
+                .orElseThrow(() -> new AppException(USER_ROLE_NOT_SET)));
         roleSet.add(roleRepository.getByName(RoleName.USER.name())
                 .orElseThrow(() -> new AppException(USER_ROLE_NOT_SET)));
 
