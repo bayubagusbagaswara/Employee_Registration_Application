@@ -14,6 +14,8 @@ public interface UserService {
 
     UserDTO createAdmin(CreateUserRequest createUserRequest);
 
+    UserDTO createAdminAndUser(CreateUserRequest createUserRequest);
+
     UserDTO createUser(CreateUserRequest createUserRequest);
 
     UserDTO getUserById(String id);
