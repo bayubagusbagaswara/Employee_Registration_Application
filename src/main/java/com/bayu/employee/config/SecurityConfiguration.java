@@ -1,5 +1,6 @@
 package com.bayu.employee.config;
 
+import com.bayu.employee.security.CustomAuthenticationSuccessHandler;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -25,6 +26,13 @@ public class SecurityConfiguration {
             "/webjars/**"
     };
 
+    // kita buat Success Handler  untuk menghandle setelah login berhasil
+    private final CustomAuthenticationSuccessHandler authenticationSuccessHandler;
+
+    public SecurityConfiguration(CustomAuthenticationSuccessHandler authenticationSuccessHandler) {
+        this.authenticationSuccessHandler = authenticationSuccessHandler;
+    }
+
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
@@ -43,17 +51,21 @@ public class SecurityConfiguration {
                             authorize
                                     .antMatchers(PUBLIC_URLS).permitAll()
                                     .antMatchers("/registration").permitAll()
-//                                    .antMatchers("/signin").permitAll()
-                                    .antMatchers("/admin/**").hasRole("ADMIN")
-                                    .antMatchers("/user/**").hasRole("USER")
-                                    .antMatchers("/employees/**").hasRole("USER")
+                                    .antMatchers("/admin/**").hasAuthority("ADMIN")
+                                    .antMatchers("/index/**").hasAuthority("USER")
                                     .anyRequest().authenticated();
                         }
                 )
                 .formLogin(form -> form
-                        .loginPage("/signin").permitAll()
+                        .loginPage("/signin")
+                        .successHandler(authenticationSuccessHandler)
+                        .permitAll()
                 )
-                .logout(LogoutConfigurer::permitAll
+                .logout(logout -> logout
+                        .invalidateHttpSession(true)
+                        .clearAuthentication(true)
+                        .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+                        .permitAll()
                 );
 
         return http.build();
