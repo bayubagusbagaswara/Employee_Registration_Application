@@ -12,6 +12,8 @@
 8. Artinya secara default user yang memiliki ROLE ADMIN, akan diredirect langsung ke /admin
 9. Jadi misal di AdminController hanya menangani /admin, tapi seumpama kita hit URL /admin/edit-user, apakah bisa redirect ke endpont /edit-user, dimana misalnya /edit-user ini dimiliki oleh UserController yang hanya bisa diakses yang memiliki Role USER
 10. Sekarang kita coba bikin form untuk User Home
+11. Kita coba untuk save data employee dan coba bikin model baru, yakni RiwayatPendidikan, dimana 1 employee bisa memilik banyak pendidikan
+12. Tapi pastikan jika kita login, maka data employee sudah ada dan melekat pada user tersebut
 
 # Flow Bisnis
 
