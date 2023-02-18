@@ -2,6 +2,7 @@ package com.bayu.employee.controller;
 
 import com.bayu.employee.model.Employee;
 import com.bayu.employee.payload.employee.CreateEmployeeRequest;
+import com.bayu.employee.payload.employee.EmployeeDTO;
 import com.bayu.employee.service.EmployeeService;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
@@ -29,13 +30,13 @@ public class EmployeeController {
 
     @GetMapping
     public String showFormEmployee(Model model) {
-        Employee employee = new Employee();
-        model.addAttribute("employee", employee);
-        return "";
+        CreateEmployeeRequest createEmployeeRequest = new CreateEmployeeRequest();
+        model.addAttribute("createEmployeeRequest", createEmployeeRequest);
+        return "employee/show_employee_form";
     }
 
-    @PostMapping("/save-employee")
-    public String doSaveEmployee(@ModelAttribute("employee") CreateEmployeeRequest createEmployeeRequest,
+    @PostMapping("/createEmployee")
+    public String doSaveEmployee(@ModelAttribute("createEmployeeRequest") CreateEmployeeRequest createEmployeeRequest,
                                  BindingResult bindingResult,
                                  Model model,
                                  RedirectAttributes redirectAttributes) {
@@ -47,7 +48,9 @@ public class EmployeeController {
             return "redirect:/employees";
         }
 
-//        employeeService.saveEmployee();
+        EmployeeDTO employee = employeeService.createEmployee(createEmployeeRequest);
+
+        redirectAttributes.addAttribute("employeeId", employee.getId());
 
         return "redirect:/list-employees";
     }
@@ -55,6 +58,16 @@ public class EmployeeController {
     @GetMapping("/{id}")
     public String getEmployeeById() {
         return "";
+    }
+
+    @GetMapping("/list-employees")
+    public String listEmployee(Model model) {
+
+        EmployeeDTO employeeDTO = new EmployeeDTO();
+        model.addAttribute("employee", employeeDTO);
+
+        return "employee/list_employee";
+
     }
 
 
