@@ -21,6 +21,7 @@ public class RoleServiceImpl implements RoleService {
     public RoleDTO createRole(CreateRoleRequest createRoleRequest) {
 
         Role role = new Role();
+        role.setId(createRoleRequest.getId().toLowerCase());
         role.setName(RoleName.valueOf(createRoleRequest.getName().toUpperCase()));
 
         roleRepository.save(role);
