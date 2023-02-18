@@ -26,12 +26,12 @@ public class EducationalBackground {
     @Column(name = "year")
     private String year;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(
-            name = "employee_id",
-            foreignKey = @ForeignKey(name = "fk_educational_employee_id"),
-            referencedColumnName = "id",
-            nullable = false)
-    private Employee employee;
+//    @ManyToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(
+//            name = "employee_id",
+//            foreignKey = @ForeignKey(name = "fk_educational_employee_id"),
+//            referencedColumnName = "id",
+//            nullable = false)
+//    private Employee employee;
 
 }
