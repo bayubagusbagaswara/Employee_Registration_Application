@@ -34,6 +34,6 @@ public class Employee {
     @Column(name = "address")
     private String address;
 
-    @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<EducationalBackground> educationalBackgrounds = new HashSet<>();
+//    @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL, orphanRemoval = true)
+//    private Set<EducationalBackground> educationalBackgrounds = new HashSet<>();
 }
