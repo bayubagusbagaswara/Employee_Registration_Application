@@ -1,0 +1,358 @@
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout">
+<body>
+
+<section layout:fragment="content" class="app-main__outer">
+  <div class="app-main__inner">
+    <div class="app-page-title">
+      <div class="page-title-wrapper">
+        <div class="page-title-heading">
+          <div class="page-title-icon">
+            <i class="lnr-picture text-danger"></i>
+          </div>
+          <div>
+            <h3 th:text="${titlePage}"></h3>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="main-card mb-2 card">
+      <div class="card-body">
+        <h5 class="card-title" th:text="${titleCardAdd}"></h5>
+        <form id="bc40add" class="col-md-12 mx-auto" th:object="${bc40Document}" method="post">
+          <div class="main-card mb-2 card">
+            <div class="card-header">
+              <i class="header-icon lnr-license icon-gradient bg-plum-plate"></i>
+              <div class="btn-actions-pane-right">
+                <div class="nav">
+                  <a data-bs-toggle="tab" href="#bc40header" class="btn-pill btn-wide active btn btn-outline-alternate btn-sm first-tab">Data Header</a>
+                  <a data-bs-toggle="tab" href="#bc40barang" class="btn-pill btn-wide me-1 ms-1  btn btn-outline-alternate btn-sm second-tab">Data Barang</a>
+                  <a data-bs-toggle="tab" href="#bc40doc" class="btn-pill btn-wide  btn btn-outline-alternate btn-sm last-tab">Data Document</a>
+                </div>
+              </div>
+            </div>
+
+            <div class="card-body">
+              <div class="tab-content">
+                <!-- MENU DATA HEADER -->
+                <div class="tab-pane active" id="bc40header" role="tabpanel">
+                  <div class="row">
+                    <input type="hidden" id="id" th:field="*{id}"/>
+                    <input type="hidden" id="status" th:field="*{status}"/>
+                    <input type="hidden" id="TPBCode" th:field="*{TPBCode}" th:value="${session.PLBActive}"/>
+                    <div class="col-md-4">
+                      <label class="form-label" for="noPengajuan">No. Pengajuan</label>
+                      <div>
+                        <input type="text" class="form-control" id="noPengajuan" th:field="*{noPengajuan}" placeholder="Please type no pengajuan">
+                      </div>
+                    </div>
+                    <div class="col-md-8"><p>&nbsp;</p></div>
+                    <div class="col-md-4">
+                      <label class="form-label" for="noPengajuan">Kantor Pabean</label>
+                      <div>
+                        <select class="multiselect-dropdown form-control" id="pabeanCode" th:field="*{pabeanCode}"
+                                style="width:100%;">
+                          <option value="">Please choose kantor pabean</option>
+                          <option th:each="pabean : ${kantorPabean}" th:value="${pabean.pabeanCode}"
+                                  th:text="${pabean.pabeanName}"></option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="col-md-8"><p>&nbsp;</p></div>
+                    <div class="col-md-4">
+                      <label class="form-label" for="jenisTPB">Jenis TPB</label>
+                      <div>
+                        <select class="multiselect-dropdown form-control" id="jenisTPB" th:field="*{jenisTPB}"
+                                style="width:100%;">
+                          <option value="">Jenis TPB</option>
+                          <option value="Kawasan Berikat">Kawasan Berikat</option>
+                          <option value="Gudang Berikat">Gudang Berikat</option>
+                          <option value="TPPB">Tempat Penyelenggaraan Pameran Berikat (TPPB)</option>
+                          <option value="TBB">Toko Bebas Bea (TBB)</option>
+                          <option value="Tempat Lelang">Tempat Lelang</option>
+                          <option value="KDUR">Kawasan Daur Ulang Berikat (KDUR)</option>
+                          <option value="PLB">PLB</option>
+                          <option value="Lainnya">Lainnya</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                      <label class="form-label" for="tujuanPengiriman">Tujuan Pengiriman</label>
+                      <div>
+                        <!-- <input type="text" class="form-control" id="tujuanPengiriman" th:field="*{tujuanPengiriman}" placeholder="Please type Tujuan Pengiriman"> -->
+                        <select class="multiselect-dropdown form-control" id="tujuanPengiriman" th:field="*{tujuanPengiriman}"
+                                style="width:100%;">
+                          <option value="">Tujuan Pengiriman</option>
+                          <option value="Disubkontrakan">Disubkontrakan</option>
+                          <option value="Diperbaiki">Diperbaiki</option>
+                          <option value="Dipamerkan">Dipamerkan</option>
+                          <option value="Lainnya">Lainnya</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="col-md-4"><p>&nbsp;</p></div>
+                    <div class="col-md-4">
+                      <label class="form-label" for="noPendaftaran">No. Pendaftaran</label>
+                      <div>
+                        <input type="text" class="form-control" id="noPendaftaran" th:field="*{noPendaftaran}" placeholder="Please type No. Pendaftaran">
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                      <label class="form-label" for="tanggalPendaftaran">Tanggal Pendaftaran</label>
+                      <div>
+                        <input type="text" data-toggle="datepicker" class="form-control" id="strTanggalPendaftaran" th:field="*{strTanggalPendaftaran}" placeholder="Please type Tanggal Pendaftaran" >
+                      </div>
+                    </div>
+                    <div class="divider row"></div>
+
+                    <p>PENGUSAHA TPB</p>
+                    <div class="col-md-4">
+                      <label class="form-label" for="tpbCode">NPWP</label>
+                      <div>
+                        <input type="text" class="form-control" id="TPBCode" th:field="${bc40Document.tpb.tpbCode}" readonly="readonly">
+                        <!-- <select class="multiselect-dropdown form-control" id="TPBCode"
+                            style="width:100%;">
+                            <option value="">Please type NPWP</option>
+                            <option th:each="tpb : ${tpbs}" th:value="${tpb.tpbCode}"
+                        th:text="${tpb.tpbName}+ ' == ' + ${tpb.tpbNpwp}"></option>
+                        </select> -->
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                      <label class="form-label" for="tpbName">Nama</label>
+                      <div>
+                        <input type="text" class="form-control" id="tpbName" th:field="${bc40Document.tpb.tpbName}" readonly="readonly">
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                      <label class="form-label" for="tpbAddress">Alamat</label>
+                      <div>
+                        <input type="text" class="form-control" id="tpbAddress" th:field="${bc40Document.tpb.tpbAddress}" readonly="readonly">
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                      <label class="form-label" for="noIzinTPB">No. Izin TPB</label>
+                      <div>
+                        <input type="text" class="form-control" id="noIzinTPB" th:field="${bc40Document.tpb.noIzinTPB}" readonly="readonly">
+                      </div>
+                    </div>
+                    <div class="divider row"></div>
+
+                    <p>PEMILIK BARANG</p>
+                    <div class="col-md-4">
+                      <label class="form-label" for="tenantNpwp">NPWP</label>
+                      <div>
+                        <input type="text" class="form-control" id="tenantNpwp" th:field="${bc40Document.tenant.tenantNpwp}" placeholder="Please type NPWP" readonly="readonly">
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                      <label class="form-label" for="tenantName">Nama</label>
+                      <div>
+                        <input type="text" class="form-control" id="tenantName" th:field="${bc40Document.tenant.tenantName}" readonly="readonly">
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                      <label class="form-label" for="tenantAddress">Alamat</label>
+                      <div>
+                        <input type="text" class="form-control" id="tenantAddress" th:field="${bc40Document.tenant.tenantAddress}" readonly="readonly">
+                      </div>
+                    </div>
+                    <div class="divider row"></div>
+
+                    <p>PENGIRIM BARANG</p>
+
+                    <!--SELECT BOX-->
+                    <div class="col-md-4">
+                      <label class="form-label" for="rekananNpwp">NPWP</label>
+                      <div>
+                        <!--												<input type="text" class="form-control" id="rekananNpwp" th:field="*{rekananNpwp}" placeholder="Please type NPWP">-->
+                        <select class="multiselect-dropdown form-control" id="rekananNpwp"
+                                th:field="*{rekananNpwp}" style="width:100%">
+                          <option value="">Please choose rekanan</option>
+                          <option th:each="rekanan : ${rekanan}" th:value="${rekanan.rekananNpwp}"
+                                  th:text="${rekanan.rekananName}">
+                          </option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                      <label class="form-label" for="rekananName">Nama</label>
+                      <div>
+                        <input type="text" class="form-control" id="rekananName"
+                               readonly="readonly" th:value="${bc40Document.rekanan==null?'':bc40Document.rekanan.rekananName}">
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                      <label class="form-label" for="rekananAddress">Alamat</label>
+                      <div>
+                        <input type="text" class="form-control" id="rekananAddress"
+                               readonly="readonly" th:value="${bc40Document.rekanan==null?'':bc40Document.rekanan.rekananAddress}">
+                      </div>
+                    </div>
+                    <div class="divider row"></div>
+                  </div>
+                </div>
+
+                <!-- MENU DATA BARANG -->
+                <div class="tab-pane" id="bc40barang" role="tabpanel">
+                  <div class="row">
+                    <div class="col-md-4">
+                      <label class="form-label" for="kodeBarang">Nama Barang</label>
+                      <div>
+                        <select class="multiselect-dropdown form-control" id="kodeBarang" style="width:100%;">
+                          <option value="">Pilih barang</option>
+                          <option th:each="b : ${barang}" th:value="${b.kodeBarang}"
+                                  th:text="${b.namaBarang}"></option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="col-md-8"><p>&nbsp;</p></div>
+                    <div class="col-md-4">
+                      <label class="form-label" for="merk">Merk Barang</label>
+                      <div>
+                        <input type="text" class="form-control" id="merk" placeholder="Please type Merk Barang" readonly="readonly">
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                      <label class="form-label" for="volume">Volume Barang</label>
+                      <div>
+                        <input type="text" class="form-control" id="volume" placeholder="Please type Volume Barang">
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                      <label class="form-label" for="beratKotor">Berat Kotor</label>
+                      <div>
+                        <input type="text" class="form-control" id="beratKotor" placeholder="Please type Berat Kotor Barang">
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                      <label class="form-label" for="beratBersih">Berat Bersih</label>
+                      <div>
+                        <input type="text" class="form-control" id="beratBersih" placeholder="Please type Berat Bersih Barang">
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                      <label class="form-label" for="jumlah">Jumlah Barang</label>
+                      <div>
+                        <input type="text" class="form-control" id="jumlah" placeholder="Please type Jumlah Barang">
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                      <label class="form-label" for="hargaPenyerahan">Harga Penyerahan</label>
+                      <div>
+                        <input type="text" class="form-control numformat" id="hargaPenyerahan" placeholder="Please type Harga Penyerahan">
+                      </div>
+                    </div>
+                    <div class="divider row"></div>
+                    <div class="col-md-4">
+                      <button type="button" id="addBarangToTable" class="btn btn-primary btn-save">Add to Table</button>
+                    </div>
+
+                    <!-- LIST DATA BARANG -->
+                    <table id="tblBarangAdd" class="mb-0 table table-hover">
+                      <thead>
+                      <tr>
+                        <th>Kode Barang</th>
+                        <th>Nama Barang</th>
+                        <th>Merk</th>
+                        <th>Volume</th>
+                        <th>Berat Bersih</th>
+                        <th>Berat Kotor</th>
+                        <th>Jumlah</th>
+                        <th>Harga Penyerahan</th>
+                        <th>Action</th>
+                      </tr>
+                      </thead>
+                      <tbody>
+                      <tr th:if="${editFlag}" th:each="barang :${bc40Document.lstDetailBarang}">
+                        <td th:text="${barang.namaBarangCode}"></td>
+                        <td th:text="${barang.namaBarang}"></td>
+                        <td th:text="${barang.merk}"></td>
+                        <td th:text="${barang.volume}"></td>
+                        <td th:text="${barang.beratBersih}"></td>
+                        <td th:text="${barang.beratKotor}"></td>
+                        <td th:text="${barang.jumlah}"></td>
+                        <td th:text="${barang.strHargaPenyerahan}"></td>
+                        <td><button class="btndel btn btn-danger"><i class="fas fa-trash-alt"></i> Delete</button></td>
+                      </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+
+                <!-- MENU DATA DOCUMENT -->
+                <div class="tab-pane" id="bc40doc" role="tabpanel">
+                  <div class="row">
+                    <input type="hidden" id="idBC40Doc"/>
+                    <div class="col-md-4">
+                      <label class="form-label" for="jenisDoc">Jenis Dokumen</label>
+                      <div>
+                        <select class="multiselect-dropdown form-control" id="jenisDoc" style="width:100%;">
+                          <option value="">Jenis Document</option>
+                          <option value="B/L">B/L</option>
+                          <option value="Faktur Pajak">Faktur Pajak</option>
+                          <option value="Contract">Contract</option>
+                          <option value="Invoice">Invoice</option>
+                          <option value="Packing List">Packing List</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                      <label class="form-label" for="noDoc">No. Dokumen</label>
+                      <div>
+                        <input type="text" class="form-control" id="noDoc" placeholder="Please type No Dokumen">
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                      <label class="form-label" for="namaDoc">Nama Dokumen</label>
+                      <div>
+                        <input type="text" class="form-control" id="namaDoc" placeholder="Please type Nama Dokumen">
+                      </div>
+                    </div>
+
+                    <div class="divider row"></div>
+                    <div class="col-md-4">
+                      <button type="button" id="addDocumentToTable" class="btn btn-primary btn-save">Add to Table</button>
+                    </div>
+
+                    <!-- LIST DATA BARANG -->
+                    <table id="tblDocumentAdd" class="mb-0 table table-hover">
+                      <thead>
+                      <tr>
+                        <th>Jenis Document</th>
+                        <th>No Document</th>
+                        <th>Nama Document</th>
+                        <th>Action</th>
+                      </tr>
+                      </thead>
+                      <tbody>
+                      <tr th:if="${editFlag}" th:each="doc :${bc40Document.lstJenisDocument}">
+                        <td th:text="${doc.jenisDoc}"></td>
+                        <td th:text="${doc.noDoc}"></td>
+                        <td th:text="${doc.namaDoc}"></td>
+                        <td><button class="btndeldoc btn btn-danger"><i class="fas fa-trash-alt"></i> Delete</button></td>
+                      </tr>
+                      </tbody>
+                    </table>
+
+
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="d-block text-end card-footer" >
+              <button id="btnSaveBc40" type="button" class="btn-wide btn btn-success">Save</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<th:block layout:fragment="script">
+  <script th:src="@{/js/bc40/list.js}"></script>
+</th:block>
+</body>
+</html>
