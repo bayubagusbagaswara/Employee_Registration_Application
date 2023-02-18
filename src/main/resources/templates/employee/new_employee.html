@@ -13,35 +13,43 @@
         <div class="col-lg">
           <div class="p-5">
             <form action="#"
-                  th:action="@{/employees/createEmployee}"
+                  th:action="@{/employees/saveEmployee}"
                   th:object="${createEmployeeRequest}"
                   method="post">
               <div class="mb-3 row">
                 <label for="position" class="col-sm-3 col-form-label">Posisi yang dilamar</label>
                 <div class="col-sm-8">
-                  <input type="text" class="form-control" id="position" name="position" th:value="*{position}">
+                  <input type="text" class="form-control"
+                         id="position" name="position"
+                         th:field="*{position}">
                 </div>
               </div>
               <div class="mb-3 row">
                 <label for="name" class="col-sm-3 col-form-label">Nama Lengkap</label>
                 <div class="col-sm-8">
-                  <input type="text" class="form-control" id="name" name="name" th:value="*{name}">
+                  <input type="text" class="form-control"
+                         id="name" name="name"
+                         th:field="*{name}">
                 </div>
               </div>
               <div class="mb-3 row">
                 <label for="age" class="col-sm-3 col-form-label">Umur</label>
                 <div class="col-sm-8">
-                  <input type="text" class="form-control" id="age" name="age" th:value="*{age}">
+                  <input type="text" class="form-control"
+                         id="age" name="age"
+                         th:field="*{age}">
                 </div>
               </div>
               <div class="mb-3 row">
                 <label for="address" class="col-sm-3 col-form-label">Alamat Lengkap</label>
                 <div class="col-sm-8">
-                  <input type="text" class="form-control" id="address" name="address" th:value="*{address}">
+                  <input type="text" class="form-control"
+                         id="address" name="address"
+                         th:field="*{address}">
                 </div>
               </div>
               <div class="d-grid d-md-flex justify-content-md-end">
-                <button class="btn btn-success" type="button">Simpan</button>
+                <button type="submit"class="btn btn-success">Simpan</button>
               </div>
             </form>
           </div>
