@@ -1,20 +1,27 @@
 package com.bayu.employee.service;
 
 import com.bayu.employee.model.Employee;
+import com.bayu.employee.payload.employee.CreateEmployeeRequest;
+import com.bayu.employee.payload.employee.EmployeeDTO;
+import com.bayu.employee.payload.employee.UpdateEmployeeRequest;
 import org.springframework.data.domain.Page;
 
 import java.util.List;
 
 public interface EmployeeService {
 
-    List<Employee> getAllEmployees();
+    List<EmployeeDTO> getAllEmployees();
 
-    void saveEmployee(Employee employee);
+    EmployeeDTO getEmployeeById(String id);
 
-    Employee getEmployeeById(String id);
+    EmployeeDTO getEmployeeByName(String name);
 
-    void deleteEmployeeById(String id);
+    EmployeeDTO createEmployee(CreateEmployeeRequest createEmployeeRequest);
 
-    Page<Employee> findPaginated(int pageNo, int pageSize, String sortField, String sortDirection);
+    EmployeeDTO updateEmployee(String id, UpdateEmployeeRequest updateEmployeeRequest);
+
+    void deleteEmployee(String id);
+
+//    Page<Employee> findPaginated(int pageNo, int pageSize, String sortField, String sortDirection);
 
 }
