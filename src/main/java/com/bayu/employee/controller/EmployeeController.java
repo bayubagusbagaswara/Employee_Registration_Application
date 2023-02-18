@@ -1,12 +1,17 @@
 package com.bayu.employee.controller;
 
 import com.bayu.employee.model.Employee;
+import com.bayu.employee.payload.employee.CreateEmployeeRequest;
 import com.bayu.employee.service.EmployeeService;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
@@ -18,24 +23,40 @@ import java.util.List;
 @RequiredArgsConstructor
 public class EmployeeController {
 
+    private final static Logger log = LoggerFactory.getLogger(EmployeeController.class);
+
     private final EmployeeService employeeService;
 
-    @GetMapping("/showNewEmployeeForm")
-    public String showNewEmployeeForm(Model model) {
-        // create model attribute to bind form data
+    @GetMapping
+    public String showFormEmployee(Model model) {
         Employee employee = new Employee();
         model.addAttribute("employee", employee);
         return "";
     }
 
-    @PostMapping("/saveEmployee")
-    public String saveEmployee(@ModelAttribute("employee") Employee employee) {
+    @PostMapping("/save-employee")
+    public String doSaveEmployee(@ModelAttribute("employee") CreateEmployeeRequest createEmployeeRequest,
+                                 BindingResult bindingResult,
+                                 Model model,
+                                 RedirectAttributes redirectAttributes) {
 
-        // save employee to database
-        employeeService.saveEmployee(employee);
-        // redirect ke halaman listEmployee
+        log.info("Create Employee: {}", createEmployeeRequest.toString());
+
+        // check validation
+        if (bindingResult.hasErrors()){
+            return "redirect:/employees";
+        }
+
+//        employeeService.saveEmployee();
+
+        return "redirect:/list-employees";
+    }
+
+    @GetMapping("/{id}")
+    public String getEmployeeById() {
         return "";
     }
+
 
     // handle for showing form for update data employee by ID
     @GetMapping("/showFormForUpdate/{id}")
@@ -43,10 +64,10 @@ public class EmployeeController {
                                     Model model) {
 
         // get employee from the service
-        Employee employee = employeeService.getEmployeeById(id);
+//        Employee employee = employeeService.getEmployeeById(id);
 
         // set employee as a model attribute to pre-populate the form
-        model.addAttribute("employee", employee);
+//        model.addAttribute("employee", employee);
         return "";
     }
 
@@ -57,10 +78,6 @@ public class EmployeeController {
 //        employeeService.deleteEmployeeById(id);
         return "";
     }
-
-
-    // handler Get All Employee hanya bisa diakses oleh /admin/**
-    // handler Delete Employee hanya bisa diakses oleh /admin/**
 
 
 
