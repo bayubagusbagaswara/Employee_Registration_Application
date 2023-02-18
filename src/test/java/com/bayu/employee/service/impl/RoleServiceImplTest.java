@@ -27,6 +27,7 @@ class RoleServiceImplTest {
     @Order(1)
     void createRoleAdmin() {
         CreateRoleRequest createRoleRequest = CreateRoleRequest.builder()
+                .id("admin")
                 .name("admin")
                 .build();
 
@@ -42,6 +43,7 @@ class RoleServiceImplTest {
     @Order(2)
     void createRoleUser() {
         CreateRoleRequest createRoleRequest = CreateRoleRequest.builder()
+                .id("user")
                 .name("user")
                 .build();
 
