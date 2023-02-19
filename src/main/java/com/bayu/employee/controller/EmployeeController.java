@@ -51,7 +51,8 @@ public class EmployeeController {
 
         Employee employee = employeeService.findByUserId(user.getId());
 
-        model.addAttribute("employeeId", employee.getId());
+        // harus redirectAttribute, karena kita langsung redirect ke endpoint
+        redirectAttributes.addAttribute("employeeId", employee.getId());
         return "redirect:/employees/{employeeId}";
     }
 
@@ -89,7 +90,7 @@ public class EmployeeController {
         // jika sukses save employee, maka kita tampilkan halaman data_employee
         // kita ambil object employee, lalu cari employee by id
 
-        model.addAttribute("employeeId", employee.getId());
+        redirectAttributes.addAttribute("employeeId", employee.getId());
 
         return "redirect:/employees/{employeeId}"; // redirect ke getEmployeeById
     }
