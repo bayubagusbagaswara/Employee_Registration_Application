@@ -13,7 +13,9 @@ public class EmployeeDTO {
 
     private String id;
 
-    // jika kita OneToOne dengan table User, maka kita disini bisa mendapatkan data email
+    // data User
+    private String username;
+    private String email;
 
     private String position;
 
