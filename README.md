@@ -11,7 +11,11 @@
 7. Role Admin => /admin/. Role ADMIN & USER => /admin/. Role USER => /index/
 8. Artinya secara default user yang memiliki ROLE ADMIN, akan diredirect langsung ke /admin
 9. Jadi misal di AdminController hanya menangani /admin, tapi seumpama kita hit URL /admin/edit-user, apakah bisa redirect ke endpont /edit-user, dimana misalnya /edit-user ini dimiliki oleh UserController yang hanya bisa diakses yang memiliki Role USER
-10. Kita login sebagai USER, lalu kita klik halaman form My Profile, kita akan mengisi identitas, lalu SIMPAN, maka akan ditampikan halaman list-employee
+10. Kita login sebagai USER, lalu kita klik halaman form My Profile, kita akan mengisi identitas, lalu SIMPAN, maka akan ditampikan halaman list-employee (DONE)
+11. Kita kerjakan halaman untuk Educational Background. Dimana ada form untuk mengisi pendisikan, lalu tombol save
+12. Kemudian jika telah berhasil, maka kita akan di redirect ke halaman data_education_background.html
+13. Dan di halaman data_educational_background juga ada tombol "Tambah Educational Background"
+14. Data yang ditampilkan dalam tabel di halaman data_education_background harus kita urutkan dulu berdasarkan tahun pendidikan
 
 
 # Flow Bisnis
