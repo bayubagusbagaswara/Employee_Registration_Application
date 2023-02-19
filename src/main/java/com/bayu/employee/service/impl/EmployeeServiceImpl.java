@@ -67,7 +67,21 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public EmployeeDTO getEmployeeByUserId(String userId) {
-        return null;
+        Employee employee = employeeRepository.findByUserId(userId)
+                .orElseThrow(() -> new ResourceNotFoundException("Employee not found with user id : " + userId));
+        return EmployeeDTO.builder()
+                .id(employee.getId())
+                .position(employee.getPosition())
+                .name(employee.getName())
+                .age(String.valueOf(employee.getAge()))
+                .address(employee.getAddress())
+                .build();
+    }
+
+    @Override
+    public Employee findById(String id) {
+        return employeeRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Employee not found with id : " + id));
     }
 
     @Override
