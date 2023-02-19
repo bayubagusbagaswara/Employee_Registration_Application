@@ -18,6 +18,8 @@ public interface EmployeeService {
 
     EmployeeDTO getEmployeeByUserId(String userId);
 
+    Employee findById(String id);
+
     Employee findByUserId(String userId);
 
     EmployeeDTO createEmployee(String userId, CreateEmployeeRequest createEmployeeRequest);
