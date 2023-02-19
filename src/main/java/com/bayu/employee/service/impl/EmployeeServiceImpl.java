@@ -2,11 +2,13 @@ package com.bayu.employee.service.impl;
 
 import com.bayu.employee.exception.ResourceNotFoundException;
 import com.bayu.employee.model.Employee;
+import com.bayu.employee.model.User;
 import com.bayu.employee.payload.employee.CreateEmployeeRequest;
 import com.bayu.employee.payload.employee.EmployeeDTO;
 import com.bayu.employee.payload.employee.UpdateEmployeeRequest;
 import com.bayu.employee.repository.EmployeeRepository;
 import com.bayu.employee.service.EmployeeService;
+import com.bayu.employee.service.UserService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,9 +18,11 @@ import java.util.stream.Collectors;
 public class EmployeeServiceImpl implements EmployeeService {
 
     private final EmployeeRepository employeeRepository;
+    private final UserService userService;
 
-    public EmployeeServiceImpl(EmployeeRepository employeeRepository) {
+    public EmployeeServiceImpl(EmployeeRepository employeeRepository, UserService userService) {
         this.employeeRepository = employeeRepository;
+        this.userService = userService;
     }
 
     @Override
@@ -62,18 +66,35 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public EmployeeDTO createEmployee(CreateEmployeeRequest createEmployeeRequest) {
+    public EmployeeDTO getEmployeeByUserId(String userId) {
+        return null;
+    }
+
+    @Override
+    public Employee findByUserId(String userId) {
+        return employeeRepository.findByUserId(userId)
+                .orElseThrow(() -> new ResourceNotFoundException("Employee not found with user id : " + userId));
+    }
+
+    @Override
+    public EmployeeDTO createEmployee(String userId, CreateEmployeeRequest createEmployeeRequest) {
+        // kita harus cek user by id, panggil userService
+        User user = userService.findById(userId);
+
         Employee employee = Employee.builder()
                 .name(createEmployeeRequest.getName())
                 .position(createEmployeeRequest.getPosition())
                 .age(Integer.valueOf(createEmployeeRequest.getAge()))
                 .address(createEmployeeRequest.getAddress())
+                .user(user)
                 .build();
 
         employeeRepository.save(employee);
 
         return EmployeeDTO.builder()
                 .id(employee.getId())
+                .username(employee.getUser().getUsername())
+                .email(employee.getUser().getEmail())
                 .position(employee.getPosition())
                 .name(employee.getName())
                 .age(String.valueOf(employee.getAge()))
