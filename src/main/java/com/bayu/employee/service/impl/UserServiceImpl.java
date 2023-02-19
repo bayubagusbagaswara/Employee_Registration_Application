@@ -1,6 +1,7 @@
 package com.bayu.employee.service.impl;
 
 import com.bayu.employee.exception.AppException;
+import com.bayu.employee.exception.ResourceNotFoundException;
 import com.bayu.employee.model.Role;
 import com.bayu.employee.model.User;
 import com.bayu.employee.model.enumerator.RoleName;
@@ -175,6 +176,18 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserDTO getUserById(String id) {
         return null;
+    }
+
+    @Override
+    public User findById(String id) {
+        return userRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("User not found with id : " + id));
+    }
+
+    @Override
+    public User findByUsername(String username) {
+        return userRepository.findByUsername(username)
+                .orElseThrow(() -> new ResourceNotFoundException("User not found with username : " + username));
     }
 
     @Override
