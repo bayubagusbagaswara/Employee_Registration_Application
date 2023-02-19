@@ -1,5 +1,6 @@
 package com.bayu.employee.service;
 
+import com.bayu.employee.model.User;
 import com.bayu.employee.payload.*;
 
 public interface UserService {
@@ -19,6 +20,10 @@ public interface UserService {
     UserDTO createUser(CreateUserRequest createUserRequest);
 
     UserDTO getUserById(String id);
+
+    User findById(String id);
+
+    User findByUsername(String username);
 
     UserDTO getUserByUsername(String username);
 
