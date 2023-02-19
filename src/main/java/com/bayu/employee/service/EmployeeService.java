@@ -16,7 +16,11 @@ public interface EmployeeService {
 
     EmployeeDTO getEmployeeByName(String name);
 
-    EmployeeDTO createEmployee(CreateEmployeeRequest createEmployeeRequest);
+    EmployeeDTO getEmployeeByUserId(String userId);
+
+    Employee findByUserId(String userId);
+
+    EmployeeDTO createEmployee(String userId, CreateEmployeeRequest createEmployeeRequest);
 
     EmployeeDTO updateEmployee(String id, UpdateEmployeeRequest updateEmployeeRequest);
 
