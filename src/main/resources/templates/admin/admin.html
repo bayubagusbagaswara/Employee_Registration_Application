@@ -35,14 +35,14 @@
 
     <!-- Heading -->
     <div class="sidebar-heading">
-      User Profile
+      Admin Profile
     </div>
 
     <!-- Nav Item - My Profile -->
     <li class="nav-item">
       <a class="nav-link" href="charts.html">
         <i class="fas fa-user"></i>
-        <span>My Profile</span></a>
+        <span>Personal Data</span></a>
     </li>
 
     <!-- Nav Item - Edit Profile -->
@@ -57,7 +57,7 @@
 
     <!-- Nav Item - Logout -->
     <li class="nav-item">
-      <a class="nav-link" href="tables.html">
+      <a class="nav-link" th:href="@{/logout}">
         <i class="fas fa-sign-out-alt"></i>
         <span>Logout</span></a>
     </li>
@@ -86,6 +86,10 @@
         <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
           <i class="fa fa-bars"></i>
         </button>
+
+        <div class="mt-2" align="right">
+          <h5 class="text-gray-800">Employee Registration System</h5>
+        </div>
 
         <!-- Topbar Navbar -->
         <ul class="navbar-nav ml-auto">
