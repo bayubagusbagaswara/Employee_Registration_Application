@@ -34,6 +34,12 @@ public class Employee {
     @Column(name = "address")
     private String address;
 
+    // Employee memilik relasi OneToOne dengan User
+    @MapsId
+    @OneToOne
+    @JoinColumn(name = "id_user", foreignKey = @ForeignKey(name = "fk_employee_id_user"), referencedColumnName = "id")
+    private User user;
+
 //    @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL, orphanRemoval = true)
 //    private Set<EducationalBackground> educationalBackgrounds = new HashSet<>();
 }
