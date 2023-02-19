@@ -13,4 +13,12 @@ public class AdminController {
         return "admin/admin.html";
     }
 
+    // bisa get employee by id
+
+    // bisa get all employee
+
+    // bisa update employee
+
+    // bisa delete employee
+
 }
