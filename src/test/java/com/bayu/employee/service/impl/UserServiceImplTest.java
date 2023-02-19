@@ -55,6 +55,25 @@ class UserServiceImplTest {
     }
 
     @Test
+    void createUserNewton() {
+        CreateUserRequest createUserRequest = CreateUserRequest.builder()
+                .username("newton")
+                .email("newton@mail.com")
+                .password("newton123")
+                .build();
+
+        UserDTO user = userService.createUser(createUserRequest);
+
+        assertNotNull(user.getId());
+
+        log.info("ID: {}", user.getId());
+        log.info("Username: {}", user.getUsername());
+        log.info("Email: {}", user.getEmail());
+        log.info("Password: {}", user.getPassword());
+        log.info("Role: {}", user.getRoles().toString());
+    }
+
+    @Test
     void createAdmin() {
         CreateUserRequest createUserRequest = CreateUserRequest.builder()
                 .username("admin")
