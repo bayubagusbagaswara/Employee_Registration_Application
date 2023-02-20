@@ -26,21 +26,12 @@ public class EducationServiceImpl implements EducationService {
     }
 
     @Override
-    public EducationDTO createEducationalBackground(String userId, CreateEducationRequest createEducationRequest) {
-        // cari user by id
-        User user = userService.findById(userId);
-
-
-
+    public EducationDTO createEducation(String userId, CreateEducationRequest createEducationRequest) {
         return null;
     }
 
     @Override
     public List<Education> findByUserId(String userId) {
-        return null;
-    }
-
-    public EducationDTO mapToEducationalBackgroundDTO(Education education) {
         return null;
     }
 }
