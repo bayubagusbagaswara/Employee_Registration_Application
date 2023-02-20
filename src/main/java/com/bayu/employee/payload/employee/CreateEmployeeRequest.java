@@ -19,6 +19,9 @@ public class CreateEmployeeRequest {
     @NotBlank(message = "Name must not be blank")
     private String name;
 
+    @NotBlank(message = "Gender must not be blank")
+    private String gender;
+
     @NotBlank(message = "Age must not be blank")
     private String age;
 
