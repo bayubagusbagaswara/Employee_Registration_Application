@@ -8,9 +8,11 @@ import com.bayu.employee.repository.EducationRepository;
 import com.bayu.employee.service.EducationService;
 import com.bayu.employee.service.EmployeeService;
 import com.bayu.employee.service.UserService;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class EducationServiceImpl implements EducationService {
@@ -27,6 +29,17 @@ public class EducationServiceImpl implements EducationService {
 
     @Override
     public EducationDTO createEducation(String userId, CreateEducationRequest createEducationRequest) {
+        User user = userService.findById(userId);
+
+        Education education = new Education();
+        education.setLevelOfEducation(createEducationRequest.getLevelOfEducation().toLowerCase());
+        education.setDepartment(createEducationRequest.getDepartment().toLowerCase());
+        education.setCollegeName(createEducationRequest.getCollegeName().toLowerCase());
+        education.setGraduationYear(Integer.valueOf(createEducationRequest.getGraduationYear()));
+        education.setUser(user);
+
+        educationRepository.save(education);
+
         return null;
     }
 
@@ -34,4 +47,22 @@ public class EducationServiceImpl implements EducationService {
     public List<Education> findByUserId(String userId) {
         return null;
     }
+
+    public EducationDTO mapToEducationDTO(Education education) {
+        return EducationDTO.builder()
+                .id(education.getId())
+                .userId(education.getUser().getId())
+                .levelOfEducation(StringUtils.upperCase(education.getLevelOfEducation()))
+                .department(StringUtils.capitalize(education.getDepartment()))
+                .collegeName(StringUtils.capitalize(education.getCollegeName()))
+                .graduationYear(String.valueOf(education.getGraduationYear()))
+                .build();
+    }
+
+    public List<EducationDTO> mapToEducationDTOList(List<Education> educationList) {
+        return educationList.stream()
+                .map(this::mapToEducationDTO)
+                .collect(Collectors.toList());
+    }
+
 }
