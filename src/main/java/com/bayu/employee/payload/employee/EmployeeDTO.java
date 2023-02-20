@@ -12,14 +12,14 @@ import lombok.NoArgsConstructor;
 public class EmployeeDTO {
 
     private String id;
-
-    // data User
     private String username;
     private String email;
 
     private String position;
 
     private String name;
+
+    private String gender;
 
     private String age;
 
