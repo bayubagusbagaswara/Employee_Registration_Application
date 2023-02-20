@@ -1,4 +1,4 @@
-package com.bayu.employee.payload.educational;
+package com.bayu.employee.payload.education;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class CreateEducationalBackgroundRequest {
+public class CreateEducationRequest {
 
     private String name;
 

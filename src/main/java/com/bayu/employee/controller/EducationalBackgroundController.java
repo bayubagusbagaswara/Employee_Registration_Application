@@ -2,7 +2,7 @@ package com.bayu.employee.controller;
 
 import com.bayu.employee.model.Education;
 import com.bayu.employee.model.User;
-import com.bayu.employee.payload.educational.CreateEducationalBackgroundRequest;
+import com.bayu.employee.payload.education.CreateEducationRequest;
 import com.bayu.employee.service.EducationalBackgroundService;
 import com.bayu.employee.service.EmployeeService;
 import com.bayu.employee.service.UserService;
@@ -39,10 +39,10 @@ public class EducationalBackgroundController {
 
         User user = userService.findByUsername(username);
 
-        CreateEducationalBackgroundRequest createEducationalBackgroundRequest = new CreateEducationalBackgroundRequest();
+        CreateEducationRequest createEducationRequest = new CreateEducationRequest();
 
         if (user.getEducations() == null) {
-            model.addAttribute("createEducationalBackgroundRequest", createEducationalBackgroundRequest);
+            model.addAttribute("createEducationalBackgroundRequest", createEducationRequest);
             return "redirect:/educational/show-form-educational";
         }
 

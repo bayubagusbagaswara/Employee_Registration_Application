@@ -2,8 +2,8 @@ package com.bayu.employee.service.impl;
 
 import com.bayu.employee.model.Education;
 import com.bayu.employee.model.User;
-import com.bayu.employee.payload.educational.CreateEducationalBackgroundRequest;
-import com.bayu.employee.payload.educational.EducationalBackgroundDTO;
+import com.bayu.employee.payload.education.CreateEducationRequest;
+import com.bayu.employee.payload.education.EducationDTO;
 import com.bayu.employee.repository.EducationalBackgroundRepository;
 import com.bayu.employee.service.EducationalBackgroundService;
 import com.bayu.employee.service.EmployeeService;
@@ -26,7 +26,7 @@ public class EducationalBackgroundServiceImpl implements EducationalBackgroundSe
     }
 
     @Override
-    public EducationalBackgroundDTO createEducationalBackground(String userId, CreateEducationalBackgroundRequest createEducationalBackgroundRequest) {
+    public EducationDTO createEducationalBackground(String userId, CreateEducationRequest createEducationRequest) {
         // cari user by id
         User user = userService.findById(userId);
 
@@ -40,7 +40,7 @@ public class EducationalBackgroundServiceImpl implements EducationalBackgroundSe
         return null;
     }
 
-    public EducationalBackgroundDTO mapToEducationalBackgroundDTO(Education education) {
+    public EducationDTO mapToEducationalBackgroundDTO(Education education) {
         return null;
     }
 }
