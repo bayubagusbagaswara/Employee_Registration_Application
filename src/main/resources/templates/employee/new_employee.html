@@ -12,44 +12,72 @@
       <div class="row">
         <div class="col-lg">
           <div class="p-5">
-            <form action="#"
-                  th:action="@{/employees/saveEmployee/{userId}(userId=${userId})}"
-                  th:object="${createEmployeeRequest}"
-                  method="post">
-              <div class="mb-3 row">
-                <label for="position" class="col-sm-3 col-form-label">Posisi yang dilamar</label>
-                <div class="col-sm-8">
-                  <input type="text" class="form-control"
-                         id="position" name="position"
-                         th:field="*{position}">
+            <form action="#" th:action="@{/employees/saveEmployee/{userId}(userId=${userId})}" th:object="${createEmployeeRequest}" method="post">
+              <div class="row my-5 pl-5">
+                <div class="col-12 col-md-5">
+                  <div class="form-group mb-3">
+                    <div class="row align-items-end">
+                      <div class="col-md mb-md-0">
+                        <label for="position" class="form-label"><strong>Posisi yang dilamar</strong></label>
+                        <input type="text" class="form-control" id="position" name="position" th:field="*{position}">
+                      </div>
+                    </div>
+                  </div>
                 </div>
-              </div>
-              <div class="mb-3 row">
-                <label for="name" class="col-sm-3 col-form-label">Nama Lengkap</label>
-                <div class="col-sm-8">
-                  <input type="text" class="form-control"
-                         id="name" name="name"
-                         th:field="*{name}">
+                <div class="col-12 col-md-1"></div>
+                <div class="col-12 col-md-5">
+                  <div class="form-group mb-3">
+                    <div class="row align-items-end">
+                      <div class="col-md mb-md-0">
+                        <label for="name" class="form-label"><strong>Nama Lengkap</strong></label>
+                        <input type="text" class="form-control" id="name" name="name" th:field="*{name}">
+                      </div>
+                    </div>
+                  </div>
                 </div>
-              </div>
-              <div class="mb-3 row">
-                <label for="age" class="col-sm-3 col-form-label">Umur</label>
-                <div class="col-sm-8">
-                  <input type="text" class="form-control"
-                         id="age" name="age"
-                         th:field="*{age}">
+                <div class="col-12 col-md-5">
+                  <div class="form-group mb-3">
+                    <div class="row align-items-end">
+                      <div class="col-md mb-md-0">
+                        <label class="form-label"><strong>Jenis Kelamin</strong></label>
+                        <div class="row pl-3">
+                          <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" th:field="*{gender}" value="Laki-laki">
+                            <label class="form-check-label" for="inlineRadio1">Laki-laki</label>
+                          </div>
+                          <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" th:field="*{gender}" value="Perempuan">
+                            <label class="form-check-label" for="inlineRadio2">Perempuan</label>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
-              </div>
-              <div class="mb-3 row">
-                <label for="address" class="col-sm-3 col-form-label">Alamat Lengkap</label>
-                <div class="col-sm-8">
-                  <input type="text" class="form-control"
-                         id="address" name="address"
-                         th:field="*{address}">
+                <div class="col-12 col-md-1"></div>
+                <div class="col-12 col-md-5">
+                  <div class="form-group mb-3">
+                    <div class="row align-items-end">
+                      <div class="col-md mb-md-0">
+                        <label for="age" class="form-label"><strong>Umur</strong></label>
+                        <input type="text" class="form-control" id="age" name="age" th:field="*{age}">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-12 col-md-5">
+                  <div class="form-group mb-3">
+                    <div class="row align-items-end">
+                      <div class="col-md mb-md-0">
+                        <label for="address" class="form-label"><strong>Alamat</strong></label>
+                        <input type="text" class="form-control" id="address" name="address" th:field="*{address}">
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
               <div class="d-grid d-md-flex justify-content-md-end">
-                <button type="submit"class="btn btn-success">Simpan</button>
+                <button type="submit" class="btn btn-success">Simpan</button>
               </div>
             </form>
           </div>
