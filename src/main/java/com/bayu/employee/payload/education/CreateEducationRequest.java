@@ -11,9 +11,11 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class CreateEducationRequest {
 
-    private String name;
+    private String levelOfEducation;
 
-    private String major;
+    private String department;
 
-    private String year;
+    private String collegeName;
+
+    private String graduationYear;
 }
