@@ -5,7 +5,9 @@ import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -37,12 +39,11 @@ public class Employee {
     @Column(name = "address")
     private String address;
 
-    // Employee memilik relasi OneToOne dengan User
     @MapsId
     @OneToOne
     @JoinColumn(name = "id_user", foreignKey = @ForeignKey(name = "fk_employee_id_user"), referencedColumnName = "id")
     private User user;
 
-//    @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL, orphanRemoval = true)
-//    private Set<EducationalBackground> educationalBackgrounds = new HashSet<>();
+    @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
+    private Set<EducationalBackground> educationalBackgrounds = new HashSet<>();
 }
