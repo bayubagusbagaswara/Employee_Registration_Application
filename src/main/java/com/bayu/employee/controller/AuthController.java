@@ -48,17 +48,14 @@ public class AuthController {
 
         log.info("Registration User: {}", registrationRequest.toString());
 
-        // check username is exists
         if (userService.checkUsernameIsExists(registrationRequest.getUsername())) {
             bindingResult.addError(new FieldError("registrationRequest", "username", "Username is already exists"));
         }
 
-        // check email is exists
         if (userService.checkEmailIsExists(registrationRequest.getEmail())) {
             bindingResult.addError(new FieldError("registrationRequest", "email", "Email is already exists"));
         }
 
-        // check is the password match
         if (registrationRequest.getPassword() != null && registrationRequest.getRepeatPassword() != null) {
             if (!registrationRequest.getPassword().equals(registrationRequest.getRepeatPassword())) {
                 bindingResult.addError(new FieldError("registrationRequest", "repeatPassword", "Password must be match"));
@@ -81,32 +78,5 @@ public class AuthController {
         model.addAttribute("title", "Login Page");
         return "auth/login";
     }
-
-//    @PostMapping("/signin")
-//    public String doLogin(@ModelAttribute LoginRequest loginRequest) {
-//        // harusnya disini terjadi autentikasi username dan password
-//
-//        log.info("Username: {}", loginRequest.getUsername());
-//        log.info("Password: {}", loginRequest.getPassword());
-////
-//        userService.login(loginRequest);
-//
-//        return "home"; // ini mengarah ke register.html, harusnya mengarah ke home.html
-//    }
-
-//    @RequestMapping(value = "/login", method = RequestMethod.POST)
-//    public void login(@RequestParam("username") final String username, @RequestParam("password") final String password, final HttpServletRequest request) {
-//        UsernamePasswordAuthenticationToken authReq =
-//                new UsernamePasswordAuthenticationToken(username, password);
-//        Authentication auth = authManager.authenticate(authReq);
-//        SecurityContext sc = SecurityContextHolder.getContext();
-//        sc.setAuthentication(auth);
-//        HttpSession session = request.getSession(true);
-//        session.setAttribute("SPRING_SECURITY_CONTEXT", sc);
-//    }
-
-
-    // /admin/index
-    // /user/index
 
 }
