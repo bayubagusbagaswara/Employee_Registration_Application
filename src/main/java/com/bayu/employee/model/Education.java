@@ -6,7 +6,7 @@ import org.hibernate.annotations.GenericGenerator;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "educational_background")
+@Table(name = "educations")
 @Getter
 @Setter
 @Builder
