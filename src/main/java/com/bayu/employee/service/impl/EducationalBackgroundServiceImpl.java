@@ -4,7 +4,7 @@ import com.bayu.employee.model.Education;
 import com.bayu.employee.model.User;
 import com.bayu.employee.payload.education.CreateEducationRequest;
 import com.bayu.employee.payload.education.EducationDTO;
-import com.bayu.employee.repository.EducationalBackgroundRepository;
+import com.bayu.employee.repository.EducationRepository;
 import com.bayu.employee.service.EducationalBackgroundService;
 import com.bayu.employee.service.EmployeeService;
 import com.bayu.employee.service.UserService;
@@ -15,12 +15,12 @@ import java.util.List;
 @Service
 public class EducationalBackgroundServiceImpl implements EducationalBackgroundService {
 
-    private final EducationalBackgroundRepository educationalBackgroundRepository;
+    private final EducationRepository educationRepository;
     private final UserService userService;
     private final EmployeeService employeeService;
 
-    public EducationalBackgroundServiceImpl(EducationalBackgroundRepository educationalBackgroundRepository, UserService userService, EmployeeService employeeService) {
-        this.educationalBackgroundRepository = educationalBackgroundRepository;
+    public EducationalBackgroundServiceImpl(EducationRepository educationRepository, UserService userService, EmployeeService employeeService) {
+        this.educationRepository = educationRepository;
         this.userService = userService;
         this.employeeService = employeeService;
     }

@@ -5,7 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 
-public interface EducationalBackgroundRepository extends JpaRepository<Education, String> {
+public interface EducationRepository extends JpaRepository<Education, String> {
 
 //    List<EducationalBackground> findAllByEmployeeId(String employeeId);
 
