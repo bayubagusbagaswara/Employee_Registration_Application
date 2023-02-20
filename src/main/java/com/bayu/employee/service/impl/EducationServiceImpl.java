@@ -40,12 +40,12 @@ public class EducationServiceImpl implements EducationService {
 
         educationRepository.save(education);
 
-        return null;
+        return mapToEducationDTO(education);
     }
 
     @Override
     public List<Education> findByUserId(String userId) {
-        return null;
+        return educationRepository.findAllByUserId(userId);
     }
 
     public EducationDTO mapToEducationDTO(Education education) {
