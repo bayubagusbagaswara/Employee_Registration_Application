@@ -5,7 +5,7 @@ import com.bayu.employee.model.User;
 import com.bayu.employee.payload.education.CreateEducationRequest;
 import com.bayu.employee.payload.education.EducationDTO;
 import com.bayu.employee.repository.EducationRepository;
-import com.bayu.employee.service.EducationalBackgroundService;
+import com.bayu.employee.service.EducationService;
 import com.bayu.employee.service.EmployeeService;
 import com.bayu.employee.service.UserService;
 import org.springframework.stereotype.Service;
@@ -13,13 +13,13 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class EducationalBackgroundServiceImpl implements EducationalBackgroundService {
+public class EducationServiceImpl implements EducationService {
 
     private final EducationRepository educationRepository;
     private final UserService userService;
     private final EmployeeService employeeService;
 
-    public EducationalBackgroundServiceImpl(EducationRepository educationRepository, UserService userService, EmployeeService employeeService) {
+    public EducationServiceImpl(EducationRepository educationRepository, UserService userService, EmployeeService employeeService) {
         this.educationRepository = educationRepository;
         this.userService = userService;
         this.employeeService = employeeService;

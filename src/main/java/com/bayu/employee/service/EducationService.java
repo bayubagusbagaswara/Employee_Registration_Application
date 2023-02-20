@@ -6,7 +6,7 @@ import com.bayu.employee.payload.education.EducationDTO;
 
 import java.util.List;
 
-public interface EducationalBackgroundService {
+public interface EducationService {
 
     EducationDTO createEducationalBackground(String userId, CreateEducationRequest createEducationRequest);
 

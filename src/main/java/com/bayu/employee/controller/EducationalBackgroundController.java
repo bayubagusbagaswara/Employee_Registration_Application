@@ -3,7 +3,7 @@ package com.bayu.employee.controller;
 import com.bayu.employee.model.Education;
 import com.bayu.employee.model.User;
 import com.bayu.employee.payload.education.CreateEducationRequest;
-import com.bayu.employee.service.EducationalBackgroundService;
+import com.bayu.employee.service.EducationService;
 import com.bayu.employee.service.EmployeeService;
 import com.bayu.employee.service.UserService;
 import org.slf4j.Logger;
@@ -21,12 +21,12 @@ public class EducationalBackgroundController {
 
     private final static Logger log = LoggerFactory.getLogger(EducationalBackgroundController.class);
 
-    private final EducationalBackgroundService educationalBackgroundService;
+    private final EducationService educationService;
     private final UserService userService;
     private final EmployeeService employeeService;
 
-    public EducationalBackgroundController(EducationalBackgroundService educationalBackgroundService, UserService userService, EmployeeService employeeService) {
-        this.educationalBackgroundService = educationalBackgroundService;
+    public EducationalBackgroundController(EducationService educationService, UserService userService, EmployeeService employeeService) {
+        this.educationService = educationService;
         this.userService = userService;
         this.employeeService = employeeService;
     }
@@ -46,7 +46,7 @@ public class EducationalBackgroundController {
             return "redirect:/educational/show-form-educational";
         }
 
-        List<Education> educationList = educationalBackgroundService.findByUserId(user.getId());
+        List<Education> educationList = educationService.findByUserId(user.getId());
 
         String userId = "";
 
