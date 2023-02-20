@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface EducationalBackgroundRepository extends JpaRepository<EducationalBackground, String> {
 
-//    List<EducationalBackground> findByEmployeeId(String employeeId);
+    List<EducationalBackground> findAllByEmployeeId(String employeeId);
 }
