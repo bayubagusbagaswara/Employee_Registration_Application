@@ -26,14 +26,13 @@ public class EducationalBackground {
     private String major;
 
     @Column(name = "year")
-    private String year;
+    private Integer year;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(
-            name = "employee_id",
-            foreignKey = @ForeignKey(name = "fk_educational_employee_id"),
-            referencedColumnName = "id",
-            nullable = false)
-    private Employee employee;
+//    @ManyToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(
+//            name = "employee_id",
+//            foreignKey = @ForeignKey(name = "fk_educational_employee_id"),
+//            referencedColumnName = "id")
+//    private Employee employee;
 
 }
