@@ -17,15 +17,15 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import java.util.List;
 
 @Controller
-public class EducationalBackgroundController {
+public class EducationController {
 
-    private final static Logger log = LoggerFactory.getLogger(EducationalBackgroundController.class);
+    private final static Logger log = LoggerFactory.getLogger(EducationController.class);
 
     private final EducationService educationService;
     private final UserService userService;
     private final EmployeeService employeeService;
 
-    public EducationalBackgroundController(EducationService educationService, UserService userService, EmployeeService employeeService) {
+    public EducationController(EducationService educationService, UserService userService, EmployeeService employeeService) {
         this.educationService = educationService;
         this.userService = userService;
         this.employeeService = employeeService;
