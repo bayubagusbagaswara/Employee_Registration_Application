@@ -13,7 +13,7 @@ public class EducationalBackgroundDTO {
 
     private String id;
 
-    private String employeeId;
+    private String userId;
 
     private String name;
 
