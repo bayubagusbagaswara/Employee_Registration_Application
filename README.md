@@ -51,11 +51,11 @@
 - No. Telp
 - Orang terdekat yang dapat dihubungi
 
-# Menu : Educational Background
+# Menu : Educations
 
-# Menu : Job Experience
+# Menu : Work Experience
 
-# Menu : Training History
+# Menu : Training History (Trainings)
 
 # Menu : Additional
 

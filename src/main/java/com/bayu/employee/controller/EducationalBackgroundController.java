@@ -1,6 +1,6 @@
 package com.bayu.employee.controller;
 
-import com.bayu.employee.model.EducationalBackground;
+import com.bayu.employee.model.Education;
 import com.bayu.employee.model.User;
 import com.bayu.employee.payload.educational.CreateEducationalBackgroundRequest;
 import com.bayu.employee.service.EducationalBackgroundService;
@@ -15,8 +15,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 @Controller
 public class EducationalBackgroundController {
@@ -43,17 +41,17 @@ public class EducationalBackgroundController {
 
         CreateEducationalBackgroundRequest createEducationalBackgroundRequest = new CreateEducationalBackgroundRequest();
 
-        if (user.getEducationalBackgrounds() == null) {
+        if (user.getEducations() == null) {
             model.addAttribute("createEducationalBackgroundRequest", createEducationalBackgroundRequest);
             return "redirect:/educational/show-form-educational";
         }
 
-        List<EducationalBackground> educationalBackgroundList = educationalBackgroundService.findByUserId(user.getId());
+        List<Education> educationList = educationalBackgroundService.findByUserId(user.getId());
 
         String userId = "";
 
-        for (EducationalBackground educationalBackground : educationalBackgroundList) {
-            userId = educationalBackground.getUser().getId();
+        for (Education education : educationList) {
+            userId = education.getUser().getId();
         }
 
         redirectAttributes.addAttribute("userId", userId);

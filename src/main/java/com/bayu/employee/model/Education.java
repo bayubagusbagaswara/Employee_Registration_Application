@@ -12,21 +12,24 @@ import javax.persistence.*;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class EducationalBackground {
+public class Education {
 
     @Id
     @GenericGenerator(name = "system-uuid", strategy = "uuid2")
     @GeneratedValue(generator = "system-uuid")
     private String id;
 
-    @Column(name = "name")
-    private String name;
+    @Column(name = "level_of_education")
+    private String levelOfEducation;
 
-    @Column(name = "major")
-    private String major;
+    @Column(name = "department")
+    private String department;
 
-    @Column(name = "year")
-    private Integer year;
+    @Column(name = "college_name")
+    private String collegeName;
+
+    @Column(name = "graduation_year")
+    private Integer graduationYear;
 
     // karena di table Employee adalah OneToOne dengan table User, dan menggunakan id_user, maka kita referencedColumn nya adalah id_user
 //    @ManyToOne(fetch = FetchType.LAZY)

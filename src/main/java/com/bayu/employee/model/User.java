@@ -43,7 +43,7 @@ public class User {
 
     // relation bidirectional with EducationalBackground
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
-    private Set<EducationalBackground> educationalBackgrounds = new HashSet<>();
+    private Set<Education> educations = new HashSet<>();
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
