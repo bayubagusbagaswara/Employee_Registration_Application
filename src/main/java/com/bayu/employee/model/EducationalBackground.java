@@ -28,11 +28,9 @@ public class EducationalBackground {
     @Column(name = "year")
     private Integer year;
 
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(
-//            name = "employee_id",
-//            foreignKey = @ForeignKey(name = "fk_educational_employee_id"),
-//            referencedColumnName = "id")
-//    private Employee employee;
+    // karena di table Employee adalah OneToOne dengan table User, dan menggunakan id_user, maka kita referencedColumn nya adalah id_user
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "employee_id", foreignKey = @ForeignKey(name = "fk_educational_employee_id"), referencedColumnName = "id_user")
+    private Employee employee;
 
 }
