@@ -28,6 +28,9 @@ public class Employee {
     @Column(name = "name")
     private String name;
 
+    @Column(name = "gender")
+    private String gender;
+
     @Column(name = "age")
     private Integer age;
 
