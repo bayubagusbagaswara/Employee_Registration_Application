@@ -1,6 +1,8 @@
 package com.bayu.employee.controller;
 
+import com.bayu.employee.model.EducationalBackground;
 import com.bayu.employee.model.User;
+import com.bayu.employee.payload.educational.CreateEducationalBackgroundRequest;
 import com.bayu.employee.service.EducationalBackgroundService;
 import com.bayu.employee.service.EmployeeService;
 import com.bayu.employee.service.UserService;
@@ -11,6 +13,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Controller
 public class EducationalBackgroundController {
@@ -33,16 +39,33 @@ public class EducationalBackgroundController {
         String username = authentication.getName();
         log.info("Username: {}", username);
 
-        // saat pertama kita hit menu Educational Background atau URL /educational
-        // maka kita akan diarahkan ke halaman educational/home.html
-        // dimana di halaman tersebut hanya ada tombol "Tambahkan "
-
-        // cari user berdasarkan username
         User user = userService.findByUsername(username);
 
-        // cek apakah user tersebut sudah memiliki educational background
+        CreateEducationalBackgroundRequest createEducationalBackgroundRequest = new CreateEducationalBackgroundRequest();
 
+        if (user.getEducationalBackgrounds() == null) {
+            model.addAttribute("createEducationalBackgroundRequest", createEducationalBackgroundRequest);
+            return "redirect:/educational/show-form-educational";
+        }
 
-        return "educational/home.html";
+        List<EducationalBackground> educationalBackgroundList = educationalBackgroundService.findByUserId(user.getId());
+
+        String userId = "";
+
+        for (EducationalBackground educationalBackground : educationalBackgroundList) {
+            userId = educationalBackground.getUser().getId();
+        }
+
+        redirectAttributes.addAttribute("userId", userId);
+        return "redirect:/educational/user/{userId}";
+    }
+
+    // tampilkan form untuk menambahkan educational background
+    @GetMapping("/educational/show-form-educational")
+    public String showNewEducationalForm(Model model, Authentication authentication, RedirectAttributes redirectAttributes) {
+        // cari user by username
+        String username = authentication.getName();
+
+        return "";
     }
 }
