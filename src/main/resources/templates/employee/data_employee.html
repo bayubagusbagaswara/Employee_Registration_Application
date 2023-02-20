@@ -15,18 +15,16 @@
             <div class="row">
                 <div class="col-lg">
                     <div class="p-5">
-                        <div class="col-md-12">
-                            <div class="form-row">
-                                <h4 class="fw-bold text-muted mt-6 mb-0"><strong>Data Diri</strong></h4>
-                            </div>
+                        <div class="form-row mb-4">
+                            <h4 class="fw-bold text-muted mt-6 mb-0"><strong>Data Diri</strong></h4>
                         </div>
-                        <div class="row my-5 pl-5">
+                        <div class="row mb-5 pl-5">
                             <div class="col-12 col-md-6">
                                 <div class="form-group mb-3">
                                     <div class="row align-items-end">
                                         <div class="col-md mb-md-0">
                                             <label class="font-size-14 fw-bold"><strong>Nama Lengkap</strong></label>
-                                            <p style="text-transform: capitalize" th:text="${employee.name}"></p>
+                                            <p th:text="${employee.name}"></p>
                                         </div>
                                     </div>
                                 </div>
@@ -67,13 +65,9 @@
                                         <div class="col-md mb-md-0">
                                             <label class="font-size-14 fw-bold"><strong>Jenis Kelamin</strong></label>
                                             <p th:text="${employee.gender}"></p>
-
                                         </div>
-
                                     </div>
-
                                 </div>
-
                             </div>
                             <div class="col-12 col-md-6">
                                 <div class="form-group mb-3">
@@ -87,10 +81,10 @@
                             </div>
                         </div>
                         <hr>
+                        <div class="form-row mb-4">
+                            <h4 class="fw-bold text-muted mt-2 mb-0"><strong>Domisili</strong></h4>
+                        </div>
                         <div class="row mb-5 pl-5">
-                            <div class="form-row mb-4">
-                                <h4 class="fw-bold text-muted mt-2 mb-0"><strong>Domisili</strong></h4>
-                            </div>
                             <div class="col-12">
                                 <div class="form-group mb-3">
                                     <div class="row align-items-end">
