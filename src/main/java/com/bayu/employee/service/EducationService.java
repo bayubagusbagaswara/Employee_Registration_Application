@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface EducationService {
 
-    EducationDTO createEducationalBackground(String userId, CreateEducationRequest createEducationRequest);
+    EducationDTO createEducation(String userId, CreateEducationRequest createEducationRequest);
 
     List<Education> findByUserId(String userId);
 
