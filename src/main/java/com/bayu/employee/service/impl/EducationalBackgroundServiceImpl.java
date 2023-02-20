@@ -1,10 +1,13 @@
-package com.bayu.employee.service;
+package com.bayu.employee.service.impl;
 
 import com.bayu.employee.model.EducationalBackground;
 import com.bayu.employee.model.Employee;
 import com.bayu.employee.payload.educational.CreateEducationalBackgroundRequest;
 import com.bayu.employee.payload.educational.EducationBackgroundDTO;
 import com.bayu.employee.repository.EducationalBackgroundRepository;
+import com.bayu.employee.service.EducationalBackgroundService;
+import com.bayu.employee.service.EmployeeService;
+import com.bayu.employee.service.UserService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
