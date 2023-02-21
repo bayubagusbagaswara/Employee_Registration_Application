@@ -12,6 +12,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
@@ -31,19 +32,17 @@ public class EducationController {
         this.employeeService = employeeService;
     }
 
-    @GetMapping("/educational")
-    public String educationalBackground(Model model, Authentication authentication, RedirectAttributes redirectAttributes) {
+    @GetMapping("/education")
+    public String education(Model model, Authentication authentication, RedirectAttributes redirectAttributes) {
 
         String username = authentication.getName();
         log.info("Username: {}", username);
 
         User user = userService.findByUsername(username);
 
-        CreateEducationRequest createEducationRequest = new CreateEducationRequest();
-
-        if (user.getEducations() == null) {
-            model.addAttribute("createEducationalBackgroundRequest", createEducationRequest);
-            return "redirect:/educational/show-form-educational";
+        if (user.getEducations().size() == 0) {
+            // ini diarahakan ke home_education
+            return "redirect:/education/home";
         }
 
         List<Education> educationList = educationService.findByUserId(user.getId());
@@ -54,16 +53,35 @@ public class EducationController {
             userId = education.getUser().getId();
         }
 
+        // jika sudah ada education minimal 1
         redirectAttributes.addAttribute("userId", userId);
-        return "redirect:/educational/user/{userId}";
+        return "redirect:/education/user/{userId}";
     }
 
-    // tampilkan form untuk menambahkan educational background
-    @GetMapping("/educational/show-form-educational")
-    public String showNewEducationalForm(Model model, Authentication authentication, RedirectAttributes redirectAttributes) {
+
+    @GetMapping("/education/home")
+    public String educationHome(Model model) {
+        model.addAttribute("homeEducation", "Home Education");
+        return "education/home_education";
+    }
+
+    @GetMapping("/education/show-form-education")
+    public String showNewEducationForm(Model model, Authentication authentication, RedirectAttributes redirectAttributes) {
         // cari user by username
         String username = authentication.getName();
 
         return "";
+    }
+
+    @GetMapping("/education/user/{userId}")
+    public String getAllEducationByUserId(@PathVariable(value = "userId") String userId,
+                                          Model model,
+                                          RedirectAttributes redirectAttributes) {
+
+        List<Education> educationList = educationService.findByUserId(userId);
+
+        model.addAttribute("educationList", educationList);
+
+        return "education/data_education"; // redirect ke halaman education/data_education.html (disini data berbentuk tabel)
     }
 }
