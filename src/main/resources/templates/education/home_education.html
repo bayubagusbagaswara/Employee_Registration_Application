@@ -1,13 +1,22 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/main_layout}">
 <head>
     <meta charset="UTF-8">
-    <title>Home Educational</title>
+    <title>Data Employee</title>
 </head>
 <body>
-<h4>Belum Ada Data Riwayat Pendidikan</h4>
+<div layout:fragment="content">
 
-<button type="button"><a href="/addEducational"></a>Tambahkan Pendidikan</button>
+<div class="card o-hidden border-0 shadow-lg my-5">
+    <div class="card-body p-0">
+        <div>
+            <p>Data Education Belum Ada</p>
+        </div>
+    </div>
+</div>
 
 </body>
 </html>
