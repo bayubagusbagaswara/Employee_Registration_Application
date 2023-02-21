@@ -49,22 +49,29 @@
     <!-- Nav Item - Edit Profile -->
     <li class="nav-item">
       <a class="nav-link" th:href="@{/education}">
-        <i class="fas fa-graduation-cap"></i>
+        <i class="fas fa-user-graduate"></i>
         <span>Educational Background</span></a>
     </li>
 
     <!-- Nav Item - Edit Profile -->
     <li class="nav-item">
-      <a class="nav-link" href="tables.html">
+      <a class="nav-link" th:href="@{/work}">
         <i class="fas fa-briefcase"></i>
-        <span>Job Experience</span></a>
+        <span>Work Experience</span></a>
     </li>
 
     <!-- Nav Item - Edit Profile -->
     <li class="nav-item">
-      <a class="nav-link" href="tables.html">
+      <a class="nav-link" th:href="@{/training}">
         <i class="fas fa-stamp"></i>
         <span>Training History</span></a>
+    </li>
+
+    <!-- Nav Item - Edit Profile -->
+    <li class="nav-item">
+      <a class="nav-link" th:href="@{/other}">
+        <i class="fas fa-user-plus"></i>
+        <span>Other</span></a>
     </li>
 
     <!-- Divider -->
@@ -96,11 +103,10 @@
 
       <!-- Topbar -->
       <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
-
-        <!--        &lt;!&ndash; Sidebar Toggle (Topbar) &ndash;&gt;-->
-        <!--        <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">-->
-        <!--          <i class="fa fa-bars"></i>-->
-        <!--        </button>-->
+        <!-- Sidebar Toggle (Topbar) -->
+        <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+          <i class="fa fa-bars"></i>
+        </button>
 
         <div class="mt-2" align="right">
           <h5 class="text-gray-800">Employee Registration System</h5>
@@ -108,14 +114,13 @@
 
         <!-- Topbar Navbar -->
         <ul class="navbar-nav ml-auto">
-
           <div class="topbar-divider d-none d-sm-block"></div>
 
           <!-- Nav Item - User Information -->
           <li class="nav-item dropdown no-arrow">
             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              <span class="mr-2 d-none d-lg-inline text-gray-600 small">Douglas McGee</span>
+              <span class="mr-3 d-none d-lg-inline text-gray-600 small" th:text="*{username}"></span>
               <img class="img-profile rounded-circle"
                    th:src="@{/img/undraw_profile.svg}">
             </a>
