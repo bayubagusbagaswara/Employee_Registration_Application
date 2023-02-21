@@ -49,7 +49,7 @@
 - Alamat Tinggal/Domisili
 - Email
 - No. Telp
-- Orang terdekat yang dapat dihubungi
+- Orang terdekat yang dapat dihubungi (Kontak Darurat)
 
 # Menu : Educations
 
