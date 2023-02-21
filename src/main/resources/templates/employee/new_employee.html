@@ -12,8 +12,11 @@
       <div class="row">
         <div class="col-lg">
           <div class="p-5">
+            <div class="form-row mb-4">
+              <h4 class="fw-bold text-muted mt-6 mb-0"><strong>Data Diri</strong></h4>
+            </div>
             <form action="#" th:action="@{/employees/saveEmployee/{userId}(userId=${userId})}" th:object="${createEmployeeRequest}" method="post">
-              <div class="row my-5 pl-5">
+              <div class="row mb-5 pl-5">
                 <div class="col-12 col-md-5">
                   <div class="form-group mb-3">
                     <div class="row align-items-end">
