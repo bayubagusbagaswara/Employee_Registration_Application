@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/main_layout}">
+<body>
+
+<div layout:fragment="content">
+
+    <div class="card o-hidden border-0 shadow-lg my-5">
+        <div class="card-body p-0">
+            <div class="row">
+                <div class="col-lg">
+                    <div class="p-5">
+                        <div class="form-row mb-4">
+                            <h4 class="fw-bold text-muted mt-6 mb-0"><strong>Data Pendidikan</strong></h4>
+                        </div>
+<!--                        th:action="@{/education/addEducation/{userId}(userId=${userId})}"-->
+                        <form action="#"  th:object="${createEducationRequest}" method="post">
+                            <div class="row mb-5 pl-5">
+                                <div class="col-12 col-md-5">
+                                    <div class="form-group mb-3">
+                                        <div class="row align-items-end">
+                                            <div class="col-md mb-md-0">
+                                                <div class="row">
+                                                    <div>
+                                                        <label class="form-label" for="levelOfEducation"><strong>Tingkat Pendidikan</strong></label>
+                                                        <select class="form-select" name="levelOfEducation" id="levelOfEducation" th:field="*{levelOfEducation}">
+                                                            <option value="" selected>--Silahkan pilih--</option>
+                                                            <option th:each="levelOfEducationOpt : ${T(com.bayu.employee.model.enumerator.LevelOfEducation).values()}"
+                                                                    th:value="${levelOfEducationOpt}"
+                                                                    th:text="${levelOfEducationOpt.levelOfEducationName}"></option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-1"></div>
+                                <div class="col-12 col-md-5">
+                                    <div class="form-group mb-3">
+                                        <div class="row align-items-end">
+                                            <div class="col-md mb-md-0">
+                                                <label for="department" class="form-label"><strong>Jurusan</strong></label>
+                                                <input type="text" class="form-control" id="department" name="department" th:field="*{department}">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-5">
+                                    <div class="form-group mb-3">
+                                        <div class="row align-items-end">
+                                            <div class="col-md mb-md-0">
+                                                <label for="collegeName" class="form-label"><strong>Nama Instansi/Perguruan Tinggi</strong></label>
+                                                <input type="text" class="form-control" id="collegeName" name="collegeName" th:field="*{collegeName}">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-1"></div>
+                                <div class="col-12 col-md-5">
+                                    <div class="form-group mb-3">
+                                        <div class="row align-items-end">
+                                            <div class="col-md mb-md-0">
+                                                <label for="graduationYear" class="form-label"><strong>Tahun Lulus</strong></label>
+                                                <input type="text" class="form-control" id="graduationYear" name="graduationYear" th:field="*{graduationYear}">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="d-grid d-md-flex justify-content-md-end">
+                                <button type="submit" class="btn btn-success">Simpan</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
