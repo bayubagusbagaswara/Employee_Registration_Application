@@ -66,11 +66,17 @@ public class EducationController {
     }
 
     @GetMapping("/education/show-form-education")
-    public String showNewEducationForm(Model model, Authentication authentication, RedirectAttributes redirectAttributes) {
-        // cari user by username
-        String username = authentication.getName();
+    public String showNewEducationForm(Model model, Authentication authentication) {
 
-        return "";
+        String username = authentication.getName();
+        User user = userService.findByUsername(username);
+
+        CreateEducationRequest createEducationRequest = new CreateEducationRequest();
+
+        model.addAttribute("createEducationRequest", createEducationRequest);
+        model.addAttribute("userId", user.getId());
+
+        return "education/add_education";
     }
 
     @GetMapping("/education/user/{userId}")
