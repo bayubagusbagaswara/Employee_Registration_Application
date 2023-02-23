@@ -1,12 +1,13 @@
 package com.bayu.employee.service.impl;
 
+import com.bayu.employee.exception.ResourceNotFoundException;
 import com.bayu.employee.model.Education;
 import com.bayu.employee.model.User;
 import com.bayu.employee.payload.education.CreateEducationRequest;
 import com.bayu.employee.payload.education.EducationDTO;
+import com.bayu.employee.payload.education.UpdateEducationRequest;
 import com.bayu.employee.repository.EducationRepository;
 import com.bayu.employee.service.EducationService;
-import com.bayu.employee.service.EmployeeService;
 import com.bayu.employee.service.UserService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.domain.Sort;
@@ -20,12 +21,10 @@ public class EducationServiceImpl implements EducationService {
 
     private final EducationRepository educationRepository;
     private final UserService userService;
-    private final EmployeeService employeeService;
 
-    public EducationServiceImpl(EducationRepository educationRepository, UserService userService, EmployeeService employeeService) {
+    public EducationServiceImpl(EducationRepository educationRepository, UserService userService) {
         this.educationRepository = educationRepository;
         this.userService = userService;
-        this.employeeService = employeeService;
     }
 
     @Override
@@ -46,10 +45,50 @@ public class EducationServiceImpl implements EducationService {
 
     @Override
     public List<EducationDTO> findAllByUserId(String userId) {
-        // sorting by tahun secara ascending
         Sort sorting = Sort.by("graduationYear").ascending();
         List<Education> educationList = educationRepository.findAllByUserId(userId, sorting);
         return mapToEducationDTOList(educationList);
+    }
+
+    @Override
+    public EducationDTO findById(String educationId) {
+        Education education = educationRepository.findById(educationId)
+                .orElseThrow(() -> new ResourceNotFoundException("Education not found with id : " + educationId));
+        return mapToEducationDTO(education);
+    }
+
+    @Override
+    public EducationDTO updateEducation(String educationId, UpdateEducationRequest updateEducationRequest) {
+        Education education = educationRepository.findById(educationId)
+                .orElseThrow(() -> new ResourceNotFoundException("Education not found with id : " + educationId));
+
+        if (updateEducationRequest.getLevelOfEducation() != null) {
+            education.setLevelOfEducation(updateEducationRequest.getLevelOfEducation());
+        }
+
+        if (updateEducationRequest.getDepartment() != null) {
+            education.setDepartment(updateEducationRequest.getDepartment());
+        }
+
+        if (updateEducationRequest.getCollegeName() != null) {
+            education.setCollegeName(updateEducationRequest.getCollegeName());
+        }
+
+        if (updateEducationRequest.getGraduationYear() != null) {
+            education.setGraduationYear(Integer.valueOf(updateEducationRequest.getGraduationYear()));
+        }
+
+        educationRepository.save(education);
+
+        return mapToEducationDTO(education);
+    }
+
+    @Override
+    public void deleteEducation(String educationId) {
+        Education education = educationRepository.findById(educationId)
+                .orElseThrow(() -> new ResourceNotFoundException("Education not found with id : " + educationId));
+
+        educationRepository.delete(education);
     }
 
     public EducationDTO mapToEducationDTO(Education education) {
@@ -81,6 +120,5 @@ public class EducationServiceImpl implements EducationService {
         }
         return word.toString();
     }
-
 
 }
