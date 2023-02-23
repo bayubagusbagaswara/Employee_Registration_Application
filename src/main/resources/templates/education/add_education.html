@@ -16,24 +16,20 @@
                             <h4 class="fw-bold text-muted mt-6 mb-0"><strong>Data Pendidikan</strong></h4>
                         </div>
 <!--                        th:action="@{/education/addEducation/{userId}(userId=${userId})}"-->
-                        <form action="#"  th:object="${createEducationRequest}" method="post">
+                        <form action="#" th:action="@{/education/saveEducation/{userId}(userId=${userId})}" th:object="${createEducationRequest}" method="post">
                             <div class="row mb-5 pl-5">
                                 <div class="col-12 col-md-5">
                                     <div class="form-group mb-3">
                                         <div class="row align-items-end">
                                             <div class="col-md mb-md-0">
-                                                <div class="row">
-                                                    <div>
-                                                        <label class="form-label" for="levelOfEducation"><strong>Tingkat Pendidikan</strong></label>
-                                                        <select class="form-select" name="levelOfEducation" id="levelOfEducation" th:field="*{levelOfEducation}">
-                                                            <option value="" selected>--Silahkan pilih--</option>
-                                                            <option th:each="levelOfEducationOpt : ${T(com.bayu.employee.model.enumerator.LevelOfEducation).values()}"
-                                                                    th:value="${levelOfEducationOpt}"
-                                                                    th:text="${levelOfEducationOpt.levelOfEducationName}"></option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-
+                                                <label class="form-label" for="levelOfEducation"><strong>Tingkat Pendidikan</strong></label>
+                                                <span class="required align-self-end text-danger small font-weight-bold">*</span>
+                                                <select class="form-select form-control" name="levelOfEducation" id="levelOfEducation" th:field="*{levelOfEducation}">
+                                                    <option value="" selected>--Silahkan pilih--</option>
+                                                    <option th:each="levelOfEducationOpt : ${T(com.bayu.employee.model.enumerator.LevelOfEducation).values()}"
+                                                            th:value="${levelOfEducationOpt}"
+                                                            th:text="${levelOfEducationOpt.levelOfEducationName}"></option>
+                                                </select>
                                             </div>
                                         </div>
                                     </div>
