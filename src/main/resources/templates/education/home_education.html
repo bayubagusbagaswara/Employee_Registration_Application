@@ -3,26 +3,25 @@
       xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{fragments/main_layout}">
-<head>
-    <meta charset="UTF-8">
-    <title>Data Employee</title>
-</head>
-<body>
-<div layout:fragment="content">
 
-<div class="card o-hidden border-0 shadow-lg my-5">
-    <div class="card-body p-0">
-        <div class="card text-center">
-            <div class="card-body">
-                <h5 class="card-title"><strong>Data Pendidikan Belum Ada</strong></h5>
-                <p class="card-text">Silahkan tambahkan data pendidikan terlebih dahulu.</p>
-<!--                direct ke halaman form tambah education atau add_education.html-->
-                <a th:href="@{/education/show-form-education}" class="btn btn-primary">Tambahkan Pendidikan</a>
+<body>
+
+<div layout:fragment="content">
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="card o-hidden border-0 shadow-lg my-5" style="width: 30rem;">
+            <div class="card-body p-0">
+                <div class="card text-center">
+                    <div class="card-body">
+                        <h5 class="card-title"><strong>Belum Ada Data Pendidikan</strong></h5>
+                        <p class="card-text">Silahkan tambahkan data pendidikan terlebih dahulu.</p>
+                        <a th:href="@{/education/show-form-education}" class="btn btn-primary">Tambah Pendidikan</a>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 </div>
 
-</div>
 </body>
 </html>
