@@ -37,8 +37,7 @@ public class Education {
 //    private Employee employee;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_user", foreignKey = @ForeignKey(name = "fk_educational_id_user"), referencedColumnName = "id")
+    @JoinColumn(name = "id_user", foreignKey = @ForeignKey(name = "fk_educations_id_user"), referencedColumnName = "id")
     private User user;
-
 
 }
