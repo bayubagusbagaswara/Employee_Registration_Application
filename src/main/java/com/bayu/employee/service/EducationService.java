@@ -10,6 +10,6 @@ public interface EducationService {
 
     EducationDTO createEducation(String userId, CreateEducationRequest createEducationRequest);
 
-    List<Education> findByUserId(String userId);
+    List<EducationDTO> findAllByUserId(String userId);
 
 }
