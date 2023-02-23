@@ -5,7 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.validation.constraints.NotBlank;
+import java.util.Date;
 
 @Data
 @Builder
@@ -13,18 +13,20 @@ import javax.validation.constraints.NotBlank;
 @AllArgsConstructor
 public class CreateEmployeeRequest {
 
-    @NotBlank(message = "Position must not be blank")
     private String position;
 
-    @NotBlank(message = "Name must not be blank")
-    private String name;
+    private String nik;
 
-    @NotBlank(message = "Gender must not be blank")
+    private String firstName;
+
+    private String lastName;
+
     private String gender;
 
-    @NotBlank(message = "Age must not be blank")
     private String age;
 
-    @NotBlank(message = "Address must not be blank")
-    private String address;
+    private String placeOfBirth;
+
+    private Date dateOfBirth;
+
 }
