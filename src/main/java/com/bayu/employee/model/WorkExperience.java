@@ -34,4 +34,9 @@ public class WorkExperience {
 
     @Column(name = "year_of_resignation")
     private Integer yearOfResignation;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_user", foreignKey = @ForeignKey(name = "fk_work_experiences_id_user"), referencedColumnName = "id")
+    private User user;
+
 }
