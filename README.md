@@ -16,6 +16,7 @@
 12. Kemudian jika telah berhasil, maka kita akan di redirect ke halaman data_education_background.html
 13. Dan di halaman data_educational_background juga ada tombol "Tambah Educational Background"
 14. Data yang ditampilkan dalam tabel di halaman data_education_background harus kita urutkan dulu berdasarkan tahun pendidikan
+15. Update kolom form-label dan form-select
 
 
 # Flow Bisnis
