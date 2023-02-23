@@ -1,11 +1,56 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/main_layout}">
 <body>
-<!-- disini juga ada tombol untuk "Tambahkan Pendidikan "-->
-<!-- disini berbentuk table, karena minimal ada 1 data education -->
+
+<div layout:fragment="content">
+    <div class="card o-hidden border-0 shadow-lg my-5">
+        <div class="card-body p-0">
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">Riwayat Pendidikan</h6>
+                </div>
+                <div class="card-body">
+                    <div class="table">
+                        <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
+                                <div class="col-sm-12 col-md-6 mb-4">
+                                    <a th:href="@{/education/show-form-education}" class="btn btn-primary">Tambah Pendidikan</a>
+                                </div>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <table class="table table-bordered dataTable" id="dataTable" width="100%" cellspacing="0" role="grid" aria-describedby="dataTable_info" style="width: 100%;">
+                                        <thead>
+                                        <tr role="row">
+                                            <th>Tingkat Pendidikan</th>
+                                            <th>Jurusan</th>
+                                            <th>Nama Instansi/Perguruan Tinggi</th>
+                                            <th>Tahun Lulus</th>
+                                            <th>Aksi</th>
+                                        </thead>
+                                        <tbody>
+                                        <tr th:each="education : ${educationList}">
+                                            <td th:text="${education.levelOfEducation}"></td>
+                                            <td th:text="${education.department}"></td>
+                                            <td th:text="${education.collegeName}"></td>
+                                            <td th:text="${education.graduationYear}"></td>
+                                            <td align="center">
+                                                <a title="Edit" th:href="@{'/education/' + ${education.id}}" class="btn btn-info btn-circle btn-sm"><i class="fas fa-edit"></i></a>
+                                                <a title="Hapus" th:href="@{'/education/delete/' + ${education.id}}" class="btn btn-danger btn-circle btn-sm"><i class="fas fa-trash"></i></a>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 </body>
 </html>
