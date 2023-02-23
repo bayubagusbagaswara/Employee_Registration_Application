@@ -9,6 +9,7 @@ import com.bayu.employee.service.EducationService;
 import com.bayu.employee.service.EmployeeService;
 import com.bayu.employee.service.UserService;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -34,7 +35,7 @@ public class EducationServiceImpl implements EducationService {
         Education education = new Education();
         education.setLevelOfEducation(createEducationRequest.getLevelOfEducation().toLowerCase());
         education.setDepartment(createEducationRequest.getDepartment().toLowerCase());
-        education.setCollegeName(createEducationRequest.getCollegeName().toLowerCase());
+        education.setCollegeName(createEducationRequest.getCollegeName());
         education.setGraduationYear(Integer.valueOf(createEducationRequest.getGraduationYear()));
         education.setUser(user);
 
@@ -44,8 +45,11 @@ public class EducationServiceImpl implements EducationService {
     }
 
     @Override
-    public List<Education> findByUserId(String userId) {
-        return educationRepository.findAllByUserId(userId);
+    public List<EducationDTO> findAllByUserId(String userId) {
+        // sorting by tahun secara ascending
+        Sort sorting = Sort.by("graduationYear").ascending();
+        List<Education> educationList = educationRepository.findAllByUserId(userId, sorting);
+        return mapToEducationDTOList(educationList);
     }
 
     public EducationDTO mapToEducationDTO(Education education) {
@@ -53,8 +57,8 @@ public class EducationServiceImpl implements EducationService {
                 .id(education.getId())
                 .userId(education.getUser().getId())
                 .levelOfEducation(StringUtils.upperCase(education.getLevelOfEducation()))
-                .department(StringUtils.capitalize(education.getDepartment()))
-                .collegeName(StringUtils.capitalize(education.getCollegeName()))
+                .department(capitalizeEachWord(education.getDepartment()))
+                .collegeName(education.getCollegeName())
                 .graduationYear(String.valueOf(education.getGraduationYear()))
                 .build();
     }
@@ -64,5 +68,19 @@ public class EducationServiceImpl implements EducationService {
                 .map(this::mapToEducationDTO)
                 .collect(Collectors.toList());
     }
+
+    public String capitalizeEachWord(String str) {
+        StringBuilder word = new StringBuilder();
+
+        for (int i = 0; i < str.length(); i++) {
+            if (i == 0 || str.charAt(i - 1) == ' ') {
+                word.append(Character.toUpperCase(str.charAt(i)));
+            } else {
+                word.append(str.charAt(i));
+            }
+        }
+        return word.toString();
+    }
+
 
 }
