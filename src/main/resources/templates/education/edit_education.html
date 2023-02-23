@@ -1,10 +1,97 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/main_layout}">
 <body>
 
+<div layout:fragment="content">
+    <div class="card o-hidden border-0 shadow-lg my-5">
+        <div class="card-body p-0">
+            <div class="row">
+                <div class="col-lg">
+                    <div class="p-5">
+                        <div class="form-row mb-2">
+                            <h4 class="fw-bold text-muted mt-6 mb-0"><strong>Data Pendidikan</strong></h4>
+                        </div>
+                        <div class="pl-1 mb-4">
+                            <small class="font-italic text-danger">(*) Data wajib diisi. Jika tidak ada, maka isi dengan tanda strip (-).</small>
+                        </div>
+                        <form action="#" th:action="@{/education/updateEducation/{educationId}(educationId=${educationId})}" th:object="${updateEducationRequest}" method="post">
+                            <div class="row mb-5 pl-5">
+                                <div class="col-12 col-md-5">
+                                    <div class="form-group mb-3">
+                                        <div class="row align-items-end">
+                                            <div class="col-md mb-md-0">
+                                                <label class="form-label" for="levelOfEducation"><strong>Tingkat Pendidikan</strong></label>
+                                                <span class="required align-self-end text-danger small font-weight-bold">*</span>
+                                                <select class="form-select form-control" name="levelOfEducation" id="levelOfEducation"
+                                                        th:field="*{levelOfEducation}"
+                                                        th:errorClass="is-invalid">
+                                                    <option value="" selected>--Silahkan pilih--</option>
+                                                    <option th:each="levelOfEducationOpt : ${T(com.bayu.employee.model.enumerator.LevelOfEducation).values()}"
+                                                            th:value="${levelOfEducationOpt}"
+                                                            th:text="${levelOfEducationOpt.levelOfEducationName}"></option>
+                                                </select>
+                                                <small th:if="${#fields.hasErrors('levelOfEducation')}" th:errors="*{levelOfEducation}" class="text-danger pl-1"></small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-1"></div>
+                                <div class="col-12 col-md-5">
+                                    <div class="form-group mb-3">
+                                        <div class="row align-items-end">
+                                            <div class="col-md mb-md-0">
+                                                <label for="department" class="form-label"><strong>Jurusan</strong></label>
+                                                <span class="required align-self-end text-danger small font-weight-bold">*</span>
+                                                <input type="text" class="form-control" id="department" name="department"
+                                                       th:field="*{department}"
+                                                       th:errorClass="is-invalid">
+                                                <small th:if="${#fields.hasErrors('department')}" th:errors="*{department}" class="text-danger pl-1"></small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-5">
+                                    <div class="form-group mb-3">
+                                        <div class="row align-items-end">
+                                            <div class="col-md mb-md-0">
+                                                <label for="collegeName" class="form-label"><strong>Nama Instansi/Perguruan Tinggi</strong></label>
+                                                <span class="required align-self-end text-danger small font-weight-bold">*</span>
+                                                <input type="text" class="form-control" id="collegeName" name="collegeName"
+                                                       th:field="*{collegeName}"
+                                                       th:errorClass="is-invalid">
+                                                <small th:if="${#fields.hasErrors('collegeName')}" th:errors="*{collegeName}" class="text-danger pl-1"></small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-1"></div>
+                                <div class="col-12 col-md-5">
+                                    <div class="form-group mb-3">
+                                        <div class="row align-items-end">
+                                            <div class="col-md mb-md-0">
+                                                <label for="graduationYear" class="form-label"><strong>Tahun Lulus</strong></label>
+                                                <span class="required align-self-end text-danger small font-weight-bold">*</span>
+                                                <input type="text" class="form-control" id="graduationYear" name="graduationYear"
+                                                       th:field="*{graduationYear}"
+                                                       th:errorClass="is-invalid">
+                                                <small th:if="${#fields.hasErrors('graduationYear')}" th:errors="*{graduationYear}" class="text-danger pl-1"></small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="d-grid d-md-flex justify-content-md-end">
+                                <button type="submit" class="btn btn-success">Simpan</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 </body>
 </html>
