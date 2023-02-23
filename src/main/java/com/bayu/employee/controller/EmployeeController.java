@@ -34,12 +34,12 @@ public class EmployeeController {
     @GetMapping("/employees")
     public String personalData(Model model, Authentication authentication, RedirectAttributes redirectAttributes) {
 
-        String name = authentication.getName(); // username
+        String username = authentication.getName(); // username
 
-        log.info("Name: {}", name);
+        log.info("Name: {}", username);
 
         // cari user berdasarkan username
-        User user = userService.findByUsername(name);
+        User user = userService.findByUsername(username);
 
         CreateEmployeeRequest createEmployeeRequest = new CreateEmployeeRequest();
 
@@ -53,11 +53,14 @@ public class EmployeeController {
 
         // harus redirectAttribute, karena kita langsung redirect ke endpoint
         redirectAttributes.addAttribute("employeeId", employee.getId());
+        model.addAttribute("username", username);
         return "redirect:/employees/{employeeId}";
     }
 
     @GetMapping("/employees/show-form-employee")
     public String showNewEmployeeForm(Model model, Authentication authentication, RedirectAttributes redirectAttributes) {
+
+        String username = authentication.getName();
 
         // cari user by username
         String name = authentication.getName();
@@ -67,6 +70,7 @@ public class EmployeeController {
         CreateEmployeeRequest createEmployeeRequest = new CreateEmployeeRequest();
         model.addAttribute("createEmployeeRequest", createEmployeeRequest);
         model.addAttribute("userId", user.getId());
+        model.addAttribute("username", username);
 
         return "employee/new_employee";
     }
