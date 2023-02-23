@@ -36,7 +36,7 @@
                                             <td th:text="${education.collegeName}"></td>
                                             <td th:text="${education.graduationYear}"></td>
                                             <td align="center">
-                                                <a title="Edit" th:href="@{'/education/' + ${education.id}}" class="btn btn-info btn-circle btn-sm"><i class="fas fa-edit"></i></a>
+                                                <a title="Edit" th:href="@{'/education/show-update-form/' + ${education.id}}" class="btn btn-info btn-circle btn-sm"><i class="fas fa-edit"></i></a>
                                                 <a title="Hapus" th:href="@{'/education/delete/' + ${education.id}}" class="btn btn-danger btn-circle btn-sm"><i class="fas fa-trash"></i></a>
                                             </td>
                                         </tr>
