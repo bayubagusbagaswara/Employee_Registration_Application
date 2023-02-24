@@ -10,14 +10,18 @@ import java.util.List;
 
 public interface EmployeeService {
 
+    // ADMIN
     List<EmployeeDTO> getAllEmployees();
-
-    EmployeeDTO getEmployeeById(String id);
 
     EmployeeDTO getEmployeeByName(String name);
 
-    EmployeeDTO getEmployeeByUserId(String userId);
+    void deleteEmployee(String id);
 
+    // ADMIN, USER
+    EmployeeDTO getEmployeeById(String id);
+
+
+    // USER
     Employee findById(String id);
 
     Employee findByUserId(String userId);
@@ -26,7 +30,7 @@ public interface EmployeeService {
 
     EmployeeDTO updateEmployee(String id, UpdateEmployeeRequest updateEmployeeRequest);
 
-    void deleteEmployee(String id);
+
 
 //    Page<Employee> findPaginated(int pageNo, int pageSize, String sortField, String sortDirection);
 
