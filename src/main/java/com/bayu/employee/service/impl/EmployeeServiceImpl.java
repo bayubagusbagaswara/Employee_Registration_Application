@@ -14,6 +14,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -85,6 +86,7 @@ public class EmployeeServiceImpl implements EmployeeService {
                 .age(Integer.valueOf(createEmployeeRequest.getAge()))
                 .placeOfBirth(createEmployeeRequest.getPlaceOfBirth())
                 .dateOfBirth(createEmployeeRequest.getDateOfBirth())
+                .salary(createEmployeeRequest.getSalary())
                 .user(user)
                 .build();
 
@@ -105,8 +107,6 @@ public class EmployeeServiceImpl implements EmployeeService {
         return mapToEmployeeDTO(employee);
     }
 
-
-
     @Override
     public void deleteEmployee(String id) {
         Employee employee = employeeRepository.findById(id)
@@ -126,6 +126,7 @@ public class EmployeeServiceImpl implements EmployeeService {
                 .age(String.valueOf(employee.getAge()))
                 .placeOfBirth(employee.getPlaceOfBirth())
                 .dateOfBirth(changeDateFormat(employee.getDateOfBirth()))
+                .salary(String.valueOf(employee.getSalary()))
                 .build();
     }
 
@@ -204,6 +205,12 @@ public class EmployeeServiceImpl implements EmployeeService {
                 StringUtils.capitalize(String.valueOf(date.getMonth()).toLowerCase()) +
                 " " +
                 date.getYear();
+    }
+
+    private static String formatCurrency(BigDecimal currency) {
+        // input : 5000000.00
+        // output : Rp. 5.000.000,00
+        return null;
     }
 
 }
