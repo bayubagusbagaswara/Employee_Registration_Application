@@ -16,19 +16,21 @@
                 <div class="col-lg">
                     <div class="p-5">
                         <div class="form-row mb-4">
-                            <h4 class="fw-bold text-muted mt-6 mb-0"><strong>Data Diri</strong></h4>
+                            <div class="col-12 col-md-6">
+                                <h4 class="fw-bold text-muted mt-6 mb-0"><strong>Data Diri</strong></h4>
+                            </div>
+                            <div class="col-12 col-md-4"></div>
+                            <div class="col-12 col-md-2">
+                                <a th:href="@{/education/show-form-education}"
+                                   class="btn btn-primary btn-icon-split">
+                                    <span class="icon text-white-50">
+                                        <i class="fas fa-edit"></i>
+                                    </span>
+                                    <span class="text">Edit</span>
+                                </a>
+                            </div>
                         </div>
                         <div class="row mb-5 pl-5">
-                            <div class="col-12 col-md-6">
-                                <div class="form-group mb-3">
-                                    <div class="row align-items-end">
-                                        <div class="col-md mb-md-0">
-                                            <label class="font-size-14 fw-bold"><strong>Nama Lengkap</strong></label>
-                                            <p th:text="${employee.name}"></p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
                             <div class="col-12 col-md-6">
                                 <div class="form-group mb-3">
                                     <div class="row align-items-end">
@@ -43,8 +45,18 @@
                                 <div class="form-group mb-3">
                                     <div class="row align-items-end">
                                         <div class="col-md mb-md-0">
-                                            <label class="font-size-14 fw-bold"><strong>Umur</strong></label>
-                                            <p th:text="${employee.age}"></p>
+                                            <label class="font-size-14 fw-bold"><strong>NIK</strong></label>
+                                            <p th:text="${employee.nik}"></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <div class="form-group mb-3">
+                                    <div class="row align-items-end">
+                                        <div class="col-md mb-md-0">
+                                            <label class="font-size-14 fw-bold"><strong>Nama Lengkap</strong></label>
+                                            <p th:text="${employee.fullName}"></p>
                                         </div>
                                     </div>
                                 </div>
@@ -73,8 +85,28 @@
                                 <div class="form-group mb-3">
                                     <div class="row align-items-end">
                                         <div class="col-md mb-md-0">
-                                            <label class="font-size-14 fw-bold"><strong>Alamat</strong></label>
-                                            <p th:text="${employee.address}"></p>
+                                            <label class="font-size-14 fw-bold"><strong>Umur</strong></label>
+                                            <p th:text="${employee.age}"></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <div class="form-group mb-3">
+                                    <div class="row align-items-end">
+                                        <div class="col-md mb-md-0">
+                                            <label class="font-size-14 fw-bold"><strong>Tempat Lahir</strong></label>
+                                            <p th:text="${employee.placeOfBirth}"></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <div class="form-group mb-3">
+                                    <div class="row align-items-end">
+                                        <div class="col-md mb-md-0">
+                                            <label class="font-size-14 fw-bold"><strong>Tanggal Lahir</strong></label>
+                                            <p th:text="${employee.dateOfBirth}"></p>
                                         </div>
                                     </div>
                                 </div>
@@ -90,7 +122,7 @@
                                     <div class="row align-items-end">
                                         <div class="col-md mb-md-0">
                                             <label class="font-size-14 fw-bold"><strong>Alamat Lengkap</strong></label>
-                                            <p th:text="${employee.address}"></p>
+                                            <p>Desa Singonegaran</p>
                                         </div>
                                     </div>
                                 </div>
