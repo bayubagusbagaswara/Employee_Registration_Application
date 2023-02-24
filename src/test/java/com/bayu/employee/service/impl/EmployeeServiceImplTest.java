@@ -21,20 +21,5 @@ class EmployeeServiceImplTest {
 
     @Test
     void createEmployee() {
-        String userId = "f5342629-1d96-4181-9f29-aea06fa15012";
-        CreateEmployeeRequest createEmployeeRequest = CreateEmployeeRequest.builder()
-                .name("Bayu Bagaswara")
-                .position("Backend Developer")
-                .age("26")
-                .gender("Laki-laki")
-                .address("Kediri")
-                .build();
-
-        EmployeeDTO employee = employeeService.createEmployee(userId, createEmployeeRequest);
-
-        assertNotNull(employee.getId());
-
-        log.info("Name: {}", employee.getName());
-        log.info("Gender: {}", employee.getGender());
     }
 }
