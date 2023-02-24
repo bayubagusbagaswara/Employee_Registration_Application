@@ -36,9 +36,31 @@
                   <div class="form-group mb-3">
                     <div class="row align-items-end">
                       <div class="col-md mb-md-0">
-                        <label for="name" class="form-label"><strong>Nama Lengkap</strong></label>
+                        <label for="nik" class="form-label"><strong>NIK</strong></label>
                         <span class="required align-self-end text-danger small font-weight-bold">*</span>
-                        <input type="text" class="form-control" id="name" name="name" th:field="*{name}">
+                        <input type="text" class="form-control" id="nik" name="nik" th:field="*{nik}">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-12 col-md-5">
+                  <div class="form-group mb-3">
+                    <div class="row align-items-end">
+                      <div class="col-md mb-md-0">
+                        <label for="firstName" class="form-label"><strong>Nama Depan</strong></label>
+                        <span class="required align-self-end text-danger small font-weight-bold">*</span>
+                        <input type="text" class="form-control" id="firstName" name="firstName" th:field="*{firstName}">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-12 col-md-1"></div>
+                <div class="col-12 col-md-5">
+                  <div class="form-group mb-3">
+                    <div class="row align-items-end">
+                      <div class="col-md mb-md-0">
+                        <label for="lastName" class="form-label"><strong>Nama Belakang</strong></label>
+                        <input type="text" class="form-control" id="lastName" name="lastName" th:field="*{lastName}">
                       </div>
                     </div>
                   </div>
@@ -77,11 +99,23 @@
                   <div class="form-group mb-3">
                     <div class="row align-items-end">
                       <div class="col-md mb-md-0">
-                        <label for="address" class="form-label"><strong>Alamat</strong></label>
-                        <input type="text" class="form-control" id="address" name="address" th:field="*{address}">
+                        <label for="placeOfBirth" class="form-label"><strong>Tempat Lahir</strong></label>
+                        <input type="text" class="form-control" id="placeOfBirth" name="placeOfBirth" th:field="*{placeOfBirth}">
                       </div>
                     </div>
                   </div>
+                </div>
+                <div class="col-12 col-md-1"></div>
+                <div class="col-12 col-md-5">
+                  <div class="form-group mb-3">
+                    <div class="row align-items-end">
+                      <div class="col-md mb-md-0">
+                        <label for="dateOfBirth" class="form-label"><strong>Tanggal Lahir</strong></label>
+                        <input type="date" class="form-control" id="dateOfBirth" name="dateOfBirth" th:field="*{dateOfBirth}">
+                      </div>
+                    </div>
+                  </div>
+
                 </div>
               </div>
               <div class="d-grid d-md-flex justify-content-md-end">
