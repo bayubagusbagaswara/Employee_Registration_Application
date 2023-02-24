@@ -20,6 +20,10 @@ public class EmployeeDTO {
     private String position;
     private String nik;
 
+    private String firstName;
+
+    private String lastName;
+
     private String fullName;
 
     private String gender;
