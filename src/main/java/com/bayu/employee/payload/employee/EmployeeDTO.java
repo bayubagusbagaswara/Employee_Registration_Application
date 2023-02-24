@@ -31,4 +31,6 @@ public class EmployeeDTO {
     private String placeOfBirth;
 
     private String dateOfBirth;
+
+    private String salary;
 }
