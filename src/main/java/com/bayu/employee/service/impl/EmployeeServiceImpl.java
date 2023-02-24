@@ -10,19 +10,13 @@ import com.bayu.employee.repository.EmployeeRepository;
 import com.bayu.employee.service.EmployeeService;
 import com.bayu.employee.service.UserService;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.logging.log4j.util.StringBuilders;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
-import javax.print.DocFlavor;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.time.format.FormatStyle;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -53,10 +47,9 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public EmployeeDTO getEmployeeByName(String name) {
-//        Employee employee = employeeRepository.findByNameContainsIgnoreCase(name)
-//                .orElseThrow(() -> new ResourceNotFoundException("Employee not found with name : " + name));
-//        return mapToEmployeeDTO(employee);
-        return null;
+        Employee employee = employeeRepository.findByFullNameContainsIgnoreCase(name)
+                .orElseThrow(() -> new ResourceNotFoundException("Employee not found with name : " + name));
+        return mapToEmployeeDTO(employee);
     }
 
     @Override
@@ -105,6 +98,44 @@ public class EmployeeServiceImpl implements EmployeeService {
         Employee employee = employeeRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Employee not found with id : " + id));
 
+        validationCheck(updateEmployeeRequest, employee);
+
+        employeeRepository.save(employee);
+
+        return mapToEmployeeDTO(employee);
+    }
+
+
+
+    @Override
+    public void deleteEmployee(String id) {
+        Employee employee = employeeRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Employee not found with id : " + id));
+
+        employeeRepository.delete(employee);
+    }
+
+    private static EmployeeDTO mapToEmployeeDTO(Employee employee) {
+        return EmployeeDTO.builder()
+                .id(employee.getId())
+                .email(employee.getUser().getEmail())
+                .position(StringUtils.capitalize(employee.getPosition()))
+                .nik(employee.getNik())
+                .fullName(employee.getFullName())
+                .gender(StringUtils.capitalize(employee.getGender()))
+                .age(String.valueOf(employee.getAge()))
+                .placeOfBirth(employee.getPlaceOfBirth())
+                .dateOfBirth(changeDateFormat(employee.getDateOfBirth()))
+                .build();
+    }
+
+    private static List<EmployeeDTO> mapToEmployeeDTOList(List<Employee> employeeList) {
+        return employeeList.stream()
+                .map(EmployeeServiceImpl::mapToEmployeeDTO)
+                .collect(Collectors.toList());
+    }
+
+    private static void validationCheck(UpdateEmployeeRequest updateEmployeeRequest, Employee employee) {
         if (updateEmployeeRequest.getPosition() != null) {
             employee.setPosition(updateEmployeeRequest.getPosition());
         }
@@ -137,46 +168,18 @@ public class EmployeeServiceImpl implements EmployeeService {
             employee.setDateOfBirth(updateEmployeeRequest.getDateOfBirth());
         }
 
-        employeeRepository.save(employee);
-
-        return mapToEmployeeDTO(employee);
+        if (updateEmployeeRequest.getFirstName() != null && updateEmployeeRequest.getLastName() != null) {
+            employee.setFullName(splitAndCapitalize(updateEmployeeRequest.getFirstName(), updateEmployeeRequest.getLastName()));
+        }
     }
 
-    @Override
-    public void deleteEmployee(String id) {
-        Employee employee = employeeRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Employee not found with id : " + id));
-
-        employeeRepository.delete(employee);
-    }
-
-    public EmployeeDTO mapToEmployeeDTO(Employee employee) {
-        return EmployeeDTO.builder()
-                .id(employee.getId())
-                .email(employee.getUser().getEmail())
-                .position(StringUtils.capitalize(employee.getPosition()))
-                .nik(employee.getNik())
-                .fullName(employee.getFullName())
-                .gender(StringUtils.capitalize(employee.getGender()))
-                .age(String.valueOf(employee.getAge()))
-                .placeOfBirth(employee.getPlaceOfBirth())
-                .dateOfBirth(changeDateFormat(employee.getDateOfBirth()))
-                .build();
-    }
-
-    public List<EmployeeDTO> mapToEmployeeDTOList(List<Employee> employeeList) {
-        return employeeList.stream()
-                .map(this::mapToEmployeeDTO)
-                .collect(Collectors.toList());
-    }
-
-    public static String capitalize(String str)
+    private static String capitalize(String str)
     {
         if (str == null || str.length() == 0) return str;
         return str.substring(0, 1).toUpperCase() + str.substring(1).toLowerCase();
     }
 
-    public static String splitAndCapitalize(String first, String last) {
+    private static String splitAndCapitalize(String first, String last) {
         List<String> stringList = new ArrayList<>();
 
         String[] firstSplit = first.split(" ");
@@ -195,7 +198,7 @@ public class EmployeeServiceImpl implements EmployeeService {
         return result.toString();
     }
 
-    public static String changeDateFormat(LocalDate date) {
+    private static String changeDateFormat(LocalDate date) {
         return date.getDayOfMonth() +
                 " " +
                 StringUtils.capitalize(String.valueOf(date.getMonth()).toLowerCase()) +
