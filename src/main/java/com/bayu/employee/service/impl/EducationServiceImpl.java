@@ -91,7 +91,7 @@ public class EducationServiceImpl implements EducationService {
         educationRepository.delete(education);
     }
 
-    public EducationDTO mapToEducationDTO(Education education) {
+    private static EducationDTO mapToEducationDTO(Education education) {
         return EducationDTO.builder()
                 .id(education.getId())
                 .userId(education.getUser().getId())
@@ -102,13 +102,13 @@ public class EducationServiceImpl implements EducationService {
                 .build();
     }
 
-    public List<EducationDTO> mapToEducationDTOList(List<Education> educationList) {
+    private static List<EducationDTO> mapToEducationDTOList(List<Education> educationList) {
         return educationList.stream()
-                .map(this::mapToEducationDTO)
+                .map(EducationServiceImpl::mapToEducationDTO)
                 .collect(Collectors.toList());
     }
 
-    public String capitalizeEachWord(String str) {
+    private static String capitalizeEachWord(String str) {
         StringBuilder word = new StringBuilder();
 
         for (int i = 0; i < str.length(); i++) {
