@@ -51,6 +51,9 @@
 - Email
 - No. Telp
 - Orang terdekat yang dapat dihubungi (Kontak Darurat)
+- nama kontak darurat
+- nomor handphone kontak darurat
+- hubungan 
 
 # Menu : Educations
 
