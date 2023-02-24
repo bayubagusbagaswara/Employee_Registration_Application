@@ -52,7 +52,6 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void register(RegistrationRequest registrationRequest) {
-        // create User
         User user = User.builder()
                 .username(registrationRequest.getUsername())
                 .email(registrationRequest.getEmail())
@@ -200,7 +199,7 @@ public class UserServiceImpl implements UserService {
         return null;
     }
 
-    public RegistrationResponse mapToRegistrationResponse(User user) {
+    private static RegistrationResponse mapToRegistrationResponse(User user) {
         return RegistrationResponse.builder()
                 .id(user.getId())
                 .username(user.getUsername())
