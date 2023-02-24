@@ -10,13 +10,26 @@ import com.bayu.employee.repository.EmployeeRepository;
 import com.bayu.employee.service.EmployeeService;
 import com.bayu.employee.service.UserService;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.logging.log4j.util.StringBuilders;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
+import javax.print.DocFlavor;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
+
+    private final static Logger log = LoggerFactory.getLogger(EmployeeServiceImpl.class);
 
     private final EmployeeRepository employeeRepository;
     private final UserService userService;
@@ -40,9 +53,10 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public EmployeeDTO getEmployeeByName(String name) {
-        Employee employee = employeeRepository.findByNameContainsIgnoreCase(name)
-                .orElseThrow(() -> new ResourceNotFoundException("Employee not found with name : " + name));
-        return mapToEmployeeDTO(employee);
+//        Employee employee = employeeRepository.findByNameContainsIgnoreCase(name)
+//                .orElseThrow(() -> new ResourceNotFoundException("Employee not found with name : " + name));
+//        return mapToEmployeeDTO(employee);
+        return null;
     }
 
     @Override
@@ -68,13 +82,17 @@ public class EmployeeServiceImpl implements EmployeeService {
     public EmployeeDTO createEmployee(String userId, CreateEmployeeRequest createEmployeeRequest) {
         User user = userService.findById(userId);
 
-        Employee employee = new Employee();
-        employee.setPosition(createEmployeeRequest.getPosition().toLowerCase());
-        employee.setName(createEmployeeRequest.getName().toLowerCase());
-        employee.setAge(Integer.valueOf(createEmployeeRequest.getAge()));
-        employee.setGender(createEmployeeRequest.getGender().toLowerCase());
-        employee.setAddress(createEmployeeRequest.getAddress());
-        employee.setUser(user);
+        Employee employee = Employee.builder()
+                .position(createEmployeeRequest.getPosition())
+                .nik(createEmployeeRequest.getNik())
+                .firstName(createEmployeeRequest.getFirstName())
+                .lastName(createEmployeeRequest.getLastName())
+                .gender(createEmployeeRequest.getGender())
+                .age(Integer.valueOf(createEmployeeRequest.getAge()))
+                .placeOfBirth(createEmployeeRequest.getPlaceOfBirth())
+                .dateOfBirth(createEmployeeRequest.getDateOfBirth())
+                .user(user)
+                .build();
 
         employeeRepository.save(employee);
 
@@ -86,20 +104,36 @@ public class EmployeeServiceImpl implements EmployeeService {
         Employee employee = employeeRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Employee not found with id : " + id));
 
-        if (updateEmployeeRequest.getName() != null) {
-            employee.setName(updateEmployeeRequest.getName());
-        }
-
         if (updateEmployeeRequest.getPosition() != null) {
             employee.setPosition(updateEmployeeRequest.getPosition());
+        }
+
+        if (updateEmployeeRequest.getNik() != null) {
+            employee.setNik(updateEmployeeRequest.getNik());
+        }
+
+        if (updateEmployeeRequest.getFirstName() != null) {
+            employee.setFirstName(updateEmployeeRequest.getFirstName());
+        }
+
+        if (updateEmployeeRequest.getLastName() != null) {
+            employee.setLastName(updateEmployeeRequest.getLastName());
+        }
+
+        if (updateEmployeeRequest.getGender() != null) {
+            employee.setGender(updateEmployeeRequest.getGender());
         }
 
         if (updateEmployeeRequest.getAge() != null) {
             employee.setAge(Integer.valueOf(updateEmployeeRequest.getAge()));
         }
 
-        if (updateEmployeeRequest.getAddress() != null) {
-            employee.setAddress(updateEmployeeRequest.getAddress());
+        if (updateEmployeeRequest.getPlaceOfBirth() != null) {
+            employee.setPlaceOfBirth(updateEmployeeRequest.getPlaceOfBirth());
+        }
+
+        if (updateEmployeeRequest.getDateOfBirth() != null) {
+            employee.setDateOfBirth(updateEmployeeRequest.getDateOfBirth());
         }
 
         employeeRepository.save(employee);
@@ -118,12 +152,14 @@ public class EmployeeServiceImpl implements EmployeeService {
     public EmployeeDTO mapToEmployeeDTO(Employee employee) {
         return EmployeeDTO.builder()
                 .id(employee.getId())
-                .position(StringUtils.capitalize(employee.getPosition()))
-                .name(StringUtils.capitalize(employee.getName()))
                 .email(employee.getUser().getEmail())
-                .age(String.valueOf(employee.getAge()))
+                .position(StringUtils.capitalize(employee.getPosition()))
+                .nik(employee.getNik())
+                .fullName(splitAndCapitalize(employee.getFirstName(), employee.getLastName()))
                 .gender(StringUtils.capitalize(employee.getGender()))
-                .address(employee.getAddress())
+                .age(String.valueOf(employee.getAge()))
+                .placeOfBirth(employee.getPlaceOfBirth())
+                .dateOfBirth(changeDateFormat(employee.getDateOfBirth()))
                 .build();
     }
 
@@ -137,6 +173,33 @@ public class EmployeeServiceImpl implements EmployeeService {
     {
         if (str == null || str.length() == 0) return str;
         return str.substring(0, 1).toUpperCase() + str.substring(1).toLowerCase();
+    }
+
+    public static String splitAndCapitalize(String first, String last) {
+        List<String> stringList = new ArrayList<>();
+
+        String[] firstSplit = first.split(" ");
+        String[] lastSplit = last.split(" ");
+
+        stringList.addAll(Arrays.asList(firstSplit));
+        stringList.addAll(Arrays.asList(lastSplit));
+
+        StringBuilder result = new StringBuilder();
+
+        for (String s : stringList) {
+            result.append(StringUtils.capitalize(s.toLowerCase()));
+            result.append(" ");
+        }
+
+        return result.toString();
+    }
+
+    public static String changeDateFormat(LocalDate date) {
+        return date.getDayOfMonth() +
+                " " +
+                StringUtils.capitalize(String.valueOf(date.getMonth()).toLowerCase()) +
+                " " +
+                date.getYear();
     }
 
 }
