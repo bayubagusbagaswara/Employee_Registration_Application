@@ -3,7 +3,10 @@ package com.bayu.employee.service.impl;
 import com.bayu.employee.payload.CreateUserRequest;
 import com.bayu.employee.payload.UserDTO;
 import com.bayu.employee.service.UserService;
+import org.junit.jupiter.api.MethodOrderer;
+import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestMethodOrder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +15,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class UserServiceImplTest {
 
     private final static Logger log = LoggerFactory.getLogger(UserServiceImplTest.class);
@@ -20,22 +24,7 @@ class UserServiceImplTest {
     UserService userService;
 
     @Test
-    void checkUsernameIsExists() {
-    }
-
-    @Test
-    void checkEmailIsExists() {
-    }
-
-    @Test
-    void register() {
-    }
-
-    @Test
-    void login() {
-    }
-
-    @Test
+    @Order(1)
     void createUser() {
         CreateUserRequest createUserRequest = CreateUserRequest.builder()
                 .username("albert")
@@ -49,12 +38,10 @@ class UserServiceImplTest {
 
         log.info("ID: {}", user.getId());
         log.info("Username: {}", user.getUsername());
-        log.info("Email: {}", user.getEmail());
-        log.info("Password: {}", user.getPassword());
-        log.info("Role: {}", user.getRoles().toString());
     }
 
     @Test
+    @Order(2)
     void createUserNewton() {
         CreateUserRequest createUserRequest = CreateUserRequest.builder()
                 .username("newton")
@@ -68,12 +55,10 @@ class UserServiceImplTest {
 
         log.info("ID: {}", user.getId());
         log.info("Username: {}", user.getUsername());
-        log.info("Email: {}", user.getEmail());
-        log.info("Password: {}", user.getPassword());
-        log.info("Role: {}", user.getRoles().toString());
     }
 
     @Test
+    @Order(3)
     void createAdmin() {
         CreateUserRequest createUserRequest = CreateUserRequest.builder()
                 .username("admin")
@@ -87,12 +72,10 @@ class UserServiceImplTest {
 
         log.info("ID: {}", user.getId());
         log.info("Username: {}", user.getUsername());
-        log.info("Email: {}", user.getEmail());
-        log.info("Password: {}", user.getPassword());
-        log.info("Role: {}", user.getRoles().toString());
     }
 
     @Test
+    @Order(4)
     void createAdminAndUser() {
         CreateUserRequest createUserRequest = CreateUserRequest.builder()
                 .username("bayu")
@@ -106,22 +89,6 @@ class UserServiceImplTest {
 
         log.info("ID: {}", user.getId());
         log.info("Username: {}", user.getUsername());
-        log.info("Email: {}", user.getEmail());
-        log.info("Password: {}", user.getPassword());
-        log.info("Role: {}", user.getRoles().toString());
     }
-
-    @Test
-    void getUserById() {
-    }
-
-    @Test
-    void getUserByUsername() {
-    }
-
-    @Test
-    void getUserByEmail() {
-    }
-
 
 }
