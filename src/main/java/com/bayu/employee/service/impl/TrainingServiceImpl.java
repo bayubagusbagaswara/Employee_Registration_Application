@@ -1,5 +1,6 @@
 package com.bayu.employee.service.impl;
 
+import com.bayu.employee.model.Training;
 import com.bayu.employee.payload.training.CreateTrainingRequest;
 import com.bayu.employee.payload.training.TrainingDTO;
 import com.bayu.employee.payload.training.UpdateTrainingRequest;
@@ -9,6 +10,7 @@ import com.bayu.employee.service.UserService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class TrainingServiceImpl implements TrainingService {
@@ -44,5 +46,45 @@ public class TrainingServiceImpl implements TrainingService {
     @Override
     public void deleteTraining(String trainingId) {
 
+    }
+
+    private static TrainingDTO mapToTrainingDTO(Training training) {
+        return TrainingDTO.builder()
+                .id(training.getId())
+                .userId(training.getUser().getId())
+                .trainingName(capitalizeEachWord(training.getTrainingName()))
+                .certificate(formatBoolean(training.getCertificate()))
+                .year(String.valueOf(training.getYear()))
+                .build();
+    }
+
+    private static List<TrainingDTO> mapToTrainingDTOList(List<Training> trainingList) {
+        return trainingList.stream()
+                .map(TrainingServiceImpl::mapToTrainingDTO)
+                .collect(Collectors.toList());
+    }
+
+    private static String formatBoolean(Boolean certificate) {
+        String certificateString = "";
+        if (!certificate) {
+            certificateString = "Tidak";
+        } else {
+            certificateString = "Ya";
+        }
+
+        return certificateString;
+    }
+
+    private static String capitalizeEachWord(String str) {
+        StringBuilder word = new StringBuilder();
+
+        for (int i = 0; i < str.length(); i++) {
+            if (i == 0 || str.charAt(i - 1) == ' ') {
+                word.append(Character.toUpperCase(str.charAt(i)));
+            } else {
+                word.append(str.charAt(i));
+            }
+        }
+        return word.toString();
     }
 }
