@@ -8,6 +8,7 @@ import com.bayu.employee.payload.training.UpdateTrainingRequest;
 import com.bayu.employee.repository.TrainingRepository;
 import com.bayu.employee.service.TrainingService;
 import com.bayu.employee.service.UserService;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -41,7 +42,10 @@ public class TrainingServiceImpl implements TrainingService {
 
     @Override
     public List<TrainingDTO> getAllTrainingsByUserId(String userId) {
-        return null;
+        User user = userService.findById(userId);
+        Sort sort = Sort.by("year").ascending();
+        List<Training> trainings = trainingRepository.findAllByUserId(user.getId(), sort);
+        return mapToTrainingDTOList(trainings);
     }
 
     @Override
