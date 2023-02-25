@@ -1,6 +1,7 @@
 package com.bayu.employee.service.impl;
 
 import com.bayu.employee.model.Training;
+import com.bayu.employee.model.User;
 import com.bayu.employee.payload.training.CreateTrainingRequest;
 import com.bayu.employee.payload.training.TrainingDTO;
 import com.bayu.employee.payload.training.UpdateTrainingRequest;
@@ -25,7 +26,17 @@ public class TrainingServiceImpl implements TrainingService {
 
     @Override
     public TrainingDTO createTraining(String userId, CreateTrainingRequest createTrainingRequest) {
-        return null;
+        User user = userService.findById(userId);
+
+        Training training = new Training();
+        training.setTrainingName(createTrainingRequest.getTrainingName().toLowerCase());
+        training.setCertificate(createTrainingRequest.getCertificate());
+        training.setYear(Integer.valueOf(createTrainingRequest.getYear()));
+        training.setUser(user);
+
+        trainingRepository.save(training);
+
+        return mapToTrainingDTO(training);
     }
 
     @Override
