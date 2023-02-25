@@ -58,7 +58,24 @@ public class TrainingServiceImpl implements TrainingService {
 
     @Override
     public TrainingDTO updateTraining(String trainingId, UpdateTrainingRequest updateTrainingRequest) {
-        return null;
+        Training training = trainingRepository.findById(trainingId)
+                .orElseThrow(() -> new ResourceNotFoundException("Training not found with id : " + trainingId));
+
+        if (updateTrainingRequest.getTrainingName() != null) {
+            training.setTrainingName(updateTrainingRequest.getTrainingName().toLowerCase());
+        }
+
+        if (updateTrainingRequest.getCertificate() != null) {
+            training.setCertificate(updateTrainingRequest.getCertificate());
+        }
+
+        if (updateTrainingRequest.getYear() != null) {
+            training.setYear(Integer.valueOf(updateTrainingRequest.getYear()));
+        }
+
+        trainingRepository.save(training);
+
+        return mapToTrainingDTO(training);
     }
 
     @Override
