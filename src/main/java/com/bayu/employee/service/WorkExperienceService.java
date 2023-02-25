@@ -11,4 +11,6 @@ public interface WorkExperienceService {
 
     List<WorkDTO> getAllByUserId(String userId);
 
+    WorkDTO getWorkById(String workId);
+
 }
