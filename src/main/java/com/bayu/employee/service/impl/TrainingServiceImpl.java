@@ -1,5 +1,6 @@
 package com.bayu.employee.service.impl;
 
+import com.bayu.employee.exception.ResourceNotFoundException;
 import com.bayu.employee.model.Training;
 import com.bayu.employee.model.User;
 import com.bayu.employee.payload.training.CreateTrainingRequest;
@@ -50,7 +51,9 @@ public class TrainingServiceImpl implements TrainingService {
 
     @Override
     public TrainingDTO getTrainingById(String trainingId) {
-        return null;
+        Training training = trainingRepository.findById(trainingId)
+                .orElseThrow(() -> new ResourceNotFoundException("Training not found with id : " + trainingId));
+        return mapToTrainingDTO(training);
     }
 
     @Override
