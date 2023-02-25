@@ -80,7 +80,10 @@ public class TrainingServiceImpl implements TrainingService {
 
     @Override
     public void deleteTraining(String trainingId) {
+        Training training = trainingRepository.findById(trainingId)
+                .orElseThrow(() -> new ResourceNotFoundException("Training not found with id : " + trainingId));
 
+        trainingRepository.delete(training);
     }
 
     private static TrainingDTO mapToTrainingDTO(Training training) {
@@ -122,4 +125,5 @@ public class TrainingServiceImpl implements TrainingService {
         }
         return word.toString();
     }
+
 }
