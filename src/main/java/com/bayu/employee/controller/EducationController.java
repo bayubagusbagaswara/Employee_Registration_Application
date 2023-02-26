@@ -67,7 +67,7 @@ public class EducationController {
         return "education/home_education";
     }
 
-    @GetMapping("/education/show-form-education")
+    @GetMapping("/education/show-add-form")
     public String showNewEducationForm(Model model, Authentication authentication) {
 
         String username = authentication.getName();
