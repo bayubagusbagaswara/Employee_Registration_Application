@@ -116,7 +116,7 @@ public class EmployeeController {
 
         String username = authentication.getName();
 
-        EmployeeDTO employee = employeeService.getEmployeeById(employeeId);
+        Employee employee = employeeService.findById(employeeId);
 
         UpdateEmployeeRequest updateEmployeeRequest = new UpdateEmployeeRequest();
         updateEmployeeRequest.setPosition(employee.getPosition());
@@ -127,7 +127,7 @@ public class EmployeeController {
         updateEmployeeRequest.setAge(String.valueOf(employee.getAge()));
         updateEmployeeRequest.setPlaceOfBirth(employee.getPlaceOfBirth());
         updateEmployeeRequest.setDateOfBirth(employee.getDateOfBirth());
-        updateEmployeeRequest.setSalary(employee.getSalary());
+        updateEmployeeRequest.setSalary(String.valueOf(employee.getSalary()));
 
         model.addAttribute("updateEmployeeRequest", updateEmployeeRequest);
         model.addAttribute("employeeId", employeeId);
