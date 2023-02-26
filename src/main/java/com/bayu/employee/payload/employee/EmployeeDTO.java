@@ -33,8 +33,10 @@ public class EmployeeDTO {
 
     private String placeOfBirth;
 
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private LocalDate dateOfBirth;
+//    @DateTimeFormat(pattern = "yyyy-MM-dd")
+//    private LocalDate dateOfBirth;
+
+    private String dateOfBirth;
 
     private String salary;
 }
