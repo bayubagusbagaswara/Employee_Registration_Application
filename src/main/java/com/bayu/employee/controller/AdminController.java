@@ -17,8 +17,6 @@ public class AdminController {
 
     // bisa get all employee
 
-    // bisa update employee
-
     // bisa delete employee
 
 }
