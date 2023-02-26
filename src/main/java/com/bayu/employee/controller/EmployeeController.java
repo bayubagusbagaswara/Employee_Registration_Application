@@ -17,6 +17,10 @@ import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.math.BigDecimal;
+import java.text.DecimalFormat;
+import java.time.LocalDate;
+
 @Controller
 public class EmployeeController {
 
@@ -112,7 +116,7 @@ public class EmployeeController {
 
         String username = authentication.getName();
 
-        Employee employee = employeeService.findById(employeeId);
+        EmployeeDTO employee = employeeService.getEmployeeById(employeeId);
 
         UpdateEmployeeRequest updateEmployeeRequest = new UpdateEmployeeRequest();
         updateEmployeeRequest.setPosition(employee.getPosition());
@@ -122,9 +126,8 @@ public class EmployeeController {
         updateEmployeeRequest.setGender(employee.getGender());
         updateEmployeeRequest.setAge(String.valueOf(employee.getAge()));
         updateEmployeeRequest.setPlaceOfBirth(employee.getPlaceOfBirth());
-
-
         updateEmployeeRequest.setDateOfBirth(employee.getDateOfBirth());
+        updateEmployeeRequest.setSalary(employee.getSalary());
 
         model.addAttribute("updateEmployeeRequest", updateEmployeeRequest);
         model.addAttribute("employeeId", employeeId);
