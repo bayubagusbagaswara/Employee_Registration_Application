@@ -15,10 +15,14 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
+import java.text.NumberFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Locale;
 import java.util.stream.Collectors;
 
 @Service
@@ -79,7 +83,7 @@ public class EmployeeServiceImpl implements EmployeeService {
                 .age(Integer.valueOf(createEmployeeRequest.getAge()))
                 .placeOfBirth(createEmployeeRequest.getPlaceOfBirth())
                 .dateOfBirth(createEmployeeRequest.getDateOfBirth())
-                .salary(createEmployeeRequest.getSalary())
+                .salary(formatStringToBigDecimal(createEmployeeRequest.getSalary()))
                 .user(user)
                 .build();
 
@@ -118,8 +122,8 @@ public class EmployeeServiceImpl implements EmployeeService {
                 .gender(StringUtils.capitalize(employee.getGender()))
                 .age(String.valueOf(employee.getAge()))
                 .placeOfBirth(employee.getPlaceOfBirth())
-                .dateOfBirth(changeDateFormat(employee.getDateOfBirth()))
-                .salary(String.valueOf(employee.getSalary()))
+                .dateOfBirth(employee.getDateOfBirth())
+                .salary(formatBigDecimalToString(employee.getSalary()))
                 .build();
     }
 
@@ -165,6 +169,10 @@ public class EmployeeServiceImpl implements EmployeeService {
         if (updateEmployeeRequest.getFirstName() != null && updateEmployeeRequest.getLastName() != null) {
             employee.setFullName(splitAndCapitalize(updateEmployeeRequest.getFirstName(), updateEmployeeRequest.getLastName()));
         }
+
+        if (updateEmployeeRequest.getSalary() != null) {
+            employee.setSalary(formatStringToBigDecimal(updateEmployeeRequest.getSalary()));
+        }
     }
 
     private static String capitalize(String str)
@@ -200,10 +208,16 @@ public class EmployeeServiceImpl implements EmployeeService {
                 date.getYear();
     }
 
-    private static String formatCurrency(BigDecimal currency) {
-        // input : 5000000.00
-        // output : Rp. 5.000.000,00
-        return null;
+    private static String formatBigDecimalToString(BigDecimal currency) {
+        DecimalFormat df = new DecimalFormat();
+        return df.format(currency);
     }
 
+    private static BigDecimal formatStringToBigDecimal(String currency) {
+        NumberFormat nf = new DecimalFormat("",
+                new DecimalFormatSymbols(new Locale("id", "ID")));
+        ((DecimalFormat) nf).setParseBigDecimal(true);
+//        Locale locale = new Locale("id", "ID");
+        return new BigDecimal(currency);
+    }
 }
