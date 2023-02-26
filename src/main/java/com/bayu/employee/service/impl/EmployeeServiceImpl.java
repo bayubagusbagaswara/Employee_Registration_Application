@@ -123,7 +123,7 @@ public class EmployeeServiceImpl implements EmployeeService {
                 .age(String.valueOf(employee.getAge()))
                 .placeOfBirth(employee.getPlaceOfBirth())
                 .dateOfBirth(changeDateFormat(employee.getDateOfBirth()))
-                .salary(formatBigDecimalToString(employee.getSalary()))
+                .salary(String.valueOf(employee.getSalary()))
                 .build();
     }
 
