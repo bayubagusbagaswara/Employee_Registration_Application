@@ -117,9 +117,9 @@
                                         <div class="col-md mb-md-0">
                                             <label class="font-size-14 fw-bold"><strong>Salary (Rp.)</strong></label>
 <!--                                            <p th:text="${employee.salary}"></p>-->
-<!--                                            <p>Rp. <span th:text="${#numbers.formatDecimal(employee.salary, 0, 'POINT', 2, 'COMMA')}"></span></p>-->
+                                            <p>Rp. <span th:text="${#numbers.formatDecimal(employee.salary, 1, 'POINT', 2, 'COMMA')}"></span></p>
 <!--                                            <p th:text="${#numbers.formatDecimal(employee.salary, 1, 'POINT', 2, 'COMMA')}"></p>-->
-                                            <p th:text="${employee.salary}"><span>.00</span></p>
+<!--                                            <p th:text="${employee.salary}"><span>.00</span></p>-->
                                         </div>
                                     </div>
                                 </div>
