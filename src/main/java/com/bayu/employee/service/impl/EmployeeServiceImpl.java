@@ -122,7 +122,7 @@ public class EmployeeServiceImpl implements EmployeeService {
                 .gender(StringUtils.capitalize(employee.getGender()))
                 .age(String.valueOf(employee.getAge()))
                 .placeOfBirth(employee.getPlaceOfBirth())
-                .dateOfBirth(employee.getDateOfBirth())
+                .dateOfBirth(changeDateFormat(employee.getDateOfBirth()))
                 .salary(formatBigDecimalToString(employee.getSalary()))
                 .build();
     }
