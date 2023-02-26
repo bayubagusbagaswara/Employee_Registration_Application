@@ -82,7 +82,7 @@ public class EducationController {
         return "education/add_education";
     }
 
-    @PostMapping("/education/saveEducation/{userId}")
+    @PostMapping("/education/save/{userId}")
     public String saveEducation(@ModelAttribute CreateEducationRequest createEducationRequest,
                                 @PathVariable(value = "userId") String userId,
                                 BindingResult bindingResult,
@@ -157,7 +157,7 @@ public class EducationController {
         return "education/edit_education";
     }
 
-    @PostMapping("/education/updateEducation/{educationId}")
+    @PostMapping("/education/update/{educationId}")
     public String doUpdateEducation(@PathVariable(value = "educationId") String educationId,
                                     @ModelAttribute("updateEducationRequest") UpdateEducationRequest updateEducationRequest,
                                     Authentication authentication,
