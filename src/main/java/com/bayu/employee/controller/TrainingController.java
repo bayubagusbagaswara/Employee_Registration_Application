@@ -1,6 +1,7 @@
 package com.bayu.employee.controller;
 
 import com.bayu.employee.model.User;
+import com.bayu.employee.payload.training.CreateTrainingRequest;
 import com.bayu.employee.payload.training.TrainingDTO;
 import com.bayu.employee.service.TrainingService;
 import com.bayu.employee.service.UserService;
@@ -61,4 +62,20 @@ public class TrainingController {
         model.addAttribute("username", username);
         return "training/home_training";
     }
+
+    @GetMapping("/training/show-add-form")
+    public String showAddTrainingForm(Model model, Authentication authentication) {
+        String username = authentication.getName();
+        User user = userService.findByUsername(username);
+
+        CreateTrainingRequest createTrainingRequest = new CreateTrainingRequest();
+
+        model.addAttribute("createTrainingRequest", createTrainingRequest);
+        model.addAttribute("userId", user.getId());
+        model.addAttribute("username", username);
+
+        return "training/add_training";
+    }
+
+
 }
