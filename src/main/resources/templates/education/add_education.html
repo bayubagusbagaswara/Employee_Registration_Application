@@ -17,7 +17,7 @@
                         <div class="pl-1 mb-4">
                             <small class="font-italic text-danger">(*) Data wajib diisi. Jika tidak ada, maka isi dengan tanda strip (-).</small>
                         </div>
-                        <form action="#" th:action="@{/education/saveEducation/{userId}(userId=${userId})}" th:object="${createEducationRequest}" method="post">
+                        <form action="#" th:action="@{/education/save/{userId}(userId=${userId})}" th:object="${createEducationRequest}" method="post">
                             <div class="row mb-5 pl-5">
                                 <div class="col-12 col-md-5">
                                     <div class="form-group mb-3">
