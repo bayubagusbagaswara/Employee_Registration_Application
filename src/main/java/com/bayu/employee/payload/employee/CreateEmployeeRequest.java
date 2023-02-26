@@ -32,5 +32,5 @@ public class CreateEmployeeRequest {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate dateOfBirth;
 
-    private BigDecimal salary;
+    private String salary;
 }
