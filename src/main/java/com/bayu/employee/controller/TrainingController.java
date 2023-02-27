@@ -114,4 +114,18 @@ public class TrainingController {
         return "redirect:/training/user/{userId}";
     }
 
+    @GetMapping("/training/user/{userId}")
+    public String getAllTrainingByUserId(@PathVariable(value = "userId") String userId,
+                                         Authentication authentication,
+                                         Model model,
+                                         RedirectAttributes redirectAttributes) {
+        String username = authentication.getName();
+        List<TrainingDTO> trainingList = trainingService.getAllTrainingsByUserId(userId);
+
+        model.addAttribute("trainingList", trainingList);
+        model.addAttribute("username", username);
+
+        return "training/data_training";
+    }
+
 }
