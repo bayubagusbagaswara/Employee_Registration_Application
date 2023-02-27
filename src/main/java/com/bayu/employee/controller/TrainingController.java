@@ -10,7 +10,12 @@ import org.slf4j.LoggerFactory;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
@@ -77,5 +82,36 @@ public class TrainingController {
         return "training/add_training";
     }
 
+    @PostMapping("/training/save/{userId}")
+    public String saveTraining(@ModelAttribute CreateTrainingRequest createTrainingRequest,
+                               @PathVariable(value = "userId") String userId,
+                               BindingResult bindingResult,
+                               Model model,
+                               RedirectAttributes redirectAttributes) {
+
+        log.info("Create Training : {}", createTrainingRequest.toString());
+
+        if (createTrainingRequest.getTrainingName() == null) {
+            bindingResult.addError(new FieldError("createTrainingRequest", "trainingName", "Nama Pelatihan wajib diisi."));
+        }
+
+        if (createTrainingRequest.getCertificate() == null) {
+            bindingResult.addError(new FieldError("createTrainingRequest", "certificate", "Sertifikat wajib diisi."));
+        }
+
+        if (createTrainingRequest.getYear() == null) {
+            bindingResult.addError(new FieldError("createTrainingRequest", "year", "Tahun wajib diisi."));
+        }
+
+        if (bindingResult.hasErrors()) {
+            return "training/add_training";
+        }
+
+        TrainingDTO training = trainingService.createTraining(userId, createTrainingRequest);
+
+        redirectAttributes.addAttribute("userId", userId);
+
+        return "redirect:/training/user/{userId}";
+    }
 
 }
