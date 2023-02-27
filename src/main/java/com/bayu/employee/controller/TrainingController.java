@@ -150,6 +150,38 @@ public class TrainingController {
         log.info("Training DTO: {}", training.toString());
 
         return "training/edit_training";
-
     }
+
+    @PostMapping("/training/update/{trainingId}")
+    public String doUpdateTraining(@PathVariable(value = "trainingId") String trainingId,
+                                   @ModelAttribute("updateTrainingRequest") UpdateTrainingRequest updateTrainingRequest,
+                                   Authentication authentication,
+                                   Model model,
+                                   BindingResult bindingResult,
+                                   RedirectAttributes redirectAttributes) {
+
+        log.info("Update Training: {}", updateTrainingRequest.toString());
+
+        String username = authentication.getName();
+
+        if (updateTrainingRequest.getTrainingName() == null) {
+            bindingResult.addError(new FieldError("updateTrainingRequest", "trainingName", "Nama Pelatihan wajib diisi."));
+        }
+
+        if (updateTrainingRequest.getCertificate() == null) {
+            bindingResult.addError(new FieldError("updateTrainingRequest", "certificate", "Sertifikat wajib diisi."));
+        }
+
+        if (updateTrainingRequest.getYear() == null) {
+            bindingResult.addError(new FieldError("updateTrainingRequest", "year", "Tahun wajib diisi."));
+        }
+
+        TrainingDTO training = trainingService.updateTraining(trainingId, updateTrainingRequest);
+
+        model.addAttribute("username", username);
+        redirectAttributes.addAttribute("userId", training.getId());
+
+        return "redirect:/training/user/{userId}";
+    }
+
 }
