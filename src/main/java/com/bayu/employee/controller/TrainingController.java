@@ -3,6 +3,7 @@ package com.bayu.employee.controller;
 import com.bayu.employee.model.User;
 import com.bayu.employee.payload.training.CreateTrainingRequest;
 import com.bayu.employee.payload.training.TrainingDTO;
+import com.bayu.employee.payload.training.UpdateTrainingRequest;
 import com.bayu.employee.service.TrainingService;
 import com.bayu.employee.service.UserService;
 import org.slf4j.Logger;
@@ -128,4 +129,27 @@ public class TrainingController {
         return "training/data_training";
     }
 
+    @GetMapping("/training/show-update-form/{trainingId}")
+    public String showUpdateForm(@PathVariable(value = "trainingId") String trainingId,
+                                 Authentication authentication,
+                                 Model model) {
+
+        String username = authentication.getName();
+
+        TrainingDTO training = trainingService.getTrainingById(trainingId);
+
+        UpdateTrainingRequest updateTrainingRequest = new UpdateTrainingRequest();
+        updateTrainingRequest.setTrainingName(training.getTrainingName());
+        updateTrainingRequest.setCertificate(Boolean.valueOf(training.getCertificate()));
+        updateTrainingRequest.setYear(training.getYear());
+
+        model.addAttribute("updateTrainingRequest", updateTrainingRequest);
+        model.addAttribute("trainingId", training.getId());
+        model.addAttribute("username", username);
+
+        log.info("Training DTO: {}", training.toString());
+
+        return "training/edit_training";
+
+    }
 }
