@@ -184,4 +184,21 @@ public class TrainingController {
         return "redirect:/training/user/{userId}";
     }
 
+    @GetMapping("/training/delete/{trainingId}")
+    public String deleteTraining(@PathVariable(value = "trainingId") String trainingId,
+                                 Authentication authentication,
+                                 Model model,
+                                 RedirectAttributes redirectAttributes) {
+        String username = authentication.getName();
+
+        TrainingDTO trainingDTO = trainingService.getTrainingById(trainingId);
+
+        trainingService.deleteTraining(trainingId);
+
+        redirectAttributes.addAttribute("userId", trainingDTO.getId());
+        model.addAttribute("username", username);
+
+        return "redirect:/training/user/{userId}";
+    }
+
 }
