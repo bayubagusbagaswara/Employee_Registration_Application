@@ -91,7 +91,7 @@ public class TrainingServiceImpl implements TrainingService {
                 .id(training.getId())
                 .userId(training.getUser().getId())
                 .trainingName(capitalizeEachWord(training.getTrainingName()))
-                .certificate(formatBoolean(training.getCertificate()))
+                .certificate(training.getCertificate())
                 .year(String.valueOf(training.getYear()))
                 .build();
     }
@@ -100,17 +100,6 @@ public class TrainingServiceImpl implements TrainingService {
         return trainingList.stream()
                 .map(TrainingServiceImpl::mapToTrainingDTO)
                 .collect(Collectors.toList());
-    }
-
-    private static String formatBoolean(Boolean certificate) {
-        String certificateString = "";
-        if (!certificate) {
-            certificateString = "Tidak";
-        } else {
-            certificateString = "Ya";
-        }
-
-        return certificateString;
     }
 
     private static String capitalizeEachWord(String str) {
