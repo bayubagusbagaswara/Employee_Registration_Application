@@ -13,7 +13,7 @@ public class CreateTrainingRequest {
 
     private String trainingName;
 
-    private Boolean certificate;
+    private String certificate;
 
     private String year;
 
