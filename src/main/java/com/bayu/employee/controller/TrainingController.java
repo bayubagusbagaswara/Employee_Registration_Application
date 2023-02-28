@@ -180,7 +180,7 @@ public class TrainingController {
         TrainingDTO training = trainingService.updateTraining(trainingId, updateTrainingRequest);
 
         model.addAttribute("username", username);
-        redirectAttributes.addAttribute("userId", training.getId());
+        redirectAttributes.addAttribute("userId", training.getUserId());
 
         return "redirect:/training/user/{userId}";
     }
