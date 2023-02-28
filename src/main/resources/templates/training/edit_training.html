@@ -1,10 +1,84 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/main_layout}">
 <body>
+
+<div layout:fragment="content">
+    <div class="card o-hidden border-0 shadow-lg my-5">
+        <div class="card-body p-0">
+            <div class="row">
+                <div class="col-lg">
+                    <div class="p-5">
+                        <div class="form-row mb-2">
+                            <h4 class="fw-bold text-muted mt-6 mb-0"><strong>Data Pelatihan</strong></h4>
+                        </div>
+                        <div class="pl-1 mb-4">
+                            <small class="font-italic text-danger">(*) Data wajib diisi. Jika tidak ada, maka isi dengan tanda strip (-).</small>
+                        </div>
+                        <form action="#" th:action="@{/training/update/{trainingId}(trainingId=${trainingId})}" th:object="${updateTrainingRequest}" method="post">
+                            <div class="row mb-5 pl-5">
+                                <div class="col-12 col-md-5">
+                                    <div class="form-group mb-3">
+                                        <div class="row align-items-end">
+                                            <div class="col-md mb-md-0">
+                                                <label class="form-label" for="trainingName"><strong>Nama Pelatihan</strong></label>
+                                                <span class="required align-self-end text-danger small font-weight-bold">*</span>
+                                                <input type="text" class="form-control" id="trainingName" name="trainingName"
+                                                       th:value="*{trainingName}"
+                                                       th:errorClass="is-invalid">
+                                                <small th:if="${#fields.hasErrors('trainingName')}" th:errors="*{trainingName}" class="text-danger pl-1"></small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-1"></div>
+                                <div class="col-12 col-md-5">
+                                    <div class="form-group mb-3">
+                                        <div class="row align-items-end">
+                                            <div class="col-md mb-md-0">
+                                                <label class="form-label"><strong>Sertifikat</strong></label>
+                                                <span class="required align-self-end text-danger small font-weight-bold">*</span>
+                                                <div class="row pl-3">
+                                                    <div class="form-check form-check-inline">
+                                                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" th:field="*{certificate}" value="Ada">
+                                                        <label class="form-check-label" for="inlineRadio1">Ada</label>
+                                                    </div>
+                                                    <div class="form-check form-check-inline">
+                                                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" th:field="*{certificate}" value="Tidak Ada">
+                                                        <label class="form-check-label" for="inlineRadio2">Tidak Ada</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-5">
+                                    <div class="form-group mb-3">
+                                        <div class="row align-items-end">
+                                            <div class="col-md mb-md-0">
+                                                <label for="year" class="form-label"><strong>Tahun</strong></label>
+                                                <span class="required align-self-end text-danger small font-weight-bold">*</span>
+                                                <input type="text" class="form-control" id="year" name="year"
+                                                       th:value="*{year}"
+                                                       th:errorClass="is-invalid">
+                                                <small th:if="${#fields.hasErrors('year')}" th:errors="*{year}" class="text-danger pl-1"></small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="d-grid d-md-flex justify-content-md-end">
+                                <button type="submit" class="btn btn-success">Simpan</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 </body>
 </html>
