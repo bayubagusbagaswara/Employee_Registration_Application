@@ -59,7 +59,7 @@ public class TrainingController {
         model.addAttribute("username", username);
         redirectAttributes.addAttribute("userId", userId);
 
-        return "redirect:/training/user/userId";
+        return "redirect:/training/user/{userId}";
     }
 
     @GetMapping("/training/home")
@@ -120,6 +120,7 @@ public class TrainingController {
                                          Authentication authentication,
                                          Model model,
                                          RedirectAttributes redirectAttributes) {
+
         String username = authentication.getName();
         List<TrainingDTO> trainingList = trainingService.getAllTrainingsByUserId(userId);
 
