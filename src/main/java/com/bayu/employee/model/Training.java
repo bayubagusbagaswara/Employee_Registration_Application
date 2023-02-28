@@ -23,7 +23,7 @@ public class Training {
     private String trainingName;
 
     @Column(name = "certificate")
-    private Boolean certificate;
+    private String certificate;
 
     @Column(name = "year")
     private Integer year;
