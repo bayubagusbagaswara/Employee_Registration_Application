@@ -43,9 +43,8 @@ public class TrainingServiceImpl implements TrainingService {
 
     @Override
     public List<TrainingDTO> getAllTrainingsByUserId(String userId) {
-        User user = userService.findById(userId);
         Sort sort = Sort.by("year").ascending();
-        List<Training> trainings = trainingRepository.findAllByUserId(user.getId(), sort);
+        List<Training> trainings = trainingRepository.findAllByUserId(userId, sort);
         return mapToTrainingDTOList(trainings);
     }
 
