@@ -140,7 +140,7 @@ public class TrainingController {
 
         UpdateTrainingRequest updateTrainingRequest = new UpdateTrainingRequest();
         updateTrainingRequest.setTrainingName(training.getTrainingName());
-        updateTrainingRequest.setCertificate(Boolean.valueOf(training.getCertificate()));
+        updateTrainingRequest.setCertificate(training.getCertificate());
         updateTrainingRequest.setYear(training.getYear());
 
         model.addAttribute("updateTrainingRequest", updateTrainingRequest);
