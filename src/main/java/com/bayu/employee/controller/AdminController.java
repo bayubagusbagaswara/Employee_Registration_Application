@@ -2,9 +2,11 @@ package com.bayu.employee.controller;
 
 import com.bayu.employee.model.User;
 import com.bayu.employee.payload.admin.EmployeeAdminDTO;
+import com.bayu.employee.payload.education.EducationDTO;
 import com.bayu.employee.payload.employee.EmployeeDTO;
-import com.bayu.employee.service.AdminService;
-import com.bayu.employee.service.UserService;
+import com.bayu.employee.payload.training.TrainingDTO;
+import com.bayu.employee.payload.work.WorkDTO;
+import com.bayu.employee.service.*;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,10 +23,19 @@ public class AdminController {
 
     private final UserService userService;
     private final AdminService adminService;
+    private final EmployeeService employeeService;
+    private final EducationService educationService;
+    private final WorkExperienceService workExperienceService;
+    private final TrainingService trainingService;
 
-    public AdminController(UserService userService, AdminService adminService) {
+
+    public AdminController(UserService userService, AdminService adminService, EmployeeService employeeService, EducationService educationService, WorkExperienceService workExperienceService, TrainingService trainingService) {
         this.userService = userService;
         this.adminService = adminService;
+        this.employeeService = employeeService;
+        this.educationService = educationService;
+        this.workExperienceService = workExperienceService;
+        this.trainingService = trainingService;
     }
 
     @GetMapping
@@ -44,7 +55,7 @@ public class AdminController {
         // ambil semua data employee
         List<EmployeeAdminDTO> employeeList = adminService.getAllEmployees();
 
-        model.addAttribute("employeeList", employeeList);
+        model.addAttribute("employeeList", employeeList); // isinya hanya position, nik, fullName
         model.addAttribute("username", username);
 
 
@@ -65,9 +76,22 @@ public class AdminController {
         String userId = user.getId();
 
         // dapatkan employee by id
+        // ambil data employee
         EmployeeDTO employee = adminService.getEmployeeById(employeeId);
 
+        // ambil semua data education by userId
+        List<EducationDTO> educationList = educationService.findAllByUserId(userId);
+
+        // ambil semua data training by userId
+        List<TrainingDTO> trainingList = trainingService.getAllTrainingsByUserId(userId);
+
+        // ambil semua data work experience by userId
+        List<WorkDTO> workList = workExperienceService.getAllByUserId(userId);
+
         model.addAttribute("employee", employee);
+        model.addAttribute("educationList", educationList);
+        model.addAttribute("trainingList", trainingList);
+        model.addAttribute("workList", workList);
         redirectAttributes.addAttribute("userId", userId);
 
         // hanya menampilkan data employee by id
