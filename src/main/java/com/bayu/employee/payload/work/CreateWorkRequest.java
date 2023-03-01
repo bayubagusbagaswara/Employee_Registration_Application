@@ -19,7 +19,9 @@ public class CreateWorkRequest {
 
     private String salary;
 
-    private String yearOfEmployment;
+    private String lengthOfWork;
 
-    private String yearOfResignation;
+//    private String yearOfEmployment;
+
+//    private String yearOfResignation;
 }
