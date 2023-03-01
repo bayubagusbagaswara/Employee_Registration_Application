@@ -17,7 +17,7 @@ public class UpdateWorkRequest {
 
     private String position;
 
-    private BigDecimal salary;
+    private String salary;
 
     private String yearOfEmployment;
 
