@@ -2,7 +2,10 @@ package com.bayu.employee.service;
 
 import com.bayu.employee.payload.UserDTO;
 import com.bayu.employee.payload.admin.EmployeeAdminDTO;
+import com.bayu.employee.payload.education.EducationDTO;
 import com.bayu.employee.payload.employee.EmployeeDTO;
+import com.bayu.employee.payload.training.TrainingDTO;
+import com.bayu.employee.payload.work.WorkDTO;
 
 import java.util.List;
 
@@ -17,9 +20,10 @@ public interface AdminService {
     // get user by id
     UserDTO getUserById(String userId);
 
-    // List<EducationDTO> getAllEducationsByUserId
-    // List<TrainingDTO> getAllTrainingsByUserId
-    // List<WorkDTO> getAllWorksByUserId
+     List<EducationDTO> getAllEducationsByUserId(String userId);
 
+     List<TrainingDTO> getAllTrainingsByUserId(String userId);
+
+     List<WorkDTO> getAllWorksByUserId(String userId);
 
 }
