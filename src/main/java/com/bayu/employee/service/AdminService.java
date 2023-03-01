@@ -16,4 +16,10 @@ public interface AdminService {
 
     // get user by id
     UserDTO getUserById(String userId);
+
+    // List<EducationDTO> getAllEducationsByUserId
+    // List<TrainingDTO> getAllTrainingsByUserId
+    // List<WorkDTO> getAllWorksByUserId
+
+
 }
