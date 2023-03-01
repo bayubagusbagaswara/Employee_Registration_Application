@@ -41,6 +41,9 @@ public class User {
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
     private Employee employee;
 
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+    private Offer offer;
+
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
     private Set<Education> educations = new HashSet<>();
 
