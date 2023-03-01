@@ -74,3 +74,13 @@
 
 data-inputmask="'alias': 'numeric', 'groupSeparator': ',', 'autoGroup': true, 'digits': 2, 'digitsOptional': false, 'prefix': '€ ', 'placeholder': '0'"
 autocomplete="off"
+
+
+# Admin Controller
+
+- Ada 2 Menu
+- Profil Admin
+- Daftar Employee
+
+## Controller Profil Admin
+## Controller Daftar Employee
