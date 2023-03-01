@@ -75,18 +75,16 @@ public class AdminController {
 
         String userId = user.getId();
 
-        // dapatkan employee by id
-        // ambil data employee
         EmployeeDTO employee = adminService.getEmployeeById(employeeId);
 
         // ambil semua data education by userId
-        List<EducationDTO> educationList = educationService.findAllByUserId(userId);
+        List<EducationDTO> educationList = adminService.getAllEducationsByUserId(userId);
 
         // ambil semua data training by userId
-        List<TrainingDTO> trainingList = trainingService.getAllTrainingsByUserId(userId);
+        List<TrainingDTO> trainingList = adminService.getAllTrainingsByUserId(userId);
 
         // ambil semua data work experience by userId
-        List<WorkDTO> workList = workExperienceService.getAllByUserId(userId);
+        List<WorkDTO> workList = adminService.getAllWorksByUserId(userId);
 
         model.addAttribute("employee", employee);
         model.addAttribute("educationList", educationList);
@@ -94,8 +92,8 @@ public class AdminController {
         model.addAttribute("workList", workList);
         redirectAttributes.addAttribute("userId", userId);
 
-        // hanya menampilkan data employee by id
-        return "admin/data_employee"; // tampilkan halaman employee
+        // tampilkan data employee
+        return "admin/data_employee";
     }
 
     // bisa delete employee
