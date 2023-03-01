@@ -21,7 +21,7 @@ public class WorkDTO {
 
     private String position;
 
-    private BigDecimal salary;
+    private String salary;
 
     private String yearOfEmployment;
 
