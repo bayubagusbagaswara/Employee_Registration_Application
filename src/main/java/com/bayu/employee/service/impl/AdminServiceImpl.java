@@ -1,6 +1,8 @@
 package com.bayu.employee.service.impl;
 
+import com.bayu.employee.payload.UserDTO;
 import com.bayu.employee.payload.admin.EmployeeAdminDTO;
+import com.bayu.employee.payload.employee.EmployeeDTO;
 import com.bayu.employee.repository.EmployeeRepository;
 import com.bayu.employee.repository.UserRepository;
 import com.bayu.employee.service.AdminService;
@@ -32,4 +34,13 @@ public class AdminServiceImpl implements AdminService {
                 }).collect(Collectors.toList());
     }
 
+    @Override
+    public EmployeeDTO getEmployeeById(String employeeId) {
+        return null;
+    }
+
+    @Override
+    public UserDTO getUserById(String userId) {
+        return null;
+    }
 }
