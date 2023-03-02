@@ -33,4 +33,12 @@ public class CreateEmployeeRequest {
     private LocalDate dateOfBirth;
 
     private String salary;
+
+    private String levelOfEducation;
+
+    private String department;
+
+    private String collegeName;
+
+    private String graduationYear;
 }
