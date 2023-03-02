@@ -44,9 +44,9 @@ public class TrainingController {
 
         User user = userService.findByUsername(username);
 
-        if (user.getTrainings().size() == 0) {
-            return "redirect:/training/home";
-        }
+//        if (user.getTrainings().size() == 0) {
+//            return "redirect:/training/home";
+//        }
 
         List<TrainingDTO> trainingDTOList = trainingService.getAllTrainingsByUserId(user.getId());
 
