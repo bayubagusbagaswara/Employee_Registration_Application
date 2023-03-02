@@ -1,11 +1,13 @@
 package com.bayu.employee.service.impl;
 
 import com.bayu.employee.exception.ResourceNotFoundException;
+import com.bayu.employee.model.Education;
 import com.bayu.employee.model.Employee;
 import com.bayu.employee.model.User;
 import com.bayu.employee.payload.employee.CreateEmployeeRequest;
 import com.bayu.employee.payload.employee.EmployeeDTO;
 import com.bayu.employee.payload.employee.UpdateEmployeeRequest;
+import com.bayu.employee.repository.EducationRepository;
 import com.bayu.employee.repository.EmployeeRepository;
 import com.bayu.employee.service.EmployeeService;
 import com.bayu.employee.service.UserService;
@@ -32,10 +34,12 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     private final EmployeeRepository employeeRepository;
     private final UserService userService;
+    private final EducationRepository educationRepository;
 
-    public EmployeeServiceImpl(EmployeeRepository employeeRepository, UserService userService) {
+    public EmployeeServiceImpl(EmployeeRepository employeeRepository, UserService userService, EducationRepository educationRepository) {
         this.employeeRepository = employeeRepository;
         this.userService = userService;
+        this.educationRepository = educationRepository;
     }
 
     @Override
@@ -89,18 +93,29 @@ public class EmployeeServiceImpl implements EmployeeService {
                 .dateOfBirth(createEmployeeRequest.getDateOfBirth())
                 .salary(formatStringToBigDecimal(createEmployeeRequest.getSalary()))
                 .user(user)
+                .levelOfEducation(createEmployeeRequest.getLevelOfEducation())
+                .department(createEmployeeRequest.getDepartment())
+                .collegeName(createEmployeeRequest.getCollegeName())
+                .graduationYear(Integer.valueOf(createEmployeeRequest.getGraduationYear()))
                 .build();
 
-        // di object Employee memiliki property tingkatPendidikanTerakhir, jurusan, namaInstansi
+        // di object Employee memiliki property tingkatPendidikanTerakhir, jurusan, namaInstansi, tahunLulus
 
         // save employee
-        employeeRepository.save(employee);
+        Employee employeeSaved = employeeRepository.save(employee);
 
         // create Education dan masukkan employeeId yang sudah tersimpan
+        Education education = Education.builder()
+                .levelOfEducation(employeeSaved.getLevelOfEducation())
+                .department(employeeSaved.getDepartment())
+                .collegeName(employeeSaved.getCollegeName())
+                .graduationYear(employeeSaved.getGraduationYear())
+                .build();
 
         // save Education
+        educationRepository.save(education);
 
-        return mapToEmployeeDTO(employee);
+        return mapToEmployeeDTO(employeeSaved);
     }
 
     @Override
