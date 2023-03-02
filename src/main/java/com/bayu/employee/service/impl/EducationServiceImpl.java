@@ -36,7 +36,7 @@ public class EducationServiceImpl implements EducationService {
         education.setDepartment(createEducationRequest.getDepartment().toLowerCase());
         education.setCollegeName(createEducationRequest.getCollegeName());
         education.setGraduationYear(Integer.valueOf(createEducationRequest.getGraduationYear()));
-        education.setUser(user);
+//        education.setUser(user);
 
         educationRepository.save(education);
 
@@ -46,8 +46,9 @@ public class EducationServiceImpl implements EducationService {
     @Override
     public List<EducationDTO> findAllByUserId(String userId) {
         Sort sorting = Sort.by("graduationYear").ascending();
-        List<Education> educationList = educationRepository.findAllByUserId(userId, sorting);
-        return mapToEducationDTOList(educationList);
+//        List<Education> educationList = educationRepository.findAllByUserId(userId, sorting);
+//        return mapToEducationDTOList(educationList);
+        return null;
     }
 
     @Override
@@ -94,7 +95,7 @@ public class EducationServiceImpl implements EducationService {
     private static EducationDTO mapToEducationDTO(Education education) {
         return EducationDTO.builder()
                 .id(education.getId())
-                .userId(education.getUser().getId())
+//                .userId(education.getUser().getId())
                 .levelOfEducation(StringUtils.upperCase(education.getLevelOfEducation()))
                 .department(capitalizeEachWord(education.getDepartment()))
                 .collegeName(education.getCollegeName())
