@@ -8,5 +8,5 @@ import java.util.List;
 
 public interface WorkExperienceRepository extends JpaRepository<WorkExperience, String> {
 
-    List<WorkExperience> findAllByUserId(String userId, Sort sort);
+    List<WorkExperience> findAllByEmployeeId(String employeeId, Sort sort);
 }
