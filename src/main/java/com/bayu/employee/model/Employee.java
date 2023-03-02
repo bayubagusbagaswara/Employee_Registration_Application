@@ -59,7 +59,15 @@ public class Employee {
     // jurusan
     // nama instansi
 
-//
+    @Column(name = "level_of_education")
+    private String levelOfEducation;
+
+    @Column(name = "department")
+    private String department;
+
+    @Column(name = "college_name")
+    private String collegeName;
+
 //    private String religion;
 //
 //    private String bloodGroup;
@@ -98,5 +106,17 @@ public class Employee {
     @OneToOne
     @JoinColumn(name = "id_user", foreignKey = @ForeignKey(name = "fk_employee_id_user"), referencedColumnName = "id")
     private User user;
+
+    // OneToMany dengan Education
+    @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
+    private Set<Education> educations = new HashSet<>();
+
+    // OneToMany dengan Training
+    @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
+    private Set<Training> trainings = new HashSet<>();
+
+    // OneToMany dengan WorkExperience
+    @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
+    private Set<WorkExperience> workExperiences = new HashSet<>();
 
 }
