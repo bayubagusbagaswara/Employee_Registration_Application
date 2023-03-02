@@ -68,6 +68,9 @@ public class Employee {
     @Column(name = "college_name")
     private String collegeName;
 
+    @Column(name = "graduation_year")
+    private Integer graduationYear;
+
 //    private String religion;
 //
 //    private String bloodGroup;
