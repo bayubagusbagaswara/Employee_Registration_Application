@@ -32,14 +32,8 @@ public class WorkExperience {
     @Column(name = "length_of_work")
     private Float lengthOfWork; // misal 2.5 tahun
 
-//    @Column(name = "year_of_employment")
-//    private Integer yearOfEmployment;
-
-//    @Column(name = "year_of_resignation")
-//    private Integer yearOfResignation;
-
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_user", foreignKey = @ForeignKey(name = "fk_work_experiences_id_user"), referencedColumnName = "id")
-    private User user;
+    @JoinColumn(name = "employee_id", foreignKey = @ForeignKey(name = "fk_work_experiences_employee_id"), referencedColumnName = "id_user")
+    private Employee employee;
 
 }
