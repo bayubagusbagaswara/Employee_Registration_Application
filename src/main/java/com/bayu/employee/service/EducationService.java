@@ -8,9 +8,9 @@ import java.util.List;
 
 public interface EducationService {
 
-    EducationDTO createEducation(String userId, CreateEducationRequest createEducationRequest);
+    EducationDTO createEducation(String employeeId, CreateEducationRequest createEducationRequest);
 
-    List<EducationDTO> findAllByUserId(String userId);
+    List<EducationDTO> getAllByEmployeeId(String employeeId);
 
     EducationDTO findById(String educationId);
 
