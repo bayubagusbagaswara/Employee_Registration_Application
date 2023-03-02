@@ -36,4 +36,12 @@ public class WorkExperience {
     @JoinColumn(name = "employee_id", foreignKey = @ForeignKey(name = "fk_work_experiences_employee_id"), referencedColumnName = "id_user")
     private Employee employee;
 
+    // jika ada kolom tahun resign, maka nanti bisa di sorting berdasarkan tahun
+    // bisa gak Date tapi cuma Bulan dan Tahun (MM-yyyy)
+    @Column(name = "year_of_employment")
+    private Integer yearOfEmployment;
+
+    @Column(name = "year_of_resignation")
+    private Integer yearOfResignation;
+
 }
