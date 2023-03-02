@@ -51,18 +51,18 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
-    public List<EducationDTO> getAllEducationsByUserId(String userId) {
-        return educationService.findAllByUserId(userId);
+    public List<EducationDTO> getAllEducationsByUserId(String employeeId) {
+        return educationService.getAllByEmployeeId(employeeId);
     }
 
     @Override
-    public List<TrainingDTO> getAllTrainingsByUserId(String userId) {
-        return trainingService.getAllTrainingsByUserId(userId);
+    public List<TrainingDTO> getAllTrainingsByUserId(String employeeId) {
+        return trainingService.getAllTrainingsByEmployeeId(employeeId);
     }
 
     @Override
     public List<WorkDTO> getAllWorksByUserId(String userId) {
-        return workExperienceService.getAllByUserId(userId);
+        return workExperienceService.getAllByEmployeeId(userId);
     }
 
 }
