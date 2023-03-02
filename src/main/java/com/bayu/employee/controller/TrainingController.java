@@ -1,9 +1,11 @@
 package com.bayu.employee.controller;
 
+import com.bayu.employee.model.Employee;
 import com.bayu.employee.model.User;
 import com.bayu.employee.payload.training.CreateTrainingRequest;
 import com.bayu.employee.payload.training.TrainingDTO;
 import com.bayu.employee.payload.training.UpdateTrainingRequest;
+import com.bayu.employee.service.EmployeeService;
 import com.bayu.employee.service.TrainingService;
 import com.bayu.employee.service.UserService;
 import org.slf4j.Logger;
@@ -28,10 +30,12 @@ public class TrainingController {
 
     private final TrainingService trainingService;
     private final UserService userService;
+    private final EmployeeService employeeService;
 
-    public TrainingController(TrainingService trainingService, UserService userService) {
+    public TrainingController(TrainingService trainingService, UserService userService, EmployeeService employeeService) {
         this.trainingService = trainingService;
         this.userService = userService;
+        this.employeeService = employeeService;
     }
 
     @GetMapping("/training")
@@ -44,11 +48,15 @@ public class TrainingController {
 
         User user = userService.findByUsername(username);
 
-//        if (user.getTrainings().size() == 0) {
-//            return "redirect:/training/home";
-//        }
+        // cari employee berdasarkan id, karena employeeId sama dengan userId, maka tinggal cari findById
+        Employee employee = employeeService.findById(user.getId());
 
-        List<TrainingDTO> trainingDTOList = trainingService.getAllTrainingsByUserId(user.getId());
+        // ini tetap, tapi melalui employee dulu
+        if (employee.getTrainings().size() == 0) {
+            return "redirect:/training/home";
+        }
+
+        List<TrainingDTO> trainingDTOList = trainingService.getAllTrainingsByEmployeeId(user.getId());
 
         String userId = "";
 
@@ -122,7 +130,7 @@ public class TrainingController {
                                          RedirectAttributes redirectAttributes) {
 
         String username = authentication.getName();
-        List<TrainingDTO> trainingList = trainingService.getAllTrainingsByUserId(userId);
+        List<TrainingDTO> trainingList = trainingService.getAllTrainingsByEmployeeId(userId);
 
         model.addAttribute("trainingList", trainingList);
         model.addAttribute("username", username);
