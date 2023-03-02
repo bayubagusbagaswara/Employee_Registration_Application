@@ -42,9 +42,9 @@ public class EducationController {
 
         User user = userService.findByUsername(username);
 
-        if (user.getEducations().size() == 0) {
-            return "redirect:/education/home";
-        }
+//        if (user.getEducations().size() == 0) {
+//            return "redirect:/education/home";
+//        }
 
         List<EducationDTO> educationDTOList = educationService.findAllByUserId(user.getId());
 
