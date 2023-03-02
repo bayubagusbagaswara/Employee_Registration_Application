@@ -71,9 +71,12 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public EmployeeDTO createEmployee(String userId, CreateEmployeeRequest createEmployeeRequest) {
-        // create hanya dilakukan satu kali saja diawal, jadi kita bisa membuat object Education, lalu simpan di EducationRepository beserta employeeId yang sudah ter-create
+        // create hanya dilakukan satu kali saja diawal,
+        // jadi kita bisa membuat satu object Education,
+        // lalu simpan di EducationRepository beserta employeeId yang sudah ter-create
         User user = userService.findById(userId);
 
+        // create employee
         Employee employee = Employee.builder()
                 .position(createEmployeeRequest.getPosition())
                 .nik(createEmployeeRequest.getNik())
@@ -88,7 +91,14 @@ public class EmployeeServiceImpl implements EmployeeService {
                 .user(user)
                 .build();
 
+        // di object Employee memiliki property tingkatPendidikanTerakhir, jurusan, namaInstansi
+
+        // save employee
         employeeRepository.save(employee);
+
+        // create Education dan masukkan employeeId yang sudah tersimpan
+
+        // save Education
 
         return mapToEmployeeDTO(employee);
     }
