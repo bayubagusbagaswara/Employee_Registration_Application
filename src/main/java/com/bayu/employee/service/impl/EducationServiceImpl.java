@@ -2,13 +2,13 @@ package com.bayu.employee.service.impl;
 
 import com.bayu.employee.exception.ResourceNotFoundException;
 import com.bayu.employee.model.Education;
-import com.bayu.employee.model.User;
+import com.bayu.employee.model.Employee;
 import com.bayu.employee.payload.education.CreateEducationRequest;
 import com.bayu.employee.payload.education.EducationDTO;
 import com.bayu.employee.payload.education.UpdateEducationRequest;
 import com.bayu.employee.repository.EducationRepository;
 import com.bayu.employee.service.EducationService;
-import com.bayu.employee.service.UserService;
+import com.bayu.employee.service.EmployeeService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
@@ -20,23 +20,23 @@ import java.util.stream.Collectors;
 public class EducationServiceImpl implements EducationService {
 
     private final EducationRepository educationRepository;
-    private final UserService userService;
+    private final EmployeeService employeeService;
 
-    public EducationServiceImpl(EducationRepository educationRepository, UserService userService) {
+    public EducationServiceImpl(EducationRepository educationRepository, EmployeeService employeeService) {
         this.educationRepository = educationRepository;
-        this.userService = userService;
+        this.employeeService = employeeService;
     }
 
     @Override
-    public EducationDTO createEducation(String userId, CreateEducationRequest createEducationRequest) {
-        User user = userService.findById(userId);
+    public EducationDTO createEducation(String employeeId, CreateEducationRequest createEducationRequest) {
+        Employee employee = employeeService.findById(employeeId);
 
         Education education = new Education();
         education.setLevelOfEducation(createEducationRequest.getLevelOfEducation().toLowerCase());
         education.setDepartment(createEducationRequest.getDepartment().toLowerCase());
         education.setCollegeName(createEducationRequest.getCollegeName());
         education.setGraduationYear(Integer.valueOf(createEducationRequest.getGraduationYear()));
-//        education.setUser(user);
+        education.setEmployee(employee);
 
         educationRepository.save(education);
 
@@ -44,11 +44,10 @@ public class EducationServiceImpl implements EducationService {
     }
 
     @Override
-    public List<EducationDTO> findAllByUserId(String userId) {
+    public List<EducationDTO> getAllByEmployeeId(String employeeId) {
         Sort sorting = Sort.by("graduationYear").ascending();
-//        List<Education> educationList = educationRepository.findAllByUserId(userId, sorting);
-//        return mapToEducationDTOList(educationList);
-        return null;
+        List<Education> educationList = educationRepository.findAllByEmployeeId(employeeId, sorting);
+        return mapToEducationDTOList(educationList);
     }
 
     @Override
@@ -95,7 +94,7 @@ public class EducationServiceImpl implements EducationService {
     private static EducationDTO mapToEducationDTO(Education education) {
         return EducationDTO.builder()
                 .id(education.getId())
-//                .userId(education.getUser().getId())
+                .employeeId(education.getEmployee().getId())
                 .levelOfEducation(StringUtils.upperCase(education.getLevelOfEducation()))
                 .department(capitalizeEachWord(education.getDepartment()))
                 .collegeName(education.getCollegeName())
