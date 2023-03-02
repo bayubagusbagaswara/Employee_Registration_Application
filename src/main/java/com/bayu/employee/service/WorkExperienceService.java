@@ -7,10 +7,10 @@ import java.util.List;
 
 public interface WorkExperienceService {
 
-    WorkDTO createWork(String userId, CreateWorkRequest createWorkRequest);
+    WorkDTO createWorkExperience(String employeeId, CreateWorkRequest createWorkRequest);
 
-    List<WorkDTO> getAllByUserId(String userId);
+    List<WorkDTO> getAllWorkExperiencesByEmployeeId(String employeeId);
 
-    WorkDTO getWorkById(String workId);
+    WorkDTO getWorkExperienceById(String workId);
 
 }
