@@ -8,5 +8,5 @@ import java.util.List;
 
 public interface TrainingRepository extends JpaRepository<Training, String> {
 
-    List<Training> findAllByUserId(String userId, Sort sort);
+    List<Training> findAllByEmployeeId(String employeeId, Sort sort);
 }
