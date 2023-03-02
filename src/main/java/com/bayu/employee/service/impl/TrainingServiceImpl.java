@@ -1,14 +1,14 @@
 package com.bayu.employee.service.impl;
 
 import com.bayu.employee.exception.ResourceNotFoundException;
+import com.bayu.employee.model.Employee;
 import com.bayu.employee.model.Training;
-import com.bayu.employee.model.User;
 import com.bayu.employee.payload.training.CreateTrainingRequest;
 import com.bayu.employee.payload.training.TrainingDTO;
 import com.bayu.employee.payload.training.UpdateTrainingRequest;
 import com.bayu.employee.repository.TrainingRepository;
+import com.bayu.employee.service.EmployeeService;
 import com.bayu.employee.service.TrainingService;
-import com.bayu.employee.service.UserService;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
@@ -19,22 +19,22 @@ import java.util.stream.Collectors;
 public class TrainingServiceImpl implements TrainingService {
 
     private final TrainingRepository trainingRepository;
-    private final UserService userService;
+    private final EmployeeService employeeService;
 
-    public TrainingServiceImpl(TrainingRepository trainingRepository, UserService userService) {
+    public TrainingServiceImpl(TrainingRepository trainingRepository, EmployeeService employeeService) {
         this.trainingRepository = trainingRepository;
-        this.userService = userService;
+        this.employeeService = employeeService;
     }
 
     @Override
-    public TrainingDTO createTraining(String userId, CreateTrainingRequest createTrainingRequest) {
-        User user = userService.findById(userId);
+    public TrainingDTO createTraining(String employeeId, CreateTrainingRequest createTrainingRequest) {
+        Employee employee = employeeService.findById(employeeId);
 
         Training training = new Training();
         training.setTrainingName(createTrainingRequest.getTrainingName().toLowerCase());
         training.setCertificate(createTrainingRequest.getCertificate());
         training.setYear(Integer.valueOf(createTrainingRequest.getYear()));
-//        training.setUser(user);
+        training.setEmployee(employee);
 
         trainingRepository.save(training);
 
@@ -42,11 +42,10 @@ public class TrainingServiceImpl implements TrainingService {
     }
 
     @Override
-    public List<TrainingDTO> getAllTrainingsByUserId(String userId) {
+    public List<TrainingDTO> getAllTrainingsByEmployeeId(String employeeId) {
         Sort sort = Sort.by("year").ascending();
-//        List<Training> trainings = trainingRepository.findAllByUserId(userId, sort);
-//        return mapToTrainingDTOList(trainings);
-        return null;
+        List<Training> trainings = trainingRepository.findAllByEmployeeId(employeeId, sort);
+        return mapToTrainingDTOList(trainings);
     }
 
     @Override
@@ -89,7 +88,7 @@ public class TrainingServiceImpl implements TrainingService {
     private static TrainingDTO mapToTrainingDTO(Training training) {
         return TrainingDTO.builder()
                 .id(training.getId())
-//                .userId(training.getUser().getId())
+                .employeeId(training.getEmployee().getId())
                 .trainingName(capitalizeEachWord(training.getTrainingName()))
                 .certificate(training.getCertificate())
                 .year(String.valueOf(training.getYear()))
