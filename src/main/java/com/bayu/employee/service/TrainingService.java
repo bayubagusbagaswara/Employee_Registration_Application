@@ -8,9 +8,9 @@ import java.util.List;
 
 public interface TrainingService {
 
-    TrainingDTO createTraining(String userId, CreateTrainingRequest createTrainingRequest);
+    TrainingDTO createTraining(String employeeId, CreateTrainingRequest createTrainingRequest);
 
-    List<TrainingDTO> getAllTrainingsByUserId(String userId);
+    List<TrainingDTO> getAllTrainingsByEmployeeId(String employeeId);
 
     TrainingDTO getTrainingById(String trainingId);
 
