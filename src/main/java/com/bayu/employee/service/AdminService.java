@@ -26,4 +26,7 @@ public interface AdminService {
 
      List<WorkDTO> getAllWorksByUserId(String userId);
 
+     // kita tambahkan pencarian employee berdasarkan nama
+
+    // kita tambahkan pengurutan data berdasarkan property tertentu
 }
