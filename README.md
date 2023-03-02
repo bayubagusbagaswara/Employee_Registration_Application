@@ -96,3 +96,10 @@ autocomplete="off"
 ```
 
 array = [1, 2, 3, 4]
+
+
+# Perubahan
+- Model child dan parent nya adalah Employee
+- ID USER dan ID EMPLOYEE adalah sama
+- coba apakah ada error saat me-load data EDUCATION berdasarkan ID EMPLOYEE
+- kita tambahkan beberapa kolom di add_employee, karena ada kolom education
