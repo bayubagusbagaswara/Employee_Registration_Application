@@ -34,7 +34,7 @@ public class TrainingServiceImpl implements TrainingService {
         training.setTrainingName(createTrainingRequest.getTrainingName().toLowerCase());
         training.setCertificate(createTrainingRequest.getCertificate());
         training.setYear(Integer.valueOf(createTrainingRequest.getYear()));
-        training.setUser(user);
+//        training.setUser(user);
 
         trainingRepository.save(training);
 
@@ -44,8 +44,9 @@ public class TrainingServiceImpl implements TrainingService {
     @Override
     public List<TrainingDTO> getAllTrainingsByUserId(String userId) {
         Sort sort = Sort.by("year").ascending();
-        List<Training> trainings = trainingRepository.findAllByUserId(userId, sort);
-        return mapToTrainingDTOList(trainings);
+//        List<Training> trainings = trainingRepository.findAllByUserId(userId, sort);
+//        return mapToTrainingDTOList(trainings);
+        return null;
     }
 
     @Override
@@ -88,7 +89,7 @@ public class TrainingServiceImpl implements TrainingService {
     private static TrainingDTO mapToTrainingDTO(Training training) {
         return TrainingDTO.builder()
                 .id(training.getId())
-                .userId(training.getUser().getId())
+//                .userId(training.getUser().getId())
                 .trainingName(capitalizeEachWord(training.getTrainingName()))
                 .certificate(training.getCertificate())
                 .year(String.valueOf(training.getYear()))
