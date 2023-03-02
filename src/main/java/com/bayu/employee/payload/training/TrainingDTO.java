@@ -15,6 +15,8 @@ public class TrainingDTO {
 
     private String userId;
 
+    private String employeeId;
+
     private String trainingName;
 
     private String certificate;
