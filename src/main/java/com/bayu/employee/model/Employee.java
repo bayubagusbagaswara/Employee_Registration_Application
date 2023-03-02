@@ -54,6 +54,11 @@ public class Employee {
     @Column(name = "salary")
     private BigDecimal salary;
 
+    // tapi ketika isi form createEmployee maka mengisi juga object RiwayatPendidikan
+    // tingkat pendidikan terakhir
+    // jurusan
+    // nama instansi
+
 //
 //    private String religion;
 //
