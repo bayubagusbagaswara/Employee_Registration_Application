@@ -87,3 +87,12 @@ autocomplete="off"
 
 ## Controller Profil Admin
 ## Controller Daftar Employee
+
+```json
+{
+  "id": "",
+  "name": ""
+}
+```
+
+array = [1, 2, 3, 4]
