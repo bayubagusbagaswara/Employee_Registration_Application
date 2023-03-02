@@ -17,6 +17,8 @@ public class WorkDTO {
 
     private String userId;
 
+    private String employeeId;
+
     private String companyName;
 
     private String position;
