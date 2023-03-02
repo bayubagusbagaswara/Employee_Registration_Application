@@ -1,10 +1,12 @@
 package com.bayu.employee.controller;
 
+import com.bayu.employee.model.Employee;
 import com.bayu.employee.model.User;
 import com.bayu.employee.payload.education.CreateEducationRequest;
 import com.bayu.employee.payload.education.EducationDTO;
 import com.bayu.employee.payload.education.UpdateEducationRequest;
 import com.bayu.employee.service.EducationService;
+import com.bayu.employee.service.EmployeeService;
 import com.bayu.employee.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,10 +30,12 @@ public class EducationController {
 
     private final EducationService educationService;
     private final UserService userService;
+    private final EmployeeService employeeService;
 
-    public EducationController(EducationService educationService, UserService userService) {
+    public EducationController(EducationService educationService, UserService userService, EmployeeService employeeService) {
         this.educationService = educationService;
         this.userService = userService;
+        this.employeeService = employeeService;
     }
 
     @GetMapping("/education")
@@ -42,11 +46,13 @@ public class EducationController {
 
         User user = userService.findByUsername(username);
 
-//        if (user.getEducations().size() == 0) {
-//            return "redirect:/education/home";
-//        }
+        Employee employee = employeeService.findById(user.getId());
 
-        List<EducationDTO> educationDTOList = educationService.findAllByUserId(user.getId());
+        if (employee.getEducations().size() == 0) {
+            return "redirect:/education/home";
+        }
+
+        List<EducationDTO> educationDTOList = educationService.getAllByEmployeeId(employee.getId());
 
         String userId = "";
 
@@ -125,7 +131,7 @@ public class EducationController {
                                           RedirectAttributes redirectAttributes) {
 
         String username = authentication.getName();
-        List<EducationDTO> educationList = educationService.findAllByUserId(userId);
+        List<EducationDTO> educationList = educationService.getAllByEmployeeId(userId);
 
         model.addAttribute("educationList", educationList);
         model.addAttribute("username", username);
