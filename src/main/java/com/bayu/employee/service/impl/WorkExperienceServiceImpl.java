@@ -3,6 +3,7 @@ package com.bayu.employee.service.impl;
 import com.bayu.employee.payload.work.CreateWorkRequest;
 import com.bayu.employee.payload.work.WorkDTO;
 import com.bayu.employee.repository.WorkExperienceRepository;
+import com.bayu.employee.service.EmployeeService;
 import com.bayu.employee.service.WorkExperienceService;
 import org.springframework.stereotype.Service;
 
@@ -12,23 +13,25 @@ import java.util.List;
 public class WorkExperienceServiceImpl implements WorkExperienceService {
 
     private final WorkExperienceRepository workExperienceRepository;
+    private final EmployeeService employeeService;
 
-    public WorkExperienceServiceImpl(WorkExperienceRepository workExperienceRepository) {
+    public WorkExperienceServiceImpl(WorkExperienceRepository workExperienceRepository, EmployeeService employeeService) {
         this.workExperienceRepository = workExperienceRepository;
+        this.employeeService = employeeService;
     }
 
     @Override
-    public WorkDTO createWork(String userId, CreateWorkRequest createWorkRequest) {
+    public WorkDTO createWorkExperience(String employeeId, CreateWorkRequest createWorkRequest) {
         return null;
     }
 
     @Override
-    public List<WorkDTO> getAllByUserId(String userId) {
+    public List<WorkDTO> getAllWorkExperiencesByEmployeeId(String employeeId) {
         return null;
     }
 
     @Override
-    public WorkDTO getWorkById(String workId) {
+    public WorkDTO getWorkExperienceById(String workId) {
         return null;
     }
 }
