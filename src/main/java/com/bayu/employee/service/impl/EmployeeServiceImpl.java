@@ -71,6 +71,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public EmployeeDTO createEmployee(String userId, CreateEmployeeRequest createEmployeeRequest) {
+        // create hanya dilakukan satu kali saja diawal, jadi kita bisa membuat object Education, lalu simpan di EducationRepository beserta employeeId yang sudah ter-create
         User user = userService.findById(userId);
 
         Employee employee = Employee.builder()
