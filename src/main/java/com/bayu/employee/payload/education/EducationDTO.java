@@ -15,6 +15,8 @@ public class EducationDTO {
 
     private String userId;
 
+    private String employeeId;
+
     private String levelOfEducation;
 
     private String department;
