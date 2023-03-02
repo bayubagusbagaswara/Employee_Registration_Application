@@ -18,4 +18,8 @@ public interface EmployeeRepository extends JpaRepository<Employee, String> {
     @Query(value = "SELECT e FROM Employee e WHERE e.id_user = :userId", nativeQuery = true)
     Optional<Employee> getEmployeeByUserId(@Param("userId") String userId);
 
+    // bisa get employee berdasarkan property levelOfEducation, position, name
+
+    // bisa urutkan data siapa yang pertama kali createdAt
+
 }
