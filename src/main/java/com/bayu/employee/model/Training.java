@@ -29,6 +29,6 @@ public class Training {
     private Integer year;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_user", foreignKey = @ForeignKey(name = "fk_trainings_id_user"), referencedColumnName = "id")
-    private User user;
+    @JoinColumn(name = "employee_id", foreignKey = @ForeignKey(name = "fk_trainings_employee_id"), referencedColumnName = "id_user")
+    private Employee employee;
 }
