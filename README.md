@@ -66,11 +66,13 @@
 - Skill
 - Bersedia ditempatkan di seluruh kantor perusahaan ? Ya atau Tidak (Checkbox)
 - Penghasilan yang diharapkan
+- Data Pendidikan Terakhir, Riwayat Pelatihan, dan Riwayat Pekerjaan adalah merupakan child dari Biodata
 
 # Feature
 
 - Remember Me
 - Changing Password
+- Pencarian berdasarkan Nama (full name), Posisi yang dilamar, dan Tingkat Pendidikan terakhir
 
 data-inputmask="'alias': 'numeric', 'groupSeparator': ',', 'autoGroup': true, 'digits': 2, 'digitsOptional': false, 'prefix': '€ ', 'placeholder': '0'"
 autocomplete="off"
@@ -81,6 +83,7 @@ autocomplete="off"
 - Ada 2 Menu
 - Profil Admin
 - Daftar Employee
+- di Daftar Employee terdapat Card Jumlah Karyawan. 
 
 ## Controller Profil Admin
 ## Controller Daftar Employee
