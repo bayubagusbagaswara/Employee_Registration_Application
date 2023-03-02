@@ -61,8 +61,8 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
-    public List<WorkDTO> getAllWorksByUserId(String userId) {
-        return workExperienceService.getAllByEmployeeId(userId);
+    public List<WorkDTO> getAllWorksByUserId(String employeeId) {
+        return workExperienceService.getAllWorkExperiencesByEmployeeId(employeeId);
     }
 
 }
