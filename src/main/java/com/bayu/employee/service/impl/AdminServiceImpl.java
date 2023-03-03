@@ -5,7 +5,7 @@ import com.bayu.employee.payload.admin.EmployeeAdminDTO;
 import com.bayu.employee.payload.education.EducationDTO;
 import com.bayu.employee.payload.employee.EmployeeDTO;
 import com.bayu.employee.payload.training.TrainingDTO;
-import com.bayu.employee.payload.work.WorkDTO;
+import com.bayu.employee.payload.work.WorkExperienceDTO;
 import com.bayu.employee.service.*;
 import org.springframework.stereotype.Service;
 
@@ -61,7 +61,7 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
-    public List<WorkDTO> getAllWorksByUserId(String employeeId) {
+    public List<WorkExperienceDTO> getAllWorksByUserId(String employeeId) {
         return workExperienceService.getAllWorkExperiencesByEmployeeId(employeeId);
     }
 
