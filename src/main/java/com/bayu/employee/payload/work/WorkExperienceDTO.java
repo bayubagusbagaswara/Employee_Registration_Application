@@ -5,13 +5,11 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.math.BigDecimal;
-
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class WorkDTO {
+public class WorkExperienceDTO {
 
     private String id;
 
@@ -25,8 +23,6 @@ public class WorkDTO {
 
     private String salary;
 
-    private String yearOfEmployment;
-
-    private String yearOfResignation;
+    private String lengthOfWork;
 
 }
