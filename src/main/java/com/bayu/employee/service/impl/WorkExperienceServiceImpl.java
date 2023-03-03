@@ -4,7 +4,7 @@ import com.bayu.employee.exception.ResourceNotFoundException;
 import com.bayu.employee.model.Employee;
 import com.bayu.employee.model.WorkExperience;
 import com.bayu.employee.payload.work.CreateWorkRequest;
-import com.bayu.employee.payload.work.WorkDTO;
+import com.bayu.employee.payload.work.WorkExperienceDTO;
 import com.bayu.employee.repository.WorkExperienceRepository;
 import com.bayu.employee.service.EmployeeService;
 import com.bayu.employee.service.WorkExperienceService;
@@ -25,7 +25,7 @@ public class WorkExperienceServiceImpl implements WorkExperienceService {
     }
 
     @Override
-    public WorkDTO createWorkExperience(String employeeId, CreateWorkRequest createWorkRequest) {
+    public WorkExperienceDTO createWorkExperience(String employeeId, CreateWorkRequest createWorkRequest) {
         // cari employee by id dulu
         Employee employee = employeeService.findById(employeeId);
 
@@ -46,19 +46,19 @@ public class WorkExperienceServiceImpl implements WorkExperienceService {
     }
 
     @Override
-    public List<WorkDTO> getAllWorkExperiencesByEmployeeId(String employeeId) {
+    public List<WorkExperienceDTO> getAllWorkExperiencesByEmployeeId(String employeeId) {
         List<WorkExperience> workExperienceList = workExperienceRepository.findAllByEmployeeId(employeeId);
         return mapToWorkDTOList(workExperienceList);
     }
 
     @Override
-    public WorkDTO getWorkExperienceById(String workId) {
+    public WorkExperienceDTO getWorkExperienceById(String workId) {
         WorkExperience workExperience = workExperienceRepository.findById(workId).orElseThrow(() -> new ResourceNotFoundException("Work Experience not found with id : " + workId));
         return mapToWorkDTO(workExperience);
     }
 
-    private WorkDTO mapToWorkDTO(WorkExperience workExperience) {
-        return WorkDTO.builder()
+    private WorkExperienceDTO mapToWorkDTO(WorkExperience workExperience) {
+        return WorkExperienceDTO.builder()
                 .id(workExperience.getId())
                 .employeeId(workExperience.getEmployee().getId())
                 .position(workExperience.getPosition())
@@ -68,7 +68,7 @@ public class WorkExperienceServiceImpl implements WorkExperienceService {
                 .build();
     }
 
-    private List<WorkDTO> mapToWorkDTOList(List<WorkExperience> workExperienceList) {
+    private List<WorkExperienceDTO> mapToWorkDTOList(List<WorkExperience> workExperienceList) {
         return workExperienceList.stream()
                 .map(this::mapToWorkDTO)
                 .collect(Collectors.toList());
