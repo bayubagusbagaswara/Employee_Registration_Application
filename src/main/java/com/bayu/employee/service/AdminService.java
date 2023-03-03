@@ -5,7 +5,7 @@ import com.bayu.employee.payload.admin.EmployeeAdminDTO;
 import com.bayu.employee.payload.education.EducationDTO;
 import com.bayu.employee.payload.employee.EmployeeDTO;
 import com.bayu.employee.payload.training.TrainingDTO;
-import com.bayu.employee.payload.work.WorkDTO;
+import com.bayu.employee.payload.work.WorkExperienceDTO;
 
 import java.util.List;
 
@@ -24,7 +24,7 @@ public interface AdminService {
 
      List<TrainingDTO> getAllTrainingsByUserId(String userId);
 
-     List<WorkDTO> getAllWorksByUserId(String userId);
+     List<WorkExperienceDTO> getAllWorksByUserId(String userId);
 
      // kita tambahkan pencarian employee berdasarkan nama
 
