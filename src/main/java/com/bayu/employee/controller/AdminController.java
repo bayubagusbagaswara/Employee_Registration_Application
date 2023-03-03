@@ -5,7 +5,7 @@ import com.bayu.employee.payload.admin.EmployeeAdminDTO;
 import com.bayu.employee.payload.education.EducationDTO;
 import com.bayu.employee.payload.employee.EmployeeDTO;
 import com.bayu.employee.payload.training.TrainingDTO;
-import com.bayu.employee.payload.work.WorkDTO;
+import com.bayu.employee.payload.work.WorkExperienceDTO;
 import com.bayu.employee.service.*;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -84,7 +84,7 @@ public class AdminController {
         List<TrainingDTO> trainingList = adminService.getAllTrainingsByUserId(userId);
 
         // ambil semua data work experience by userId
-        List<WorkDTO> workList = adminService.getAllWorksByUserId(userId);
+        List<WorkExperienceDTO> workList = adminService.getAllWorksByUserId(userId);
 
         model.addAttribute("employee", employee);
         model.addAttribute("educationList", educationList);
