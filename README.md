@@ -103,3 +103,6 @@ array = [1, 2, 3, 4]
 - ID USER dan ID EMPLOYEE adalah sama
 - coba apakah ada error saat me-load data EDUCATION berdasarkan ID EMPLOYEE
 - kita tambahkan beberapa kolom di add_employee, karena ada kolom education
+
+# Perubahan Semua Project
+- Ubah maven version menjadi 3.8.6. Di laptop juga menggunakan maven 3.8.6
