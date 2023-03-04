@@ -4,8 +4,13 @@ import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.io.Serial;
+import java.io.Serializable;
 import java.math.BigDecimal;
 
+/**
+ * model untuk Offering
+ */
 @Entity
 @Table(name = "offers")
 @Getter
@@ -13,7 +18,10 @@ import java.math.BigDecimal;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Offer {
+public class Offer implements Serializable {
+
+    @Serial
+    private final static long serialVersionUID = 8882264240778484657L;
 
     @Id
     @GenericGenerator(name = "system-uuid", strategy = "uuid2")
