@@ -42,4 +42,6 @@ public class EmployeeDTO implements Serializable {
     private String dateOfBirth;
 
     private String salary;
+
+    private String levelOfEducation;
 }
