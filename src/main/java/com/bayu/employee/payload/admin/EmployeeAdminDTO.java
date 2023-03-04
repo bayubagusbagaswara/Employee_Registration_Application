@@ -17,7 +17,13 @@ public class EmployeeAdminDTO implements Serializable {
     @Serial
     private final static long serialVersionUID = -1007974275382158669L;
 
+    private String id;
+
     private String position;
-    private String nik;
     private String fullName;
+
+    private String age;
+    private String gender;
+
+    private String levelOfEducation;
 }
