@@ -94,9 +94,7 @@ public class EmployeeServiceImpl implements EmployeeService {
                 .salary(formatStringToBigDecimal(createEmployeeRequest.getSalary()))
                 .user(user)
                 .levelOfEducation(createEmployeeRequest.getLevelOfEducation())
-                .department(createEmployeeRequest.getDepartment())
-                .collegeName(createEmployeeRequest.getCollegeName())
-                .graduationYear(Integer.valueOf(createEmployeeRequest.getGraduationYear()))
+
                 .build();
 
         // di object Employee memiliki property tingkatPendidikanTerakhir, jurusan, namaInstansi, tahunLulus
@@ -106,10 +104,11 @@ public class EmployeeServiceImpl implements EmployeeService {
 
         // create Education dan masukkan employeeId yang sudah tersimpan
         Education education = Education.builder()
+                .employee(employeeSaved)
                 .levelOfEducation(employeeSaved.getLevelOfEducation())
-                .department(employeeSaved.getDepartment())
-                .collegeName(employeeSaved.getCollegeName())
-                .graduationYear(employeeSaved.getGraduationYear())
+                .department(createEmployeeRequest.getDepartment())
+                .collegeName(createEmployeeRequest.getCollegeName())
+                .graduationYear(Integer.valueOf(createEmployeeRequest.getGraduationYear()))
                 .build();
 
         // save Education
