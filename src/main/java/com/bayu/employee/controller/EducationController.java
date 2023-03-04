@@ -39,7 +39,7 @@ public class EducationController {
     }
 
     @GetMapping("/education")
-    public String education(Model model, Authentication authentication, RedirectAttributes redirectAttributes) {
+    public String educationMenu(Model model, Authentication authentication, RedirectAttributes redirectAttributes) {
 
         String username = authentication.getName();
         log.info("Username: {}", username);
@@ -74,7 +74,7 @@ public class EducationController {
     }
 
     @GetMapping("/education/show-add-form")
-    public String showNewEducationForm(Model model, Authentication authentication) {
+    public String showAddEducationForm(Model model, Authentication authentication) {
 
         String username = authentication.getName();
         User user = userService.findByUsername(username);
@@ -82,50 +82,36 @@ public class EducationController {
         CreateEducationRequest createEducationRequest = new CreateEducationRequest();
 
         model.addAttribute("createEducationRequest", createEducationRequest);
-        model.addAttribute("userId", user.getId());
+        model.addAttribute("employeeId", user.getEmployee().getId());
         model.addAttribute("username", username);
 
         return "education/add_education";
     }
 
-    @PostMapping("/education/save/{userId}")
+    @PostMapping("/education/save/{employeeId}")
     public String saveEducation(@ModelAttribute CreateEducationRequest createEducationRequest,
-                                @PathVariable(value = "userId") String userId,
+                                @PathVariable(value = "employeeId") String employeeId,
                                 BindingResult bindingResult,
                                 Model model,
                                 RedirectAttributes redirectAttributes) {
 
         log.info("Create Education: {}", createEducationRequest.toString());
 
-        if (createEducationRequest.getLevelOfEducation() == null || createEducationRequest.getLevelOfEducation().equals("")) {
-            bindingResult.addError(new FieldError("createEducationRequest", "levelOfEducation", "Tingkat Pendidikan wajib diisi."));
-        }
+        String fieldError = checkValidation(createEducationRequest, bindingResult);
 
-        if (createEducationRequest.getDepartment() == null || createEducationRequest.getDepartment().equals("")) {
-            bindingResult.addError(new FieldError("createEducationRequest", "department", "Jurusan wajib diisi."));
-        }
+        if (fieldError != null) return fieldError;
 
-        if (createEducationRequest.getCollegeName() == null || createEducationRequest.getCollegeName().equals("")) {
-            bindingResult.addError(new FieldError("createEducationRequest", "collegeName", "Nama Instansi/Perguruan Tinggi wajib diisi."));
-        }
+        EducationDTO education = educationService.createEducation(employeeId, createEducationRequest);
 
-        if (createEducationRequest.getGraduationYear() == null || createEducationRequest.getGraduationYear().equals("")) {
-            bindingResult.addError(new FieldError("createEducationRequest", "graduationYear", "Tahun Lulus wajib diisi."));
-        }
+        redirectAttributes.addAttribute("employeeId", employeeId);
 
-        if (bindingResult.hasErrors()) {
-            return "education/add_education";
-        }
-
-        EducationDTO education = educationService.createEducation(userId, createEducationRequest);
-
-        redirectAttributes.addAttribute("userId", userId);
-
-        return "redirect:/education/user/{userId}";
+        return "redirect:/education/employee/{employeeId}";
     }
 
+
+
     @GetMapping("/education/employee/{employeeId}")
-    public String getAllEducationByUserId(@PathVariable(value = "employeeId") String employeeId,
+    public String getAllEducationByEmployeeId(@PathVariable(value = "employeeId") String employeeId,
                                           Authentication authentication,
                                           Model model,
                                           RedirectAttributes redirectAttributes) {
@@ -140,7 +126,7 @@ public class EducationController {
     }
 
     @GetMapping("/education/show-update-form/{educationId}")
-    public String showUpdateForm(@PathVariable(value = "educationId") String educationId,
+    public String showUpdateEducationForm(@PathVariable(value = "educationId") String educationId,
                                  Authentication authentication,
                                  Model model) {
 
@@ -164,7 +150,7 @@ public class EducationController {
     }
 
     @PostMapping("/education/update/{educationId}")
-    public String doUpdateEducation(@PathVariable(value = "educationId") String educationId,
+    public String updateEducation(@PathVariable(value = "educationId") String educationId,
                                     @ModelAttribute("updateEducationRequest") UpdateEducationRequest updateEducationRequest,
                                     Authentication authentication,
                                     Model model,
@@ -175,6 +161,59 @@ public class EducationController {
 
         String username = authentication.getName();
 
+        String fieldError = checkUpdateValidation(updateEducationRequest, bindingResult);
+        if (fieldError != null) return fieldError;
+
+        EducationDTO education = educationService.updateEducation(educationId, updateEducationRequest);
+
+        model.addAttribute("username", username);
+        redirectAttributes.addAttribute("employeeId", education.getEmployeeId());
+
+        return "redirect:/education/employee/{employeeId}";
+    }
+
+    @GetMapping("/education/delete/{educationId}")
+    public String deleteEducation(@PathVariable(value = "educationId") String educationId,
+                                  Authentication authentication,
+                                  Model model,
+                                  RedirectAttributes redirectAttributes) {
+
+        String username = authentication.getName();
+
+        EducationDTO educationDTO = educationService.findById(educationId);
+
+        educationService.deleteEducation(educationId);
+
+        redirectAttributes.addAttribute("employeeId", educationDTO.getEmployeeId());
+        model.addAttribute("username", username);
+
+        return "redirect:/education/employee/{employeeId}";
+    }
+
+    private static String checkValidation(CreateEducationRequest createEducationRequest, BindingResult bindingResult) {
+        if (createEducationRequest.getLevelOfEducation() == null || createEducationRequest.getLevelOfEducation().equals("")) {
+            bindingResult.addError(new FieldError("createEducationRequest", "levelOfEducation", "Tingkat Pendidikan wajib diisi."));
+        }
+
+        if (createEducationRequest.getDepartment() == null || createEducationRequest.getDepartment().equals("")) {
+            bindingResult.addError(new FieldError("createEducationRequest", "department", "Jurusan wajib diisi."));
+        }
+
+        if (createEducationRequest.getCollegeName() == null || createEducationRequest.getCollegeName().equals("")) {
+            bindingResult.addError(new FieldError("createEducationRequest", "collegeName", "Nama Instansi/Perguruan Tinggi wajib diisi."));
+        }
+
+        if (createEducationRequest.getGraduationYear() == null || createEducationRequest.getGraduationYear().equals("")) {
+            bindingResult.addError(new FieldError("createEducationRequest", "graduationYear", "Tahun Lulus wajib diisi."));
+        }
+
+        if (bindingResult.hasErrors()) {
+            return "education/add_education";
+        }
+        return null;
+    }
+
+    private static String checkUpdateValidation(UpdateEducationRequest updateEducationRequest, BindingResult bindingResult) {
         if (updateEducationRequest.getLevelOfEducation() == null || updateEducationRequest.getLevelOfEducation().equals("")) {
             bindingResult.addError(new FieldError("updateEducationRequest", "levelOfEducation", "Tingkat Pendidikan wajib diisi."));
         }
@@ -194,31 +233,7 @@ public class EducationController {
         if (bindingResult.hasErrors()) {
             return "redirect:/education/show-update-form/{educationId}";
         }
-
-        EducationDTO education = educationService.updateEducation(educationId, updateEducationRequest);
-
-        model.addAttribute("username", username);
-        redirectAttributes.addAttribute("userId", education.getUserId());
-
-        return "redirect:/education/user/{userId}";
-    }
-
-    @GetMapping("/education/delete/{educationId}")
-    public String deleteEducation(@PathVariable(value = "educationId") String educationId,
-                                  Authentication authentication,
-                                  Model model,
-                                  RedirectAttributes redirectAttributes) {
-
-        String username = authentication.getName();
-
-        EducationDTO educationDTO = educationService.findById(educationId);
-
-        educationService.deleteEducation(educationId);
-
-        redirectAttributes.addAttribute("userId", educationDTO.getUserId());
-        model.addAttribute("username", username);
-
-        return "redirect:/education/user/{userId}";
+        return null;
     }
 
 }
