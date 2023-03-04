@@ -5,11 +5,17 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serial;
+import java.io.Serializable;
+
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class EducationDTO {
+public class EducationDTO implements Serializable {
+
+    @Serial
+    private final static long serialVersionUID = 5429895131311271533L;
 
     private String id;
 
