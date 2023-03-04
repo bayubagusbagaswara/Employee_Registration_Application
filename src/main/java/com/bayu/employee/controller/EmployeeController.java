@@ -82,6 +82,8 @@ public class EmployeeController {
 
         log.info("Create Employee: {}", createEmployeeRequest.toString());
 
+        // nanti lakukan validation field dulu disini
+
         if (bindingResult.hasErrors()){
             return "redirect:/employees";
         }
