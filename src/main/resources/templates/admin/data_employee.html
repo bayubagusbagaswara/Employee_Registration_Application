@@ -1,11 +1,191 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/admin_layout}">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Data Employee</title>
 </head>
 <body>
-<!--menampilkan data employee by id, tapi data lengkap beserta-->
+<div layout:fragment="content">
 
+    <div class="card o-hidden border-0 shadow-lg my-5">
+        <div class="card-body p-0">
+            <div class="row">
+                <div class="col-lg">
+                    <div class="p-5">
+                        <div class="form-row mb-4">
+                            <div class="col-12 col-md-6">
+                                <h4 class="fw-bold text-muted mt-6 mb-0"><strong>Biodata</strong></h4>
+                            </div>
+                        </div>
+                        <div class="row mb-5 pl-5">
+                            <div class="col-12 col-md-6">
+                                <div class="form-group mb-3">
+                                    <div class="row align-items-end">
+                                        <div class="col-md mb-md-0">
+                                            <label class="font-size-14 fw-bold"><strong>Posisi yang dilamar</strong></label>
+                                            <p th:text="${employee.position}"></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <div class="form-group mb-3">
+                                    <div class="row align-items-end">
+                                        <div class="col-md mb-md-0">
+                                            <label class="font-size-14 fw-bold"><strong>NIK</strong></label>
+                                            <p th:text="${employee.nik}"></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <div class="form-group mb-3">
+                                    <div class="row align-items-end">
+                                        <div class="col-md mb-md-0">
+                                            <label class="font-size-14 fw-bold"><strong>Nama Lengkap</strong></label>
+                                            <p th:text="${employee.fullName}"></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <div class="form-group mb-3">
+                                    <div class="row align-items-end">
+                                        <div class="col-md mb-md-0">
+                                            <label class="font-size-14 fw-bold"><strong>Email</strong></label>
+                                            <p th:text="${employee.email}"></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <div class="from-group mb-3">
+                                    <div class="row align-items-end">
+                                        <div class="col-md mb-md-0">
+                                            <label class="font-size-14 fw-bold"><strong>Jenis Kelamin</strong></label>
+                                            <p th:text="${employee.gender}"></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <div class="form-group mb-3">
+                                    <div class="row align-items-end">
+                                        <div class="col-md mb-md-0">
+                                            <label class="font-size-14 fw-bold"><strong>Umur</strong></label>
+                                            <p th:text="${employee.age}"></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <div class="form-group mb-3">
+                                    <div class="row align-items-end">
+                                        <div class="col-md mb-md-0">
+                                            <label class="font-size-14 fw-bold"><strong>Tempat Lahir</strong></label>
+                                            <p th:text="${employee.placeOfBirth}"></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <div class="form-group mb-3">
+                                    <div class="row align-items-end">
+                                        <div class="col-md mb-md-0">
+                                            <label class="font-size-14 fw-bold"><strong>Tanggal Lahir</strong></label>
+                                            <p th:text="${employee.dateOfBirth}"></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <div class="form-group mb-3">
+                                    <div class="row align-items-end">
+                                        <div class="col-md mb-md-0">
+                                            <label class="font-size-14 fw-bold"><strong>Salary</strong></label>
+                                            <p>Rp. <span th:text="${#numbers.formatDecimal(employee.salary, 1, 'POINT', 2, 'COMMA')}"></span></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="form-row mb-4">
+                            <h4 class="fw-bold text-muted mt-2 mb-0"><strong>Domisili</strong></h4>
+                        </div>
+                        <div class="row mb-5 pl-5">
+                            <div class="col-12">
+                                <div class="form-group mb-3">
+                                    <div class="row align-items-end">
+                                        <div class="col-md mb-md-0">
+                                            <label class="font-size-14 fw-bold"><strong>Alamat Lengkap</strong></label>
+                                            <p>Desa Singonegaran</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <div class="form-group mb-3">
+                                    <div class="row align-items-end">
+                                        <div class="col-md mb-md-0">
+                                            <label class="font-size-12 fw-bold"><strong>Provinsi</strong></label>
+                                            <p>Jawa Timur</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <div class="form-group mb-3">
+                                    <div class="row align-items-end">
+                                        <div class="col-md mb-md-0">
+                                            <label class="font-size-12 fw-bold"><strong>Kota/Kab</strong></label>
+                                            <p>Kota Kediri</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="form-row mb-4">
+                            <h4 class="fw-bold text-muted mt-2 mb-0"><strong>Riwayat Pendidikan</strong></h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="table">
+                                <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <table class="table table-bordered dataTable" id="dataTable" width="100%" cellspacing="0" role="grid" aria-describedby="dataTable_info" style="width: 100%;">
+                                                <thead>
+                                                <tr role="row">
+                                                    <th>Tingkat Pendidikan</th>
+                                                    <th>Jurusan</th>
+                                                    <th>Nama Instansi/Perguruan Tinggi</th>
+                                                    <th>Tahun Lulus</th>
+                                                </thead>
+                                                <tbody>
+                                                <tr th:each="education : ${educationList}">
+                                                    <td th:text="${education.levelOfEducation}"></td>
+                                                    <td th:text="${education.department}"></td>
+                                                    <td th:text="${education.collegeName}"></td>
+                                                    <td th:text="${education.graduationYear}"></td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <hr>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
 </body>
 </html>
