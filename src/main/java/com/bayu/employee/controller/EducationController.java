@@ -54,15 +54,15 @@ public class EducationController {
 
         List<EducationDTO> educationDTOList = educationService.getAllByEmployeeId(employee.getId());
 
-        String userId = "";
+        String employeeId = "";
 
         for (EducationDTO educationDTO : educationDTOList) {
-            userId = educationDTO.getUserId();
+            employeeId = educationDTO.getEmployeeId();
         }
 
         model.addAttribute("username", username);
-        redirectAttributes.addAttribute("userId", userId);
-        return "redirect:/education/user/{userId}";
+        redirectAttributes.addAttribute("employeeId", employeeId);
+        return "redirect:/education/employee/{employeeId}";
     }
 
 
@@ -124,14 +124,14 @@ public class EducationController {
         return "redirect:/education/user/{userId}";
     }
 
-    @GetMapping("/education/user/{userId}")
-    public String getAllEducationByUserId(@PathVariable(value = "userId") String userId,
+    @GetMapping("/education/employee/{employeeId}")
+    public String getAllEducationByUserId(@PathVariable(value = "employeeId") String employeeId,
                                           Authentication authentication,
                                           Model model,
                                           RedirectAttributes redirectAttributes) {
 
         String username = authentication.getName();
-        List<EducationDTO> educationList = educationService.getAllByEmployeeId(userId);
+        List<EducationDTO> educationList = educationService.getAllByEmployeeId(employeeId);
 
         model.addAttribute("educationList", educationList);
         model.addAttribute("username", username);
