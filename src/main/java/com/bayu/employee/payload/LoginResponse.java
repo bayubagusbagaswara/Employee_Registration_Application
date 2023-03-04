@@ -5,11 +5,17 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serial;
+import java.io.Serializable;
+
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class LoginResponse {
+public class LoginResponse implements Serializable {
+
+    @Serial
+    private final static long serialVersionUID = -4489165542681663697L;
 
     private String id;
 
