@@ -106,3 +106,4 @@ array = [1, 2, 3, 4]
 
 # Perubahan Semua Project
 - Ubah maven version menjadi 3.8.6. Di laptop juga menggunakan maven 3.8.6
+- tiap model dan payload, harus ada serializable serialVersionUID
