@@ -8,12 +8,17 @@ import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import java.io.Serial;
+import java.io.Serializable;
 
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class RegistrationRequest {
+public class RegistrationRequest implements Serializable {
+
+    @Serial
+    private final static long serialVersionUID = -5547164059361684602L;
 
     @NotBlank(message = "Username must not be blank")
     private String username;
