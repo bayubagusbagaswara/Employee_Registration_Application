@@ -29,6 +29,10 @@ public class WorkExperienceDTO implements Serializable {
 
     private String salary;
 
+    private String yearOfEmployment;
+
+    private String yearOfResignation;
+
     private String lengthOfWork;
 
 }
