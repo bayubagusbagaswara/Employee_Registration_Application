@@ -69,15 +69,6 @@ public class Employee implements Serializable {
     @Column(name = "level_of_education")
     private String levelOfEducation;
 
-    @Column(name = "department")
-    private String department;
-
-    @Column(name = "college_name")
-    private String collegeName;
-
-    @Column(name = "graduation_year")
-    private Integer graduationYear;
-
 //    private String religion;
 //
 //    private String bloodGroup;
