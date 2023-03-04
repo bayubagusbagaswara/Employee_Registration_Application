@@ -5,6 +5,8 @@ import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.io.Serial;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "roles", uniqueConstraints = @UniqueConstraint(name = "role_name_unique", columnNames = "name"))
@@ -13,7 +15,10 @@ import javax.persistence.*;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Role {
+public class Role implements Serializable {
+
+    @Serial
+    private final static long serialVersionUID = -3116405158206093317L;
 
     @Id
     @GenericGenerator(name = "system-uuid", strategy = "uuid2")
