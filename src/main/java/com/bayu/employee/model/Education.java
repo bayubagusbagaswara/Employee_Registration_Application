@@ -4,6 +4,8 @@ import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.io.Serial;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "educations")
@@ -12,7 +14,10 @@ import javax.persistence.*;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Education {
+public class Education implements Serializable {
+
+    @Serial
+    private final static long serialVersionUID = -292203108165354119L;
 
     @Id
     @GenericGenerator(name = "system-uuid", strategy = "uuid2")
