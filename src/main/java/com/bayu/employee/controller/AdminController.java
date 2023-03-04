@@ -18,7 +18,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import java.util.List;
 
 @Controller
-@RequestMapping("/admin")
 public class AdminController {
 
     private final UserService userService;
@@ -38,12 +37,18 @@ public class AdminController {
         this.trainingService = trainingService;
     }
 
-    @GetMapping
+    @GetMapping("/admin")
     public String homeAdmin() {
+        // ini halaman setelah login sebagai admin
         return "admin/admin.html";
     }
 
-    @GetMapping("/employees")
+    @GetMapping("/admin/profile")
+    public String adminProfile() {
+        return "";
+    }
+
+    @GetMapping("/admin/employees")
     public String getAllEmployees(Authentication authentication, Model model, RedirectAttributes redirectAttributes) {
 
         // tampilkan table all employees
@@ -55,15 +60,21 @@ public class AdminController {
         // ambil semua data employee
         List<EmployeeAdminDTO> employeeList = adminService.getAllEmployees();
 
+        String employeeId = "";
+
+        for (EmployeeAdminDTO employeeAdminDTO : employeeList) {
+            employeeId = employeeAdminDTO.getId();
+        }
+
         model.addAttribute("employeeList", employeeList); // isinya hanya position, nik, fullName
         model.addAttribute("username", username);
-
+        redirectAttributes.addAttribute("employeeId", employeeId);
 
         return "admin/list_employee"; // tampilkan halaman list_employee
     }
 
     // bisa get employee by id
-    @GetMapping("/employees/{employeeId}")
+    @GetMapping("/admin/employees/{employeeId}")
     public String getEmployeeById(@PathVariable(value = "employeeId") String employeeId,
                                   Authentication authentication,
                                   Model model,
@@ -71,33 +82,28 @@ public class AdminController {
 
         // cari user by username
         String username = authentication.getName();
-        User user = userService.findByUsername(username);
-
-        String userId = user.getId();
 
         EmployeeDTO employee = adminService.getEmployeeById(employeeId);
 
         // ambil semua data education by userId
-        List<EducationDTO> educationList = adminService.getAllEducationsByUserId(userId);
+        List<EducationDTO> educationList = adminService.getAllEducationsByEmployeeId(employee.getId());
 
         // ambil semua data training by userId
-        List<TrainingDTO> trainingList = adminService.getAllTrainingsByUserId(userId);
+        List<TrainingDTO> trainingList = adminService.getAllTrainingsByEmployeeId(employee.getId());
 
         // ambil semua data work experience by userId
-        List<WorkExperienceDTO> workList = adminService.getAllWorksByUserId(userId);
+        List<WorkExperienceDTO> workExperienceList = adminService.getAllWorkExperiencesByEmployeeId(employee.getId());
 
         model.addAttribute("employee", employee);
         model.addAttribute("educationList", educationList);
         model.addAttribute("trainingList", trainingList);
-        model.addAttribute("workList", workList);
-        redirectAttributes.addAttribute("userId", userId);
+        model.addAttribute("workList", workExperienceList);
 
-        // tampilkan data employee
         return "admin/data_employee";
     }
 
     // bisa delete employee
-    @GetMapping("/employees/delete/{employeeId}")
+    @GetMapping("/admin/employees/delete/{employeeId}")
     public String deleteEmployee(@PathVariable(value = "employeeId") String employeeId,
                                  Model model,
                                  RedirectAttributes redirectAttributes) {
