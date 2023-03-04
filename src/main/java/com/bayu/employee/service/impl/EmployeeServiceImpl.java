@@ -149,6 +149,7 @@ public class EmployeeServiceImpl implements EmployeeService {
                 .placeOfBirth(employee.getPlaceOfBirth())
                 .dateOfBirth(changeDateFormat(employee.getDateOfBirth()))
                 .salary(String.valueOf(employee.getSalary()))
+                .levelOfEducation(employee.getLevelOfEducation())
                 .build();
     }
 
