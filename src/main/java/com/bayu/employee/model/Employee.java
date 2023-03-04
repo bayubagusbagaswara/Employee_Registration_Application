@@ -106,6 +106,15 @@ public class Employee implements Serializable {
 //
 //    private String provinceDomicile;
 
+    // OFFERING
+
+//    @Column(name = "expectation_salary")
+//    private BigDecimal expectationSalary;
+//
+//    // bersedia ditempatkan dimana saja, Ya atau Tidak
+//    @Column(name = "agreed_placement")
+//    private String agreedPlacement;
+
 
 //    KONTAK TERDEKAT
 
@@ -120,15 +129,12 @@ public class Employee implements Serializable {
     @JoinColumn(name = "id_user", foreignKey = @ForeignKey(name = "fk_employee_id_user"), referencedColumnName = "id")
     private User user;
 
-    // OneToMany dengan Education
     @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
     private Set<Education> educations = new HashSet<>();
 
-    // OneToMany dengan Training
     @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
     private Set<Training> trainings = new HashSet<>();
 
-    // OneToMany dengan WorkExperience
     @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
     private Set<WorkExperience> workExperiences = new HashSet<>();
 
