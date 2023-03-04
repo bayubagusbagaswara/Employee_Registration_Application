@@ -2,9 +2,12 @@ package com.bayu.employee.model;
 
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Where;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import java.io.Serial;
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.*;
@@ -16,7 +19,11 @@ import java.util.*;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class Employee {
+//@Where(clause = "is_deleted = false")
+public class Employee implements Serializable {
+
+    @Serial
+    private final static long serialVersionUID = -3086674995898498716L;
 
     @Id
     @GenericGenerator(name = "system-uuid", strategy = "uuid2")
@@ -104,6 +111,9 @@ public class Employee {
 
     // status hubungan
     // private no kontak
+
+//    @Column(name = "is_deleted")
+//    private boolean isDeleted;
 
     @MapsId
     @OneToOne
