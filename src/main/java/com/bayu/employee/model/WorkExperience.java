@@ -4,6 +4,8 @@ import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.io.Serial;
+import java.io.Serializable;
 import java.math.BigDecimal;
 
 @Entity
@@ -13,7 +15,10 @@ import java.math.BigDecimal;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class WorkExperience {
+public class WorkExperience implements Serializable {
+
+    @Serial
+    private final static long serialVersionUID = -6814124251031923072L;
 
     @Id
     @GenericGenerator(name = "system-uuid", strategy = "uuid2")
