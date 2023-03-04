@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html lang="en"
       xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
   <meta charset="UTF-8">
   <title>User Home Page</title>
@@ -24,7 +25,7 @@
 
     <!-- Sidebar - Brand -->
     <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
-      <div class="sidebar-brand-icon rotate-n-15">
+      <div class="sidebar-brand-icon">
         <i class="fas fa-code"></i>
       </div>
       <div class="sidebar-brand-text mx-3">ERIS<sup>2</sup></div>
@@ -40,16 +41,16 @@
 
     <!-- Nav Item - My Profile -->
     <li class="nav-item">
-      <a class="nav-link" href="charts.html">
+      <a class="nav-link" th:href="@{/admin/profile}">
         <i class="fas fa-user"></i>
-        <span>Personal Data</span></a>
+        <span>Profil Admin</span></a>
     </li>
 
     <!-- Nav Item - Edit Profile -->
     <li class="nav-item">
-      <a class="nav-link" href="tables.html">
+      <a class="nav-link" th:href="@{/admin/employees}">
         <i class="fas fa-user-edit"></i>
-        <span>Edit Profile</span></a>
+        <span>Daftar Employee</span></a>
     </li>
 
     <!-- Divider -->
@@ -81,26 +82,24 @@
 
       <!-- Topbar -->
       <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
-
         <!-- Sidebar Toggle (Topbar) -->
         <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
           <i class="fa fa-bars"></i>
         </button>
 
         <div class="mt-2" align="right">
-          <h5 class="text-gray-800">Employee Registration System</h5>
+          <h5 class="text-gray-800">Admin - Employee Registration System</h5>
         </div>
 
         <!-- Topbar Navbar -->
         <ul class="navbar-nav ml-auto">
-
           <div class="topbar-divider d-none d-sm-block"></div>
 
           <!-- Nav Item - User Information -->
           <li class="nav-item dropdown no-arrow">
             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              <span class="mr-2 d-none d-lg-inline text-gray-600 small">Douglas McGee</span>
+              <span class="mr-3 d-none d-lg-inline text-gray-600 small" th:text="*{username}"></span>
               <img class="img-profile rounded-circle"
                    th:src="@{/img/undraw_profile.svg}">
             </a>
@@ -128,16 +127,17 @@
 
       <!-- Begin Page Content -->
       <div class="container-fluid">
-
-        <!-- Page Heading -->
-        <h1 class="h3 mb-4 text-gray-800">User List</h1>
-
-        <div class="mt-2">Username: <span sec:authentication="principal.username"/></div>
-        <div class="mt-2"> Roles: <span sec:authentication="principal.authorities"/></div>
-
-
-        <div class="mt-5"><a class="link-primary" th:href="@{/logout}">Logout</a></div>
-
+        <div class="card o-hidden border-0 shadow-lg my-5">
+          <div class="card-body p-0">
+            <div class="row">
+              <div class="col-lg">
+                <div class="p-5">
+                  <p>Ini adalah halaman Admin</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
       <!-- /.container-fluid -->
 
@@ -179,7 +179,7 @@
       <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
       <div class="modal-footer">
         <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-        <a class="btn btn-primary" href="login.html">Logout</a>
+        <a class="btn btn-primary" th:href="@{/logout}">Logout</a>
       </div>
     </div>
   </div>
