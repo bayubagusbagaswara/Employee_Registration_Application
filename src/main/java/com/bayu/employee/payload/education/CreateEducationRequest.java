@@ -5,11 +5,17 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serial;
+import java.io.Serializable;
+
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class CreateEducationRequest {
+public class CreateEducationRequest implements Serializable {
+
+    @Serial
+    private final static long serialVersionUID = 5633313031356022829L;
 
     private String levelOfEducation;
 
