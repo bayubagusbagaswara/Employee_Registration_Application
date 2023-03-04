@@ -35,7 +35,6 @@ public class WorkExperienceServiceImpl implements WorkExperienceService {
                 .companyName(createWorkRequest.getCompanyName())
                 // salary convert dulu ke BigDecimal
 //                .salary(createWorkRequest.)
-                .lengthOfWork(Float.valueOf(createWorkRequest.getLengthOfWork()))
                 .employee(employee)
                 .build();
 
@@ -63,7 +62,6 @@ public class WorkExperienceServiceImpl implements WorkExperienceService {
                 .employeeId(workExperience.getEmployee().getId())
                 .position(workExperience.getPosition())
                 .companyName(workExperience.getCompanyName())
-                .lengthOfWork(String.valueOf(workExperience.getLengthOfWork()))
                 .salary(String.valueOf(workExperience.getSalary()))
                 .build();
     }
