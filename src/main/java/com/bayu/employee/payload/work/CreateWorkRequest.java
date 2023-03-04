@@ -24,9 +24,7 @@ public class CreateWorkRequest implements Serializable {
 
     private String salary;
 
-    private String lengthOfWork;
+    private String yearOfEmployment;
 
-//    private String yearOfEmployment;
-
-//    private String yearOfResignation;
+    private String yearOfResignation;
 }
