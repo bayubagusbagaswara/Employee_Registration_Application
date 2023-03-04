@@ -20,11 +20,11 @@ public interface AdminService {
     // get user by id
     UserDTO getUserById(String userId);
 
-     List<EducationDTO> getAllEducationsByUserId(String userId);
+     List<EducationDTO> getAllEducationsByEmployeeId(String employeeId);
 
-     List<TrainingDTO> getAllTrainingsByUserId(String userId);
+     List<TrainingDTO> getAllTrainingsByEmployeeId(String employeeId);
 
-     List<WorkExperienceDTO> getAllWorksByUserId(String userId);
+     List<WorkExperienceDTO> getAllWorkExperiencesByEmployeeId(String employeeId);
 
      // kita tambahkan pencarian employee berdasarkan nama
 
