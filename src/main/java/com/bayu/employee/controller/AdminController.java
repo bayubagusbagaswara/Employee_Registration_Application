@@ -40,7 +40,8 @@ public class AdminController {
     @GetMapping("/admin")
     public String homeAdmin() {
         // ini halaman setelah login sebagai admin
-        return "admin/admin.html";
+        // di halaman ini
+        return "admin/admin_home.html";
     }
 
     @GetMapping("/admin/profile")
