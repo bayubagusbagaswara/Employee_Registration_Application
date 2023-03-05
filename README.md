@@ -1,5 +1,14 @@
 # Employee Registration Application
 
+# Technologies
+
+- Java JDK 11
+- Maven version 3.8.6
+- Spring Boot version 2.7.8
+- PostgreSQL database
+- Thymeleaf
+- Bootstrap 4
+
 # Step-Step
 
 1. Buat template untuk Register, Login, dan HomePage atau index.html (DONE)
