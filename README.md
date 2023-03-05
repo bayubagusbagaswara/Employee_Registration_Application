@@ -83,10 +83,12 @@ autocomplete="off"
 - Ada 2 Menu
 - Profil Admin
 - Daftar Employee
-- di Daftar Employee terdapat Card Jumlah Karyawan. 
+- di Daftar Employee terdapat Card Jumlah Karyawan.
 
-## Controller Profil Admin
-## Controller Daftar Employee
+- Di admin_home, kita tampilkan card-body
+- Card Body 1 : untuk menampilkan jumlah total employee
+- Card Body 2 : untuk menampilkan jumlah 
+- Pie Chart : untuk menampilkan jumlah employee berdasarkan posisi
 
 ```json
 {
