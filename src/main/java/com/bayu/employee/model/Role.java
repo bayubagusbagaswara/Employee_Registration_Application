@@ -5,7 +5,6 @@ import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
-import java.io.Serial;
 import java.io.Serializable;
 
 @Entity
@@ -17,7 +16,6 @@ import java.io.Serializable;
 @AllArgsConstructor
 public class Role implements Serializable {
 
-    @Serial
     private final static long serialVersionUID = -3116405158206093317L;
 
     @Id

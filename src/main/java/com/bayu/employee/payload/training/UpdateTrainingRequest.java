@@ -5,7 +5,6 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.io.Serial;
 import java.io.Serializable;
 
 @Data
@@ -14,7 +13,6 @@ import java.io.Serializable;
 @AllArgsConstructor
 public class UpdateTrainingRequest implements Serializable {
 
-    @Serial
     private final static long serialVersionUID = 3331025117364120280L;
 
     private String trainingName;

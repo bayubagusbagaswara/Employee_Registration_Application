@@ -5,9 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.io.Serial;
 import java.io.Serializable;
-import java.math.BigDecimal;
 
 @Data
 @Builder
@@ -15,7 +13,6 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 public class CreateWorkRequest implements Serializable {
 
-    @Serial
     private final static long serialVersionUID = 4095520802509285186L;
 
     private String companyName;

@@ -6,7 +6,6 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.io.Serial;
 import java.io.Serializable;
 import java.util.Set;
 
@@ -16,7 +15,6 @@ import java.util.Set;
 @AllArgsConstructor
 public class UserDTO implements Serializable {
 
-    @Serial
     private final static long serialVersionUID = 45831916349019254L;
 
     private String id;

@@ -5,7 +5,6 @@ import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
-import java.io.Serial;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
@@ -22,7 +21,6 @@ import java.util.Set;
 @AllArgsConstructor
 public class User implements Serializable {
 
-    @Serial
     private final static long serialVersionUID = 9119906632382186870L;
 
     @Id

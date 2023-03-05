@@ -6,7 +6,6 @@ import org.hibernate.annotations.Where;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
-import java.io.Serial;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -22,7 +21,6 @@ import java.util.*;
 //@Where(clause = "is_deleted = false")
 public class Employee implements Serializable {
 
-    @Serial
     private final static long serialVersionUID = -3086674995898498716L;
 
     @Id
