@@ -113,4 +113,7 @@ public class AdminController {
         return "redirect:/admin/employees";
     }
 
+    // controller untuk handle pencarian berdasarkan keyword
+    // yang terpenting adalah keyword dan property apa
+
 }
