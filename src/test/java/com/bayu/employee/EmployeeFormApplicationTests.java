@@ -47,4 +47,38 @@ class EmployeeFormApplicationTests {
 
 		System.out.println(bigDecimal); // 5000000
 	}
+
+	@Test
+	void stringToLong() {
+		String s = "6 Bulan";
+		String s1 = "12 Bulan";
+
+
+
+//		GetHitungNisbahRs getHitungNisbahRs = calculateEfektifBagiHasil(
+//				new BigDecimal(detailDeposito.getDepositoAmount()),
+//				Long.valueOf(detailDeposito.getMudTenor().toUpperCase().replace(" BULAN", ""))
+//		);
+
+		Long number = Long.valueOf(s.toUpperCase().replace(" BULAN", ""));
+		Long number1 = Long.valueOf(s1.toUpperCase().replace(" BULAN", ""));
+
+		System.out.println(number);
+		System.out.println(number1);
+
+		BigDecimal itemPrice = new BigDecimal(10000000);
+		BigDecimal fee = new BigDecimal(2000);
+
+//		itemCost  = itemPrice.multiply(BigDecimal.valueOf(itemQuantity));
+//		totalCost = totalCost.add(itemCost);
+//		return totalCost;
+
+		BigDecimal multiply = itemPrice.multiply(BigDecimal.valueOf(number));
+
+		System.out.println(multiply);
+
+		BigDecimal total = itemPrice.add(fee);
+
+		System.out.println(total);
+	}
 }
