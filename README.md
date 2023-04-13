@@ -124,3 +124,7 @@ array = [1, 2, 3, 4]
 - Kita buat form new employee dengan menambahkan education
 - Jadi di dto createNewEmployee harus ada property education
 - Tapi ketika di save akan membuat object education baru
+
+# TEST UNTUK ROLE USER
+
+- Menu Work Experience belum tampil
