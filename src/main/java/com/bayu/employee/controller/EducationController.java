@@ -187,6 +187,9 @@ public class EducationController {
         redirectAttributes.addAttribute("employeeId", educationDTO.getEmployeeId());
         model.addAttribute("username", username);
 
+        if (educationService.getAllByEmployeeId(educationDTO.getEmployeeId()).size() == 0) {
+            return "redirect:/education/home";
+        }
         return "redirect:/education/employee/{employeeId}";
     }
 
