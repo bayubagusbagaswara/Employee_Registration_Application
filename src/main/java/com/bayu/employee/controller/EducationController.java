@@ -90,7 +90,7 @@ public class EducationController {
 
         EducationDTO education = educationService.createEducation(employeeId, createEducationRequest);
 
-        redirectAttributes.addAttribute("employeeId", employeeId);
+        redirectAttributes.addAttribute("employeeId", education.getEmployeeId());
 
         return "redirect:/education/employee/{employeeId}";
     }
