@@ -1,0 +1,45 @@
+[
+  {
+    "username": "albert",
+    "email": "albert@mail.com",
+    "password": "albert123",
+    "role": [
+      {
+        "name": "USER"
+      }
+    ]
+  },
+  {
+    "username": "newton",
+    "email": "newton@mail.com",
+    "password": "newton123",
+    "role": [
+      {
+        "name": "USER"
+      }
+    ]
+  },
+  {
+    "username": "admin",
+    "email": "admin@mail.com",
+    "password": "admin123",
+    "role": [
+      {
+        "name": "ADMIN"
+      }
+    ]
+  },
+  {
+    "username": "bayu",
+    "email": "bayu@mail.com",
+    "password": "bayu123",
+    "role": [
+      {
+        "name": "USER"
+      },
+      {
+        "name": "ADMIN"
+      }
+    ]
+  }
+]
