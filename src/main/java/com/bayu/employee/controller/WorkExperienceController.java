@@ -34,35 +34,23 @@ public class WorkExperienceController {
     }
 
     @GetMapping("/work")
-    public String work(Authentication authentication,
-                       Model model,
-                       RedirectAttributes redirectAttributes) {
+    public String workExperienceMenu(Authentication authentication,
+                                     Model model,
+                                     RedirectAttributes redirectAttributes) {
 
         String username = authentication.getName();
         log.info("Username: {}", username);
 
         User user = userService.findByUsername(username);
 
-        Employee employee = employeeService.findById(user.getId());
-
-        if (employee.getWorkExperiences().size() == 0) {
+        if (user.getEmployee().getWorkExperiences().size() == 0) {
             return "redirect:/work/home";
         }
 
-        List<WorkExperienceDTO> workExperienceDTOList = workExperienceService.getAllWorkExperiencesByEmployeeId(user.getId());
-
-//        String userId = "";
-
-        Map<String, String> userMap = new HashMap<>();
-
-        for (WorkExperienceDTO workExperienceDTO : workExperienceDTOList) {
-            userMap.put("userId", workExperienceDTO.getUserId());
-        }
-
         model.addAttribute("username", username);
-        redirectAttributes.addAttribute("userId", userMap.get("userId"));
+        redirectAttributes.addAttribute("employeeId", user.getEmployee().getId());
 
-        return "redirect:/work/user/{userId}";
+        return "redirect:/work/employee/{employeeId}";
     }
 
 }
