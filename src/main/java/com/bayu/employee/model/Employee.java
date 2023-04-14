@@ -118,7 +118,7 @@ public class Employee implements Serializable {
     private User user;
 
     @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
-    private Set<Education> educations = new HashSet<>();
+    private Set<EducationBackground> educationBackgrounds = new HashSet<>();
 
     @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
     private Set<TrainingHistory> trainingHistories = new HashSet<>();

@@ -16,7 +16,7 @@
                     <div class="table">
                         <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
                             <div class="col-sm-12 col-md-6 mb-4">
-                                <a th:href="@{/education/show-add-form}" class="btn btn-primary">Tambah Pendidikan</a>
+                                <a th:href="@{/educationBackground/show-add-form}" class="btn btn-primary">Tambah Pendidikan</a>
                             </div>
                             <div class="row">
                                 <div class="col-sm-12">
@@ -30,14 +30,14 @@
                                             <th>Aksi</th>
                                         </thead>
                                         <tbody>
-                                        <tr th:each="education : ${educationList}">
-                                            <td th:text="${education.levelOfEducation}"></td>
-                                            <td th:text="${education.department}"></td>
-                                            <td th:text="${education.collegeName}"></td>
-                                            <td th:text="${education.graduationYear}"></td>
+                                        <tr th:each="educationBackground : ${educationBackgroundList}">
+                                            <td th:text="${educationBackground.levelOfEducation}"></td>
+                                            <td th:text="${educationBackground.department}"></td>
+                                            <td th:text="${educationBackground.collegeName}"></td>
+                                            <td th:text="${educationBackground.graduationYear}"></td>
                                             <td align="center">
-                                                <a title="Edit" th:href="@{'/education/show-update-form/' + ${education.id}}" class="btn btn-info btn-circle btn-sm"><i class="fas fa-edit"></i></a>
-                                                <a title="Hapus" th:href="@{'/education/delete/' + ${education.id}}" class="btn btn-danger btn-circle btn-sm"><i class="fas fa-trash"></i></a>
+                                                <a title="Edit" th:href="@{'/educationBackground/show-update-form/' + ${educationBackground.id}}" class="btn btn-info btn-circle btn-sm"><i class="fas fa-edit"></i></a>
+                                                <a title="Hapus" th:href="@{'/educationBackground/delete/' + ${educationBackground.id}}" class="btn btn-danger btn-circle btn-sm"><i class="fas fa-trash"></i></a>
                                             </td>
                                         </tr>
                                         </tbody>

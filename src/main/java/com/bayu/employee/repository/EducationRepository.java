@@ -1,6 +1,6 @@
 package com.bayu.employee.repository;
 
-import com.bayu.employee.model.Education;
+import com.bayu.employee.model.EducationBackground;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface EducationRepository extends JpaRepository<Education, String> {
+public interface EducationRepository extends JpaRepository<EducationBackground, String> {
 
-    List<Education> findAllByEmployeeId(String employeeId, Sort sort);
+    List<EducationBackground> findAllByEmployeeId(String employeeId, Sort sort);
 }

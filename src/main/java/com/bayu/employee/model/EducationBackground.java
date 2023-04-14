@@ -13,7 +13,7 @@ import java.io.Serializable;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Education implements Serializable {
+public class EducationBackground implements Serializable {
 
     private final static long serialVersionUID = -292203108165354119L;
 
