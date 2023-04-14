@@ -7,7 +7,7 @@ import com.bayu.employee.payload.education.CreateEducationRequest;
 import com.bayu.employee.payload.education.EducationDTO;
 import com.bayu.employee.payload.education.UpdateEducationRequest;
 import com.bayu.employee.repository.EducationalBackgroundRepository;
-import com.bayu.employee.service.EducationService;
+import com.bayu.employee.service.EducationalBackgroundService;
 import com.bayu.employee.service.EmployeeService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.domain.Sort;
@@ -17,12 +17,12 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class EducationServiceImpl implements EducationService {
+public class EducationalBackgroundServiceImpl implements EducationalBackgroundService {
 
     private final EducationalBackgroundRepository educationalBackgroundRepository;
     private final EmployeeService employeeService;
 
-    public EducationServiceImpl(EducationalBackgroundRepository educationalBackgroundRepository, EmployeeService employeeService) {
+    public EducationalBackgroundServiceImpl(EducationalBackgroundRepository educationalBackgroundRepository, EmployeeService employeeService) {
         this.educationalBackgroundRepository = educationalBackgroundRepository;
         this.employeeService = employeeService;
     }
@@ -104,7 +104,7 @@ public class EducationServiceImpl implements EducationService {
 
     private static List<EducationDTO> mapToEducationDTOList(List<EducationalBackground> educationalBackgroundList) {
         return educationalBackgroundList.stream()
-                .map(EducationServiceImpl::mapToEducationDTO)
+                .map(EducationalBackgroundServiceImpl::mapToEducationDTO)
                 .collect(Collectors.toList());
     }
 

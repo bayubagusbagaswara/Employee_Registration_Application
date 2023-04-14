@@ -4,7 +4,7 @@ import com.bayu.employee.model.User;
 import com.bayu.employee.payload.education.CreateEducationRequest;
 import com.bayu.employee.payload.education.EducationDTO;
 import com.bayu.employee.payload.education.UpdateEducationRequest;
-import com.bayu.employee.service.EducationService;
+import com.bayu.employee.service.EducationalBackgroundService;
 import com.bayu.employee.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,11 +26,11 @@ public class EducationController {
 
     private final static Logger log = LoggerFactory.getLogger(EducationController.class);
 
-    private final EducationService educationService;
+    private final EducationalBackgroundService educationalBackgroundService;
     private final UserService userService;
 
-    public EducationController(EducationService educationService, UserService userService) {
-        this.educationService = educationService;
+    public EducationController(EducationalBackgroundService educationalBackgroundService, UserService userService) {
+        this.educationalBackgroundService = educationalBackgroundService;
         this.userService = userService;
     }
 
@@ -88,7 +88,7 @@ public class EducationController {
 
         if (fieldError != null) return fieldError;
 
-        EducationDTO education = educationService.createEducation(employeeId, createEducationRequest);
+        EducationDTO education = educationalBackgroundService.createEducation(employeeId, createEducationRequest);
 
         redirectAttributes.addAttribute("employeeId", education.getEmployeeId());
 
@@ -104,7 +104,7 @@ public class EducationController {
                                           RedirectAttributes redirectAttributes) {
 
         String username = authentication.getName();
-        List<EducationDTO> educationList = educationService.getAllByEmployeeId(employeeId);
+        List<EducationDTO> educationList = educationalBackgroundService.getAllByEmployeeId(employeeId);
 
         model.addAttribute("educationList", educationList);
         model.addAttribute("username", username);
@@ -119,7 +119,7 @@ public class EducationController {
 
         String username = authentication.getName();
 
-        EducationDTO education = educationService.findById(educationId);
+        EducationDTO education = educationalBackgroundService.findById(educationId);
 
         UpdateEducationRequest updateEducationRequest = new UpdateEducationRequest();
         updateEducationRequest.setLevelOfEducation(education.getLevelOfEducation());
@@ -151,7 +151,7 @@ public class EducationController {
         String fieldError = checkUpdateValidation(updateEducationRequest, bindingResult);
         if (fieldError != null) return fieldError;
 
-        EducationDTO education = educationService.updateEducation(educationId, updateEducationRequest);
+        EducationDTO education = educationalBackgroundService.updateEducation(educationId, updateEducationRequest);
 
         model.addAttribute("username", username);
         redirectAttributes.addAttribute("employeeId", education.getEmployeeId());
@@ -167,14 +167,14 @@ public class EducationController {
 
         String username = authentication.getName();
 
-        EducationDTO educationDTO = educationService.findById(educationId);
+        EducationDTO educationDTO = educationalBackgroundService.findById(educationId);
 
-        educationService.deleteEducation(educationId);
+        educationalBackgroundService.deleteEducation(educationId);
 
         redirectAttributes.addAttribute("employeeId", educationDTO.getEmployeeId());
         model.addAttribute("username", username);
 
-        if (educationService.getAllByEmployeeId(educationDTO.getEmployeeId()).size() == 0) {
+        if (educationalBackgroundService.getAllByEmployeeId(educationDTO.getEmployeeId()).size() == 0) {
             return "redirect:/education/home";
         }
         return "redirect:/education/employee/{employeeId}";

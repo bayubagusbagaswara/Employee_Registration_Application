@@ -19,16 +19,16 @@ public class AdminServiceImpl implements AdminService {
 
     private final UserService userService;
     private final EmployeeService employeeService;
-    private final EducationService educationService;
+    private final EducationalBackgroundService educationalBackgroundService;
 
     private final EducationalBackgroundRepository educationalBackgroundRepository;
     private final TrainingService trainingService;
     private final WorkExperienceService workExperienceService;
 
-    public AdminServiceImpl(UserService userService, EmployeeService employeeService, EducationService educationService, EducationalBackgroundRepository educationalBackgroundRepository, TrainingService trainingService, WorkExperienceService workExperienceService) {
+    public AdminServiceImpl(UserService userService, EmployeeService employeeService, EducationalBackgroundService educationalBackgroundService, EducationalBackgroundRepository educationalBackgroundRepository, TrainingService trainingService, WorkExperienceService workExperienceService) {
         this.userService = userService;
         this.employeeService = employeeService;
-        this.educationService = educationService;
+        this.educationalBackgroundService = educationalBackgroundService;
         this.educationalBackgroundRepository = educationalBackgroundRepository;
         this.trainingService = trainingService;
         this.workExperienceService = workExperienceService;
