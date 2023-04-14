@@ -6,7 +6,7 @@ import com.bayu.employee.model.TrainingHistory;
 import com.bayu.employee.payload.training.CreateTrainingRequest;
 import com.bayu.employee.payload.training.TrainingDTO;
 import com.bayu.employee.payload.training.UpdateTrainingRequest;
-import com.bayu.employee.repository.TrainingRepository;
+import com.bayu.employee.repository.TrainingHistoryRepository;
 import com.bayu.employee.service.EmployeeService;
 import com.bayu.employee.service.TrainingService;
 import org.springframework.data.domain.Sort;
@@ -18,11 +18,11 @@ import java.util.stream.Collectors;
 @Service
 public class TrainingServiceImpl implements TrainingService {
 
-    private final TrainingRepository trainingRepository;
+    private final TrainingHistoryRepository trainingHistoryRepository;
     private final EmployeeService employeeService;
 
-    public TrainingServiceImpl(TrainingRepository trainingRepository, EmployeeService employeeService) {
-        this.trainingRepository = trainingRepository;
+    public TrainingServiceImpl(TrainingHistoryRepository trainingHistoryRepository, EmployeeService employeeService) {
+        this.trainingHistoryRepository = trainingHistoryRepository;
         this.employeeService = employeeService;
     }
 
@@ -36,7 +36,7 @@ public class TrainingServiceImpl implements TrainingService {
         trainingHistory.setYear(Integer.valueOf(createTrainingRequest.getYear()));
         trainingHistory.setEmployee(employee);
 
-        trainingRepository.save(trainingHistory);
+        trainingHistoryRepository.save(trainingHistory);
 
         return mapToTrainingDTO(trainingHistory);
     }
@@ -44,20 +44,20 @@ public class TrainingServiceImpl implements TrainingService {
     @Override
     public List<TrainingDTO> getAllTrainingsByEmployeeId(String employeeId) {
         Sort sort = Sort.by("year").ascending();
-        List<TrainingHistory> trainingHistories = trainingRepository.findAllByEmployeeId(employeeId, sort);
+        List<TrainingHistory> trainingHistories = trainingHistoryRepository.findAllByEmployeeId(employeeId, sort);
         return mapToTrainingDTOList(trainingHistories);
     }
 
     @Override
     public TrainingDTO getTrainingById(String trainingId) {
-        TrainingHistory trainingHistory = trainingRepository.findById(trainingId)
+        TrainingHistory trainingHistory = trainingHistoryRepository.findById(trainingId)
                 .orElseThrow(() -> new ResourceNotFoundException("Training not found with id : " + trainingId));
         return mapToTrainingDTO(trainingHistory);
     }
 
     @Override
     public TrainingDTO updateTraining(String trainingId, UpdateTrainingRequest updateTrainingRequest) {
-        TrainingHistory trainingHistory = trainingRepository.findById(trainingId)
+        TrainingHistory trainingHistory = trainingHistoryRepository.findById(trainingId)
                 .orElseThrow(() -> new ResourceNotFoundException("Training not found with id : " + trainingId));
 
         if (updateTrainingRequest.getTrainingName() != null) {
@@ -72,17 +72,17 @@ public class TrainingServiceImpl implements TrainingService {
             trainingHistory.setYear(Integer.valueOf(updateTrainingRequest.getYear()));
         }
 
-        trainingRepository.save(trainingHistory);
+        trainingHistoryRepository.save(trainingHistory);
 
         return mapToTrainingDTO(trainingHistory);
     }
 
     @Override
     public void deleteTraining(String trainingId) {
-        TrainingHistory trainingHistory = trainingRepository.findById(trainingId)
+        TrainingHistory trainingHistory = trainingHistoryRepository.findById(trainingId)
                 .orElseThrow(() -> new ResourceNotFoundException("Training not found with id : " + trainingId));
 
-        trainingRepository.delete(trainingHistory);
+        trainingHistoryRepository.delete(trainingHistory);
     }
 
     private static TrainingDTO mapToTrainingDTO(TrainingHistory trainingHistory) {
