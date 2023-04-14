@@ -1,11 +1,9 @@
 package com.bayu.employee.controller;
 
-import com.bayu.employee.model.Employee;
 import com.bayu.employee.model.User;
 import com.bayu.employee.payload.training.CreateTrainingRequest;
 import com.bayu.employee.payload.training.TrainingDTO;
 import com.bayu.employee.payload.training.UpdateTrainingRequest;
-import com.bayu.employee.service.EmployeeService;
 import com.bayu.employee.service.TrainingService;
 import com.bayu.employee.service.UserService;
 import org.slf4j.Logger;
@@ -21,19 +19,17 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @Controller
-public class TrainingController {
+public class TrainingHistoryController {
 
-    private final static Logger log = LoggerFactory.getLogger(TrainingController.class);
+    private final static Logger log = LoggerFactory.getLogger(TrainingHistoryController.class);
 
     private final TrainingService trainingService;
     private final UserService userService;
 
-    public TrainingController(TrainingService trainingService, UserService userService) {
+    public TrainingHistoryController(TrainingService trainingService, UserService userService) {
         this.trainingService = trainingService;
         this.userService = userService;
     }
