@@ -8,7 +8,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
-@Table(name = "roles", uniqueConstraints = @UniqueConstraint(name = "role_name_unique", columnNames = "name"))
+@Table(name = "role", uniqueConstraints = @UniqueConstraint(name = "role_name_unique", columnNames = "name"))
 @Getter
 @Setter
 @Builder
