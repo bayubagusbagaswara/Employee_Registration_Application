@@ -113,7 +113,7 @@ array = [1, 2, 3, 4]
 - Model child dan parent nya adalah Employee
 - ID USER dan ID EMPLOYEE adalah sama
 - coba apakah ada error saat me-load data EDUCATION berdasarkan ID EMPLOYEE
-- kita tambahkan beberapa kolom di add_employee, karena ada kolom educationBackground
+- kita tambahkan beberapa kolom di add_employee, karena ada kolom educationalBackground
 
 # Perubahan Semua Project
 - Ubah maven version menjadi 3.8.6. Di laptop juga menggunakan maven 3.8.6
@@ -121,9 +121,9 @@ array = [1, 2, 3, 4]
 
 # Test 1
 
-- Kita buat form new employee dengan menambahkan educationBackground
-- Jadi di dto createNewEmployee harus ada property educationBackground
-- Tapi ketika di save akan membuat object educationBackground baru
+- Kita buat form new employee dengan menambahkan educationalBackground
+- Jadi di dto createNewEmployee harus ada property educationalBackground
+- Tapi ketika di save akan membuat object educationalBackground baru
 
 # TEST UNTUK ROLE USER
 

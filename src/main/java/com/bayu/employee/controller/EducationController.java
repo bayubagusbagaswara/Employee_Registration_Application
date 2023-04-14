@@ -42,7 +42,7 @@ public class EducationController {
 
         User user = userService.findByUsername(username);
 
-        if (user.getEmployee().getEducationBackgrounds().size() == 0) {
+        if (user.getEmployee().getEducationalBackgrounds().size() == 0) {
             return "redirect:/education/home";
         }
 

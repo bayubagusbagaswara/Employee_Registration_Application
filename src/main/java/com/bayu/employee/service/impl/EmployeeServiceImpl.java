@@ -1,7 +1,7 @@
 package com.bayu.employee.service.impl;
 
 import com.bayu.employee.exception.ResourceNotFoundException;
-import com.bayu.employee.model.EducationBackground;
+import com.bayu.employee.model.EducationalBackground;
 import com.bayu.employee.model.Employee;
 import com.bayu.employee.model.User;
 import com.bayu.employee.payload.employee.CreateEmployeeRequest;
@@ -103,7 +103,7 @@ public class EmployeeServiceImpl implements EmployeeService {
         Employee employeeSaved = employeeRepository.save(employee);
 
         // create Education dan masukkan employeeId yang sudah tersimpan
-        EducationBackground educationBackground = EducationBackground.builder()
+        EducationalBackground educationalBackground = EducationalBackground.builder()
                 .employee(employeeSaved)
                 .levelOfEducation(employeeSaved.getLevelOfEducation())
                 .department(createEmployeeRequest.getDepartment())
@@ -112,7 +112,7 @@ public class EmployeeServiceImpl implements EmployeeService {
                 .build();
 
         // save Education
-        educationRepository.save(educationBackground);
+        educationRepository.save(educationalBackground);
 
         return mapToEmployeeDTO(employeeSaved);
     }

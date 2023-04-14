@@ -1,7 +1,7 @@
 package com.bayu.employee.service.impl;
 
 import com.bayu.employee.exception.ResourceNotFoundException;
-import com.bayu.employee.model.EducationBackground;
+import com.bayu.employee.model.EducationalBackground;
 import com.bayu.employee.model.Employee;
 import com.bayu.employee.payload.education.CreateEducationRequest;
 import com.bayu.employee.payload.education.EducationDTO;
@@ -31,79 +31,79 @@ public class EducationServiceImpl implements EducationService {
     public EducationDTO createEducation(String employeeId, CreateEducationRequest createEducationRequest) {
         Employee employee = employeeService.findById(employeeId);
 
-        EducationBackground educationBackground = new EducationBackground();
-        educationBackground.setLevelOfEducation(createEducationRequest.getLevelOfEducation().toLowerCase());
-        educationBackground.setDepartment(createEducationRequest.getDepartment().toLowerCase());
-        educationBackground.setCollegeName(createEducationRequest.getCollegeName());
-        educationBackground.setGraduationYear(Integer.valueOf(createEducationRequest.getGraduationYear()));
-        educationBackground.setEmployee(employee);
+        EducationalBackground educationalBackground = new EducationalBackground();
+        educationalBackground.setLevelOfEducation(createEducationRequest.getLevelOfEducation().toLowerCase());
+        educationalBackground.setDepartment(createEducationRequest.getDepartment().toLowerCase());
+        educationalBackground.setCollegeName(createEducationRequest.getCollegeName());
+        educationalBackground.setGraduationYear(Integer.valueOf(createEducationRequest.getGraduationYear()));
+        educationalBackground.setEmployee(employee);
 
-        educationRepository.save(educationBackground);
+        educationRepository.save(educationalBackground);
 
-        return mapToEducationDTO(educationBackground);
+        return mapToEducationDTO(educationalBackground);
     }
 
     @Override
     public List<EducationDTO> getAllByEmployeeId(String employeeId) {
         Sort sorting = Sort.by("graduationYear").ascending();
-        List<EducationBackground> educationBackgroundList = educationRepository.findAllByEmployeeId(employeeId, sorting);
-        return mapToEducationDTOList(educationBackgroundList);
+        List<EducationalBackground> educationalBackgroundList = educationRepository.findAllByEmployeeId(employeeId, sorting);
+        return mapToEducationDTOList(educationalBackgroundList);
     }
 
     @Override
     public EducationDTO findById(String educationId) {
-        EducationBackground educationBackground = educationRepository.findById(educationId)
+        EducationalBackground educationalBackground = educationRepository.findById(educationId)
                 .orElseThrow(() -> new ResourceNotFoundException("Education not found with id : " + educationId));
-        return mapToEducationDTO(educationBackground);
+        return mapToEducationDTO(educationalBackground);
     }
 
     @Override
     public EducationDTO updateEducation(String educationId, UpdateEducationRequest updateEducationRequest) {
-        EducationBackground educationBackground = educationRepository.findById(educationId)
+        EducationalBackground educationalBackground = educationRepository.findById(educationId)
                 .orElseThrow(() -> new ResourceNotFoundException("Education not found with id : " + educationId));
 
         if (updateEducationRequest.getLevelOfEducation() != null) {
-            educationBackground.setLevelOfEducation(updateEducationRequest.getLevelOfEducation());
+            educationalBackground.setLevelOfEducation(updateEducationRequest.getLevelOfEducation());
         }
 
         if (updateEducationRequest.getDepartment() != null) {
-            educationBackground.setDepartment(updateEducationRequest.getDepartment());
+            educationalBackground.setDepartment(updateEducationRequest.getDepartment());
         }
 
         if (updateEducationRequest.getCollegeName() != null) {
-            educationBackground.setCollegeName(updateEducationRequest.getCollegeName());
+            educationalBackground.setCollegeName(updateEducationRequest.getCollegeName());
         }
 
         if (updateEducationRequest.getGraduationYear() != null) {
-            educationBackground.setGraduationYear(Integer.valueOf(updateEducationRequest.getGraduationYear()));
+            educationalBackground.setGraduationYear(Integer.valueOf(updateEducationRequest.getGraduationYear()));
         }
 
-        educationRepository.save(educationBackground);
+        educationRepository.save(educationalBackground);
 
-        return mapToEducationDTO(educationBackground);
+        return mapToEducationDTO(educationalBackground);
     }
 
     @Override
     public void deleteEducation(String educationId) {
-        EducationBackground educationBackground = educationRepository.findById(educationId)
+        EducationalBackground educationalBackground = educationRepository.findById(educationId)
                 .orElseThrow(() -> new ResourceNotFoundException("Education not found with id : " + educationId));
 
-        educationRepository.delete(educationBackground);
+        educationRepository.delete(educationalBackground);
     }
 
-    private static EducationDTO mapToEducationDTO(EducationBackground educationBackground) {
+    private static EducationDTO mapToEducationDTO(EducationalBackground educationalBackground) {
         return EducationDTO.builder()
-                .id(educationBackground.getId())
-                .employeeId(educationBackground.getEmployee().getId())
-                .levelOfEducation(StringUtils.upperCase(educationBackground.getLevelOfEducation()))
-                .department(capitalizeEachWord(educationBackground.getDepartment()))
-                .collegeName(educationBackground.getCollegeName())
-                .graduationYear(String.valueOf(educationBackground.getGraduationYear()))
+                .id(educationalBackground.getId())
+                .employeeId(educationalBackground.getEmployee().getId())
+                .levelOfEducation(StringUtils.upperCase(educationalBackground.getLevelOfEducation()))
+                .department(capitalizeEachWord(educationalBackground.getDepartment()))
+                .collegeName(educationalBackground.getCollegeName())
+                .graduationYear(String.valueOf(educationalBackground.getGraduationYear()))
                 .build();
     }
 
-    private static List<EducationDTO> mapToEducationDTOList(List<EducationBackground> educationBackgroundList) {
-        return educationBackgroundList.stream()
+    private static List<EducationDTO> mapToEducationDTOList(List<EducationalBackground> educationalBackgroundList) {
+        return educationalBackgroundList.stream()
                 .map(EducationServiceImpl::mapToEducationDTO)
                 .collect(Collectors.toList());
     }

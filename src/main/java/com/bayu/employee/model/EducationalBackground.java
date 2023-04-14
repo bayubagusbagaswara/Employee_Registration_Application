@@ -7,13 +7,13 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
-@Table(name = "educations")
+@Table(name = "educational_background")
 @Getter
 @Setter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class EducationBackground implements Serializable {
+public class EducationalBackground implements Serializable {
 
     private final static long serialVersionUID = -292203108165354119L;
 
