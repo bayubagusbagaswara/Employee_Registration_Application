@@ -84,7 +84,7 @@ public class EducationalBackgroundController {
 
         log.info("Create Education: {}", createEducationRequest.toString());
 
-        String fieldError = checkValidation(createEducationRequest, bindingResult);
+        String fieldError = validationCheck(createEducationRequest, bindingResult);
 
         if (fieldError != null) return fieldError;
 
@@ -95,13 +95,12 @@ public class EducationalBackgroundController {
         return "redirect:/education/employee/{employeeId}";
     }
 
-
-
     @GetMapping("/education/employee/{employeeId}")
-    public String getAllEducationByEmployeeId(@PathVariable(value = "employeeId") String employeeId,
-                                          Authentication authentication,
-                                          Model model,
-                                          RedirectAttributes redirectAttributes) {
+    public String getAllEducationByEmployeeId(
+            @PathVariable(value = "employeeId") String employeeId,
+            Authentication authentication,
+            Model model,
+            RedirectAttributes redirectAttributes) {
 
         String username = authentication.getName();
         List<EducationDTO> educationList = educationalBackgroundService.getAllByEmployeeId(employeeId);
@@ -113,13 +112,14 @@ public class EducationalBackgroundController {
     }
 
     @GetMapping("/education/show-update-form/{educationId}")
-    public String showUpdateEducationForm(@PathVariable(value = "educationId") String educationId,
-                                 Authentication authentication,
-                                 Model model) {
+    public String showUpdateEducationForm(
+            @PathVariable(value = "educationId") String educationId,
+            Authentication authentication,
+            Model model) {
 
         String username = authentication.getName();
 
-        EducationDTO education = educationalBackgroundService.findById(educationId);
+        EducationDTO education = educationalBackgroundService.getEducationById(educationId);
 
         UpdateEducationRequest updateEducationRequest = new UpdateEducationRequest();
         updateEducationRequest.setLevelOfEducation(education.getLevelOfEducation());
@@ -138,17 +138,17 @@ public class EducationalBackgroundController {
 
     @PostMapping("/education/update/{educationId}")
     public String updateEducation(@PathVariable(value = "educationId") String educationId,
-                                    @ModelAttribute("updateEducationRequest") UpdateEducationRequest updateEducationRequest,
-                                    Authentication authentication,
-                                    Model model,
-                                    BindingResult bindingResult,
-                                    RedirectAttributes redirectAttributes) {
+                                  @ModelAttribute("updateEducationRequest") UpdateEducationRequest updateEducationRequest,
+                                  Authentication authentication,
+                                  Model model,
+                                  BindingResult bindingResult,
+                                  RedirectAttributes redirectAttributes) {
 
         log.info("Update Education: {}", updateEducationRequest.toString());
 
         String username = authentication.getName();
 
-        String fieldError = checkUpdateValidation(updateEducationRequest, bindingResult);
+        String fieldError =validationChecksForDataUpdateRequests(updateEducationRequest, bindingResult);
         if (fieldError != null) return fieldError;
 
         EducationDTO education = educationalBackgroundService.updateEducation(educationId, updateEducationRequest);
@@ -167,7 +167,7 @@ public class EducationalBackgroundController {
 
         String username = authentication.getName();
 
-        EducationDTO educationDTO = educationalBackgroundService.findById(educationId);
+        EducationDTO educationDTO = educationalBackgroundService.getEducationById(educationId);
 
         educationalBackgroundService.deleteEducation(educationId);
 
@@ -180,7 +180,7 @@ public class EducationalBackgroundController {
         return "redirect:/education/employee/{employeeId}";
     }
 
-    private static String checkValidation(CreateEducationRequest createEducationRequest, BindingResult bindingResult) {
+    private static String validationCheck(CreateEducationRequest createEducationRequest, BindingResult bindingResult) {
         if (createEducationRequest.getLevelOfEducation() == null || createEducationRequest.getLevelOfEducation().equals("")) {
             bindingResult.addError(new FieldError("createEducationRequest", "levelOfEducation", "Tingkat Pendidikan wajib diisi."));
         }
@@ -203,7 +203,7 @@ public class EducationalBackgroundController {
         return null;
     }
 
-    private static String checkUpdateValidation(UpdateEducationRequest updateEducationRequest, BindingResult bindingResult) {
+    private static String validationChecksForDataUpdateRequests(UpdateEducationRequest updateEducationRequest, BindingResult bindingResult) {
         if (updateEducationRequest.getLevelOfEducation() == null || updateEducationRequest.getLevelOfEducation().equals("")) {
             bindingResult.addError(new FieldError("updateEducationRequest", "levelOfEducation", "Tingkat Pendidikan wajib diisi."));
         }
