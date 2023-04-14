@@ -51,7 +51,7 @@ public class EducationalBackgroundServiceImpl implements EducationalBackgroundSe
     }
 
     @Override
-    public EducationDTO findById(String educationId) {
+    public EducationDTO getEducationById(String educationId) {
         EducationalBackground educationalBackground = educationalBackgroundRepository.findById(educationId)
                 .orElseThrow(() -> new ResourceNotFoundException("Education not found with id : " + educationId));
         return mapToEducationDTO(educationalBackground);
