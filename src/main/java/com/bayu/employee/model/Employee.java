@@ -11,7 +11,7 @@ import java.time.LocalDate;
 import java.util.*;
 
 @Entity
-@Table(name = "employees")
+@Table(name = "employee")
 @Getter
 @Setter
 @Builder
