@@ -19,15 +19,15 @@ import java.util.List;
 import java.util.Map;
 
 @Controller
-public class WorkController {
+public class WorkExperienceController {
 
-    private final static Logger log = LoggerFactory.getLogger(WorkController.class);
+    private final static Logger log = LoggerFactory.getLogger(WorkExperienceController.class);
 
     private final UserService userService;
     private final EmployeeService employeeService;
     private final WorkExperienceService workExperienceService;
 
-    public WorkController(UserService userService, EmployeeService employeeService, WorkExperienceService workExperienceService) {
+    public WorkExperienceController(UserService userService, EmployeeService employeeService, WorkExperienceService workExperienceService) {
         this.userService = userService;
         this.employeeService = employeeService;
         this.workExperienceService = workExperienceService;
