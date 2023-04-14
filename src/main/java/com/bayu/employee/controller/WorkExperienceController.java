@@ -53,4 +53,11 @@ public class WorkExperienceController {
         return "redirect:/work/employee/{employeeId}";
     }
 
+    @GetMapping("/work/home")
+    public String workExperienceHome(Authentication authentication, Model model) {
+        String username = authentication.getName();
+        model.addAttribute("username", username);
+        return "work/home_work";
+    }
+
 }
