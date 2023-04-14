@@ -2,6 +2,7 @@ package com.bayu.employee.controller;
 
 import com.bayu.employee.model.Employee;
 import com.bayu.employee.model.User;
+import com.bayu.employee.payload.work.CreateWorkExperienceRequest;
 import com.bayu.employee.payload.work.WorkExperienceDTO;
 import com.bayu.employee.service.EmployeeService;
 import com.bayu.employee.service.UserService;
@@ -58,6 +59,21 @@ public class WorkExperienceController {
         String username = authentication.getName();
         model.addAttribute("username", username);
         return "work/home_work";
+    }
+
+    @GetMapping("/work/show-add-form")
+    public String showAddWorkExperienceForm(Model model, Authentication authentication) {
+        String username = authentication.getName();
+
+        User user = userService.findByUsername(username);
+
+        CreateWorkExperienceRequest createWorkExperienceRequest = new CreateWorkExperienceRequest();
+
+        model.addAttribute("createWorkExperienceRequest", createWorkExperienceRequest);
+        model.addAttribute("employeeId", user.getEmployee().getId());
+        model.addAttribute("username", username);
+
+        return "work/add_work";
     }
 
 }
