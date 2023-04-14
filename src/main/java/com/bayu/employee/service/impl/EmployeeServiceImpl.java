@@ -7,7 +7,7 @@ import com.bayu.employee.model.User;
 import com.bayu.employee.payload.employee.CreateEmployeeRequest;
 import com.bayu.employee.payload.employee.EmployeeDTO;
 import com.bayu.employee.payload.employee.UpdateEmployeeRequest;
-import com.bayu.employee.repository.EducationRepository;
+import com.bayu.employee.repository.EducationalBackgroundRepository;
 import com.bayu.employee.repository.EmployeeRepository;
 import com.bayu.employee.service.EmployeeService;
 import com.bayu.employee.service.UserService;
@@ -34,12 +34,12 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     private final EmployeeRepository employeeRepository;
     private final UserService userService;
-    private final EducationRepository educationRepository;
+    private final EducationalBackgroundRepository educationalBackgroundRepository;
 
-    public EmployeeServiceImpl(EmployeeRepository employeeRepository, UserService userService, EducationRepository educationRepository) {
+    public EmployeeServiceImpl(EmployeeRepository employeeRepository, UserService userService, EducationalBackgroundRepository educationalBackgroundRepository) {
         this.employeeRepository = employeeRepository;
         this.userService = userService;
-        this.educationRepository = educationRepository;
+        this.educationalBackgroundRepository = educationalBackgroundRepository;
     }
 
     @Override
@@ -112,7 +112,7 @@ public class EmployeeServiceImpl implements EmployeeService {
                 .build();
 
         // save Education
-        educationRepository.save(educationalBackground);
+        educationalBackgroundRepository.save(educationalBackground);
 
         return mapToEmployeeDTO(employeeSaved);
     }

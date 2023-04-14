@@ -6,7 +6,7 @@ import com.bayu.employee.model.Employee;
 import com.bayu.employee.payload.education.CreateEducationRequest;
 import com.bayu.employee.payload.education.EducationDTO;
 import com.bayu.employee.payload.education.UpdateEducationRequest;
-import com.bayu.employee.repository.EducationRepository;
+import com.bayu.employee.repository.EducationalBackgroundRepository;
 import com.bayu.employee.service.EducationService;
 import com.bayu.employee.service.EmployeeService;
 import org.apache.commons.lang3.StringUtils;
@@ -19,11 +19,11 @@ import java.util.stream.Collectors;
 @Service
 public class EducationServiceImpl implements EducationService {
 
-    private final EducationRepository educationRepository;
+    private final EducationalBackgroundRepository educationalBackgroundRepository;
     private final EmployeeService employeeService;
 
-    public EducationServiceImpl(EducationRepository educationRepository, EmployeeService employeeService) {
-        this.educationRepository = educationRepository;
+    public EducationServiceImpl(EducationalBackgroundRepository educationalBackgroundRepository, EmployeeService employeeService) {
+        this.educationalBackgroundRepository = educationalBackgroundRepository;
         this.employeeService = employeeService;
     }
 
@@ -38,7 +38,7 @@ public class EducationServiceImpl implements EducationService {
         educationalBackground.setGraduationYear(Integer.valueOf(createEducationRequest.getGraduationYear()));
         educationalBackground.setEmployee(employee);
 
-        educationRepository.save(educationalBackground);
+        educationalBackgroundRepository.save(educationalBackground);
 
         return mapToEducationDTO(educationalBackground);
     }
@@ -46,20 +46,20 @@ public class EducationServiceImpl implements EducationService {
     @Override
     public List<EducationDTO> getAllByEmployeeId(String employeeId) {
         Sort sorting = Sort.by("graduationYear").ascending();
-        List<EducationalBackground> educationalBackgroundList = educationRepository.findAllByEmployeeId(employeeId, sorting);
+        List<EducationalBackground> educationalBackgroundList = educationalBackgroundRepository.findAllByEmployeeId(employeeId, sorting);
         return mapToEducationDTOList(educationalBackgroundList);
     }
 
     @Override
     public EducationDTO findById(String educationId) {
-        EducationalBackground educationalBackground = educationRepository.findById(educationId)
+        EducationalBackground educationalBackground = educationalBackgroundRepository.findById(educationId)
                 .orElseThrow(() -> new ResourceNotFoundException("Education not found with id : " + educationId));
         return mapToEducationDTO(educationalBackground);
     }
 
     @Override
     public EducationDTO updateEducation(String educationId, UpdateEducationRequest updateEducationRequest) {
-        EducationalBackground educationalBackground = educationRepository.findById(educationId)
+        EducationalBackground educationalBackground = educationalBackgroundRepository.findById(educationId)
                 .orElseThrow(() -> new ResourceNotFoundException("Education not found with id : " + educationId));
 
         if (updateEducationRequest.getLevelOfEducation() != null) {
@@ -78,17 +78,17 @@ public class EducationServiceImpl implements EducationService {
             educationalBackground.setGraduationYear(Integer.valueOf(updateEducationRequest.getGraduationYear()));
         }
 
-        educationRepository.save(educationalBackground);
+        educationalBackgroundRepository.save(educationalBackground);
 
         return mapToEducationDTO(educationalBackground);
     }
 
     @Override
     public void deleteEducation(String educationId) {
-        EducationalBackground educationalBackground = educationRepository.findById(educationId)
+        EducationalBackground educationalBackground = educationalBackgroundRepository.findById(educationId)
                 .orElseThrow(() -> new ResourceNotFoundException("Education not found with id : " + educationId));
 
-        educationRepository.delete(educationalBackground);
+        educationalBackgroundRepository.delete(educationalBackground);
     }
 
     private static EducationDTO mapToEducationDTO(EducationalBackground educationalBackground) {

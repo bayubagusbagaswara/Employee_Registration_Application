@@ -6,7 +6,7 @@ import com.bayu.employee.payload.education.EducationDTO;
 import com.bayu.employee.payload.employee.EmployeeDTO;
 import com.bayu.employee.payload.training.TrainingDTO;
 import com.bayu.employee.payload.work.WorkExperienceDTO;
-import com.bayu.employee.repository.EducationRepository;
+import com.bayu.employee.repository.EducationalBackgroundRepository;
 import com.bayu.employee.service.*;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
@@ -21,15 +21,15 @@ public class AdminServiceImpl implements AdminService {
     private final EmployeeService employeeService;
     private final EducationService educationService;
 
-    private final EducationRepository educationRepository;
+    private final EducationalBackgroundRepository educationalBackgroundRepository;
     private final TrainingService trainingService;
     private final WorkExperienceService workExperienceService;
 
-    public AdminServiceImpl(UserService userService, EmployeeService employeeService, EducationService educationService, EducationRepository educationRepository, TrainingService trainingService, WorkExperienceService workExperienceService) {
+    public AdminServiceImpl(UserService userService, EmployeeService employeeService, EducationService educationService, EducationalBackgroundRepository educationalBackgroundRepository, TrainingService trainingService, WorkExperienceService workExperienceService) {
         this.userService = userService;
         this.employeeService = employeeService;
         this.educationService = educationService;
-        this.educationRepository = educationRepository;
+        this.educationalBackgroundRepository = educationalBackgroundRepository;
         this.trainingService = trainingService;
         this.workExperienceService = workExperienceService;
     }
@@ -61,7 +61,7 @@ public class AdminServiceImpl implements AdminService {
     @Override
     public List<EducationDTO> getAllEducationsByEmployeeId(String employeeId) {
         Sort sort = Sort.by("graduationYear").ascending();
-        return educationRepository.findAllByEmployeeId(employeeId, sort)
+        return educationalBackgroundRepository.findAllByEmployeeId(employeeId, sort)
                 .stream()
                 .map(education -> {
                     return EducationDTO.builder()

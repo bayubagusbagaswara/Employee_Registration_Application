@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface EducationRepository extends JpaRepository<EducationalBackground, String> {
+public interface EducationalBackgroundRepository extends JpaRepository<EducationalBackground, String> {
 
     List<EducationalBackground> findAllByEmployeeId(String employeeId, Sort sort);
 }
