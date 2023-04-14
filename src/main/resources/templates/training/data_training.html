@@ -16,7 +16,7 @@
                     <div class="table">
                         <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
                             <div class="col-sm-12 col-md-6 mb-4">
-                                <a th:href="@{/training/show-add-form}" class="btn btn-primary">Tambah Pelatihan</a>
+                                <a th:href="@{/trainingHistory/show-add-form}" class="btn btn-primary">Tambah Pelatihan</a>
                             </div>
                             <div class="row">
                                 <div class="col-sm-12">
@@ -29,13 +29,13 @@
                                             <th>Aksi</th>
                                         </thead>
                                         <tbody>
-                                        <tr th:each="training : ${trainingList}">
-                                            <td th:text="${training.trainingName}"></td>
-                                            <td th:text="${training.certificate}"></td>
-                                            <td th:text="${training.year}"></td>
+                                        <tr th:each="trainingHistory : ${trainingHistoryList}">
+                                            <td th:text="${trainingHistory.trainingName}"></td>
+                                            <td th:text="${trainingHistory.certificate}"></td>
+                                            <td th:text="${trainingHistory.year}"></td>
                                             <td align="center">
-                                                <a title="Edit" th:href="@{'/training/show-update-form/' + ${training.id}}" class="btn btn-info btn-circle btn-sm"><i class="fas fa-edit"></i></a>
-                                                <a title="Hapus" th:href="@{'/training/delete/' + ${training.id}}" class="btn btn-danger btn-circle btn-sm"><i class="fas fa-trash"></i></a>
+                                                <a title="Edit" th:href="@{'/trainingHistory/show-update-form/' + ${trainingHistory.id}}" class="btn btn-info btn-circle btn-sm"><i class="fas fa-edit"></i></a>
+                                                <a title="Hapus" th:href="@{'/trainingHistory/delete/' + ${trainingHistory.id}}" class="btn btn-danger btn-circle btn-sm"><i class="fas fa-trash"></i></a>
                                             </td>
                                         </tr>
                                         </tbody>

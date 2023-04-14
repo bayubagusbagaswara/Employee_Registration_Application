@@ -2,7 +2,6 @@ package com.bayu.employee.model;
 
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.annotations.Where;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -122,7 +121,7 @@ public class Employee implements Serializable {
     private Set<Education> educations = new HashSet<>();
 
     @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
-    private Set<Training> trainings = new HashSet<>();
+    private Set<TrainingHistory> trainingHistories = new HashSet<>();
 
     @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
     private Set<WorkExperience> workExperiences = new HashSet<>();

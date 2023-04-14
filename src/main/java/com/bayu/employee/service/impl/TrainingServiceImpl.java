@@ -2,7 +2,7 @@ package com.bayu.employee.service.impl;
 
 import com.bayu.employee.exception.ResourceNotFoundException;
 import com.bayu.employee.model.Employee;
-import com.bayu.employee.model.Training;
+import com.bayu.employee.model.TrainingHistory;
 import com.bayu.employee.payload.training.CreateTrainingRequest;
 import com.bayu.employee.payload.training.TrainingDTO;
 import com.bayu.employee.payload.training.UpdateTrainingRequest;
@@ -30,73 +30,73 @@ public class TrainingServiceImpl implements TrainingService {
     public TrainingDTO createTraining(String employeeId, CreateTrainingRequest createTrainingRequest) {
         Employee employee = employeeService.findById(employeeId);
 
-        Training training = new Training();
-        training.setTrainingName(createTrainingRequest.getTrainingName().toLowerCase());
-        training.setCertificate(createTrainingRequest.getCertificate());
-        training.setYear(Integer.valueOf(createTrainingRequest.getYear()));
-        training.setEmployee(employee);
+        TrainingHistory trainingHistory = new TrainingHistory();
+        trainingHistory.setTrainingName(createTrainingRequest.getTrainingName().toLowerCase());
+        trainingHistory.setCertificate(createTrainingRequest.getCertificate());
+        trainingHistory.setYear(Integer.valueOf(createTrainingRequest.getYear()));
+        trainingHistory.setEmployee(employee);
 
-        trainingRepository.save(training);
+        trainingRepository.save(trainingHistory);
 
-        return mapToTrainingDTO(training);
+        return mapToTrainingDTO(trainingHistory);
     }
 
     @Override
     public List<TrainingDTO> getAllTrainingsByEmployeeId(String employeeId) {
         Sort sort = Sort.by("year").ascending();
-        List<Training> trainings = trainingRepository.findAllByEmployeeId(employeeId, sort);
-        return mapToTrainingDTOList(trainings);
+        List<TrainingHistory> trainingHistories = trainingRepository.findAllByEmployeeId(employeeId, sort);
+        return mapToTrainingDTOList(trainingHistories);
     }
 
     @Override
     public TrainingDTO getTrainingById(String trainingId) {
-        Training training = trainingRepository.findById(trainingId)
+        TrainingHistory trainingHistory = trainingRepository.findById(trainingId)
                 .orElseThrow(() -> new ResourceNotFoundException("Training not found with id : " + trainingId));
-        return mapToTrainingDTO(training);
+        return mapToTrainingDTO(trainingHistory);
     }
 
     @Override
     public TrainingDTO updateTraining(String trainingId, UpdateTrainingRequest updateTrainingRequest) {
-        Training training = trainingRepository.findById(trainingId)
+        TrainingHistory trainingHistory = trainingRepository.findById(trainingId)
                 .orElseThrow(() -> new ResourceNotFoundException("Training not found with id : " + trainingId));
 
         if (updateTrainingRequest.getTrainingName() != null) {
-            training.setTrainingName(updateTrainingRequest.getTrainingName().toLowerCase());
+            trainingHistory.setTrainingName(updateTrainingRequest.getTrainingName().toLowerCase());
         }
 
         if (updateTrainingRequest.getCertificate() != null) {
-            training.setCertificate(updateTrainingRequest.getCertificate());
+            trainingHistory.setCertificate(updateTrainingRequest.getCertificate());
         }
 
         if (updateTrainingRequest.getYear() != null) {
-            training.setYear(Integer.valueOf(updateTrainingRequest.getYear()));
+            trainingHistory.setYear(Integer.valueOf(updateTrainingRequest.getYear()));
         }
 
-        trainingRepository.save(training);
+        trainingRepository.save(trainingHistory);
 
-        return mapToTrainingDTO(training);
+        return mapToTrainingDTO(trainingHistory);
     }
 
     @Override
     public void deleteTraining(String trainingId) {
-        Training training = trainingRepository.findById(trainingId)
+        TrainingHistory trainingHistory = trainingRepository.findById(trainingId)
                 .orElseThrow(() -> new ResourceNotFoundException("Training not found with id : " + trainingId));
 
-        trainingRepository.delete(training);
+        trainingRepository.delete(trainingHistory);
     }
 
-    private static TrainingDTO mapToTrainingDTO(Training training) {
+    private static TrainingDTO mapToTrainingDTO(TrainingHistory trainingHistory) {
         return TrainingDTO.builder()
-                .id(training.getId())
-                .employeeId(training.getEmployee().getId())
-                .trainingName(capitalizeEachWord(training.getTrainingName()))
-                .certificate(training.getCertificate())
-                .year(String.valueOf(training.getYear()))
+                .id(trainingHistory.getId())
+                .employeeId(trainingHistory.getEmployee().getId())
+                .trainingName(capitalizeEachWord(trainingHistory.getTrainingName()))
+                .certificate(trainingHistory.getCertificate())
+                .year(String.valueOf(trainingHistory.getYear()))
                 .build();
     }
 
-    private static List<TrainingDTO> mapToTrainingDTOList(List<Training> trainingList) {
-        return trainingList.stream()
+    private static List<TrainingDTO> mapToTrainingDTOList(List<TrainingHistory> trainingHistoryList) {
+        return trainingHistoryList.stream()
                 .map(TrainingServiceImpl::mapToTrainingDTO)
                 .collect(Collectors.toList());
     }

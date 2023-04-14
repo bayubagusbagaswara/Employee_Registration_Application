@@ -42,7 +42,7 @@ public class TrainingHistoryController {
 
         User user = userService.findByUsername(username);
 
-        if (user.getEmployee().getTrainings().size() == 0) {
+        if (user.getEmployee().getTrainingHistories().size() == 0) {
             return "redirect:/training/home";
         }
 
