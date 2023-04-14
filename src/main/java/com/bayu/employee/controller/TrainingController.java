@@ -21,7 +21,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 public class TrainingController {
@@ -30,44 +32,28 @@ public class TrainingController {
 
     private final TrainingService trainingService;
     private final UserService userService;
-    private final EmployeeService employeeService;
 
-    public TrainingController(TrainingService trainingService, UserService userService, EmployeeService employeeService) {
+    public TrainingController(TrainingService trainingService, UserService userService) {
         this.trainingService = trainingService;
         this.userService = userService;
-        this.employeeService = employeeService;
     }
 
     @GetMapping("/training")
-    public String training(Authentication authentication,
-                           Model model,
-                           RedirectAttributes redirectAttributes) {
+    public String trainingMenu(Authentication authentication, Model model, RedirectAttributes redirectAttributes) {
 
         String username = authentication.getName();
         log.info("Username: {}", username);
 
         User user = userService.findByUsername(username);
 
-        // cari employee berdasarkan id, karena employeeId sama dengan userId, maka tinggal cari findById
-        Employee employee = employeeService.findById(user.getId());
-
-        // ini tetap, tapi melalui employee dulu
-        if (employee.getTrainings().size() == 0) {
+        if (user.getEmployee().getTrainings().size() == 0) {
             return "redirect:/training/home";
         }
 
-        List<TrainingDTO> trainingDTOList = trainingService.getAllTrainingsByEmployeeId(user.getId());
-
-        String userId = "";
-
-        for (TrainingDTO trainingDTO : trainingDTOList) {
-            userId = trainingDTO.getUserId();
-        }
-
         model.addAttribute("username", username);
-        redirectAttributes.addAttribute("userId", userId);
+        redirectAttributes.addAttribute("employeeId", user.getEmployee().getId());
 
-        return "redirect:/training/user/{userId}";
+        return "redirect:/training/employee/{employeeId}";
     }
 
     @GetMapping("/training/home")
@@ -79,27 +65,39 @@ public class TrainingController {
 
     @GetMapping("/training/show-add-form")
     public String showAddTrainingForm(Model model, Authentication authentication) {
+
         String username = authentication.getName();
         User user = userService.findByUsername(username);
 
         CreateTrainingRequest createTrainingRequest = new CreateTrainingRequest();
 
         model.addAttribute("createTrainingRequest", createTrainingRequest);
-        model.addAttribute("userId", user.getId());
+        model.addAttribute("employeeId", user.getEmployee().getId());
         model.addAttribute("username", username);
 
         return "training/add_training";
     }
 
-    @PostMapping("/training/save/{userId}")
+    @PostMapping("/training/employee/{employeeId}")
     public String saveTraining(@ModelAttribute CreateTrainingRequest createTrainingRequest,
-                               @PathVariable(value = "userId") String userId,
+                               @PathVariable(value = "employeeId") String employeeId,
                                BindingResult bindingResult,
                                Model model,
                                RedirectAttributes redirectAttributes) {
 
         log.info("Create Training : {}", createTrainingRequest.toString());
 
+        String fieldError = checkValidation(createTrainingRequest, bindingResult);
+        if (fieldError != null) return fieldError;
+
+        TrainingDTO training = trainingService.createTraining(employeeId, createTrainingRequest);
+
+        redirectAttributes.addAttribute("employeeId", training.getEmployeeId());
+
+        return "redirect:/training/employee/{employeeId}";
+    }
+
+    private static String checkValidation(CreateTrainingRequest createTrainingRequest, BindingResult bindingResult) {
         if (createTrainingRequest.getTrainingName() == null) {
             bindingResult.addError(new FieldError("createTrainingRequest", "trainingName", "Nama Pelatihan wajib diisi."));
         }
@@ -115,15 +113,10 @@ public class TrainingController {
         if (bindingResult.hasErrors()) {
             return "training/add_training";
         }
-
-        TrainingDTO training = trainingService.createTraining(userId, createTrainingRequest);
-
-        redirectAttributes.addAttribute("userId", userId);
-
-        return "redirect:/training/user/{userId}";
+        return null;
     }
 
-    @GetMapping("/training/user/{userId}")
+    @GetMapping("/training/employee/{employeeId}")
     public String getAllTrainingByUserId(@PathVariable(value = "userId") String userId,
                                          Authentication authentication,
                                          Model model,
@@ -200,13 +193,15 @@ public class TrainingController {
                                  RedirectAttributes redirectAttributes) {
         String username = authentication.getName();
 
-        TrainingDTO trainingDTO = trainingService.getTrainingById(trainingId);
+        User user = userService.findByUsername(username);
 
         trainingService.deleteTraining(trainingId);
 
-        redirectAttributes.addAttribute("userId", trainingDTO.getId());
+        redirectAttributes.addAttribute("userId", user.getId());
         model.addAttribute("username", username);
 
+        // cek dulu jika setelah dihapus masih ada data, maka redirect ke /training/user/{userId}
+        // jika datanya sudah kosong maka redirect ke /training/home
         return "redirect:/training/user/{userId}";
     }
 
