@@ -22,14 +22,14 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import java.util.List;
 
 @Controller
-public class EducationController {
+public class EducationalBackgroundController {
 
-    private final static Logger log = LoggerFactory.getLogger(EducationController.class);
+    private final static Logger log = LoggerFactory.getLogger(EducationalBackgroundController.class);
 
     private final EducationalBackgroundService educationalBackgroundService;
     private final UserService userService;
 
-    public EducationController(EducationalBackgroundService educationalBackgroundService, UserService userService) {
+    public EducationalBackgroundController(EducationalBackgroundService educationalBackgroundService, UserService userService) {
         this.educationalBackgroundService = educationalBackgroundService;
         this.userService = userService;
     }
