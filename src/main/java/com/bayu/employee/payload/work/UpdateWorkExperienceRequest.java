@@ -11,7 +11,7 @@ import java.io.Serializable;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class UpdateWorkRequest implements Serializable {
+public class UpdateWorkExperienceRequest implements Serializable {
 
     private final static long serialVersionUID = 6608153907473027267L;
 
