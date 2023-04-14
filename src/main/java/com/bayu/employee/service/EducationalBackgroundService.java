@@ -12,7 +12,7 @@ public interface EducationalBackgroundService {
 
     List<EducationDTO> getAllByEmployeeId(String employeeId);
 
-    EducationDTO findById(String educationId);
+    EducationDTO getEducationById(String educationId);
 
     EducationDTO updateEducation(String educationId, UpdateEducationRequest updateEducationRequest);
 
