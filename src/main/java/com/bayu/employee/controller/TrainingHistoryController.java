@@ -4,7 +4,7 @@ import com.bayu.employee.model.User;
 import com.bayu.employee.payload.training.CreateTrainingRequest;
 import com.bayu.employee.payload.training.TrainingDTO;
 import com.bayu.employee.payload.training.UpdateTrainingRequest;
-import com.bayu.employee.service.TrainingService;
+import com.bayu.employee.service.TrainingHistoryService;
 import com.bayu.employee.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,11 +26,11 @@ public class TrainingHistoryController {
 
     private final static Logger log = LoggerFactory.getLogger(TrainingHistoryController.class);
 
-    private final TrainingService trainingService;
+    private final TrainingHistoryService trainingHistoryService;
     private final UserService userService;
 
-    public TrainingHistoryController(TrainingService trainingService, UserService userService) {
-        this.trainingService = trainingService;
+    public TrainingHistoryController(TrainingHistoryService trainingHistoryService, UserService userService) {
+        this.trainingHistoryService = trainingHistoryService;
         this.userService = userService;
     }
 
@@ -86,7 +86,7 @@ public class TrainingHistoryController {
         String fieldError = checkValidation(createTrainingRequest, bindingResult);
         if (fieldError != null) return fieldError;
 
-        TrainingDTO training = trainingService.createTraining(employeeId, createTrainingRequest);
+        TrainingDTO training = trainingHistoryService.createTraining(employeeId, createTrainingRequest);
 
         redirectAttributes.addAttribute("employeeId", training.getEmployeeId());
 
@@ -119,7 +119,7 @@ public class TrainingHistoryController {
                                          RedirectAttributes redirectAttributes) {
 
         String username = authentication.getName();
-        List<TrainingDTO> trainingList = trainingService.getAllTrainingsByEmployeeId(userId);
+        List<TrainingDTO> trainingList = trainingHistoryService.getAllTrainingsByEmployeeId(userId);
 
         model.addAttribute("trainingList", trainingList);
         model.addAttribute("username", username);
@@ -134,7 +134,7 @@ public class TrainingHistoryController {
 
         String username = authentication.getName();
 
-        TrainingDTO training = trainingService.getTrainingById(trainingId);
+        TrainingDTO training = trainingHistoryService.getTrainingById(trainingId);
 
         UpdateTrainingRequest updateTrainingRequest = new UpdateTrainingRequest();
         updateTrainingRequest.setTrainingName(training.getTrainingName());
@@ -174,7 +174,7 @@ public class TrainingHistoryController {
             bindingResult.addError(new FieldError("updateTrainingRequest", "year", "Tahun wajib diisi."));
         }
 
-        TrainingDTO training = trainingService.updateTraining(trainingId, updateTrainingRequest);
+        TrainingDTO training = trainingHistoryService.updateTraining(trainingId, updateTrainingRequest);
 
         model.addAttribute("username", username);
         redirectAttributes.addAttribute("userId", training.getUserId());
@@ -191,7 +191,7 @@ public class TrainingHistoryController {
 
         User user = userService.findByUsername(username);
 
-        trainingService.deleteTraining(trainingId);
+        trainingHistoryService.deleteTraining(trainingId);
 
         redirectAttributes.addAttribute("userId", user.getId());
         model.addAttribute("username", username);

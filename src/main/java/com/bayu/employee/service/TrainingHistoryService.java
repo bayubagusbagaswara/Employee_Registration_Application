@@ -6,7 +6,7 @@ import com.bayu.employee.payload.training.UpdateTrainingRequest;
 
 import java.util.List;
 
-public interface TrainingService {
+public interface TrainingHistoryService {
 
     TrainingDTO createTraining(String employeeId, CreateTrainingRequest createTrainingRequest);
 

@@ -22,15 +22,15 @@ public class AdminServiceImpl implements AdminService {
     private final EducationalBackgroundService educationalBackgroundService;
 
     private final EducationalBackgroundRepository educationalBackgroundRepository;
-    private final TrainingService trainingService;
+    private final TrainingHistoryService trainingHistoryService;
     private final WorkExperienceService workExperienceService;
 
-    public AdminServiceImpl(UserService userService, EmployeeService employeeService, EducationalBackgroundService educationalBackgroundService, EducationalBackgroundRepository educationalBackgroundRepository, TrainingService trainingService, WorkExperienceService workExperienceService) {
+    public AdminServiceImpl(UserService userService, EmployeeService employeeService, EducationalBackgroundService educationalBackgroundService, EducationalBackgroundRepository educationalBackgroundRepository, TrainingHistoryService trainingHistoryService, WorkExperienceService workExperienceService) {
         this.userService = userService;
         this.employeeService = employeeService;
         this.educationalBackgroundService = educationalBackgroundService;
         this.educationalBackgroundRepository = educationalBackgroundRepository;
-        this.trainingService = trainingService;
+        this.trainingHistoryService = trainingHistoryService;
         this.workExperienceService = workExperienceService;
     }
 
@@ -78,7 +78,7 @@ public class AdminServiceImpl implements AdminService {
 
     @Override
     public List<TrainingDTO> getAllTrainingsByEmployeeId(String employeeId) {
-        return trainingService.getAllTrainingsByEmployeeId(employeeId);
+        return trainingHistoryService.getAllTrainingsByEmployeeId(employeeId);
     }
 
     @Override

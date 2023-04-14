@@ -8,7 +8,7 @@ import com.bayu.employee.payload.training.TrainingDTO;
 import com.bayu.employee.payload.training.UpdateTrainingRequest;
 import com.bayu.employee.repository.TrainingHistoryRepository;
 import com.bayu.employee.service.EmployeeService;
-import com.bayu.employee.service.TrainingService;
+import com.bayu.employee.service.TrainingHistoryService;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
@@ -16,12 +16,12 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class TrainingServiceImpl implements TrainingService {
+public class TrainingHistoryServiceImpl implements TrainingHistoryService {
 
     private final TrainingHistoryRepository trainingHistoryRepository;
     private final EmployeeService employeeService;
 
-    public TrainingServiceImpl(TrainingHistoryRepository trainingHistoryRepository, EmployeeService employeeService) {
+    public TrainingHistoryServiceImpl(TrainingHistoryRepository trainingHistoryRepository, EmployeeService employeeService) {
         this.trainingHistoryRepository = trainingHistoryRepository;
         this.employeeService = employeeService;
     }
@@ -97,7 +97,7 @@ public class TrainingServiceImpl implements TrainingService {
 
     private static List<TrainingDTO> mapToTrainingDTOList(List<TrainingHistory> trainingHistoryList) {
         return trainingHistoryList.stream()
-                .map(TrainingServiceImpl::mapToTrainingDTO)
+                .map(TrainingHistoryServiceImpl::mapToTrainingDTO)
                 .collect(Collectors.toList());
     }
 

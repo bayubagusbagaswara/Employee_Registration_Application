@@ -24,16 +24,16 @@ public class AdminController {
     private final EmployeeService employeeService;
     private final EducationalBackgroundService educationalBackgroundService;
     private final WorkExperienceService workExperienceService;
-    private final TrainingService trainingService;
+    private final TrainingHistoryService trainingHistoryService;
 
 
-    public AdminController(UserService userService, AdminService adminService, EmployeeService employeeService, EducationalBackgroundService educationalBackgroundService, WorkExperienceService workExperienceService, TrainingService trainingService) {
+    public AdminController(UserService userService, AdminService adminService, EmployeeService employeeService, EducationalBackgroundService educationalBackgroundService, WorkExperienceService workExperienceService, TrainingHistoryService trainingHistoryService) {
         this.userService = userService;
         this.adminService = adminService;
         this.employeeService = employeeService;
         this.educationalBackgroundService = educationalBackgroundService;
         this.workExperienceService = workExperienceService;
-        this.trainingService = trainingService;
+        this.trainingHistoryService = trainingHistoryService;
     }
 
     @GetMapping("/admin")
