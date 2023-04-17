@@ -74,7 +74,7 @@ public class TrainingHistoryController {
         return "training/add_training";
     }
 
-    @PostMapping("/training/employee/{employeeId}")
+    @PostMapping("/training/save/{employeeId}")
     public String saveTraining(@ModelAttribute CreateTrainingRequest createTrainingRequest,
                                @PathVariable(value = "employeeId") String employeeId,
                                BindingResult bindingResult,
@@ -83,7 +83,8 @@ public class TrainingHistoryController {
 
         log.info("Create Training : {}", createTrainingRequest.toString());
 
-        String fieldError = checkValidation(createTrainingRequest, bindingResult);
+        String fieldError = validationCheck(createTrainingRequest, bindingResult);
+
         if (fieldError != null) return fieldError;
 
         TrainingDTO training = trainingHistoryService.createTraining(employeeId, createTrainingRequest);
@@ -93,33 +94,15 @@ public class TrainingHistoryController {
         return "redirect:/training/employee/{employeeId}";
     }
 
-    private static String checkValidation(CreateTrainingRequest createTrainingRequest, BindingResult bindingResult) {
-        if (createTrainingRequest.getTrainingName() == null) {
-            bindingResult.addError(new FieldError("createTrainingRequest", "trainingName", "Nama Pelatihan wajib diisi."));
-        }
-
-        if (createTrainingRequest.getCertificate() == null) {
-            bindingResult.addError(new FieldError("createTrainingRequest", "certificate", "Sertifikat wajib diisi."));
-        }
-
-        if (createTrainingRequest.getYear() == null) {
-            bindingResult.addError(new FieldError("createTrainingRequest", "year", "Tahun wajib diisi."));
-        }
-
-        if (bindingResult.hasErrors()) {
-            return "training/add_training";
-        }
-        return null;
-    }
-
     @GetMapping("/training/employee/{employeeId}")
-    public String getAllTrainingByUserId(@PathVariable(value = "userId") String userId,
-                                         Authentication authentication,
-                                         Model model,
-                                         RedirectAttributes redirectAttributes) {
+    public String getAllTrainingByEmployeeId(
+            @PathVariable(value = "employeeId") String employeeId,
+            Authentication authentication,
+            Model model,
+            RedirectAttributes redirectAttributes) {
 
         String username = authentication.getName();
-        List<TrainingDTO> trainingList = trainingHistoryService.getAllTrainingsByEmployeeId(userId);
+        List<TrainingDTO> trainingList = trainingHistoryService.getAllTrainingsByEmployeeId(employeeId);
 
         model.addAttribute("trainingList", trainingList);
         model.addAttribute("username", username);
@@ -128,9 +111,10 @@ public class TrainingHistoryController {
     }
 
     @GetMapping("/training/show-update-form/{trainingId}")
-    public String showUpdateForm(@PathVariable(value = "trainingId") String trainingId,
-                                 Authentication authentication,
-                                 Model model) {
+    public String showUpdateTrainingHistoryForm(
+            @PathVariable(value = "trainingId") String trainingId,
+            Authentication authentication,
+            Model model) {
 
         String username = authentication.getName();
 
@@ -162,6 +146,60 @@ public class TrainingHistoryController {
 
         String username = authentication.getName();
 
+        String fieldError = validationChecksForDataUpdateRequests(updateTrainingRequest, bindingResult);
+
+        if (fieldError != null) return fieldError;
+
+        TrainingDTO training = trainingHistoryService.updateTraining(trainingId, updateTrainingRequest);
+
+        model.addAttribute("username", username);
+        redirectAttributes.addAttribute("employeeId", training.getEmployeeId());
+
+        return "redirect:/training/employee/{employeeId}";
+    }
+
+    @GetMapping("/training/delete/{trainingId}")
+    public String deleteTraining(@PathVariable(value = "trainingId") String trainingId,
+                                 Authentication authentication,
+                                 Model model,
+                                 RedirectAttributes redirectAttributes) {
+
+        String username = authentication.getName();
+
+        TrainingDTO trainingDTO = trainingHistoryService.getTrainingById(trainingId);
+
+        trainingHistoryService.deleteTraining(trainingId);
+
+        redirectAttributes.addAttribute("employeeId", trainingDTO.getEmployeeId());
+        model.addAttribute("username", username);
+
+        if (trainingHistoryService.getAllTrainingsByEmployeeId(trainingDTO.getEmployeeId()).size() == 0) {
+            return "redirect:/training/home";
+        }
+
+        return "redirect:/training/employee/{employeeId}";
+    }
+
+    private static String validationCheck(CreateTrainingRequest createTrainingRequest, BindingResult bindingResult) {
+        if (createTrainingRequest.getTrainingName() == null) {
+            bindingResult.addError(new FieldError("createTrainingRequest", "trainingName", "Nama Pelatihan wajib diisi."));
+        }
+
+        if (createTrainingRequest.getCertificate() == null) {
+            bindingResult.addError(new FieldError("createTrainingRequest", "certificate", "Sertifikat wajib diisi."));
+        }
+
+        if (createTrainingRequest.getYear() == null) {
+            bindingResult.addError(new FieldError("createTrainingRequest", "year", "Tahun wajib diisi."));
+        }
+
+        if (bindingResult.hasErrors()) {
+            return "training/add_training";
+        }
+        return null;
+    }
+
+    private static String validationChecksForDataUpdateRequests(UpdateTrainingRequest updateTrainingRequest, BindingResult bindingResult) {
         if (updateTrainingRequest.getTrainingName() == null) {
             bindingResult.addError(new FieldError("updateTrainingRequest", "trainingName", "Nama Pelatihan wajib diisi."));
         }
@@ -174,31 +212,10 @@ public class TrainingHistoryController {
             bindingResult.addError(new FieldError("updateTrainingRequest", "year", "Tahun wajib diisi."));
         }
 
-        TrainingDTO training = trainingHistoryService.updateTraining(trainingId, updateTrainingRequest);
-
-        model.addAttribute("username", username);
-        redirectAttributes.addAttribute("userId", training.getUserId());
-
-        return "redirect:/training/user/{userId}";
-    }
-
-    @GetMapping("/training/delete/{trainingId}")
-    public String deleteTraining(@PathVariable(value = "trainingId") String trainingId,
-                                 Authentication authentication,
-                                 Model model,
-                                 RedirectAttributes redirectAttributes) {
-        String username = authentication.getName();
-
-        User user = userService.findByUsername(username);
-
-        trainingHistoryService.deleteTraining(trainingId);
-
-        redirectAttributes.addAttribute("userId", user.getId());
-        model.addAttribute("username", username);
-
-        // cek dulu jika setelah dihapus masih ada data, maka redirect ke /training/user/{userId}
-        // jika datanya sudah kosong maka redirect ke /training/home
-        return "redirect:/training/user/{userId}";
+        if (bindingResult.hasErrors()) {
+            return "redirect:/training/show-update-form/{trainingId}";
+        }
+        return null;
     }
 
 }
