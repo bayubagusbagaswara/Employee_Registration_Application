@@ -3,7 +3,7 @@ package com.bayu.employee.service.impl;
 import com.bayu.employee.exception.ResourceNotFoundException;
 import com.bayu.employee.model.Employee;
 import com.bayu.employee.model.WorkExperience;
-import com.bayu.employee.payload.work.CreateWorkRequest;
+import com.bayu.employee.payload.work.CreateWorkExperienceRequest;
 import com.bayu.employee.payload.work.WorkExperienceDTO;
 import com.bayu.employee.repository.WorkExperienceRepository;
 import com.bayu.employee.service.EmployeeService;
@@ -25,14 +25,14 @@ public class WorkExperienceServiceImpl implements WorkExperienceService {
     }
 
     @Override
-    public WorkExperienceDTO createWorkExperience(String employeeId, CreateWorkRequest createWorkRequest) {
+    public WorkExperienceDTO createWorkExperience(String employeeId, CreateWorkExperienceRequest createWorkExperienceRequest) {
         // cari employee by id dulu
         Employee employee = employeeService.findById(employeeId);
 
         // buat object WorkExperience
         WorkExperience workExperience = WorkExperience.builder()
-                .position(createWorkRequest.getPosition())
-                .companyName(createWorkRequest.getCompanyName())
+                .position(createWorkExperienceRequest.getPosition())
+                .companyName(createWorkExperienceRequest.getCompanyName())
                 // salary convert dulu ke BigDecimal
 //                .salary(createWorkRequest.)
                 .employee(employee)
