@@ -182,19 +182,19 @@ public class EducationalBackgroundController {
     }
 
     private static String validationCheck(CreateEducationRequest createEducationRequest, BindingResult bindingResult) {
-        if (createEducationRequest.getLevelOfEducation() == null || createEducationRequest.getLevelOfEducation().equals("")) {
+        if (createEducationRequest.getLevelOfEducation().isEmpty()) {
             bindingResult.addError(new FieldError("createEducationRequest", "levelOfEducation", "Tingkat Pendidikan wajib diisi."));
         }
 
-        if (createEducationRequest.getDepartment() == null || createEducationRequest.getDepartment().equals("")) {
+        if (createEducationRequest.getDepartment().isEmpty()) {
             bindingResult.addError(new FieldError("createEducationRequest", "department", "Jurusan wajib diisi."));
         }
 
-        if (createEducationRequest.getCollegeName() == null || createEducationRequest.getCollegeName().equals("")) {
+        if (createEducationRequest.getCollegeName().isEmpty()) {
             bindingResult.addError(new FieldError("createEducationRequest", "collegeName", "Nama Instansi/Perguruan Tinggi wajib diisi."));
         }
 
-        if (createEducationRequest.getGraduationYear() == null || createEducationRequest.getGraduationYear().equals("")) {
+        if (createEducationRequest.getGraduationYear().isEmpty()) {
             bindingResult.addError(new FieldError("createEducationRequest", "graduationYear", "Tahun Lulus wajib diisi."));
         }
 
@@ -205,19 +205,19 @@ public class EducationalBackgroundController {
     }
 
     private static String validationChecksForDataUpdateRequests(UpdateEducationRequest updateEducationRequest, BindingResult bindingResult) {
-        if (updateEducationRequest.getLevelOfEducation() == null || updateEducationRequest.getLevelOfEducation().equals("")) {
+        if (updateEducationRequest.getLevelOfEducation().isEmpty()) {
             bindingResult.addError(new FieldError("updateEducationRequest", "levelOfEducation", "Tingkat Pendidikan wajib diisi."));
         }
 
-        if (updateEducationRequest.getDepartment() == null || updateEducationRequest.getDepartment().equals("")) {
+        if (updateEducationRequest.getDepartment().isEmpty()) {
             bindingResult.addError(new FieldError("updateEducationRequest", "department", "Jurusan wajib diisi."));
         }
 
-        if (updateEducationRequest.getCollegeName() == null || updateEducationRequest.getCollegeName().equals("")) {
+        if (updateEducationRequest.getCollegeName().isEmpty()) {
             bindingResult.addError(new FieldError("updateEducationRequest", "collegeName", "Nama Instansi/Perguruan Tinggi wajib diisi."));
         }
 
-        if (updateEducationRequest.getGraduationYear() == null || updateEducationRequest.getGraduationYear().equals("")) {
+        if (updateEducationRequest.getGraduationYear().isEmpty()) {
             bindingResult.addError(new FieldError("updateEducationRequest", "graduationYear", "Tahun Lulus wajib diisi."));
         }
 
