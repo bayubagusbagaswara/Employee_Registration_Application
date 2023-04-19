@@ -1,10 +1,7 @@
 package com.bayu.employee.controller;
 
-import com.bayu.employee.model.Employee;
 import com.bayu.employee.model.User;
 import com.bayu.employee.payload.work.CreateWorkExperienceRequest;
-import com.bayu.employee.payload.work.WorkExperienceDTO;
-import com.bayu.employee.service.EmployeeService;
 import com.bayu.employee.service.UserService;
 import com.bayu.employee.service.WorkExperienceService;
 import org.slf4j.Logger;
@@ -12,13 +9,13 @@ import org.slf4j.LoggerFactory;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 @Controller
 public class WorkExperienceController {
@@ -26,12 +23,10 @@ public class WorkExperienceController {
     private final static Logger log = LoggerFactory.getLogger(WorkExperienceController.class);
 
     private final UserService userService;
-    private final EmployeeService employeeService;
     private final WorkExperienceService workExperienceService;
 
-    public WorkExperienceController(UserService userService, EmployeeService employeeService, WorkExperienceService workExperienceService) {
+    public WorkExperienceController(UserService userService, WorkExperienceService workExperienceService) {
         this.userService = userService;
-        this.employeeService = employeeService;
         this.workExperienceService = workExperienceService;
     }
 
@@ -64,6 +59,7 @@ public class WorkExperienceController {
 
     @GetMapping("/work/show-add-form")
     public String showAddWorkExperienceForm(Model model, Authentication authentication) {
+
         String username = authentication.getName();
 
         User user = userService.findByUsername(username);
@@ -78,7 +74,44 @@ public class WorkExperienceController {
     }
 
     @PostMapping("/work/save/{employeeId}")
-    public String saveWorkExperience() {
+    public String saveWorkExperience(@ModelAttribute CreateWorkExperienceRequest createWorkExperienceRequest,
+                                     @PathVariable(value = "employeeId") String employeeId,
+                                     BindingResult bindingResult,
+                                     Model model,
+                                     RedirectAttributes redirectAttributes) {
+
+        log.info("Create Work Experience : {}", createWorkExperienceRequest.toString());
+
+
+
+        return null;
+    }
+
+    private static String validationCheck(CreateWorkExperienceRequest createWorkExperienceRequest, BindingResult bindingResult) {
+        if (createWorkExperienceRequest.getPosition().isEmpty()) {
+            bindingResult.addError(new FieldError("createWorkExperienceRequest", "position", "Posisi wajib diisi."));
+        }
+
+        if (createWorkExperienceRequest.getCompanyName().isEmpty()) {
+            bindingResult.addError(new FieldError("createWorkExperienceRequest", "companyName", "Nama Perusahaan wajib diisi."));
+        }
+
+        if (createWorkExperienceRequest.getSalary().isEmpty()) {
+            bindingResult.addError(new FieldError("createWorkExperienceRequest", "salary", "Gaji wajib diisi."));
+        }
+
+        if (createWorkExperienceRequest.getYearOfEmployment().isEmpty()) {
+            bindingResult.addError(new FieldError("createWorkExperienceRequest", "yearOfEmployment", "Tahun Masuk wajib diisi."));
+        }
+
+        if (createWorkExperienceRequest.getYearOfResignation().isEmpty()) {
+            bindingResult.addError(new FieldError("createWorkExperienceRequest", "yearOfResignation", "Tahun Keluar wajib diisi."));
+        }
+
+        if (bindingResult.hasErrors()) {
+            return "work/add_work";
+        }
+
         return null;
     }
 }
