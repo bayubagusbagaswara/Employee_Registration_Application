@@ -148,7 +148,8 @@ public class EducationalBackgroundController {
 
         String username = authentication.getName();
 
-        String fieldError =validationChecksForDataUpdateRequests(updateEducationRequest, bindingResult);
+        String fieldError = validationChecksForDataUpdateRequests(updateEducationRequest, bindingResult);
+
         if (fieldError != null) return fieldError;
 
         EducationDTO education = educationalBackgroundService.updateEducation(educationId, updateEducationRequest);
