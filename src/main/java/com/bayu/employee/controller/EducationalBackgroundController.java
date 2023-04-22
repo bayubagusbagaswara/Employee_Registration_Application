@@ -21,6 +21,17 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
+import static com.bayu.employee.util.AppConstants.CREATE_EDUCATION_REQUEST;
+import static com.bayu.employee.util.AppConstants.FIELD_EDUCATION_COLLEGE_NAME;
+import static com.bayu.employee.util.AppConstants.FIELD_EDUCATION_DEPARTMENT;
+import static com.bayu.employee.util.AppConstants.FIELD_EDUCATION_GRADUATION_YEAR;
+import static com.bayu.employee.util.AppConstants.FIELD_EDUCATION_LEVEL_OF_EDUCATION;
+import static com.bayu.employee.util.AppConstants.MESSAGE_VALIDATION_FIELD_EDUCATION_COLLEGE_NAME;
+import static com.bayu.employee.util.AppConstants.MESSAGE_VALIDATION_FIELD_EDUCATION_DEPARTMENT;
+import static com.bayu.employee.util.AppConstants.MESSAGE_VALIDATION_FIELD_EDUCATION_GRADUATION_YEAR;
+import static com.bayu.employee.util.AppConstants.MESSAGE_VALIDATION_FIELD_EDUCATION_LEVEL_OF_EDUCATION;
+import static com.bayu.employee.util.AppConstants.UPDATE_EDUCATION_REQUEST;
+
 @Controller
 public class EducationalBackgroundController {
 
@@ -183,19 +194,19 @@ public class EducationalBackgroundController {
 
     private static String validationCheck(CreateEducationRequest createEducationRequest, BindingResult bindingResult) {
         if (createEducationRequest.getLevelOfEducation().isEmpty()) {
-            bindingResult.addError(new FieldError("createEducationRequest", "levelOfEducation", "Tingkat Pendidikan wajib diisi."));
+            bindingResult.addError(new FieldError(CREATE_EDUCATION_REQUEST, FIELD_EDUCATION_LEVEL_OF_EDUCATION, MESSAGE_VALIDATION_FIELD_EDUCATION_LEVEL_OF_EDUCATION));
         }
 
         if (createEducationRequest.getDepartment().isEmpty()) {
-            bindingResult.addError(new FieldError("createEducationRequest", "department", "Jurusan wajib diisi."));
+            bindingResult.addError(new FieldError(CREATE_EDUCATION_REQUEST, FIELD_EDUCATION_DEPARTMENT, MESSAGE_VALIDATION_FIELD_EDUCATION_DEPARTMENT));
         }
 
         if (createEducationRequest.getCollegeName().isEmpty()) {
-            bindingResult.addError(new FieldError("createEducationRequest", "collegeName", "Nama Instansi/Perguruan Tinggi wajib diisi."));
+            bindingResult.addError(new FieldError(CREATE_EDUCATION_REQUEST, FIELD_EDUCATION_COLLEGE_NAME, MESSAGE_VALIDATION_FIELD_EDUCATION_COLLEGE_NAME));
         }
 
         if (createEducationRequest.getGraduationYear().isEmpty()) {
-            bindingResult.addError(new FieldError("createEducationRequest", "graduationYear", "Tahun Lulus wajib diisi."));
+            bindingResult.addError(new FieldError(CREATE_EDUCATION_REQUEST, FIELD_EDUCATION_GRADUATION_YEAR, MESSAGE_VALIDATION_FIELD_EDUCATION_GRADUATION_YEAR));
         }
 
         if (bindingResult.hasErrors()) {
@@ -206,19 +217,19 @@ public class EducationalBackgroundController {
 
     private static String validationChecksForDataUpdateRequests(UpdateEducationRequest updateEducationRequest, BindingResult bindingResult) {
         if (updateEducationRequest.getLevelOfEducation().isEmpty()) {
-            bindingResult.addError(new FieldError("updateEducationRequest", "levelOfEducation", "Tingkat Pendidikan wajib diisi."));
+            bindingResult.addError(new FieldError(UPDATE_EDUCATION_REQUEST, FIELD_EDUCATION_LEVEL_OF_EDUCATION, MESSAGE_VALIDATION_FIELD_EDUCATION_LEVEL_OF_EDUCATION));
         }
 
         if (updateEducationRequest.getDepartment().isEmpty()) {
-            bindingResult.addError(new FieldError("updateEducationRequest", "department", "Jurusan wajib diisi."));
+            bindingResult.addError(new FieldError(UPDATE_EDUCATION_REQUEST, FIELD_EDUCATION_DEPARTMENT, MESSAGE_VALIDATION_FIELD_EDUCATION_DEPARTMENT));
         }
 
         if (updateEducationRequest.getCollegeName().isEmpty()) {
-            bindingResult.addError(new FieldError("updateEducationRequest", "collegeName", "Nama Instansi/Perguruan Tinggi wajib diisi."));
+            bindingResult.addError(new FieldError(UPDATE_EDUCATION_REQUEST, FIELD_EDUCATION_COLLEGE_NAME, MESSAGE_VALIDATION_FIELD_EDUCATION_COLLEGE_NAME));
         }
 
         if (updateEducationRequest.getGraduationYear().isEmpty()) {
-            bindingResult.addError(new FieldError("updateEducationRequest", "graduationYear", "Tahun Lulus wajib diisi."));
+            bindingResult.addError(new FieldError(UPDATE_EDUCATION_REQUEST, FIELD_EDUCATION_GRADUATION_YEAR, MESSAGE_VALIDATION_FIELD_EDUCATION_GRADUATION_YEAR));
         }
 
         if (bindingResult.hasErrors()) {
