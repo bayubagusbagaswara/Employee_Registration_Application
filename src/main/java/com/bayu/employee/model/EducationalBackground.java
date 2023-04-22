@@ -1,9 +1,22 @@
 package com.bayu.employee.model;
 
-import lombok.*;
+import com.bayu.employee.model.base.UserAudit;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.ForeignKey;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 import java.io.Serializable;
 
 @Entity
@@ -13,9 +26,7 @@ import java.io.Serializable;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class EducationalBackground implements Serializable {
-
-    private final static long serialVersionUID = -292203108165354119L;
+public class EducationalBackground extends UserAudit {
 
     @Id
     @GenericGenerator(name = "system-uuid", strategy = "uuid2")
