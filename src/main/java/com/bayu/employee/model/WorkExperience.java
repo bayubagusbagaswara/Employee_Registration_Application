@@ -7,7 +7,10 @@ import org.springframework.format.annotation.DateTimeFormat;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.time.Instant;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.Date;
 
 @Entity
 @Table(name = "work_experience")
@@ -36,20 +39,19 @@ public class WorkExperience implements Serializable {
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(name = "year_of_employment")
-    private LocalDate yearOfEmployment;
+    private LocalDateTime yearOfEmployment;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(name = "year_of_resignation")
-    private LocalDate yearOfResignation;
+    private LocalDateTime yearOfResignation;
 
     // perhitungan lengthOfWork didapatkan dari yearOfResignation - yearOfEmployment
     // lalu dikonversi dalam tahun
-//    @Column(name = "length_of_work")
-//    private Float lengthOfWork;
+    @Column(name = "length_of_work")
+    private Float lengthOfWork;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "employee_id", foreignKey = @ForeignKey(name = "fk_work_experiences_employee_id"), referencedColumnName = "id_user")
     private Employee employee;
-
 
 }
