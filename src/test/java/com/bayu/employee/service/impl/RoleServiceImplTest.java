@@ -12,6 +12,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.time.ZoneId;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
@@ -37,6 +39,8 @@ class RoleServiceImplTest {
 
         log.info("ID: {}", role.getId());
         log.info("Name: {}", role.getName());
+        log.info("Created At : {}", role.getCreatedAt());
+        log.info("Updated At : {}", role.getUpdatedAt());
     }
 
     @Test
@@ -52,5 +56,13 @@ class RoleServiceImplTest {
 
         log.info("ID: {}", role.getId());
         log.info("Name: {}", role.getName());
+    }
+
+    @Test
+    void testZoneId() {
+        String s = ZoneId.systemDefault().toString();
+        System.out.println(s);
+        String s1 = ZoneId.of("Asia/Jakarta").toString();
+        System.out.println(s1);
     }
 }
