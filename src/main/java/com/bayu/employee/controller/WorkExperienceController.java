@@ -153,6 +153,27 @@ public class WorkExperienceController {
         return "work/edit_work";
     }
 
+    @PostMapping("/work/update/{workExperienceId}")
+    public String updateWorkExperience(
+            @PathVariable(value = "workExperienceId") String workExperienceId,
+            @ModelAttribute("updateWorkExperienceRequest") UpdateWorkExperienceRequest updateWorkExperienceRequest,
+            Authentication authentication,
+            Model model,
+            BindingResult bindingResult,
+            RedirectAttributes redirectAttributes) {
+
+        log.info("Update Work Experience : {}", updateWorkExperienceRequest.toString());
+
+        String username = authentication.getName();
+
+        String fieldError = validationChecksForDataUpdateRequests(updateWorkExperienceRequest, bindingResult);
+
+        if (fieldError != null) return fieldError;
+
+        return null;
+    }
+
+
     private static String validationCheck(CreateWorkExperienceRequest createWorkExperienceRequest, BindingResult bindingResult) {
         if (createWorkExperienceRequest.getPosition().isEmpty()) {
             bindingResult.addError(new FieldError(CREATE_WORK_EXPERIENCE_REQUEST, FIELD_WORK_EXPERIENCE_POSITION, MESSAGE_VALIDATION_FIELD_WORK_EXPERIENCE_POSITION));
