@@ -19,6 +19,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.util.List;
+
 import static com.bayu.employee.util.AppConstants.CREATE_WORK_EXPERIENCE_REQUEST;
 import static com.bayu.employee.util.AppConstants.FIELD_WORK_EXPERIENCE_COMPANY_NAME;
 import static com.bayu.employee.util.AppConstants.FIELD_WORK_EXPERIENCE_POSITION;
@@ -106,6 +108,23 @@ public class WorkExperienceController {
         redirectAttributes.addAttribute("employeeId", workExperience.getEmployeeId());
 
         return "redirect:/work/employee/{employeeId}";
+    }
+
+    @GetMapping("/work/employee/{employeeId}")
+    public String getAllWorkExperienceEmployeeId(
+            @PathVariable(value = "employeeId") String employeeId,
+            Authentication authentication,
+            Model model,
+            RedirectAttributes redirectAttributes) {
+
+        String username = authentication.getName();
+
+        List<WorkExperienceDTO> workExperienceList = workExperienceService.getAllWorkExperiencesByEmployeeId(employeeId);
+
+        model.addAttribute("workExperienceList", workExperienceList);
+        model.addAttribute("username", username);
+
+        return "work/data_work";
     }
 
     private static String validationCheck(CreateWorkExperienceRequest createWorkExperienceRequest, BindingResult bindingResult) {
