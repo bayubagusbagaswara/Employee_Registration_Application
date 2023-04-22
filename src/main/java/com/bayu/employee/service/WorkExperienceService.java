@@ -16,5 +16,6 @@ public interface WorkExperienceService {
 
     WorkExperienceDTO updateWorkExperience(String workExperienceId, UpdateWorkExperienceRequest updateWorkExperienceRequest);
 
+    void deleteWorkExperience(String workExperienceId);
 
 }
