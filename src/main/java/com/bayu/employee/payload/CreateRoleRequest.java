@@ -13,8 +13,7 @@ import java.io.Serializable;
 @AllArgsConstructor
 public class CreateRoleRequest implements Serializable {
 
-    private final static long serialVersionUID = -8485701433951437225L;
+    private final static long serialVersionUID = 7347156076648085826L;
 
-    private String id;
     private String name;
 }
