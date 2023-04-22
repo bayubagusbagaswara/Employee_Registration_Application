@@ -1,14 +1,30 @@
 package com.bayu.employee.model;
 
-import lombok.*;
+import com.bayu.employee.model.base.UserAudit;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.persistence.*;
-import java.io.Serializable;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.ForeignKey;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.MapsId;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "employee")
@@ -18,9 +34,7 @@ import java.util.*;
 @AllArgsConstructor
 @NoArgsConstructor
 //@Where(clause = "is_deleted = false")
-public class Employee implements Serializable {
-
-    private final static long serialVersionUID = -3086674995898498716L;
+public class Employee extends UserAudit {
 
     @Id
     @GenericGenerator(name = "system-uuid", strategy = "uuid2")
