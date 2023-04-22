@@ -13,6 +13,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.time.ZoneId;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -29,7 +31,6 @@ class RoleServiceImplTest {
     @Order(1)
     void createRoleAdmin() {
         CreateRoleRequest createRoleRequest = CreateRoleRequest.builder()
-                .id("admin")
                 .name("admin")
                 .build();
 
@@ -47,7 +48,6 @@ class RoleServiceImplTest {
     @Order(2)
     void createRoleUser() {
         CreateRoleRequest createRoleRequest = CreateRoleRequest.builder()
-                .id("user")
                 .name("user")
                 .build();
 
@@ -56,6 +56,34 @@ class RoleServiceImplTest {
 
         log.info("ID: {}", role.getId());
         log.info("Name: {}", role.getName());
+    }
+
+    @Test
+    void getRoleByName() {
+        String name = "user";
+        RoleDTO role = roleService.getRoleByName(name);
+
+        log.info("Name : {}", role.getName());
+    }
+
+    @Test
+    void getAllRoles() {
+        List<RoleDTO> roles = roleService.getAllRoles();
+        List<String> roleNames = roles.stream()
+                .map(RoleDTO::getName)
+                .collect(Collectors.toList());
+
+        for (String roleName : roleNames) {
+            log.info("Name : {}", roleName);
+        }
+        assertEquals(1, roles.size());
+    }
+
+    @Test
+    void testDeleteRole() {
+        String roleId = "1";
+
+        roleService.deleteRole(roleId);
     }
 
     @Test
