@@ -127,6 +127,32 @@ public class WorkExperienceController {
         return "work/data_work";
     }
 
+    @GetMapping("/work/show-update-form/{workExperienceId}")
+    public String showUpdateWorkExperienceForm(
+            @PathVariable(value = "workExperienceId") String workExperienceId,
+            Authentication authentication,
+            Model model) {
+
+        String username = authentication.getName();
+
+        WorkExperienceDTO workExperience = workExperienceService.getWorkExperienceById(workExperienceId);
+
+        UpdateWorkExperienceRequest updateWorkExperienceRequest = new UpdateWorkExperienceRequest();
+        updateWorkExperienceRequest.setPosition(workExperience.getPosition());
+        updateWorkExperienceRequest.setCompanyName(workExperience.getCompanyName());
+        updateWorkExperienceRequest.setSalary(workExperience.getSalary());
+        updateWorkExperienceRequest.setYearOfEmployment(workExperience.getYearOfEmployment());
+        updateWorkExperienceRequest.setYearOfResignation(workExperience.getYearOfResignation());
+
+        model.addAttribute("updateWorkExperienceRequest", updateWorkExperienceRequest);
+        model.addAttribute("workExperienceId", workExperience.getId());
+        model.addAttribute("username", username);
+
+        log.info("Work Experience DTO : {}", workExperience.toString());
+
+        return "work/edit_work";
+    }
+
     private static String validationCheck(CreateWorkExperienceRequest createWorkExperienceRequest, BindingResult bindingResult) {
         if (createWorkExperienceRequest.getPosition().isEmpty()) {
             bindingResult.addError(new FieldError(CREATE_WORK_EXPERIENCE_REQUEST, FIELD_WORK_EXPERIENCE_POSITION, MESSAGE_VALIDATION_FIELD_WORK_EXPERIENCE_POSITION));
