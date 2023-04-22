@@ -131,10 +131,31 @@ public class WorkExperienceController {
     }
 
     private static String validationChecksForDataUpdateRequests(UpdateWorkExperienceRequest updateWorkExperienceRequest, BindingResult bindingResult) {
-
         if (updateWorkExperienceRequest.getPosition().isEmpty()) {
             bindingResult.addError(new FieldError(UPDATE_WORK_EXPERIENCE_REQUEST, FIELD_WORK_EXPERIENCE_POSITION, MESSAGE_VALIDATION_FIELD_WORK_EXPERIENCE_POSITION));
         }
+
+        if (updateWorkExperienceRequest.getCompanyName().isEmpty()) {
+            bindingResult.addError(new FieldError(UPDATE_WORK_EXPERIENCE_REQUEST, FIELD_WORK_EXPERIENCE_COMPANY_NAME, MESSAGE_VALIDATION_FIELD_WORK_EXPERIENCE_COMPANY_NAME));
+        }
+
+        if (updateWorkExperienceRequest.getSalary().isEmpty()) {
+            bindingResult.addError(new FieldError(UPDATE_WORK_EXPERIENCE_REQUEST, FIELD_WORK_EXPERIENCE_SALARY, MESSAGE_VALIDATION_FIELD_WORK_EXPERIENCE_SALARY));
+        }
+
+        if (updateWorkExperienceRequest.getYearOfEmployment().isEmpty()) {
+            bindingResult.addError(new FieldError(UPDATE_WORK_EXPERIENCE_REQUEST, FIELD_WORK_EXPERIENCE_YEAR_OF_EMPLOYMENT, MESSAGE_VALIDATION_FIELD_WORK_EXPERIENCE_YEAR_OF_EMPLOYMENT));
+        }
+
+        if (updateWorkExperienceRequest.getYearOfResignation().isEmpty()) {
+            bindingResult.addError(new FieldError(UPDATE_WORK_EXPERIENCE_REQUEST, FIELD_WORK_EXPERIENCE_YEAR_OF_RESIGNATION, MESSAGE_VALIDATION_FIELD_WORK_EXPERIENCE_YEAR_OF_RESIGNATION));
+        }
+
+        if (bindingResult.hasErrors()) {
+            return "redirect:/work/show-update-form/{workExperienceId}";
+        }
+
         return null;
     }
+
 }
