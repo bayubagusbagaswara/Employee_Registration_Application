@@ -4,12 +4,15 @@ import com.bayu.employee.exception.ResourceNotFoundException;
 import com.bayu.employee.model.Employee;
 import com.bayu.employee.model.WorkExperience;
 import com.bayu.employee.payload.work.CreateWorkExperienceRequest;
+import com.bayu.employee.payload.work.UpdateWorkExperienceRequest;
 import com.bayu.employee.payload.work.WorkExperienceDTO;
 import com.bayu.employee.repository.WorkExperienceRepository;
 import com.bayu.employee.service.EmployeeService;
 import com.bayu.employee.service.WorkExperienceService;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -26,19 +29,17 @@ public class WorkExperienceServiceImpl implements WorkExperienceService {
 
     @Override
     public WorkExperienceDTO createWorkExperience(String employeeId, CreateWorkExperienceRequest createWorkExperienceRequest) {
-        // cari employee by id dulu
         Employee employee = employeeService.findById(employeeId);
 
-        // buat object WorkExperience
         WorkExperience workExperience = WorkExperience.builder()
                 .position(createWorkExperienceRequest.getPosition())
                 .companyName(createWorkExperienceRequest.getCompanyName())
-                // salary convert dulu ke BigDecimal
-//                .salary(createWorkRequest.)
+                .salary(formatToDecimal(createWorkExperienceRequest.getSalary()))
+//                .yearOfEmployment(createWorkExperienceRequest.getYearOfEmployment())
+//                .yearOfResignation(createWorkExperienceRequest.getYearOfResignation())
                 .employee(employee)
                 .build();
 
-        // save work experience
         workExperienceRepository.save(workExperience);
 
         return mapToWorkDTO(workExperience);
@@ -56,13 +57,25 @@ public class WorkExperienceServiceImpl implements WorkExperienceService {
         return mapToWorkDTO(workExperience);
     }
 
+    @Override
+    public WorkExperienceDTO updateWorkExperience(String workExperienceId, UpdateWorkExperienceRequest updateWorkExperienceRequest) {
+        return null;
+    }
+
+    @Override
+    public void deleteWorkExperience(String workExperienceId) {
+
+    }
+
     private WorkExperienceDTO mapToWorkDTO(WorkExperience workExperience) {
         return WorkExperienceDTO.builder()
                 .id(workExperience.getId())
                 .employeeId(workExperience.getEmployee().getId())
                 .position(workExperience.getPosition())
                 .companyName(workExperience.getCompanyName())
-                .salary(String.valueOf(workExperience.getSalary()))
+                .salary(formatToString(workExperience.getSalary()))
+                .yearOfEmployment(String.valueOf(workExperience.getYearOfEmployment()))
+                .yearOfResignation(String.valueOf(workExperience.getYearOfResignation()))
                 .build();
     }
 
@@ -72,5 +85,13 @@ public class WorkExperienceServiceImpl implements WorkExperienceService {
                 .collect(Collectors.toList());
     }
 
-    // private convert from String to BigDecimal
+    private static BigDecimal formatToDecimal(String value) {
+        // format 100000 to 100000.00
+        return new BigDecimal(value);
+    }
+
+    private static String formatToString(BigDecimal value) {
+        // format 100000.00 to 100000
+        return String.valueOf(value);
+    }
 }
