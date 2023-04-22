@@ -3,6 +3,7 @@ package com.bayu.employee.controller;
 import com.bayu.employee.model.User;
 import com.bayu.employee.payload.work.CreateWorkExperienceRequest;
 import com.bayu.employee.payload.work.UpdateWorkExperienceRequest;
+import com.bayu.employee.payload.work.WorkExperienceDTO;
 import com.bayu.employee.service.UserService;
 import com.bayu.employee.service.WorkExperienceService;
 import org.slf4j.Logger;
@@ -18,22 +19,21 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import static com.bayu.employee.util.AppConstants.CREATE_WORK_EXPERIENCE_REQUEST;
+import static com.bayu.employee.util.AppConstants.FIELD_WORK_EXPERIENCE_COMPANY_NAME;
+import static com.bayu.employee.util.AppConstants.FIELD_WORK_EXPERIENCE_POSITION;
+import static com.bayu.employee.util.AppConstants.FIELD_WORK_EXPERIENCE_SALARY;
+import static com.bayu.employee.util.AppConstants.FIELD_WORK_EXPERIENCE_YEAR_OF_EMPLOYMENT;
+import static com.bayu.employee.util.AppConstants.FIELD_WORK_EXPERIENCE_YEAR_OF_RESIGNATION;
+import static com.bayu.employee.util.AppConstants.MESSAGE_VALIDATION_FIELD_WORK_EXPERIENCE_COMPANY_NAME;
+import static com.bayu.employee.util.AppConstants.MESSAGE_VALIDATION_FIELD_WORK_EXPERIENCE_POSITION;
+import static com.bayu.employee.util.AppConstants.MESSAGE_VALIDATION_FIELD_WORK_EXPERIENCE_SALARY;
+import static com.bayu.employee.util.AppConstants.MESSAGE_VALIDATION_FIELD_WORK_EXPERIENCE_YEAR_OF_EMPLOYMENT;
+import static com.bayu.employee.util.AppConstants.MESSAGE_VALIDATION_FIELD_WORK_EXPERIENCE_YEAR_OF_RESIGNATION;
+import static com.bayu.employee.util.AppConstants.UPDATE_WORK_EXPERIENCE_REQUEST;
+
 @Controller
 public class WorkExperienceController {
-
-    private final static String CREATE_WORK_EXPERIENCE_REQUEST = "createWorkExperienceRequest";
-    private final static String UPDATE_WORK_EXPERIENCE_REQUEST = "updateWorkExperienceRequest";
-    private final static String FIELD_WORK_EXPERIENCE_POSITION = "position";
-    private final static String FIELD_WORK_EXPERIENCE_COMPANY_NAME = "companyName";
-    private final static String FIELD_WORK_EXPERIENCE_SALARY = "salary";
-    private final static String FIELD_WORK_EXPERIENCE_YEAR_OF_EMPLOYMENT = "yearOfEmployment";
-    private final static String FIELD_WORK_EXPERIENCE_YEAR_OF_RESIGNATION = "yearOfResignation";
-
-    private final static String MESSAGE_VALIDATION_FIELD_WORK_EXPERIENCE_POSITION = "Posisi wajib diisi.";
-    private final static String MESSAGE_VALIDATION_FIELD_WORK_EXPERIENCE_COMPANY_NAME = "Nama Perusahaan wajib diisi.";
-    private final static String MESSAGE_VALIDATION_FIELD_WORK_EXPERIENCE_SALARY = "Gaji wajib diisi.";
-    private final static String MESSAGE_VALIDATION_FIELD_WORK_EXPERIENCE_YEAR_OF_EMPLOYMENT = "Tahun Masuk wajib diisi.";
-    private final static String MESSAGE_VALIDATION_FIELD_WORK_EXPERIENCE_YEAR_OF_RESIGNATION = "Tahun Keluar wajid diisi.";
 
     private final static Logger log = LoggerFactory.getLogger(WorkExperienceController.class);
 
@@ -97,9 +97,15 @@ public class WorkExperienceController {
 
         log.info("Create Work Experience : {}", createWorkExperienceRequest.toString());
 
+        String fieldError = validationCheck(createWorkExperienceRequest, bindingResult);
 
+        if (fieldError != null) return fieldError;
 
-        return null;
+        WorkExperienceDTO workExperience = workExperienceService.createWorkExperience(employeeId, createWorkExperienceRequest);
+
+        redirectAttributes.addAttribute("employeeId", workExperience.getEmployeeId());
+
+        return "redirect:/work/employee/{employeeId}";
     }
 
     private static String validationCheck(CreateWorkExperienceRequest createWorkExperienceRequest, BindingResult bindingResult) {
