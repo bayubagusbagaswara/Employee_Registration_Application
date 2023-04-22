@@ -1,11 +1,27 @@
 package com.bayu.employee.model;
 
-import lombok.*;
+import com.bayu.employee.model.base.DateAudit;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
 
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.ForeignKey;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.Email;
-import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -19,9 +35,7 @@ import java.util.Set;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class User implements Serializable {
-
-    private final static long serialVersionUID = 9119906632382186870L;
+public class User extends DateAudit {
 
     @Id
     @GenericGenerator(name = "system-uuid", strategy = "uuid2")
