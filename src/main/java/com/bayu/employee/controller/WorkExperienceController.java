@@ -12,7 +12,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,18 +20,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
-import static com.bayu.employee.util.AppConstants.CREATE_WORK_EXPERIENCE_REQUEST;
-import static com.bayu.employee.util.AppConstants.FIELD_WORK_EXPERIENCE_COMPANY_NAME;
-import static com.bayu.employee.util.AppConstants.FIELD_WORK_EXPERIENCE_POSITION;
-import static com.bayu.employee.util.AppConstants.FIELD_WORK_EXPERIENCE_SALARY;
-import static com.bayu.employee.util.AppConstants.FIELD_WORK_EXPERIENCE_YEAR_OF_EMPLOYMENT;
-import static com.bayu.employee.util.AppConstants.FIELD_WORK_EXPERIENCE_YEAR_OF_RESIGNATION;
-import static com.bayu.employee.util.AppConstants.MESSAGE_VALIDATION_FIELD_WORK_EXPERIENCE_COMPANY_NAME;
-import static com.bayu.employee.util.AppConstants.MESSAGE_VALIDATION_FIELD_WORK_EXPERIENCE_POSITION;
-import static com.bayu.employee.util.AppConstants.MESSAGE_VALIDATION_FIELD_WORK_EXPERIENCE_SALARY;
-import static com.bayu.employee.util.AppConstants.MESSAGE_VALIDATION_FIELD_WORK_EXPERIENCE_YEAR_OF_EMPLOYMENT;
-import static com.bayu.employee.util.AppConstants.MESSAGE_VALIDATION_FIELD_WORK_EXPERIENCE_YEAR_OF_RESIGNATION;
-import static com.bayu.employee.util.AppConstants.UPDATE_WORK_EXPERIENCE_REQUEST;
+import static com.bayu.employee.util.ValidationUtil.validationChecksForCreateWorkExperienceRequests;
+import static com.bayu.employee.util.ValidationUtil.validationChecksForUpdateWorkExperienceRequests;
 
 @Controller
 public class WorkExperienceController {
@@ -99,7 +88,7 @@ public class WorkExperienceController {
 
         log.info("Create Work Experience : {}", createWorkExperienceRequest.toString());
 
-        String fieldError = validationCheck(createWorkExperienceRequest, bindingResult);
+        String fieldError = validationChecksForCreateWorkExperienceRequests(createWorkExperienceRequest, bindingResult);
 
         if (fieldError != null) return fieldError;
 
@@ -111,11 +100,10 @@ public class WorkExperienceController {
     }
 
     @GetMapping("/work/employee/{employeeId}")
-    public String getAllWorkExperienceEmployeeId(
-            @PathVariable(value = "employeeId") String employeeId,
-            Authentication authentication,
-            Model model,
-            RedirectAttributes redirectAttributes) {
+    public String getAllWorkExperienceEmployeeId(@PathVariable(value = "employeeId") String employeeId,
+                                                 Authentication authentication,
+                                                 Model model,
+                                                 RedirectAttributes redirectAttributes) {
 
         String username = authentication.getName();
 
@@ -128,10 +116,9 @@ public class WorkExperienceController {
     }
 
     @GetMapping("/work/show-update-form/{workExperienceId}")
-    public String showUpdateWorkExperienceForm(
-            @PathVariable(value = "workExperienceId") String workExperienceId,
-            Authentication authentication,
-            Model model) {
+    public String showUpdateWorkExperienceForm(@PathVariable(value = "workExperienceId") String workExperienceId,
+                                               Authentication authentication,
+                                               Model model) {
 
         String username = authentication.getName();
 
@@ -154,80 +141,50 @@ public class WorkExperienceController {
     }
 
     @PostMapping("/work/update/{workExperienceId}")
-    public String updateWorkExperience(
-            @PathVariable(value = "workExperienceId") String workExperienceId,
-            @ModelAttribute("updateWorkExperienceRequest") UpdateWorkExperienceRequest updateWorkExperienceRequest,
-            Authentication authentication,
-            Model model,
-            BindingResult bindingResult,
-            RedirectAttributes redirectAttributes) {
+    public String updateWorkExperience(@PathVariable(value = "workExperienceId") String workExperienceId,
+                                       @ModelAttribute("updateWorkExperienceRequest") UpdateWorkExperienceRequest updateWorkExperienceRequest,
+                                       Authentication authentication,
+                                       Model model,
+                                       BindingResult bindingResult,
+                                       RedirectAttributes redirectAttributes) {
 
         log.info("Update Work Experience : {}", updateWorkExperienceRequest.toString());
 
         String username = authentication.getName();
 
-        String fieldError = validationChecksForDataUpdateRequests(updateWorkExperienceRequest, bindingResult);
+        String fieldError = validationChecksForUpdateWorkExperienceRequests(updateWorkExperienceRequest, bindingResult);
 
         if (fieldError != null) return fieldError;
 
-        return null;
+        WorkExperienceDTO workExperienceDTO = workExperienceService.updateWorkExperience(workExperienceId, updateWorkExperienceRequest);
+
+        model.addAttribute("username", username);
+        redirectAttributes.addAttribute("employeeId", workExperienceDTO.getEmployeeId());
+
+        return "redirect:/work/employee/{employeeId}";
     }
 
 
-    private static String validationCheck(CreateWorkExperienceRequest createWorkExperienceRequest, BindingResult bindingResult) {
-        if (createWorkExperienceRequest.getPosition().isEmpty()) {
-            bindingResult.addError(new FieldError(CREATE_WORK_EXPERIENCE_REQUEST, FIELD_WORK_EXPERIENCE_POSITION, MESSAGE_VALIDATION_FIELD_WORK_EXPERIENCE_POSITION));
+    @GetMapping("/work/delete/{workExperienceId}")
+    public String deleteWorkExperience(@PathVariable(value = "workExperienceId") String workExperienceId,
+                                       Authentication authentication,
+                                       Model model,
+                                       RedirectAttributes redirectAttributes) {
+
+        String username = authentication.getName();
+
+        WorkExperienceDTO workExperienceDTO = workExperienceService.getWorkExperienceById(workExperienceId);
+
+        workExperienceService.deleteWorkExperience(workExperienceDTO.getId());
+
+        redirectAttributes.addAttribute("employeeId", workExperienceDTO.getEmployeeId());
+        model.addAttribute("username", username);
+
+        if (workExperienceService.getAllWorkExperiencesByEmployeeId(workExperienceDTO.getEmployeeId()).size() == 0) {
+            return "redirect:/work/home";
         }
 
-        if (createWorkExperienceRequest.getCompanyName().isEmpty()) {
-            bindingResult.addError(new FieldError(CREATE_WORK_EXPERIENCE_REQUEST, FIELD_WORK_EXPERIENCE_COMPANY_NAME, MESSAGE_VALIDATION_FIELD_WORK_EXPERIENCE_COMPANY_NAME));
-        }
-
-        if (createWorkExperienceRequest.getSalary().isEmpty()) {
-            bindingResult.addError(new FieldError(CREATE_WORK_EXPERIENCE_REQUEST, FIELD_WORK_EXPERIENCE_SALARY, MESSAGE_VALIDATION_FIELD_WORK_EXPERIENCE_SALARY));
-        }
-
-        if (createWorkExperienceRequest.getYearOfEmployment().isEmpty()) {
-            bindingResult.addError(new FieldError(CREATE_WORK_EXPERIENCE_REQUEST, FIELD_WORK_EXPERIENCE_YEAR_OF_EMPLOYMENT, MESSAGE_VALIDATION_FIELD_WORK_EXPERIENCE_YEAR_OF_EMPLOYMENT));
-        }
-
-        if (createWorkExperienceRequest.getYearOfResignation().isEmpty()) {
-            bindingResult.addError(new FieldError(CREATE_WORK_EXPERIENCE_REQUEST, FIELD_WORK_EXPERIENCE_YEAR_OF_RESIGNATION, MESSAGE_VALIDATION_FIELD_WORK_EXPERIENCE_YEAR_OF_RESIGNATION));
-        }
-
-        if (bindingResult.hasErrors()) {
-            return "work/add_work";
-        }
-
-        return null;
-    }
-
-    private static String validationChecksForDataUpdateRequests(UpdateWorkExperienceRequest updateWorkExperienceRequest, BindingResult bindingResult) {
-        if (updateWorkExperienceRequest.getPosition().isEmpty()) {
-            bindingResult.addError(new FieldError(UPDATE_WORK_EXPERIENCE_REQUEST, FIELD_WORK_EXPERIENCE_POSITION, MESSAGE_VALIDATION_FIELD_WORK_EXPERIENCE_POSITION));
-        }
-
-        if (updateWorkExperienceRequest.getCompanyName().isEmpty()) {
-            bindingResult.addError(new FieldError(UPDATE_WORK_EXPERIENCE_REQUEST, FIELD_WORK_EXPERIENCE_COMPANY_NAME, MESSAGE_VALIDATION_FIELD_WORK_EXPERIENCE_COMPANY_NAME));
-        }
-
-        if (updateWorkExperienceRequest.getSalary().isEmpty()) {
-            bindingResult.addError(new FieldError(UPDATE_WORK_EXPERIENCE_REQUEST, FIELD_WORK_EXPERIENCE_SALARY, MESSAGE_VALIDATION_FIELD_WORK_EXPERIENCE_SALARY));
-        }
-
-        if (updateWorkExperienceRequest.getYearOfEmployment().isEmpty()) {
-            bindingResult.addError(new FieldError(UPDATE_WORK_EXPERIENCE_REQUEST, FIELD_WORK_EXPERIENCE_YEAR_OF_EMPLOYMENT, MESSAGE_VALIDATION_FIELD_WORK_EXPERIENCE_YEAR_OF_EMPLOYMENT));
-        }
-
-        if (updateWorkExperienceRequest.getYearOfResignation().isEmpty()) {
-            bindingResult.addError(new FieldError(UPDATE_WORK_EXPERIENCE_REQUEST, FIELD_WORK_EXPERIENCE_YEAR_OF_RESIGNATION, MESSAGE_VALIDATION_FIELD_WORK_EXPERIENCE_YEAR_OF_RESIGNATION));
-        }
-
-        if (bindingResult.hasErrors()) {
-            return "redirect:/work/show-update-form/{workExperienceId}";
-        }
-
-        return null;
+        return "redirect:/work/employee/{employeeId}";
     }
 
 }
