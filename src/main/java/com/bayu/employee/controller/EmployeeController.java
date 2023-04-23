@@ -13,13 +13,13 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import java.math.BigDecimal;
-import java.text.DecimalFormat;
-import java.time.LocalDate;
+import static com.bayu.employee.util.ValidationUtil.validationChecksForEmployeeUpdateRequests;
 
 @Controller
 public class EmployeeController {
@@ -150,7 +150,7 @@ public class EmployeeController {
 
         String username = authentication.getName();
 
-        validationCheck(updateEmployeeRequest, bindingResult);
+        validationChecksForEmployeeUpdateRequests(updateEmployeeRequest, bindingResult);
 
         EmployeeDTO employee = employeeService.updateEmployee(employeeId, updateEmployeeRequest);
 
@@ -158,40 +158,6 @@ public class EmployeeController {
         redirectAttributes.addAttribute("employeeId", employee.getId());
 
         return "redirect:/employees/{employeeId}";
-    }
-
-    private static void validationCheck(UpdateEmployeeRequest updateEmployeeRequest, BindingResult bindingResult) {
-        if (updateEmployeeRequest.getPosition() == null || updateEmployeeRequest.getPosition().equals("")) {
-            bindingResult.addError(new FieldError("updateEmployeeRequest", "position", "Posisi wajib diisi."));
-        }
-
-        if (updateEmployeeRequest.getNik() == null || updateEmployeeRequest.getNik().equals("")) {
-            bindingResult.addError(new FieldError("updateEmployeeRequest", "nik", "NIK wajib diisi."));
-        }
-
-        if (updateEmployeeRequest.getFirstName() == null || updateEmployeeRequest.getFirstName().equals("")) {
-            bindingResult.addError(new FieldError("updateEmployeeRequest", "firstName", "Nama Depan wajib diisi."));
-        }
-
-        if (updateEmployeeRequest.getLastName() == null || updateEmployeeRequest.getLastName().equals("")) {
-            bindingResult.addError(new FieldError("updateEmployeeRequest", "lastName", "Nama Belakang wajib diisi."));
-        }
-
-        if (updateEmployeeRequest.getGender() == null || updateEmployeeRequest.getGender().equals("")) {
-            bindingResult.addError(new FieldError("updateEmployeeRequest", "gender", "Jenis Kelamin wajib diisi."));
-        }
-
-        if (updateEmployeeRequest.getAge() == null || updateEmployeeRequest.getAge().equals("")) {
-            bindingResult.addError(new FieldError("updateEmployeeRequest", "age", "Umur wajib diisi."));
-        }
-
-        if (updateEmployeeRequest.getPlaceOfBirth() == null || updateEmployeeRequest.getPlaceOfBirth().equals("")) {
-            bindingResult.addError(new FieldError("updateEmployeeRequest", "placeOfBirth", "Tempat Lahir wajib diisi."));
-        }
-
-        if (updateEmployeeRequest.getDateOfBirth() == null) {
-            bindingResult.addError(new FieldError("updateEmployeeRequest", "dateOfBirth", "Tanggal Lahir wajib diisi."));
-        }
     }
 
 }
