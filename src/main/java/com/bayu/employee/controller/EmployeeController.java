@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import static com.bayu.employee.util.ValidationUtil.validationChecksForEmployeeUpdateRequests;
+import static com.bayu.employee.util.ValidationUtil.validationChecksForUpdateEmployeeRequests;
 
 @Controller
 public class EmployeeController {
@@ -150,7 +150,7 @@ public class EmployeeController {
 
         String username = authentication.getName();
 
-        validationChecksForEmployeeUpdateRequests(updateEmployeeRequest, bindingResult);
+        validationChecksForUpdateEmployeeRequests(updateEmployeeRequest, bindingResult);
 
         EmployeeDTO employee = employeeService.updateEmployee(employeeId, updateEmployeeRequest);
 
