@@ -12,7 +12,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,6 +19,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
+
+import static com.bayu.employee.util.ValidationUtil.validationChecksForCreateTrainingRequests;
+import static com.bayu.employee.util.ValidationUtil.validationChecksForUpdateTrainingRequests;
 
 @Controller
 public class TrainingHistoryController {
@@ -83,7 +85,7 @@ public class TrainingHistoryController {
 
         log.info("Create Training : {}", createTrainingRequest.toString());
 
-        String fieldError = validationCheck(createTrainingRequest, bindingResult);
+        String fieldError = validationChecksForCreateTrainingRequests(createTrainingRequest, bindingResult);
 
         if (fieldError != null) return fieldError;
 
@@ -146,7 +148,7 @@ public class TrainingHistoryController {
 
         String username = authentication.getName();
 
-        String fieldError = validationChecksForDataUpdateRequests(updateTrainingRequest, bindingResult);
+        String fieldError = validationChecksForUpdateTrainingRequests(updateTrainingRequest, bindingResult);
 
         if (fieldError != null) return fieldError;
 
@@ -178,44 +180,6 @@ public class TrainingHistoryController {
         }
 
         return "redirect:/training/employee/{employeeId}";
-    }
-
-    private static String validationCheck(CreateTrainingRequest createTrainingRequest, BindingResult bindingResult) {
-        if (createTrainingRequest.getTrainingName() == null) {
-            bindingResult.addError(new FieldError("createTrainingRequest", "trainingName", "Nama Pelatihan wajib diisi."));
-        }
-
-        if (createTrainingRequest.getCertificate() == null) {
-            bindingResult.addError(new FieldError("createTrainingRequest", "certificate", "Sertifikat wajib diisi."));
-        }
-
-        if (createTrainingRequest.getYear() == null) {
-            bindingResult.addError(new FieldError("createTrainingRequest", "year", "Tahun wajib diisi."));
-        }
-
-        if (bindingResult.hasErrors()) {
-            return "training/add_training";
-        }
-        return null;
-    }
-
-    private static String validationChecksForDataUpdateRequests(UpdateTrainingRequest updateTrainingRequest, BindingResult bindingResult) {
-        if (updateTrainingRequest.getTrainingName() == null) {
-            bindingResult.addError(new FieldError("updateTrainingRequest", "trainingName", "Nama Pelatihan wajib diisi."));
-        }
-
-        if (updateTrainingRequest.getCertificate() == null) {
-            bindingResult.addError(new FieldError("updateTrainingRequest", "certificate", "Sertifikat wajib diisi."));
-        }
-
-        if (updateTrainingRequest.getYear() == null) {
-            bindingResult.addError(new FieldError("updateTrainingRequest", "year", "Tahun wajib diisi."));
-        }
-
-        if (bindingResult.hasErrors()) {
-            return "redirect:/training/show-update-form/{trainingId}";
-        }
-        return null;
     }
 
 }
