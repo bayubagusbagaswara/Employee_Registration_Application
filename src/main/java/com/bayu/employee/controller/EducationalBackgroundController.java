@@ -172,7 +172,7 @@ public class EducationalBackgroundController {
 
         EducationDTO educationDTO = educationalBackgroundService.getEducationById(educationId);
 
-        educationalBackgroundService.deleteEducation(educationId);
+        educationalBackgroundService.deleteEducation(educationDTO.getId());
 
         redirectAttributes.addAttribute("employeeId", educationDTO.getEmployeeId());
         model.addAttribute("username", username);
