@@ -1,8 +1,25 @@
 package com.bayu.employee.util;
 
-import org.springframework.validation.FieldError;
-
 public class AppConstants {
+
+    // EMPLOYEE
+    public final static String UPDATE_EMPLOYEE_REQUEST = "updateEmployeeRequest";
+    public final static String FIELD_EMPLOYEE_POSITION = "position";
+    public final static String FIELD_EMPLOYEE_NIK = "nik";
+    public final static String FIELD_EMPLOYEE_FIRSTNAME = "firstName";
+    public final static String FIELD_EMPLOYEE_LASTNAME = "lastName";
+    public final static String FIELD_EMPLOYEE_GENDER = "gender";
+    public final static String FIELD_EMPLOYEE_AGE = "age";
+    public final static String FIELD_EMPLOYEE_PLACE_OF_BIRTH = "placeOfBirth";
+    public final static String FIELD_EMPLOYEE_DATE_OF_BIRTH = "dateOfBirth";
+    public final static String MESSAGE_VALIDATION_FIELD_EMPLOYEE_POSITION = "Posisi wajib diisi.";
+    public final static String MESSAGE_VALIDATION_FIELD_EMPLOYEE_NIK = "NIK wajib diisi.";
+    public final static String MESSAGE_VALIDATION_FIELD_EMPLOYEE_FIRSTNAME = "Nama Depan wajib diisi.";
+    public final static String MESSAGE_VALIDATION_FIELD_EMPLOYEE_LASTNAME = "Nama Belakang wajib diisi.";
+    public final static String MESSAGE_VALIDATION_FIELD_EMPLOYEE_GENDER = "Jenis Kelamin wajib diisi.";
+    public final static String MESSAGE_VALIDATION_FIELD_EMPLOYEE_AGE = "Umur wajib diisi.";
+    public final static String MESSAGE_VALIDATION_FIELD_EMPLOYEE_PLACE_OF_BIRTH = "Tempat Lahir wajib diisi.";
+    public final static String MESSAGE_VALIDATION_FIELD_EMPLOYEE_DATE_OF_BIRTH = "Tanggal Lahir wajib diisi.";
 
     // EDUCATIONAL BACKGROUND
     public final static String CREATE_EDUCATION_REQUEST = "createEducationRequest";
@@ -30,4 +47,15 @@ public class AppConstants {
     public final static String MESSAGE_VALIDATION_FIELD_WORK_EXPERIENCE_SALARY = "Gaji wajib diisi.";
     public final static String MESSAGE_VALIDATION_FIELD_WORK_EXPERIENCE_YEAR_OF_EMPLOYMENT = "Tahun Masuk wajib diisi.";
     public final static String MESSAGE_VALIDATION_FIELD_WORK_EXPERIENCE_YEAR_OF_RESIGNATION = "Tahun Keluar wajid diisi.";
+
+    // TRAINING HISTORY
+    public final static String CREATE_TRAINING_REQUEST = "createTrainingRequest";
+    public final static String UPDATE_TRAINING_REQUEST = "updateTrainingRequest";
+    public final static String FIELD_TRAINING_NAME = "trainingName";
+    public final static String FIELD_TRAINING_CERTIFICATE = "certificate";
+    public final static String FIELD_TRAINING_YEAR = "year";
+    public final static String MESSAGE_FIELD_TRAINING_NAME = "Nama Pelatihan wajib diisi.";
+    public final static String MESSAGE_FIELD_TRAINING_CERTIFICATE = "Sertifikat wajib diisi.";
+    public final static String MESSAGE_FIELD_TRAINING_YEAR = "Tahun wajib diisi";
+
 }
