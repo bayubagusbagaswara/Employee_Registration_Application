@@ -12,14 +12,14 @@ public class AppConstants {
     public final static String FIELD_EMPLOYEE_AGE = "age";
     public final static String FIELD_EMPLOYEE_PLACE_OF_BIRTH = "placeOfBirth";
     public final static String FIELD_EMPLOYEE_DATE_OF_BIRTH = "dateOfBirth";
-    public final static String MESSAGE_VALIDATION_FIELD_EMPLOYEE_POSITION = "Posisi wajib diisi.";
-    public final static String MESSAGE_VALIDATION_FIELD_EMPLOYEE_NIK = "NIK wajib diisi.";
-    public final static String MESSAGE_VALIDATION_FIELD_EMPLOYEE_FIRSTNAME = "Nama Depan wajib diisi.";
-    public final static String MESSAGE_VALIDATION_FIELD_EMPLOYEE_LASTNAME = "Nama Belakang wajib diisi.";
-    public final static String MESSAGE_VALIDATION_FIELD_EMPLOYEE_GENDER = "Jenis Kelamin wajib diisi.";
-    public final static String MESSAGE_VALIDATION_FIELD_EMPLOYEE_AGE = "Umur wajib diisi.";
-    public final static String MESSAGE_VALIDATION_FIELD_EMPLOYEE_PLACE_OF_BIRTH = "Tempat Lahir wajib diisi.";
-    public final static String MESSAGE_VALIDATION_FIELD_EMPLOYEE_DATE_OF_BIRTH = "Tanggal Lahir wajib diisi.";
+    public final static String MESSAGE_EMPLOYEE_POSITION = "Posisi wajib diisi.";
+    public final static String MESSAGE_EMPLOYEE_NIK = "NIK wajib diisi.";
+    public final static String MESSAGE_EMPLOYEE_FIRSTNAME = "Nama Depan wajib diisi.";
+    public final static String MESSAGE_EMPLOYEE_LASTNAME = "Nama Belakang wajib diisi.";
+    public final static String MESSAGE_EMPLOYEE_GENDER = "Jenis Kelamin wajib diisi.";
+    public final static String MESSAGE_EMPLOYEE_AGE = "Umur wajib diisi.";
+    public final static String MESSAGE_EMPLOYEE_PLACE_OF_BIRTH = "Tempat Lahir wajib diisi.";
+    public final static String MESSAGE_EMPLOYEE_DATE_OF_BIRTH = "Tanggal Lahir wajib diisi.";
 
     // EDUCATIONAL BACKGROUND
     public final static String CREATE_EDUCATION_REQUEST = "createEducationRequest";
@@ -28,10 +28,10 @@ public class AppConstants {
     public final static String FIELD_EDUCATION_DEPARTMENT = "department";
     public final static String FIELD_EDUCATION_COLLEGE_NAME = "collegeName";
     public final static String FIELD_EDUCATION_GRADUATION_YEAR = "graduationYear";
-    public final static String MESSAGE_VALIDATION_FIELD_EDUCATION_LEVEL_OF_EDUCATION = "Tingkat Pendidikan wajib diisi.";
-    public final static String MESSAGE_VALIDATION_FIELD_EDUCATION_DEPARTMENT = "Jurusan wajib diisi.";
-    public final static String MESSAGE_VALIDATION_FIELD_EDUCATION_COLLEGE_NAME = "Nama Instansi/Perguruan Tinggi wajib diisi.";
-    public final static String MESSAGE_VALIDATION_FIELD_EDUCATION_GRADUATION_YEAR = "Tahun Lulus wajib diisi.";
+    public final static String MESSAGE_EDUCATION_LEVEL_OF_EDUCATION = "Tingkat Pendidikan wajib diisi.";
+    public final static String MESSAGE_EDUCATION_DEPARTMENT = "Jurusan wajib diisi.";
+    public final static String MESSAGE_EDUCATION_COLLEGE_NAME = "Nama Instansi/Perguruan Tinggi wajib diisi.";
+    public final static String MESSAGE_EDUCATION_GRADUATION_YEAR = "Tahun Lulus wajib diisi.";
 
     // WORK EXPERIENCE
     public final static String CREATE_WORK_EXPERIENCE_REQUEST = "createWorkExperienceRequest";
@@ -42,11 +42,11 @@ public class AppConstants {
     public final static String FIELD_WORK_EXPERIENCE_YEAR_OF_EMPLOYMENT = "yearOfEmployment";
     public final static String FIELD_WORK_EXPERIENCE_YEAR_OF_RESIGNATION = "yearOfResignation";
 
-    public final static String MESSAGE_VALIDATION_FIELD_WORK_EXPERIENCE_POSITION = "Posisi wajib diisi.";
-    public final static String MESSAGE_VALIDATION_FIELD_WORK_EXPERIENCE_COMPANY_NAME = "Nama Perusahaan wajib diisi.";
-    public final static String MESSAGE_VALIDATION_FIELD_WORK_EXPERIENCE_SALARY = "Gaji wajib diisi.";
-    public final static String MESSAGE_VALIDATION_FIELD_WORK_EXPERIENCE_YEAR_OF_EMPLOYMENT = "Tahun Masuk wajib diisi.";
-    public final static String MESSAGE_VALIDATION_FIELD_WORK_EXPERIENCE_YEAR_OF_RESIGNATION = "Tahun Keluar wajid diisi.";
+    public final static String MESSAGE_WORK_EXPERIENCE_POSITION = "Posisi wajib diisi.";
+    public final static String MESSAGE_WORK_EXPERIENCE_COMPANY_NAME = "Nama Perusahaan wajib diisi.";
+    public final static String MESSAGE_WORK_EXPERIENCE_SALARY = "Gaji wajib diisi.";
+    public final static String MESSAGE_WORK_EXPERIENCE_YEAR_OF_EMPLOYMENT = "Tahun Masuk wajib diisi.";
+    public final static String MESSAGE_WORK_EXPERIENCE_YEAR_OF_RESIGNATION = "Tahun Keluar wajid diisi.";
 
     // TRAINING HISTORY
     public final static String CREATE_TRAINING_REQUEST = "createTrainingRequest";
@@ -54,8 +54,8 @@ public class AppConstants {
     public final static String FIELD_TRAINING_NAME = "trainingName";
     public final static String FIELD_TRAINING_CERTIFICATE = "certificate";
     public final static String FIELD_TRAINING_YEAR = "year";
-    public final static String MESSAGE_FIELD_TRAINING_NAME = "Nama Pelatihan wajib diisi.";
-    public final static String MESSAGE_FIELD_TRAINING_CERTIFICATE = "Sertifikat wajib diisi.";
-    public final static String MESSAGE_FIELD_TRAINING_YEAR = "Tahun wajib diisi";
+    public final static String MESSAGE_TRAINING_NAME = "Nama Pelatihan wajib diisi.";
+    public final static String MESSAGE_TRAINING_CERTIFICATE = "Sertifikat wajib diisi.";
+    public final static String MESSAGE_TRAINING_YEAR = "Tahun wajib diisi";
 
 }
