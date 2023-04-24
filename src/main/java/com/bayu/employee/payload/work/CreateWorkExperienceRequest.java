@@ -4,8 +4,10 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 
 @Data
 @Builder
@@ -21,7 +23,9 @@ public class CreateWorkExperienceRequest implements Serializable {
 
     private String salary;
 
-    private String yearOfEmployment;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private LocalDateTime yearOfEmployment;
 
-    private String yearOfResignation;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private LocalDateTime yearOfResignation;
 }
