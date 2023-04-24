@@ -12,7 +12,6 @@ import com.bayu.employee.service.WorkExperienceService;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -35,8 +34,8 @@ public class WorkExperienceServiceImpl implements WorkExperienceService {
                 .position(createWorkExperienceRequest.getPosition())
                 .companyName(createWorkExperienceRequest.getCompanyName())
                 .salary(formatToDecimal(createWorkExperienceRequest.getSalary()))
-//                .yearOfEmployment(createWorkExperienceRequest.getYearOfEmployment())
-//                .yearOfResignation(createWorkExperienceRequest.getYearOfResignation())
+                .yearOfEmployment(createWorkExperienceRequest.getYearOfEmployment())
+                .yearOfResignation(createWorkExperienceRequest.getYearOfResignation())
                 .employee(employee)
                 .build();
 
@@ -67,7 +66,7 @@ public class WorkExperienceServiceImpl implements WorkExperienceService {
 
     }
 
-    private WorkExperienceDTO mapToWorkDTO(WorkExperience workExperience) {
+    private static WorkExperienceDTO mapToWorkDTO(WorkExperience workExperience) {
         return WorkExperienceDTO.builder()
                 .id(workExperience.getId())
                 .employeeId(workExperience.getEmployee().getId())
@@ -79,9 +78,9 @@ public class WorkExperienceServiceImpl implements WorkExperienceService {
                 .build();
     }
 
-    private List<WorkExperienceDTO> mapToWorkDTOList(List<WorkExperience> workExperienceList) {
+    private static List<WorkExperienceDTO> mapToWorkDTOList(List<WorkExperience> workExperienceList) {
         return workExperienceList.stream()
-                .map(this::mapToWorkDTO)
+                .map(WorkExperienceServiceImpl::mapToWorkDTO)
                 .collect(Collectors.toList());
     }
 
