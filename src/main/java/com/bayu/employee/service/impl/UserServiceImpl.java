@@ -61,7 +61,7 @@ public class UserServiceImpl implements UserService {
 
         Set<Role> roleSet = new HashSet<>();
 
-        roleSet.add(roleRepository.getByName(RoleName.USER.name())
+        roleSet.add(roleRepository.getRoleByName(RoleName.USER.name())
                 .orElseThrow(() -> new AppException(USER_ROLE_NOT_SET)));
 
         user.setRoles(roleSet);
@@ -95,7 +95,7 @@ public class UserServiceImpl implements UserService {
 
         Set<Role> roleSet = new HashSet<>();
 
-        roleSet.add(roleRepository.getByName(RoleName.ADMIN.name())
+        roleSet.add(roleRepository.getRoleByName(RoleName.ADMIN.name())
                 .orElseThrow(() -> new AppException(USER_ROLE_NOT_SET)));
 
         user.setRoles(roleSet);
@@ -123,9 +123,9 @@ public class UserServiceImpl implements UserService {
 
         Set<Role> roleSet = new HashSet<>();
 
-        roleSet.add(roleRepository.getByName(RoleName.ADMIN.name())
+        roleSet.add(roleRepository.getRoleByName(RoleName.ADMIN.name())
                 .orElseThrow(() -> new AppException(USER_ROLE_NOT_SET)));
-        roleSet.add(roleRepository.getByName(RoleName.USER.name())
+        roleSet.add(roleRepository.getRoleByName(RoleName.USER.name())
                 .orElseThrow(() -> new AppException(USER_ROLE_NOT_SET)));
 
         user.setRoles(roleSet);
@@ -155,7 +155,7 @@ public class UserServiceImpl implements UserService {
                 .build();
 
         Set<Role> roleSet = new HashSet<>();
-        roleSet.add(roleRepository.getByName(RoleName.USER.name())
+        roleSet.add(roleRepository.getRoleByName(RoleName.USER.name())
                 .orElseThrow(() -> new AppException(USER_ROLE_NOT_SET)));
 
         user.setRoles(roleSet);
