@@ -63,7 +63,11 @@ public class WorkExperienceServiceImpl implements WorkExperienceService {
 
     @Override
     public void deleteWorkExperience(String workExperienceId) {
+        WorkExperience workExperience = workExperienceRepository.findById(workExperienceId)
+                .orElseThrow(() -> new RuntimeException("Work Experience not found with id : [" + workExperienceId + "]"));
 
+        workExperience.setDeleted(true);
+        workExperienceRepository.save(workExperience);
     }
 
     private static WorkExperienceDTO mapToWorkDTO(WorkExperience workExperience) {
