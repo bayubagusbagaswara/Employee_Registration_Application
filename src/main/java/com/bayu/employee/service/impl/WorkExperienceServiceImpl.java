@@ -12,6 +12,7 @@ import com.bayu.employee.service.WorkExperienceService;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -58,7 +59,18 @@ public class WorkExperienceServiceImpl implements WorkExperienceService {
 
     @Override
     public WorkExperienceDTO updateWorkExperience(String workExperienceId, UpdateWorkExperienceRequest updateWorkExperienceRequest) {
-        return null;
+        WorkExperience workExperience = workExperienceRepository.findById(workExperienceId)
+                .orElseThrow(() -> new RuntimeException("Work Experience not found with id : [" + workExperienceId + "]"));
+
+        workExperience.setPosition(updateWorkExperienceRequest.getPosition());
+        workExperience.setCompanyName(updateWorkExperienceRequest.getCompanyName());
+        workExperience.setSalary(new BigDecimal(updateWorkExperienceRequest.getSalary()));
+        workExperience.setYearOfEmployment(LocalDateTime.parse(updateWorkExperienceRequest.getYearOfEmployment()));
+        workExperience.setYearOfResignation(LocalDateTime.parse(updateWorkExperienceRequest.getYearOfResignation()));
+
+        workExperienceRepository.save(workExperience);
+
+        return mapToWorkDTO(workExperience);
     }
 
     @Override
