@@ -145,11 +145,11 @@ public class ValidationUtil {
             bindingResult.addError(new FieldError(CREATE_WORK_EXPERIENCE_REQUEST, FIELD_WORK_EXPERIENCE_SALARY, MESSAGE_WORK_EXPERIENCE_SALARY));
         }
 
-        if (createWorkExperienceRequest.getYearOfEmployment().isEmpty()) {
+        if (createWorkExperienceRequest.getYearOfEmployment() == null) {
             bindingResult.addError(new FieldError(CREATE_WORK_EXPERIENCE_REQUEST, FIELD_WORK_EXPERIENCE_YEAR_OF_EMPLOYMENT, MESSAGE_WORK_EXPERIENCE_YEAR_OF_EMPLOYMENT));
         }
 
-        if (createWorkExperienceRequest.getYearOfResignation().isEmpty()) {
+        if (createWorkExperienceRequest.getYearOfResignation() == null) {
             bindingResult.addError(new FieldError(CREATE_WORK_EXPERIENCE_REQUEST, FIELD_WORK_EXPERIENCE_YEAR_OF_RESIGNATION, MESSAGE_WORK_EXPERIENCE_YEAR_OF_RESIGNATION));
         }
 
