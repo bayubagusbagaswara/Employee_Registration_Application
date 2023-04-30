@@ -195,4 +195,91 @@ public class StringUtilTests {
         String result1 = convertAmount2(amount1);
         assertEquals("Rp1.000", result1);
     }
+
+    public static String upperCaseWords(String sentence) {
+        if(sentence.isEmpty() || sentence.isBlank()){
+            return "";
+        } else if (sentence==null) {
+            return "";
+        }
+        String words[] = sentence.replaceAll("\\s+", " ").trim().split(" ");
+        String newSentence = "";
+        if(sentence!=null) {
+            for (String word : words) {
+                for (int i = 0; i < word.length(); i++)
+                    newSentence = newSentence + ((i == 0) ? word.substring(i, i + 1).toUpperCase() :
+                            (i != word.length() - 1) ? word.substring(i, i + 1).toLowerCase() : word.substring(i, i + 1).toLowerCase().toLowerCase() + " ");
+            }
+            newSentence = newSentence.substring(0,newSentence.length()-1);
+        }
+        return newSentence;
+    }
+
+    @Test
+    void testUpperCaseWords() {
+        String name = "bayu bagus bagaswara";
+
+        String result = upperCaseWords(name);
+
+        System.out.println(result);
+    }
+
+//    String words[] = str.split("\\s+");
+//
+//      for(String word: words)
+//    {
+//        firstchr = word.substring(0, 1);
+//        firstchr = firstchr.toUpperCase();
+//        remchrs = word.substring(1);
+//        newstr = newstr + firstchr + remchrs + " ";
+//    }
+
+    public static String capitalizeSentences(String sentences) {
+        String firstCharacter;
+        String remchrs;
+        StringBuilder newstr = new StringBuilder();
+        String[] words = sentences.split("\\s+");
+
+        for(String word: words)
+        {
+            firstCharacter = word.substring(0, 1);
+            firstCharacter = firstCharacter.toUpperCase();
+            remchrs = word.substring(1);
+            newstr.append(firstCharacter).append(remchrs).append(" ");
+        }
+        return String.valueOf(newstr);
+    }
+
+    @Test
+    void testCapitalize() {
+        String name = "bayu bagus bagaswara";
+        String result = capitalizeSentences(name);
+        System.out.println(result);
+    }
+
+    public static String capitalize(String str) {
+        StringBuilder word = new StringBuilder();
+        for (int i = 0; i < str.length(); i++) {
+            if (i == 0 || str.charAt(i - 1) == ' ') {
+                word.append(Character.toUpperCase(str.charAt(i)));
+            }
+            else {
+                word.append(str.charAt(i));
+            }
+        }
+        return word.toString();
+    }
+
+    @Test
+    void testCap() {
+        String name = "bayu bagus bagaswara";
+        String capitalize = capitalize(name);
+        System.out.println(capitalize);
+        assertEquals("Bayu Bagus Bagaswara", capitalize);
+
+        String name1 = "bagaswara";
+        String capitalize1 = capitalize(name1);
+        System.out.println(capitalize1);
+        assertEquals("Bagaswara", capitalize1);
+    }
 }
