@@ -16,6 +16,8 @@ import java.time.Instant;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static com.bayu.employee.util.StringUtil.formattedInstantToString;
+
 @Service
 public class TrainingHistoryServiceImpl implements TrainingHistoryService {
 
@@ -99,6 +101,10 @@ public class TrainingHistoryServiceImpl implements TrainingHistoryService {
                 .trainingName(capitalizeEachWord(trainingHistory.getTrainingName()))
                 .certificate(trainingHistory.getCertificate())
                 .year(String.valueOf(trainingHistory.getYear()))
+                .createdAt(formattedInstantToString(trainingHistory.getCreatedAt()))
+                .createdBy(trainingHistory.getCreatedBy())
+                .updatedAt(trainingHistory.getUpdatedAt() == null ? null : formattedInstantToString(trainingHistory.getUpdatedAt()))
+                .updatedBy(trainingHistory.getUpdatedBy() == null ? null : trainingHistory.getUpdatedBy())
                 .build();
     }
 
