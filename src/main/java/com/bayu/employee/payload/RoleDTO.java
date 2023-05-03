@@ -20,6 +20,7 @@ public class RoleDTO implements Serializable {
     private String name;
 
     private String createdAt;
-
+    private String createdBy;
     private String updatedAt;
+    private String updatedBy;
 }
