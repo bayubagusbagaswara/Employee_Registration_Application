@@ -30,7 +30,5 @@ public class UserDTO implements Serializable {
     private Set<Role> roles;
 
     private String createdAt;
-    private String createdBy;
     private String updatedAt;
-    private String updatedBy;
 }
