@@ -12,6 +12,7 @@ import com.bayu.employee.service.TrainingHistoryService;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.time.Instant;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -35,6 +36,9 @@ public class TrainingHistoryServiceImpl implements TrainingHistoryService {
         trainingHistory.setCertificate(createTrainingRequest.getCertificate());
         trainingHistory.setYear(Integer.valueOf(createTrainingRequest.getYear()));
         trainingHistory.setEmployee(employee);
+
+        trainingHistory.setCreatedAt(Instant.now());
+        trainingHistory.setCreatedBy("SYSTEM");
 
         trainingHistoryRepository.save(trainingHistory);
 
@@ -71,6 +75,9 @@ public class TrainingHistoryServiceImpl implements TrainingHistoryService {
         if (updateTrainingRequest.getYear() != null) {
             trainingHistory.setYear(Integer.valueOf(updateTrainingRequest.getYear()));
         }
+
+        trainingHistory.setUpdatedAt(Instant.now());
+        trainingHistory.setUpdatedBy("SYSTEM");
 
         trainingHistoryRepository.save(trainingHistory);
 
