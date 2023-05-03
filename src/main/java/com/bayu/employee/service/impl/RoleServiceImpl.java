@@ -28,11 +28,8 @@ public class RoleServiceImpl implements RoleService {
         Role role = new Role();
         role.setName(RoleName.valueOf(createRoleRequest.getName().toUpperCase()));
 
-        Instant now = Instant.now();
-        role.setCreatedAt(now);
+        role.setCreatedAt(Instant.now());
         role.setCreatedBy("SYSTEM");
-        role.setUpdatedAt(now);
-        role.setUpdatedBy("SYSTEM");
 
         roleRepository.save(role);
 
