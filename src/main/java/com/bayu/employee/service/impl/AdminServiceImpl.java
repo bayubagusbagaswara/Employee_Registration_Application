@@ -14,6 +14,8 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static com.bayu.employee.util.StringUtil.formattedInstantToString;
+
 @Service
 public class AdminServiceImpl implements AdminService {
 
@@ -44,6 +46,10 @@ public class AdminServiceImpl implements AdminService {
                         .age(employeeDTO.getAge())
                         .gender(employeeDTO.getGender())
                         .levelOfEducation(employeeDTO.getLevelOfEducation())
+                        .createdAt(employeeDTO.getCreatedAt())
+                        .createdBy(employeeDTO.getCreatedBy())
+                        .updatedAt(employeeDTO.getUpdatedAt())
+                        .updatedBy(employeeDTO.getUpdatedBy())
                         .build())
                 .collect(Collectors.toList());
     }
@@ -71,6 +77,10 @@ public class AdminServiceImpl implements AdminService {
                             .department(education.getDepartment())
                             .collegeName(education.getCollegeName())
                             .graduationYear(String.valueOf(education.getGraduationYear()))
+                            .createdAt(formattedInstantToString(education.getCreatedAt()))
+                            .createdBy(education.getCreatedBy())
+                            .updatedAt(education.getUpdatedAt() == null ? null : formattedInstantToString(education.getUpdatedAt()))
+                            .updatedBy(education.getUpdatedBy() == null ? null : education.getUpdatedBy())
                             .build();
                 })
                 .collect(Collectors.toList());
