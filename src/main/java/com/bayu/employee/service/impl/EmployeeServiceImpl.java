@@ -20,6 +20,7 @@ import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.text.NumberFormat;
+import java.time.Instant;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -35,6 +36,8 @@ public class EmployeeServiceImpl implements EmployeeService {
     private final EmployeeRepository employeeRepository;
     private final UserService userService;
     private final EducationalBackgroundRepository educationalBackgroundRepository;
+
+    // ini gak bisa di inject EducationBackgroundService, menyebabkan circular dependency, karena di EducationalBackgroundService juga butuh EmployeeService
 
     public EmployeeServiceImpl(EmployeeRepository employeeRepository, UserService userService, EducationalBackgroundRepository educationalBackgroundRepository) {
         this.employeeRepository = employeeRepository;
@@ -94,8 +97,10 @@ public class EmployeeServiceImpl implements EmployeeService {
                 .salary(formatStringToBigDecimal(createEmployeeRequest.getSalary()))
                 .user(user)
                 .levelOfEducation(createEmployeeRequest.getLevelOfEducation())
-
                 .build();
+
+        employee.setCreatedAt(Instant.now());
+        employee.setCreatedBy("SYSTEM");
 
         // di object Employee memiliki property tingkatPendidikanTerakhir, jurusan, namaInstansi, tahunLulus
 
@@ -123,6 +128,9 @@ public class EmployeeServiceImpl implements EmployeeService {
                 .orElseThrow(() -> new ResourceNotFoundException("Employee not found with id : " + id));
 
         validationCheck(updateEmployeeRequest, employee);
+
+        employee.setUpdatedAt(Instant.now());
+        employee.setUpdatedBy("SYSTEM");
 
         employeeRepository.save(employee);
 
