@@ -17,6 +17,8 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static com.bayu.employee.util.StringUtil.formattedInstantToString;
+
 @Service
 public class WorkExperienceServiceImpl implements WorkExperienceService {
 
@@ -98,6 +100,10 @@ public class WorkExperienceServiceImpl implements WorkExperienceService {
                 .salary(formatToString(workExperience.getSalary()))
                 .yearOfEmployment(String.valueOf(workExperience.getYearOfEmployment()))
                 .yearOfResignation(String.valueOf(workExperience.getYearOfResignation()))
+                .createdAt(formattedInstantToString(workExperience.getCreatedAt()))
+                .createdBy(workExperience.getCreatedBy())
+                .updatedAt(workExperience.getUpdatedAt() == null ? null : formattedInstantToString(workExperience.getUpdatedAt()))
+                .updatedBy(workExperience.getUpdatedBy() == null ? null : workExperience.getUpdatedBy())
                 .build();
     }
 
