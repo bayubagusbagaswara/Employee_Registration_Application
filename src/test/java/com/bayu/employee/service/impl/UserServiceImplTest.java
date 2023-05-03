@@ -91,4 +91,15 @@ class UserServiceImplTest {
         log.info("Username: {}", user.getUsername());
     }
 
+
+    @Test
+    void createUser1() {
+        CreateUserRequest createUserRequest = CreateUserRequest.builder()
+                .username("bagas")
+                .email("bagas@mail.com")
+                .password("bagas123")
+                .build();
+
+        UserDTO user = userService.createUser(createUserRequest);
+    }
 }
