@@ -28,6 +28,8 @@ import java.util.List;
 import java.util.Locale;
 import java.util.stream.Collectors;
 
+import static com.bayu.employee.util.StringUtil.formattedInstantToString;
+
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
 
@@ -158,6 +160,10 @@ public class EmployeeServiceImpl implements EmployeeService {
                 .dateOfBirth(changeDateFormat(employee.getDateOfBirth()))
                 .salary(String.valueOf(employee.getSalary()))
                 .levelOfEducation(employee.getLevelOfEducation())
+                .createdAt(formattedInstantToString(employee.getCreatedAt()))
+                .createdBy(employee.getCreatedBy())
+                .updatedAt(employee.getUpdatedAt() == null ? null : formattedInstantToString(employee.getUpdatedAt()))
+                .updatedBy(employee.getUpdatedBy())
                 .build();
     }
 
