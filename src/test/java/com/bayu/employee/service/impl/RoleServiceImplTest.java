@@ -76,7 +76,7 @@ class RoleServiceImplTest {
         for (String roleName : roleNames) {
             log.info("Name : {}", roleName);
         }
-        assertEquals(1, roles.size());
+        assertEquals(2, roles.size());
     }
 
     @Test
