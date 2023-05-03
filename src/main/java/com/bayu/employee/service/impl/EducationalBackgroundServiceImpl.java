@@ -17,6 +17,8 @@ import java.time.Instant;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static com.bayu.employee.util.StringUtil.formattedInstantToString;
+
 @Service
 public class EducationalBackgroundServiceImpl implements EducationalBackgroundService {
 
@@ -106,6 +108,10 @@ public class EducationalBackgroundServiceImpl implements EducationalBackgroundSe
                 .department(capitalizeEachWord(educationalBackground.getDepartment()))
                 .collegeName(educationalBackground.getCollegeName())
                 .graduationYear(String.valueOf(educationalBackground.getGraduationYear()))
+                .createdAt(formattedInstantToString(educationalBackground.getCreatedAt()))
+                .createdBy(educationalBackground.getCreatedBy())
+                .updatedAt(educationalBackground.getUpdatedAt() == null ? null : formattedInstantToString(educationalBackground.getUpdatedAt()))
+                .updatedBy(educationalBackground.getUpdatedBy() == null ? null : educationalBackground.getUpdatedBy())
                 .build();
     }
 
