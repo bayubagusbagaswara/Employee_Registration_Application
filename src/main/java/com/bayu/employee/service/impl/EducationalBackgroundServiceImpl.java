@@ -13,6 +13,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.time.Instant;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -37,6 +38,9 @@ public class EducationalBackgroundServiceImpl implements EducationalBackgroundSe
         educationalBackground.setCollegeName(createEducationRequest.getCollegeName());
         educationalBackground.setGraduationYear(Integer.valueOf(createEducationRequest.getGraduationYear()));
         educationalBackground.setEmployee(employee);
+
+        educationalBackground.setCreatedAt(Instant.now());
+        educationalBackground.setCreatedBy("SYSTEM");
 
         educationalBackgroundRepository.save(educationalBackground);
 
@@ -77,6 +81,9 @@ public class EducationalBackgroundServiceImpl implements EducationalBackgroundSe
         if (updateEducationRequest.getGraduationYear() != null) {
             educationalBackground.setGraduationYear(Integer.valueOf(updateEducationRequest.getGraduationYear()));
         }
+
+        educationalBackground.setUpdatedAt(Instant.now());
+        educationalBackground.setUpdatedBy("SYSTEM");
 
         educationalBackgroundRepository.save(educationalBackground);
 
