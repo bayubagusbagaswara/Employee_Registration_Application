@@ -37,7 +37,7 @@ public class RoleServiceImpl implements RoleService {
                 .id(String.valueOf(role.getId()))
                 .name(String.valueOf(role.getName()))
                 .createdAt(formattedInstantToString(role.getCreatedAt()))
-                .updatedAt(formattedInstantToString(role.getUpdatedAt()))
+                .updatedAt(role.getUpdatedAt() == null ? null : formattedInstantToString(role.getUpdatedAt()))
                 .build();
     }
 
@@ -68,7 +68,7 @@ public class RoleServiceImpl implements RoleService {
                 .id(String.valueOf(role.getId()))
                 .name(role.getName().getRoleName())
                 .createdAt(formattedInstantToString(role.getCreatedAt()))
-                .updatedAt(formattedInstantToString(role.getUpdatedAt()))
+                .updatedAt(role.getUpdatedAt() == null ? null : formattedInstantToString(role.getUpdatedAt()))
                 .build();
     }
 
