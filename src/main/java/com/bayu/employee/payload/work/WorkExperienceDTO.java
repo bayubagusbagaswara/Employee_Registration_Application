@@ -33,4 +33,9 @@ public class WorkExperienceDTO implements Serializable {
 
     private String lengthOfWork;
 
+    private String createdAt;
+    private String createdBy;
+    private String updatedAt;
+    private String updatedBy;
+
 }
