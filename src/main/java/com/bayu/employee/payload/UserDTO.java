@@ -28,4 +28,9 @@ public class UserDTO implements Serializable {
     private String password;
 
     private Set<Role> roles;
+
+    private String createdAt;
+    private String createdBy;
+    private String updatedAt;
+    private String updatedBy;
 }
