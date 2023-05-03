@@ -28,4 +28,9 @@ public class EducationDTO implements Serializable {
     private String collegeName;
 
     private String graduationYear;
+
+    private String createdAt;
+    private String createdBy;
+    private String updatedAt;
+    private String updatedBy;
 }
