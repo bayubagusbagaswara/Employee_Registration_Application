@@ -128,7 +128,7 @@ public class Employee extends UserAudit {
 
     @MapsId
     @OneToOne
-    @JoinColumn(name = "id_user", foreignKey = @ForeignKey(name = "fk_employee_id_user"), referencedColumnName = "id")
+    @JoinColumn(name = "id_user", foreignKey = @ForeignKey(name = "fk_employees_id_user"), referencedColumnName = "id")
     private User user;
 
     @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)

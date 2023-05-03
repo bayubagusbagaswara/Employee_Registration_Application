@@ -69,9 +69,9 @@ public class User extends DateAudit {
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
-            name = "user_role",
-            joinColumns = @JoinColumn(name = "id_user", foreignKey = @ForeignKey(name = "fk_user_role_id_user"), referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "id_role", foreignKey = @ForeignKey(name = "fk_user_role_id_role"), referencedColumnName = "id")
+            name = "users_roles",
+            joinColumns = @JoinColumn(name = "id_user", foreignKey = @ForeignKey(name = "fk_users_roles_id_user"), referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "id_role", foreignKey = @ForeignKey(name = "fk_users_roles_id_role"), referencedColumnName = "id")
     )
     private Set<Role> roles = new HashSet<>();
 

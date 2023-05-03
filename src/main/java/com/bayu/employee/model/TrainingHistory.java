@@ -42,6 +42,6 @@ public class TrainingHistory extends UserAudit {
     private Integer year;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "employee_id", foreignKey = @ForeignKey(name = "fk_trainings_employee_id"), referencedColumnName = "id_user")
+    @JoinColumn(name = "employee_id", foreignKey = @ForeignKey(name = "fk_training_histories_employee_id"), referencedColumnName = "id_user")
     private Employee employee;
 }
