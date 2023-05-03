@@ -26,4 +26,9 @@ public class TrainingDTO implements Serializable {
     private String certificate;
 
     private String year;
+
+    private String createdAt;
+    private String createdBy;
+    private String updatedAt;
+    private String updatedBy;
 }
