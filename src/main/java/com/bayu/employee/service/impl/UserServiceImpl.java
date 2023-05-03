@@ -19,6 +19,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.time.Instant;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -99,6 +100,7 @@ public class UserServiceImpl implements UserService {
                 .orElseThrow(() -> new AppException(USER_ROLE_NOT_SET)));
 
         user.setRoles(roleSet);
+        user.setCreatedAt(Instant.now());
 
         userRepository.save(user);
 
@@ -130,6 +132,8 @@ public class UserServiceImpl implements UserService {
 
         user.setRoles(roleSet);
 
+        user.setCreatedAt(Instant.now());
+
         userRepository.save(user);
 
         return UserDTO.builder()
@@ -159,6 +163,8 @@ public class UserServiceImpl implements UserService {
                 .orElseThrow(() -> new AppException(USER_ROLE_NOT_SET)));
 
         user.setRoles(roleSet);
+
+        user.setCreatedAt(Instant.now());
 
         userRepository.save(user);
 
