@@ -24,4 +24,12 @@ public class EmployeeAdminDTO implements Serializable {
     private String gender;
 
     private String levelOfEducation;
+
+    private String createdAt;
+
+    private String createdBy;
+
+    private String updatedAt;
+
+    private String updatedBy;
 }
