@@ -12,6 +12,7 @@ import com.bayu.employee.service.WorkExperienceService;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.time.Instant;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -40,6 +41,9 @@ public class WorkExperienceServiceImpl implements WorkExperienceService {
                 .employee(employee)
                 .build();
 
+        workExperience.setCreatedAt(Instant.now());
+        workExperience.setCreatedBy("SYSTEM");
+
         workExperienceRepository.save(workExperience);
 
         return mapToWorkDTO(workExperience);
@@ -67,6 +71,9 @@ public class WorkExperienceServiceImpl implements WorkExperienceService {
         workExperience.setSalary(new BigDecimal(updateWorkExperienceRequest.getSalary()));
         workExperience.setYearOfEmployment(LocalDateTime.parse(updateWorkExperienceRequest.getYearOfEmployment()));
         workExperience.setYearOfResignation(LocalDateTime.parse(updateWorkExperienceRequest.getYearOfResignation()));
+
+        workExperience.setUpdatedAt(Instant.now());
+        workExperience.setUpdatedBy("SYSTEM");
 
         workExperienceRepository.save(workExperience);
 
