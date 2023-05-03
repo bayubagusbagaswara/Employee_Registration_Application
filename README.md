@@ -128,3 +128,9 @@ array = [1, 2, 3, 4]
 # TEST UNTUK ROLE USER
 
 - Menu Work Experience belum tampil
+
+# FITUR UNTUK ADMIN
+
+- Bisa mengetahui jumlah pelamar berdasarkan position tertentu
+- Misal posisi Java Developer memiliki pelamar sebanyak 10 pelamar
+- Bisa mengambil semua pelamar berdasarkan posisi yang dilamar (ambil semua pelamar)
