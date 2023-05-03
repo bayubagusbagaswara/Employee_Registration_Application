@@ -19,7 +19,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "training_history")
+@Table(name = "training_histories")
 @Getter
 @Setter
 @Builder

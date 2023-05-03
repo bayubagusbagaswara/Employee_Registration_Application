@@ -20,7 +20,7 @@ import javax.persistence.Table;
 import java.io.Serializable;
 
 @Entity
-@Table(name = "educational_background")
+@Table(name = "educational_backgrounds")
 @Getter
 @Setter
 @Builder

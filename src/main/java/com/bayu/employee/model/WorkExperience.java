@@ -22,7 +22,7 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "work_experience")
+@Table(name = "work_experiences")
 @Getter
 @Setter
 @Builder
