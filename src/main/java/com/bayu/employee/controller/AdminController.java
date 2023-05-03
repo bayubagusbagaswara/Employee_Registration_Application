@@ -21,19 +21,10 @@ public class AdminController {
 
     private final UserService userService;
     private final AdminService adminService;
-    private final EmployeeService employeeService;
-    private final EducationalBackgroundService educationalBackgroundService;
-    private final WorkExperienceService workExperienceService;
-    private final TrainingHistoryService trainingHistoryService;
 
-
-    public AdminController(UserService userService, AdminService adminService, EmployeeService employeeService, EducationalBackgroundService educationalBackgroundService, WorkExperienceService workExperienceService, TrainingHistoryService trainingHistoryService) {
+    public AdminController(UserService userService, AdminService adminService) {
         this.userService = userService;
         this.adminService = adminService;
-        this.employeeService = employeeService;
-        this.educationalBackgroundService = educationalBackgroundService;
-        this.workExperienceService = workExperienceService;
-        this.trainingHistoryService = trainingHistoryService;
     }
 
     @GetMapping("/admin")
