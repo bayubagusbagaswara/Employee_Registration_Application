@@ -2,7 +2,7 @@
 
 # Technologies
 
-- Java JDK 11
+- Java JDK 17
 - Maven version 3.8.6
 - Spring Boot version 2.7.8
 - PostgreSQL database
