@@ -70,6 +70,10 @@ public class WorkExperienceController {
 
         CreateWorkExperienceRequest createWorkExperienceRequest = new CreateWorkExperienceRequest();
 
+        // lengthOfWork is not exist on object createWorkExperienceRequest
+        // because that is calculate from yearOfResignation and yearOfEmployment
+        // do calculate process in service layer
+
         model.addAttribute("createWorkExperienceRequest", createWorkExperienceRequest);
         model.addAttribute("employeeId", user.getEmployee().getId());
         model.addAttribute("username", username);
