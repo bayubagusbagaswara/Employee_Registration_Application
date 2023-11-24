@@ -111,7 +111,7 @@ public class WorkExperienceController {
 
         List<WorkExperienceDTO> workExperienceList = workExperienceService.getAllWorkExperiencesByEmployeeId(employeeId);
 
-        model.addAttribute("workExperienceList", workExperienceList);
+        model.addAttribute("workList", workExperienceList);
         model.addAttribute("username", username);
 
         return "work/data_work";

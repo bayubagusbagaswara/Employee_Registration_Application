@@ -6,7 +6,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import java.io.Serial;
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Data
@@ -15,7 +17,8 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class CreateWorkExperienceRequest implements Serializable {
 
-    private final static long serialVersionUID = 4095520802509285186L;
+    @Serial
+    private static final long serialVersionUID = 4095520802509285186L;
 
     private String companyName;
 
@@ -24,8 +27,8 @@ public class CreateWorkExperienceRequest implements Serializable {
     private String salary;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private LocalDateTime yearOfEmployment;
+    private LocalDate yearOfEmployment;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private LocalDateTime yearOfResignation;
+    private LocalDate yearOfResignation;
 }

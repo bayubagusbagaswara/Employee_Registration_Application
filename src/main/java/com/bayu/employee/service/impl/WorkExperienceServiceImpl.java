@@ -71,8 +71,8 @@ public class WorkExperienceServiceImpl implements WorkExperienceService {
         workExperience.setPosition(updateWorkExperienceRequest.getPosition());
         workExperience.setCompanyName(updateWorkExperienceRequest.getCompanyName());
         workExperience.setSalary(new BigDecimal(updateWorkExperienceRequest.getSalary()));
-        workExperience.setYearOfEmployment(LocalDateTime.parse(updateWorkExperienceRequest.getYearOfEmployment()));
-        workExperience.setYearOfResignation(LocalDateTime.parse(updateWorkExperienceRequest.getYearOfResignation()));
+        workExperience.setYearOfEmployment(updateWorkExperienceRequest.getYearOfEmployment());
+        workExperience.setYearOfResignation(updateWorkExperienceRequest.getYearOfResignation());
 
         workExperience.setUpdatedAt(Instant.now());
         workExperience.setUpdatedBy("SYSTEM");
@@ -98,8 +98,8 @@ public class WorkExperienceServiceImpl implements WorkExperienceService {
                 .position(workExperience.getPosition())
                 .companyName(workExperience.getCompanyName())
                 .salary(formatToString(workExperience.getSalary()))
-                .yearOfEmployment(String.valueOf(workExperience.getYearOfEmployment()))
-                .yearOfResignation(String.valueOf(workExperience.getYearOfResignation()))
+                .yearOfEmployment(workExperience.getYearOfEmployment())
+                .yearOfResignation(workExperience.getYearOfResignation())
                 .createdAt(formattedInstantToString(workExperience.getCreatedAt()))
                 .createdBy(workExperience.getCreatedBy())
                 .updatedAt(workExperience.getUpdatedAt() == null ? null : formattedInstantToString(workExperience.getUpdatedAt()))
