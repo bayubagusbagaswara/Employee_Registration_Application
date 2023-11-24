@@ -26,7 +26,7 @@ import static com.bayu.employee.util.ValidationUtil.validationChecksForUpdateEdu
 @Controller
 public class EducationalBackgroundController {
 
-    private final static Logger log = LoggerFactory.getLogger(EducationalBackgroundController.class);
+    private static final Logger log = LoggerFactory.getLogger(EducationalBackgroundController.class);
 
     private final EducationalBackgroundService educationalBackgroundService;
     private final UserService userService;
@@ -44,7 +44,7 @@ public class EducationalBackgroundController {
 
         User user = userService.findByUsername(username);
 
-        if (user.getEmployee().getEducationalBackgrounds().size() == 0) {
+        if (user.getEmployee().getEducationalBackgrounds().isEmpty()) {
             return "redirect:/education/home";
         }
 
@@ -59,7 +59,7 @@ public class EducationalBackgroundController {
     public String educationHome(Authentication authentication, Model model) {
         String username = authentication.getName();
         model.addAttribute("username", username);
-        return "education/home_education";
+        return "education/home_education.html";
     }
 
     @GetMapping("/education/show-add-form")
@@ -177,7 +177,7 @@ public class EducationalBackgroundController {
         redirectAttributes.addAttribute("employeeId", educationDTO.getEmployeeId());
         model.addAttribute("username", username);
 
-        if (educationalBackgroundService.getAllByEmployeeId(educationDTO.getEmployeeId()).size() == 0) {
+        if (educationalBackgroundService.getAllByEmployeeId(educationDTO.getEmployeeId()).isEmpty()) {
             return "redirect:/education/home";
         }
         return "redirect:/education/employee/{employeeId}";
