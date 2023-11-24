@@ -17,7 +17,7 @@
                         <div class="pl-1 mb-4">
                             <small class="font-italic text-danger">(*) Data wajib diisi. Jika tidak ada, maka isi dengan tanda strip (-).</small>
                         </div>
-                        <form action="#" th:action="@{/work/save/{userId}(userId=${userId})}" th:object="${createWorkExperienceRequest}" method="post">
+                        <form action="#" th:action="@{/work/save/{employeeId}(employeeId=${employeeId})}" th:object="${createWorkExperienceRequest}" method="post">
                             <div class="row mb-5 pl-5">
                                 <div class="col-12 col-md-5">
                                     <div class="form-group mb-3">
@@ -63,14 +63,13 @@
                                     </div>
                                 </div>
                                 <div class="col-12 col-md-1"></div>
-<!--                                TAMBAHKAN COLUMN YEAR OF EMPLOYMENT DAN YEAR OF RESIGNATION -->
                                 <div class="col-12 col-md-5">
                                     <div class="form-group mb-3">
                                         <div class="row align-items-end">
                                             <div class="col-md mb-md-0">
                                                 <label for="yearOfEmployment" class="form-label"><strong>Tahun Mulai Bekerja</strong></label>
                                                 <span class="required align-self-end text-danger small font-weight-bold">*</span>
-                                                <input type="text" class="form-control" id="yearOfEmployment" name="yearOfEmployment"
+                                                <input type="date" class="form-control" id="yearOfEmployment" name="yearOfEmployment"
                                                        th:value="*{yearOfEmployment}"
                                                        th:errorClass="is-invalid">
                                                 <small th:if="${#fields.hasErrors('yearOfEmployment')}" th:errors="*{yearOfEmployment}" class="text-danger pl-1"></small>
@@ -78,14 +77,13 @@
                                         </div>
                                     </div>
                                 </div>
-<!--                                YEAR OF RESIGNATION -->
                                 <div class="col-12 col-md-5">
                                     <div class="form-group mb-3">
                                         <div class="row align-items-end">
                                             <div class="col-md mb-md-0">
                                                 <label for="yearOfResignation" class="form-label"><strong>Tahun Berakhir Bekerja</strong></label>
                                                 <span class="required align-self-end text-danger small font-weight-bold">*</span>
-                                                <input type="text" class="form-control" id="yearOfResignation" name="yearOfResignation"
+                                                <input type="date" class="form-control" id="yearOfResignation" name="yearOfResignation"
                                                        th:value="*{yearOfResignation}"
                                                        th:errorClass="is-invalid">
                                                 <small th:if="${#fields.hasErrors('yearOfResignation')}" th:errors="*{yearOfResignation}" class="text-danger pl-1"></small>
