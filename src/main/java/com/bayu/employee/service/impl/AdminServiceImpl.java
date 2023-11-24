@@ -72,7 +72,7 @@ public class AdminServiceImpl implements AdminService {
                 .map(education -> {
                     return EducationDTO.builder()
                             .id(education.getId())
-                            .employeeId(education.getEmployee().getId())
+                            .employeeId(education.getUserInformation().getId())
                             .levelOfEducation(education.getLevelOfEducation())
                             .department(education.getDepartment())
                             .collegeName(education.getCollegeName())

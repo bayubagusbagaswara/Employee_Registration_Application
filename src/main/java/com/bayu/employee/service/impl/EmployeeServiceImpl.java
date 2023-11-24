@@ -2,7 +2,7 @@ package com.bayu.employee.service.impl;
 
 import com.bayu.employee.exception.ResourceNotFoundException;
 import com.bayu.employee.model.EducationalBackground;
-import com.bayu.employee.model.Employee;
+import com.bayu.employee.model.UserInformation;
 import com.bayu.employee.model.User;
 import com.bayu.employee.payload.employee.CreateEmployeeRequest;
 import com.bayu.employee.payload.employee.EmployeeDTO;
@@ -48,26 +48,26 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public EmployeeDTO getEmployeeById(String id) {
-        Employee employee = employeeRepository.findById(id)
+        UserInformation userInformation = employeeRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Employee not found with id : " + id));
-        return mapToEmployeeDTO(employee);
+        return mapToEmployeeDTO(userInformation);
     }
 
     @Override
     public EmployeeDTO getEmployeeByName(String name) {
-        Employee employee = employeeRepository.findByFullNameContainsIgnoreCase(name)
+        UserInformation userInformation = employeeRepository.findByFullNameContainsIgnoreCase(name)
                 .orElseThrow(() -> new ResourceNotFoundException("Employee not found with name : " + name));
-        return mapToEmployeeDTO(employee);
+        return mapToEmployeeDTO(userInformation);
     }
 
     @Override
-    public Employee findById(String id) {
+    public UserInformation findById(String id) {
         return employeeRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Employee not found with id : " + id));
     }
 
     @Override
-    public Employee findByUserId(String userId) {
+    public UserInformation findByUserId(String userId) {
         return employeeRepository.findByUserId(userId)
                 .orElseThrow(() -> new ResourceNotFoundException("Employee not found with user id : " + userId));
     }
@@ -80,7 +80,7 @@ public class EmployeeServiceImpl implements EmployeeService {
         User user = userService.findById(userId);
 
         // create employee
-        Employee employee = Employee.builder()
+        UserInformation userInformation = UserInformation.builder()
                 .position(createEmployeeRequest.getPosition())
                 .nik(createEmployeeRequest.getNik())
                 .firstName(createEmployeeRequest.getFirstName())
@@ -95,18 +95,18 @@ public class EmployeeServiceImpl implements EmployeeService {
                 .levelOfEducation(createEmployeeRequest.getLevelOfEducation())
                 .build();
 
-        employee.setCreatedAt(Instant.now());
-        employee.setCreatedBy("SYSTEM");
+        userInformation.setCreatedAt(Instant.now());
+        userInformation.setCreatedBy("SYSTEM");
 
         // di object Employee memiliki property tingkatPendidikanTerakhir, jurusan, namaInstansi, tahunLulus
 
         // save employee
-        Employee employeeSaved = employeeRepository.save(employee);
+        UserInformation userInformationSaved = employeeRepository.save(userInformation);
 
         // create Education dan masukkan employeeId yang sudah tersimpan
         EducationalBackground educationalBackground = EducationalBackground.builder()
-                .employee(employeeSaved)
-                .levelOfEducation(employeeSaved.getLevelOfEducation())
+                .userInformation(userInformationSaved)
+                .levelOfEducation(userInformationSaved.getLevelOfEducation())
                 .department(createEmployeeRequest.getDepartment())
                 .collegeName(createEmployeeRequest.getCollegeName())
                 .graduationYear(Integer.valueOf(createEmployeeRequest.getGraduationYear()))
@@ -115,97 +115,97 @@ public class EmployeeServiceImpl implements EmployeeService {
         // save Education
         educationalBackgroundRepository.save(educationalBackground);
 
-        return mapToEmployeeDTO(employeeSaved);
+        return mapToEmployeeDTO(userInformationSaved);
     }
 
     @Override
     public EmployeeDTO updateEmployee(String id, UpdateEmployeeRequest updateEmployeeRequest) {
-        Employee employee = employeeRepository.findById(id)
+        UserInformation userInformation = employeeRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Employee not found with id : " + id));
 
-        validationCheck(updateEmployeeRequest, employee);
+        validationCheck(updateEmployeeRequest, userInformation);
 
-        employee.setUpdatedAt(Instant.now());
-        employee.setUpdatedBy("SYSTEM");
+        userInformation.setUpdatedAt(Instant.now());
+        userInformation.setUpdatedBy("SYSTEM");
 
-        employeeRepository.save(employee);
+        employeeRepository.save(userInformation);
 
-        return mapToEmployeeDTO(employee);
+        return mapToEmployeeDTO(userInformation);
     }
 
     @Override
     public void deleteEmployee(String id) {
-        Employee employee = employeeRepository.findById(id)
+        UserInformation userInformation = employeeRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Employee not found with id : " + id));
 
-        employeeRepository.delete(employee);
+        employeeRepository.delete(userInformation);
     }
 
-    private static EmployeeDTO mapToEmployeeDTO(Employee employee) {
+    private static EmployeeDTO mapToEmployeeDTO(UserInformation userInformation) {
         return EmployeeDTO.builder()
-                .id(employee.getId())
-                .email(employee.getUser().getEmail())
-                .position(StringUtils.capitalize(employee.getPosition()))
-                .nik(employee.getNik())
-                .fullName(employee.getFullName())
-                .gender(StringUtils.capitalize(employee.getGender()))
-                .age(String.valueOf(employee.getAge()))
-                .placeOfBirth(employee.getPlaceOfBirth())
-                .dateOfBirth(changeDateFormat(employee.getDateOfBirth()))
-                .salary(String.valueOf(employee.getSalary()))
-                .levelOfEducation(employee.getLevelOfEducation())
-                .createdAt(formattedInstantToString(employee.getCreatedAt()))
-                .createdBy(employee.getCreatedBy())
-                .updatedAt(employee.getUpdatedAt() == null ? null : formattedInstantToString(employee.getUpdatedAt()))
-                .updatedBy(employee.getUpdatedBy())
+                .id(userInformation.getId())
+                .email(userInformation.getUser().getEmail())
+                .position(StringUtils.capitalize(userInformation.getPosition()))
+                .nik(userInformation.getNik())
+                .fullName(userInformation.getFullName())
+                .gender(StringUtils.capitalize(userInformation.getGender()))
+                .age(String.valueOf(userInformation.getAge()))
+                .placeOfBirth(userInformation.getPlaceOfBirth())
+                .dateOfBirth(changeDateFormat(userInformation.getDateOfBirth()))
+                .salary(String.valueOf(userInformation.getSalary()))
+                .levelOfEducation(userInformation.getLevelOfEducation())
+                .createdAt(formattedInstantToString(userInformation.getCreatedAt()))
+                .createdBy(userInformation.getCreatedBy())
+                .updatedAt(userInformation.getUpdatedAt() == null ? null : formattedInstantToString(userInformation.getUpdatedAt()))
+                .updatedBy(userInformation.getUpdatedBy())
                 .build();
     }
 
-    private static List<EmployeeDTO> mapToEmployeeDTOList(List<Employee> employeeList) {
-        return employeeList.stream()
+    private static List<EmployeeDTO> mapToEmployeeDTOList(List<UserInformation> userInformationList) {
+        return userInformationList.stream()
                 .map(EmployeeServiceImpl::mapToEmployeeDTO)
                 .toList();
     }
 
-    private static void validationCheck(UpdateEmployeeRequest updateEmployeeRequest, Employee employee) {
+    private static void validationCheck(UpdateEmployeeRequest updateEmployeeRequest, UserInformation userInformation) {
         if (updateEmployeeRequest.getPosition() != null) {
-            employee.setPosition(updateEmployeeRequest.getPosition());
+            userInformation.setPosition(updateEmployeeRequest.getPosition());
         }
 
         if (updateEmployeeRequest.getNik() != null) {
-            employee.setNik(updateEmployeeRequest.getNik());
+            userInformation.setNik(updateEmployeeRequest.getNik());
         }
 
         if (updateEmployeeRequest.getFirstName() != null) {
-            employee.setFirstName(updateEmployeeRequest.getFirstName());
+            userInformation.setFirstName(updateEmployeeRequest.getFirstName());
         }
 
         if (updateEmployeeRequest.getLastName() != null) {
-            employee.setLastName(updateEmployeeRequest.getLastName());
+            userInformation.setLastName(updateEmployeeRequest.getLastName());
         }
 
         if (updateEmployeeRequest.getGender() != null) {
-            employee.setGender(updateEmployeeRequest.getGender());
+            userInformation.setGender(updateEmployeeRequest.getGender());
         }
 
         if (updateEmployeeRequest.getAge() != null) {
-            employee.setAge(Integer.valueOf(updateEmployeeRequest.getAge()));
+            userInformation.setAge(Integer.valueOf(updateEmployeeRequest.getAge()));
         }
 
         if (updateEmployeeRequest.getPlaceOfBirth() != null) {
-            employee.setPlaceOfBirth(updateEmployeeRequest.getPlaceOfBirth());
+            userInformation.setPlaceOfBirth(updateEmployeeRequest.getPlaceOfBirth());
         }
 
         if (updateEmployeeRequest.getDateOfBirth() != null) {
-            employee.setDateOfBirth(updateEmployeeRequest.getDateOfBirth());
+            userInformation.setDateOfBirth(updateEmployeeRequest.getDateOfBirth());
         }
 
         if (updateEmployeeRequest.getFirstName() != null && updateEmployeeRequest.getLastName() != null) {
-            employee.setFullName(splitAndCapitalize(updateEmployeeRequest.getFirstName(), updateEmployeeRequest.getLastName()));
+            userInformation.setFullName(splitAndCapitalize(updateEmployeeRequest.getFirstName(), updateEmployeeRequest.getLastName()));
         }
 
         if (updateEmployeeRequest.getSalary() != null) {
-            employee.setSalary(formatStringToBigDecimal(updateEmployeeRequest.getSalary()));
+            userInformation.setSalary(formatStringToBigDecimal(updateEmployeeRequest.getSalary()));
         }
     }
 

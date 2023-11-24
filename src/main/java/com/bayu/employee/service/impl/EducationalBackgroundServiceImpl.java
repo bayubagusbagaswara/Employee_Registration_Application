@@ -2,7 +2,7 @@ package com.bayu.employee.service.impl;
 
 import com.bayu.employee.exception.ResourceNotFoundException;
 import com.bayu.employee.model.EducationalBackground;
-import com.bayu.employee.model.Employee;
+import com.bayu.employee.model.UserInformation;
 import com.bayu.employee.payload.education.CreateEducationRequest;
 import com.bayu.employee.payload.education.EducationDTO;
 import com.bayu.employee.payload.education.UpdateEducationRequest;
@@ -32,14 +32,14 @@ public class EducationalBackgroundServiceImpl implements EducationalBackgroundSe
 
     @Override
     public EducationDTO createEducation(String employeeId, CreateEducationRequest createEducationRequest) {
-        Employee employee = employeeService.findById(employeeId);
+        UserInformation userInformation = employeeService.findById(employeeId);
 
         EducationalBackground educationalBackground = new EducationalBackground();
         educationalBackground.setLevelOfEducation(createEducationRequest.getLevelOfEducation().toLowerCase());
         educationalBackground.setDepartment(createEducationRequest.getDepartment().toLowerCase());
         educationalBackground.setCollegeName(createEducationRequest.getCollegeName());
         educationalBackground.setGraduationYear(Integer.valueOf(createEducationRequest.getGraduationYear()));
-        educationalBackground.setEmployee(employee);
+        educationalBackground.setUserInformation(userInformation);
 
         educationalBackground.setCreatedAt(Instant.now());
         educationalBackground.setCreatedBy("SYSTEM");
@@ -103,7 +103,7 @@ public class EducationalBackgroundServiceImpl implements EducationalBackgroundSe
     private static EducationDTO mapToEducationDTO(EducationalBackground educationalBackground) {
         return EducationDTO.builder()
                 .id(educationalBackground.getId())
-                .employeeId(educationalBackground.getEmployee().getId())
+                .employeeId(educationalBackground.getUserInformation().getId())
                 .levelOfEducation(StringUtils.upperCase(educationalBackground.getLevelOfEducation()))
                 .department(capitalizeEachWord(educationalBackground.getDepartment()))
                 .collegeName(educationalBackground.getCollegeName())

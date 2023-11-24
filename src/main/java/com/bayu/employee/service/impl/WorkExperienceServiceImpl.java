@@ -1,7 +1,7 @@
 package com.bayu.employee.service.impl;
 
 import com.bayu.employee.exception.ResourceNotFoundException;
-import com.bayu.employee.model.Employee;
+import com.bayu.employee.model.UserInformation;
 import com.bayu.employee.model.WorkExperience;
 import com.bayu.employee.payload.work.CreateWorkExperienceRequest;
 import com.bayu.employee.payload.work.UpdateWorkExperienceRequest;
@@ -13,7 +13,6 @@ import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.time.Instant;
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -32,7 +31,7 @@ public class WorkExperienceServiceImpl implements WorkExperienceService {
 
     @Override
     public WorkExperienceDTO createWorkExperience(String employeeId, CreateWorkExperienceRequest createWorkExperienceRequest) {
-        Employee employee = employeeService.findById(employeeId);
+        UserInformation userInformation = employeeService.findById(employeeId);
 
         WorkExperience workExperience = WorkExperience.builder()
                 .position(createWorkExperienceRequest.getPosition())
@@ -40,7 +39,7 @@ public class WorkExperienceServiceImpl implements WorkExperienceService {
                 .salary(formatToDecimal(createWorkExperienceRequest.getSalary()))
                 .yearOfEmployment(createWorkExperienceRequest.getYearOfEmployment())
                 .yearOfResignation(createWorkExperienceRequest.getYearOfResignation())
-                .employee(employee)
+                .userInformation(userInformation)
                 .build();
 
         workExperience.setCreatedAt(Instant.now());
@@ -94,7 +93,7 @@ public class WorkExperienceServiceImpl implements WorkExperienceService {
     private static WorkExperienceDTO mapToWorkDTO(WorkExperience workExperience) {
         return WorkExperienceDTO.builder()
                 .id(workExperience.getId())
-                .employeeId(workExperience.getEmployee().getId())
+                .employeeId(workExperience.getUserInformation().getId())
                 .position(workExperience.getPosition())
                 .companyName(workExperience.getCompanyName())
                 .salary(formatToString(workExperience.getSalary()))

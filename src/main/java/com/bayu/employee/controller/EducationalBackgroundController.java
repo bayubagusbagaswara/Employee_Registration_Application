@@ -44,12 +44,12 @@ public class EducationalBackgroundController {
 
         User user = userService.findByUsername(username);
 
-        if (user.getEmployee().getEducationalBackgrounds().isEmpty()) {
+        if (user.getUserInformation().getEducationalBackgrounds().isEmpty()) {
             return "redirect:/education/home";
         }
 
         model.addAttribute("username", username);
-        redirectAttributes.addAttribute("employeeId", user.getEmployee().getId());
+        redirectAttributes.addAttribute("employeeId", user.getUserInformation().getId());
 
         return "redirect:/education/employee/{employeeId}";
     }
@@ -71,7 +71,7 @@ public class EducationalBackgroundController {
         CreateEducationRequest createEducationRequest = new CreateEducationRequest();
 
         model.addAttribute("createEducationRequest", createEducationRequest);
-        model.addAttribute("employeeId", user.getEmployee().getId());
+        model.addAttribute("employeeId", user.getUserInformation().getId());
         model.addAttribute("username", username);
 
         return "education/add_education";

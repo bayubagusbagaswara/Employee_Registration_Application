@@ -62,14 +62,14 @@
                                             <th>Detail</th>
                                         </thead>
                                         <tbody>
-                                        <tr th:each="employee : ${employeeList}">
-                                            <td th:text="${employee.position}"></td>
-                                            <td th:text="${employee.fullName}"></td>
-                                            <td th:text="${employee.age}"></td>
-                                            <td th:text="${employee.gender}"></td>
-                                            <td th:text="${employee.levelOfEducation}"></td>
+                                        <tr th:each="userInformation : ${userInformationList}">
+                                            <td th:text="${userInformation.position}"></td>
+                                            <td th:text="${userInformation.fullName}"></td>
+                                            <td th:text="${userInformation.age}"></td>
+                                            <td th:text="${userInformation.gender}"></td>
+                                            <td th:text="${userInformation.levelOfEducation}"></td>
                                             <td align="center">
-                                                <a title="Detail Employee" th:href="@{'/admin/employees/' + ${employee.id}}" class="btn btn-info btn-circle btn-sm"><i class="fas fa-edit"></i></a>
+                                                <a title="Detail Employee" th:href="@{'/admin/employees/' + ${userInformation.id}}" class="btn btn-info btn-circle btn-sm"><i class="fas fa-edit"></i></a>
                                             </td>
                                         </tr>
                                         </tbody>

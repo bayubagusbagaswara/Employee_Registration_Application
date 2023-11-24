@@ -50,7 +50,7 @@ public class WorkExperience extends UserAudit {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "employee_id", foreignKey = @ForeignKey(name = "fk_work_experiences_employee_id"), referencedColumnName = "id_user")
-    private Employee employee;
+    private UserInformation userInformation;
 
     @Override
     public boolean equals(Object o) {

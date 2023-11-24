@@ -1,6 +1,6 @@
 package com.bayu.employee.controller;
 
-import com.bayu.employee.model.Employee;
+import com.bayu.employee.model.UserInformation;
 import com.bayu.employee.model.User;
 import com.bayu.employee.payload.employee.CreateEmployeeRequest;
 import com.bayu.employee.payload.employee.EmployeeDTO;
@@ -43,15 +43,15 @@ public class EmployeeController {
 
         User user = userService.findByUsername(username);
 
-        if (user.getEmployee() == null) {
+        if (user.getUserInformation() == null) {
             CreateEmployeeRequest createEmployeeRequest = new CreateEmployeeRequest();
             model.addAttribute("createEmployeeRequest", createEmployeeRequest);
             return "redirect:/employees/show-add-form";
         }
 
-        Employee employee = employeeService.findByUserId(user.getId());
+        UserInformation userInformation = employeeService.findByUserId(user.getId());
 
-        redirectAttributes.addAttribute("employeeId", employee.getId());
+        redirectAttributes.addAttribute("employeeId", userInformation.getId());
         model.addAttribute("username", username);
 
         return "redirect:/employees/{employeeId}";
@@ -118,18 +118,18 @@ public class EmployeeController {
 
         String username = authentication.getName();
 
-        Employee employee = employeeService.findById(employeeId);
+        UserInformation userInformation = employeeService.findById(employeeId);
 
         UpdateEmployeeRequest updateEmployeeRequest = new UpdateEmployeeRequest();
-        updateEmployeeRequest.setPosition(employee.getPosition());
-        updateEmployeeRequest.setNik(employee.getNik());
-        updateEmployeeRequest.setFirstName(employee.getFirstName());
-        updateEmployeeRequest.setLastName(employee.getLastName());
-        updateEmployeeRequest.setGender(employee.getGender());
-        updateEmployeeRequest.setAge(String.valueOf(employee.getAge()));
-        updateEmployeeRequest.setPlaceOfBirth(employee.getPlaceOfBirth());
-        updateEmployeeRequest.setDateOfBirth(employee.getDateOfBirth());
-        updateEmployeeRequest.setSalary(String.valueOf(employee.getSalary()));
+        updateEmployeeRequest.setPosition(userInformation.getPosition());
+        updateEmployeeRequest.setNik(userInformation.getNik());
+        updateEmployeeRequest.setFirstName(userInformation.getFirstName());
+        updateEmployeeRequest.setLastName(userInformation.getLastName());
+        updateEmployeeRequest.setGender(userInformation.getGender());
+        updateEmployeeRequest.setAge(String.valueOf(userInformation.getAge()));
+        updateEmployeeRequest.setPlaceOfBirth(userInformation.getPlaceOfBirth());
+        updateEmployeeRequest.setDateOfBirth(userInformation.getDateOfBirth());
+        updateEmployeeRequest.setSalary(String.valueOf(userInformation.getSalary()));
 
         model.addAttribute("updateEmployeeRequest", updateEmployeeRequest);
         model.addAttribute("employeeId", employeeId);

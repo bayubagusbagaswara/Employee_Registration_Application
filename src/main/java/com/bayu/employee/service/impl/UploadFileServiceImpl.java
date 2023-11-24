@@ -1,6 +1,6 @@
 package com.bayu.employee.service.impl;
 
-import com.bayu.employee.model.Employee;
+import com.bayu.employee.model.UserInformation;
 import com.bayu.employee.repository.EmployeeRepository;
 import com.bayu.employee.service.UploadFileService;
 import lombok.RequiredArgsConstructor;
@@ -23,19 +23,19 @@ public class UploadFileServiceImpl implements UploadFileService {
 
     @Override
     public String processExcelData(MultipartFile file) throws IOException {
-        List<Employee> entities = new ArrayList<>();
+        List<UserInformation> entities = new ArrayList<>();
 
         try (Workbook workbook = WorkbookFactory.create(file.getInputStream())) {
             // Assuming the data is in the first sheet
             Sheet sheet = workbook.getSheetAt(0);
 
             for (Row row : sheet) {
-                Employee employee = new Employee();
+                UserInformation userInformation = new UserInformation();
                 // Map Excel data to entity fields
-                employee.setFirstName(row.getCell(0).getStringCellValue());
-                employee.setLastName(row.getCell(1).getStringCellValue());
+                userInformation.setFirstName(row.getCell(0).getStringCellValue());
+                userInformation.setLastName(row.getCell(1).getStringCellValue());
                 // ...
-                entities.add(employee);
+                entities.add(userInformation);
             }
             saveEmployeeList(entities);
 
@@ -46,9 +46,9 @@ public class UploadFileServiceImpl implements UploadFileService {
         }
     }
 
-    private void saveEmployeeList(List<Employee> employeeList) {
+    private void saveEmployeeList(List<UserInformation> userInformationList) {
         // process save to all data employee
-        employeeRepository.saveAll(employeeList);
+        employeeRepository.saveAll(userInformationList);
     }
 
 }

@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.bayu</groupId>
-	<artifactId>employee-registration-application</artifactId>
+	<artifactId>userInformation-registration-application</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>employee-registration-application</name>
+	<name>userInformation-registration-application</name>
 	<description>Employee Registration Application</description>
 	<properties>
 		<java.version>17</java.version>

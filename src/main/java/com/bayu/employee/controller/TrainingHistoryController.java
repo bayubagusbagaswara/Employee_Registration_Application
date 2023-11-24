@@ -44,12 +44,12 @@ public class TrainingHistoryController {
 
         User user = userService.findByUsername(username);
 
-        if (user.getEmployee().getTrainingHistories().size() == 0) {
+        if (user.getUserInformation().getTrainingHistories().size() == 0) {
             return "redirect:/training/home";
         }
 
         model.addAttribute("username", username);
-        redirectAttributes.addAttribute("employeeId", user.getEmployee().getId());
+        redirectAttributes.addAttribute("employeeId", user.getUserInformation().getId());
 
         return "redirect:/training/employee/{employeeId}";
     }
@@ -70,7 +70,7 @@ public class TrainingHistoryController {
         CreateTrainingRequest createTrainingRequest = new CreateTrainingRequest();
 
         model.addAttribute("createTrainingRequest", createTrainingRequest);
-        model.addAttribute("employeeId", user.getEmployee().getId());
+        model.addAttribute("employeeId", user.getUserInformation().getId());
         model.addAttribute("username", username);
 
         return "training/add_training";

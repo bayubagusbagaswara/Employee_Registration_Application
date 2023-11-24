@@ -44,12 +44,12 @@ public class WorkExperienceController {
 
         User user = userService.findByUsername(username);
 
-        if (user.getEmployee().getWorkExperiences().isEmpty()) {
+        if (user.getUserInformation().getWorkExperiences().isEmpty()) {
             return "redirect:/work/home";
         }
 
         model.addAttribute("username", username);
-        redirectAttributes.addAttribute("employeeId", user.getEmployee().getId());
+        redirectAttributes.addAttribute("employeeId", user.getUserInformation().getId());
 
         return "redirect:/work/employee/{employeeId}";
     }
@@ -75,7 +75,7 @@ public class WorkExperienceController {
         // do calculate process in service layer
 
         model.addAttribute("createWorkExperienceRequest", createWorkExperienceRequest);
-        model.addAttribute("employeeId", user.getEmployee().getId());
+        model.addAttribute("employeeId", user.getUserInformation().getId());
         model.addAttribute("username", username);
 
         return "work/add_work";

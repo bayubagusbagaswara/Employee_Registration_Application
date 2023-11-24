@@ -20,7 +20,7 @@
 7. Role Admin => /admin/. Role ADMIN & USER => /admin/. Role USER => /index/
 8. Artinya secara default user yang memiliki ROLE ADMIN, akan diredirect langsung ke /admin
 9. Jadi misal di AdminController hanya menangani /admin, tapi seumpama kita hit URL /admin/edit-user, apakah bisa redirect ke endpont /edit-user, dimana misalnya /edit-user ini dimiliki oleh UserController yang hanya bisa diakses yang memiliki Role USER
-10. Kita login sebagai USER, lalu kita klik halaman form My Profile, kita akan mengisi identitas, lalu SIMPAN, maka akan ditampikan halaman list-employee (DONE)
+10. Kita login sebagai USER, lalu kita klik halaman form My Profile, kita akan mengisi identitas, lalu SIMPAN, maka akan ditampikan halaman list-userInformation (DONE)
 11. Kita kerjakan halaman untuk Educational Background. Dimana ada form untuk mengisi pendisikan, lalu tombol save
 12. Kemudian jika telah berhasil, maka kita akan di redirect ke halaman data_education_background.html
 13. Dan di halaman data_educational_background juga ada tombol "Tambah Educational Background"
@@ -32,7 +32,7 @@
 
 1. Pertama, harus registrasi dulu dengan memasukkan username dan password
 2. Kedua, kita diarahkan untuk login. Login dengan memasukkan username dan password
-3. Ketiga, kita mengisi form biodata employee, lalu save
+3. Ketiga, kita mengisi form biodata userInformation, lalu save
 
 # Registration
 
@@ -95,9 +95,9 @@ autocomplete="off"
 - di Daftar Employee terdapat Card Jumlah Karyawan.
 
 - Di admin_home, kita tampilkan card-body
-- Card Body 1 : untuk menampilkan jumlah total employee
+- Card Body 1 : untuk menampilkan jumlah total userInformation
 - Card Body 2 : untuk menampilkan jumlah 
-- Pie Chart : untuk menampilkan jumlah employee berdasarkan posisi
+- Pie Chart : untuk menampilkan jumlah userInformation berdasarkan posisi
 
 ```json
 {
@@ -121,7 +121,7 @@ array = [1, 2, 3, 4]
 
 # Test 1
 
-- Kita buat form new employee dengan menambahkan educationalBackground
+- Kita buat form new userInformation dengan menambahkan educationalBackground
 - Jadi di dto createNewEmployee harus ada property educationalBackground
 - Tapi ketika di save akan membuat object educationalBackground baru
 

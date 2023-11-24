@@ -1,6 +1,5 @@
 package com.bayu.employee.controller;
 
-import com.bayu.employee.model.Employee;
 import com.bayu.employee.service.UploadFileService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -11,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-import java.util.List;
 
 @Controller
 @RequiredArgsConstructor

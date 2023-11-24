@@ -1,10 +1,9 @@
 package com.bayu.employee.service;
 
-import com.bayu.employee.model.Employee;
+import com.bayu.employee.model.UserInformation;
 import com.bayu.employee.payload.employee.CreateEmployeeRequest;
 import com.bayu.employee.payload.employee.EmployeeDTO;
 import com.bayu.employee.payload.employee.UpdateEmployeeRequest;
-import org.springframework.data.domain.Page;
 
 import java.util.List;
 
@@ -22,9 +21,9 @@ public interface EmployeeService {
 
 
     // USER
-    Employee findById(String id);
+    UserInformation findById(String id);
 
-    Employee findByUserId(String userId);
+    UserInformation findByUserId(String userId);
 
     EmployeeDTO createEmployee(String userId, CreateEmployeeRequest createEmployeeRequest);
 

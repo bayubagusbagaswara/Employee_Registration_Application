@@ -9,7 +9,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @SpringBootTest
-class EmployeeFormApplicationTests {
+class UserInformationFormApplicationTests {
 
 	@Test
 	void contextLoads() {

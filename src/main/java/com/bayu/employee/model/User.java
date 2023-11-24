@@ -43,7 +43,7 @@ public class User extends DateAudit {
     private String password;
 
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
-    private Employee employee;
+    private UserInformation userInformation;
 
 //    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
 //    private Set<Education> educations = new HashSet<>();

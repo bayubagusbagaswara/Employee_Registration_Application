@@ -22,7 +22,7 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 //@Where(clause = "is_deleted = false")
-public class Employee extends UserAudit {
+public class UserInformation extends UserAudit {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)

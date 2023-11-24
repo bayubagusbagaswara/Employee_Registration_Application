@@ -1,7 +1,7 @@
 package com.bayu.employee.service.impl;
 
 import com.bayu.employee.exception.ResourceNotFoundException;
-import com.bayu.employee.model.Employee;
+import com.bayu.employee.model.UserInformation;
 import com.bayu.employee.model.TrainingHistory;
 import com.bayu.employee.payload.training.CreateTrainingRequest;
 import com.bayu.employee.payload.training.TrainingDTO;
@@ -31,13 +31,13 @@ public class TrainingHistoryServiceImpl implements TrainingHistoryService {
 
     @Override
     public TrainingDTO createTraining(String employeeId, CreateTrainingRequest createTrainingRequest) {
-        Employee employee = employeeService.findById(employeeId);
+        UserInformation userInformation = employeeService.findById(employeeId);
 
         TrainingHistory trainingHistory = new TrainingHistory();
         trainingHistory.setTrainingName(createTrainingRequest.getTrainingName().toLowerCase());
         trainingHistory.setCertificate(createTrainingRequest.getCertificate());
         trainingHistory.setYear(Integer.valueOf(createTrainingRequest.getYear()));
-        trainingHistory.setEmployee(employee);
+        trainingHistory.setUserInformation(userInformation);
 
         trainingHistory.setCreatedAt(Instant.now());
         trainingHistory.setCreatedBy("SYSTEM");
@@ -97,7 +97,7 @@ public class TrainingHistoryServiceImpl implements TrainingHistoryService {
     private static TrainingDTO mapToTrainingDTO(TrainingHistory trainingHistory) {
         return TrainingDTO.builder()
                 .id(trainingHistory.getId())
-                .employeeId(trainingHistory.getEmployee().getId())
+                .employeeId(trainingHistory.getUserInformation().getId())
                 .trainingName(capitalizeEachWord(trainingHistory.getTrainingName()))
                 .certificate(trainingHistory.getCertificate())
                 .year(String.valueOf(trainingHistory.getYear()))

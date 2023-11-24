@@ -36,7 +36,7 @@
                                     <div class="row align-items-end">
                                         <div class="col-md mb-md-0">
                                             <label class="font-size-14 fw-bold"><strong>Posisi yang dilamar</strong></label>
-                                            <p th:text="${employee.position}"></p>
+                                            <p th:text="${userInformation.position}"></p>
                                         </div>
                                     </div>
                                 </div>
@@ -46,7 +46,7 @@
                                     <div class="row align-items-end">
                                         <div class="col-md mb-md-0">
                                             <label class="font-size-14 fw-bold"><strong>NIK</strong></label>
-                                            <p th:text="${employee.nik}"></p>
+                                            <p th:text="${userInformation.nik}"></p>
                                         </div>
                                     </div>
                                 </div>
@@ -56,7 +56,7 @@
                                     <div class="row align-items-end">
                                         <div class="col-md mb-md-0">
                                             <label class="font-size-14 fw-bold"><strong>Nama Lengkap</strong></label>
-                                            <p th:text="${employee.fullName}"></p>
+                                            <p th:text="${userInformation.fullName}"></p>
                                         </div>
                                     </div>
                                 </div>
@@ -66,7 +66,7 @@
                                     <div class="row align-items-end">
                                         <div class="col-md mb-md-0">
                                             <label class="font-size-14 fw-bold"><strong>Email</strong></label>
-                                            <p th:text="${employee.email}"></p>
+                                            <p th:text="${userInformation.email}"></p>
                                         </div>
                                     </div>
                                 </div>
@@ -76,7 +76,7 @@
                                     <div class="row align-items-end">
                                         <div class="col-md mb-md-0">
                                             <label class="font-size-14 fw-bold"><strong>Jenis Kelamin</strong></label>
-                                            <p th:text="${employee.gender}"></p>
+                                            <p th:text="${userInformation.gender}"></p>
                                         </div>
                                     </div>
                                 </div>
@@ -86,7 +86,7 @@
                                     <div class="row align-items-end">
                                         <div class="col-md mb-md-0">
                                             <label class="font-size-14 fw-bold"><strong>Umur</strong></label>
-                                            <p th:text="${employee.age}"></p>
+                                            <p th:text="${userInformation.age}"></p>
                                         </div>
                                     </div>
                                 </div>
@@ -96,7 +96,7 @@
                                     <div class="row align-items-end">
                                         <div class="col-md mb-md-0">
                                             <label class="font-size-14 fw-bold"><strong>Tempat Lahir</strong></label>
-                                            <p th:text="${employee.placeOfBirth}"></p>
+                                            <p th:text="${userInformation.placeOfBirth}"></p>
                                         </div>
                                     </div>
                                 </div>
@@ -106,7 +106,7 @@
                                     <div class="row align-items-end">
                                         <div class="col-md mb-md-0">
                                             <label class="font-size-14 fw-bold"><strong>Tanggal Lahir</strong></label>
-                                            <p th:text="${employee.dateOfBirth}"></p>
+                                            <p th:text="${userInformation.dateOfBirth}"></p>
                                         </div>
                                     </div>
                                 </div>
@@ -116,10 +116,10 @@
                                     <div class="row align-items-end">
                                         <div class="col-md mb-md-0">
                                             <label class="font-size-14 fw-bold"><strong>Salary (Rp.)</strong></label>
-<!--                                            <p th:text="${employee.salary}"></p>-->
-                                            <p>Rp. <span th:text="${#numbers.formatDecimal(employee.salary, 1, 'POINT', 2, 'COMMA')}"></span></p>
-<!--                                            <p th:text="${#numbers.formatDecimal(employee.salary, 1, 'POINT', 2, 'COMMA')}"></p>-->
-<!--                                            <p th:text="${employee.salary}"><span>.00</span></p>-->
+<!--                                            <p th:text="${userInformation.salary}"></p>-->
+                                            <p>Rp. <span th:text="${#numbers.formatDecimal(userInformation.salary, 1, 'POINT', 2, 'COMMA')}"></span></p>
+<!--                                            <p th:text="${#numbers.formatDecimal(userInformation.salary, 1, 'POINT', 2, 'COMMA')}"></p>-->
+<!--                                            <p th:text="${userInformation.salary}"><span>.00</span></p>-->
                                         </div>
                                     </div>
                                 </div>
