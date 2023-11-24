@@ -8,6 +8,7 @@ import org.springframework.security.config.annotation.authentication.configurati
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
@@ -44,20 +45,18 @@ public class SecurityConfiguration {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                .csrf().disable()
-                .authorizeHttpRequests(authorize -> {
-                            authorize
-                                    .antMatchers(PUBLIC_URLS).permitAll()
-                                    .antMatchers("/registration").permitAll()
-                                    .antMatchers("/admin/**").hasAuthority("ADMIN")
-                                    .antMatchers("/index/**").hasAuthority("USER")
-                                    .antMatchers("/employees/**").hasAuthority("USER")
-                                    .antMatchers("/education/**").hasAuthority("USER")
-                                    .antMatchers("/training/**").hasAuthority("USER")
-                                    .antMatchers("/work/**").hasAuthority("USER")
-                                    .antMatchers("/test/**").permitAll()
-                                    .anyRequest().authenticated();
-                        }
+                .csrf(AbstractHttpConfigurer::disable)
+                .authorizeHttpRequests(authorize -> authorize
+                        .requestMatchers(PUBLIC_URLS).permitAll()
+                        .requestMatchers(new AntPathRequestMatcher("/registration")).permitAll()
+                        .requestMatchers(new AntPathRequestMatcher("/admin/**")).hasAuthority("ADMIN")
+                        .requestMatchers(new AntPathRequestMatcher("/index/**")).hasAuthority("USER")
+                        .requestMatchers(new AntPathRequestMatcher("/employees/**")).hasAuthority("USER")
+                        .requestMatchers(new AntPathRequestMatcher("/education/**")).hasAuthority("USER")
+                        .requestMatchers(new AntPathRequestMatcher("/training/**")).hasAuthority("USER")
+                        .requestMatchers(new AntPathRequestMatcher("/work/**")).hasAuthority("USER")
+                        .requestMatchers(new AntPathRequestMatcher("/test/**")).permitAll()
+                        .anyRequest().authenticated()
                 )
                 .formLogin(form -> form
                         .loginPage("/signin")
@@ -76,6 +75,6 @@ public class SecurityConfiguration {
 
     public void configure(WebSecurity webSecurity) {
         webSecurity.ignoring()
-                .antMatchers("/img/**", "/images/**", "/js/**", "/css/**");
+                .requestMatchers("/img/**", "/images/**", "/js/**", "/css/**");
     }
 }
