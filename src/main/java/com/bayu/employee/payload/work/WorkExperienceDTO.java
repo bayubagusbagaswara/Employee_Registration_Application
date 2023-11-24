@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 
 @Data
 @Builder
@@ -13,7 +14,7 @@ import java.io.Serializable;
 @AllArgsConstructor
 public class WorkExperienceDTO implements Serializable {
 
-    private final static long serialVersionUID = 7172864872644495952L;
+    private static final long serialVersionUID = 7172864872644495952L;
 
     private String id;
 
@@ -27,9 +28,9 @@ public class WorkExperienceDTO implements Serializable {
 
     private String salary;
 
-    private String yearOfEmployment;
+    private LocalDate yearOfEmployment;
 
-    private String yearOfResignation;
+    private LocalDate yearOfResignation;
 
     private String lengthOfWork;
 
