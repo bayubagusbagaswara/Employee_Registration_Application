@@ -6,6 +6,7 @@ import com.bayu.employee.payload.work.UpdateWorkExperienceRequest;
 import com.bayu.employee.payload.work.WorkExperienceDTO;
 import com.bayu.employee.service.UserService;
 import com.bayu.employee.service.WorkExperienceService;
+import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.core.Authentication;
@@ -24,17 +25,14 @@ import static com.bayu.employee.util.ValidationUtil.validationChecksForCreateWor
 import static com.bayu.employee.util.ValidationUtil.validationChecksForUpdateWorkExperienceRequests;
 
 @Controller
+@RequiredArgsConstructor
 public class WorkExperienceController {
 
-    private final static Logger log = LoggerFactory.getLogger(WorkExperienceController.class);
+    private static final Logger log = LoggerFactory.getLogger(WorkExperienceController.class);
 
     private final UserService userService;
-    private final WorkExperienceService workExperienceService;
 
-    public WorkExperienceController(UserService userService, WorkExperienceService workExperienceService) {
-        this.userService = userService;
-        this.workExperienceService = workExperienceService;
-    }
+    private final WorkExperienceService workExperienceService;
 
     @GetMapping("/work")
     public String workExperienceMenu(Authentication authentication,
@@ -46,7 +44,7 @@ public class WorkExperienceController {
 
         User user = userService.findByUsername(username);
 
-        if (user.getEmployee().getWorkExperiences().size() == 0) {
+        if (user.getEmployee().getWorkExperiences().isEmpty()) {
             return "redirect:/work/home";
         }
 
