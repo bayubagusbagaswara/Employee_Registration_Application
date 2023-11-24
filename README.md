@@ -134,3 +134,9 @@ array = [1, 2, 3, 4]
 - Bisa mengetahui jumlah pelamar berdasarkan position tertentu
 - Misal posisi Java Developer memiliki pelamar sebanyak 10 pelamar
 - Bisa mengambil semua pelamar berdasarkan posisi yang dilamar (ambil semua pelamar)
+
+# Tambah Work Experience
+- belum bisa, pastikan url nya bisa dihit
+
+# Main Layout
+- layout yang digunakan utama
