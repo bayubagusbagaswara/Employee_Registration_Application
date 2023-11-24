@@ -12,28 +12,22 @@ import com.bayu.employee.repository.EmployeeRepository;
 import com.bayu.employee.service.EmployeeService;
 import com.bayu.employee.service.UserService;
 import org.apache.commons.lang3.StringUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
-import java.text.NumberFormat;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
-import java.util.stream.Collectors;
 
 import static com.bayu.employee.util.StringUtil.formattedInstantToString;
 
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
-
-    private final static Logger log = LoggerFactory.getLogger(EmployeeServiceImpl.class);
 
     private final EmployeeRepository employeeRepository;
     private final UserService userService;
@@ -170,7 +164,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     private static List<EmployeeDTO> mapToEmployeeDTOList(List<Employee> employeeList) {
         return employeeList.stream()
                 .map(EmployeeServiceImpl::mapToEmployeeDTO)
-                .collect(Collectors.toList());
+                .toList();
     }
 
     private static void validationCheck(UpdateEmployeeRequest updateEmployeeRequest, Employee employee) {
@@ -254,9 +248,9 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     private static BigDecimal formatStringToBigDecimal(String currency) {
-        NumberFormat nf = new DecimalFormat("",
+        DecimalFormat nf = new DecimalFormat("",
                 new DecimalFormatSymbols(new Locale("id", "ID")));
-        ((DecimalFormat) nf).setParseBigDecimal(true);
+        nf.setParseBigDecimal(true);
 //        Locale locale = new Locale("id", "ID");
         return new BigDecimal(currency);
     }
