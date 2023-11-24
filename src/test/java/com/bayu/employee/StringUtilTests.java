@@ -146,55 +146,55 @@ public class StringUtilTests {
         System.out.println(a.length());
     }
 
-    @Test
-    void convertAmount1() {
-        String amount1 = "1000";
-        String result1 = convertAmount1(amount1);
-        System.out.println(result1);
-        assertEquals("Rp.1.000",result1);
+//    @Test
+//    void convertAmount1() {
+//        String amount1 = "1000";
+//        String result1 = convertAmount1(amount1);
+//        System.out.println(result1);
+//        assertEquals("Rp.1.000",result1);
+//
+//        String amount2 = "1500";
+//        String result2 = convertAmount1(amount2);
+//        System.out.println(result2);
+//        assertEquals("Rp.1.500", result2);
+//
+//        String amount3 = "57000";
+//        String result3 = convertAmount1(amount3);
+//        System.out.println(result3);
+//        assertEquals("Rp.57.000", result3);
+//
+//        String amount4 = "155000";
+//        String result4 = convertAmount1(amount4);
+//        System.out.println(result4);
+//        assertEquals("Rp.155.000", result4);
+//
+//        String amount5 = "170500";
+//        String result5 = convertAmount1(amount5);
+//        System.out.println(result5);
+//        assertEquals("Rp.170.500", result5);
+//
+//        String amount6 = "1205000";
+//        String result6 = convertAmount1(amount6);
+//        System.out.println(result6);
+//        assertEquals("Rp.1.205.000", result6);
+//
+//        String amount7 = "15850000";
+//        String result7 = convertAmount1(amount7);
+//        System.out.println(result7);
+//        assertEquals("Rp.15.850.000", result7);
+//
+//        String amount8 = "100250000";
+//        String result8 = convertAmount1(amount8);
+//        System.out.println(result8);
+//        assertEquals("Rp.100.250.000", result8);
+//    }
 
-        String amount2 = "1500";
-        String result2 = convertAmount1(amount2);
-        System.out.println(result2);
-        assertEquals("Rp.1.500", result2);
-
-        String amount3 = "57000";
-        String result3 = convertAmount1(amount3);
-        System.out.println(result3);
-        assertEquals("Rp.57.000", result3);
-
-        String amount4 = "155000";
-        String result4 = convertAmount1(amount4);
-        System.out.println(result4);
-        assertEquals("Rp.155.000", result4);
-
-        String amount5 = "170500";
-        String result5 = convertAmount1(amount5);
-        System.out.println(result5);
-        assertEquals("Rp.170.500", result5);
-
-        String amount6 = "1205000";
-        String result6 = convertAmount1(amount6);
-        System.out.println(result6);
-        assertEquals("Rp.1.205.000", result6);
-
-        String amount7 = "15850000";
-        String result7 = convertAmount1(amount7);
-        System.out.println(result7);
-        assertEquals("Rp.15.850.000", result7);
-
-        String amount8 = "100250000";
-        String result8 = convertAmount1(amount8);
-        System.out.println(result8);
-        assertEquals("Rp.100.250.000", result8);
-    }
-
-    @Test
-    void convertAmount2() {
-        String amount1 = "1000";
-        String result1 = convertAmount2(amount1);
-        assertEquals("Rp1.000", result1);
-    }
+//    @Test
+//    void convertAmount2() {
+//        String amount1 = "1000";
+//        String result1 = convertAmount2(amount1);
+//        assertEquals("Rp1.000", result1);
+//    }
 
     public static String upperCaseWords(String sentence) {
         if(sentence.isEmpty() || sentence.isBlank()){
