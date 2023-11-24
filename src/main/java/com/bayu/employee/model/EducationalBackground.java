@@ -34,7 +34,7 @@ public class EducationalBackground extends UserAudit {
     private Integer graduationYear;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "employee_id", foreignKey = @ForeignKey(name = "fk_educational_backgrounds_employee_id"), referencedColumnName = "id_user")
+    @JoinColumn(name = "user_information_id", foreignKey = @ForeignKey(name = "fk_educational_backgrounds_user_information_id"), referencedColumnName = "id_user")
     private UserInformation userInformation;
 
     @Override

@@ -65,16 +65,16 @@ public class UserInformation extends UserAudit {
 
     @MapsId
     @OneToOne
-    @JoinColumn(name = "id_user", foreignKey = @ForeignKey(name = "fk_employees_id_user"), referencedColumnName = "id")
+    @JoinColumn(name = "id_user", foreignKey = @ForeignKey(name = "fk_user_information_id_user"), referencedColumnName = "id")
     private User user;
 
-    @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
+    @OneToMany(mappedBy = "userInformation", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
     private Set<EducationalBackground> educationalBackgrounds = new HashSet<>();
 
-    @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
+    @OneToMany(mappedBy = "userInformation", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
     private Set<TrainingHistory> trainingHistories = new HashSet<>();
 
-    @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
+    @OneToMany(mappedBy = "userInformation", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
     private Set<WorkExperience> workExperiences = new HashSet<>();
 
     @Override
