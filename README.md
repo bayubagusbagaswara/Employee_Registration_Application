@@ -140,3 +140,11 @@ array = [1, 2, 3, 4]
 
 # Main Layout
 - layout yang digunakan utama
+
+# Relational Table
+
+- Harusnya Table User adalah table parent
+- Karena jika user ini belum mengisi data Personal Data (Employee), maka tab `Educational Background`, `WorkExperience`, `TrainingHistory` akan error
+- Karena table-table tersebut berelasi terhadap data Employee, bukan data User
+- Anggap saja Data Employee adalah sama dengan User Information
+- Sedangkan data table User adalah table Parent untuk semua table child nya
