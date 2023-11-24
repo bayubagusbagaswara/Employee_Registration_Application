@@ -10,7 +10,7 @@ import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "work_experiences")
@@ -37,11 +37,11 @@ public class WorkExperience extends UserAudit {
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(name = "year_of_employment")
-    private LocalDateTime yearOfEmployment;
+    private LocalDate yearOfEmployment;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(name = "year_of_resignation")
-    private LocalDateTime yearOfResignation;
+    private LocalDate yearOfResignation;
 
     // perhitungan lengthOfWork didapatkan dari yearOfResignation - yearOfEmployment
     // lalu dikonversi dalam tahun
