@@ -60,6 +60,8 @@ public class UserServiceImpl implements UserService {
                 .enabled(true)
                 .build();
 
+        user.setCreatedAt(Instant.now());
+
         Set<Role> roleSet = new HashSet<>();
 
         roleSet.add(roleRepository.getRoleByName(RoleName.USER.name())
