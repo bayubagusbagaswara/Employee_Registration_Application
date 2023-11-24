@@ -1,12 +1,13 @@
 package com.bayu.employee.model.base;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import jakarta.persistence.Column;
+import jakarta.persistence.MappedSuperclass;
 import lombok.Data;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
-import javax.persistence.Column;
-import javax.persistence.MappedSuperclass;
+import java.io.Serial;
 import java.io.Serializable;
 import java.time.Instant;
 
@@ -19,6 +20,7 @@ import java.time.Instant;
 )
 public abstract class DateAudit implements Serializable {
 
+    @Serial
     private static final long serialVersionUID = 3275762390211340879L;
 
     @CreatedDate
