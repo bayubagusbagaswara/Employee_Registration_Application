@@ -1,12 +1,87 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Data Work Experience</title>
-</head>
+<html
+        lang="en"
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{fragments/main_layout}"
+>
 <body>
+<!-- kolomnya akan menambahkan length of work -->
 
+<div layout:fragment="content">
+    <div class="card o-hidden border-0 shadow-lg my-5">
+        <div class="card-body p-0">
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">
+                        Pengalaman Kerja
+                    </h6>
+                </div>
+                <div class="card-body">
+                    <div class="table">
+                        <div
+                                id="dataTabel_wrapper"
+                                class="dataTables_wrapper dt-bootstrap4"
+                        >
+                            <div class="col-sm-12 col-md-6 mb-4">
+                                <a href="@{/work/show-add-form}" class="btn btn-primary"
+                                >Tambah Pengalaman Kerja</a
+                                >
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <table
+                                            class="table table-bordered dataTable"
+                                            id="dataTable"
+                                            role="grid"
+                                            aria-describedby="dataTable_info"
+                                            style="width: 100%"
+                                    >
+                                        <thead>
+                                        <tr role="row">
+                                            <th>Nama Perusahaan</th>
+                                            <th>Position</th>
+                                            <th>Gaji</th>
+                                            <th>Tahun Masuk</th>
+                                            <th>Tahun Keluar</th>
+                                            <th>Lama Pekerjaan</th>
+                                        </tr>
+                                        </thead>
 
-
+                                        <tbody>
+                                        <tr th:each="work : ${workList}">
+                                            <td th:text="${work.companyName}"></td>
+                                            <td th:text="${work.position}"></td>
+                                            <td th:text="${work.salary}"></td>
+                                            <td th:text="${work.yearOfEmployment}"></td>
+                                            <td th:text="${work.yearOfResignation}"></td>
+                                            <td th:text="${work.lengthOfWork}"></td>
+                                            <td align="center">
+                                                <a
+                                                        title="Edit"
+                                                        th:href="@{'/work/show-update-form/' + ${work.id}}"
+                                                        class="btn btn-info btn-circle btn-sm"
+                                                ><i class="fas fa-edit"></i>
+                                                </a>
+                                                <a
+                                                        title="Hapus"
+                                                        th:href="@{'/work/delete/' + ${work.id}}"
+                                                        class="btn btn-danger btn-circle btn-sm"
+                                                >
+                                                    <i class="fas fa-trash"></i>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 </body>
 </html>
