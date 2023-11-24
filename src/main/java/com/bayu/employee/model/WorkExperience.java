@@ -7,7 +7,6 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.hibernate.annotations.GenericGenerator;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.math.BigDecimal;
@@ -23,8 +22,8 @@ import java.time.LocalDateTime;
 public class WorkExperience extends UserAudit {
 
     @Id
-    @GenericGenerator(name = "system-uuid", strategy = "uuid2")
-    @GeneratedValue(generator = "system-uuid")
+    @GeneratedValue(strategy = GenerationType.UUID)
+    @Column(name = "id")
     private String id;
 
     @Column(name = "company_name")
@@ -52,5 +51,15 @@ public class WorkExperience extends UserAudit {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "employee_id", foreignKey = @ForeignKey(name = "fk_work_experiences_employee_id"), referencedColumnName = "id_user")
     private Employee employee;
+
+    @Override
+    public boolean equals(Object o) {
+        return super.equals(o);
+    }
+
+    @Override
+    public int hashCode() {
+        return super.hashCode();
+    }
 
 }

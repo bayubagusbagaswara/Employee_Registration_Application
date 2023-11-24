@@ -7,7 +7,6 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Table(name = "educational_backgrounds")
@@ -19,8 +18,7 @@ import org.hibernate.annotations.GenericGenerator;
 public class EducationalBackground extends UserAudit {
 
     @Id
-    @GenericGenerator(name = "system-uuid", strategy = "uuid2")
-    @GeneratedValue(generator = "system-uuid")
+    @GeneratedValue(strategy = GenerationType.UUID)
     private String id;
 
     @Column(name = "level_of_education")
@@ -39,4 +37,13 @@ public class EducationalBackground extends UserAudit {
     @JoinColumn(name = "employee_id", foreignKey = @ForeignKey(name = "fk_educational_backgrounds_employee_id"), referencedColumnName = "id_user")
     private Employee employee;
 
+    @Override
+    public boolean equals(Object o) {
+        return super.equals(o);
+    }
+
+    @Override
+    public int hashCode() {
+        return super.hashCode();
+    }
 }

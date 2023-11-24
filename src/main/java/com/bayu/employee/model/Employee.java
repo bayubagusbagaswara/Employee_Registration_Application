@@ -7,7 +7,6 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.hibernate.annotations.GenericGenerator;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.math.BigDecimal;
@@ -26,8 +25,8 @@ import java.util.Set;
 public class Employee extends UserAudit {
 
     @Id
-    @GenericGenerator(name = "system-uuid", strategy = "uuid2")
-    @GeneratedValue(generator = "system-uuid")
+    @GeneratedValue(strategy = GenerationType.UUID)
+    @Column(name = "id")
     private String id;
 
     @Column(name = "position")
@@ -61,59 +60,8 @@ public class Employee extends UserAudit {
     @Column(name = "salary")
     private BigDecimal salary;
 
-    // tapi ketika isi form createEmployee maka mengisi juga object RiwayatPendidikan
-    // tingkat pendidikan terakhir
-    // jurusan
-    // nama instansi
-
     @Column(name = "level_of_education")
     private String levelOfEducation;
-
-//    private String religion;
-//
-//    private String bloodGroup;
-//
-//    private String maritalStatus;
-//
-//    @Column(name = "address_ktp")
-//    private String addressKtp;
-//
-//    private String subDistrictKtp; // desa/kelurahan
-//
-//    private String districtKtp; // kecamatan
-//
-//    private String cityKtp; // kota
-//
-//    private String provinceKtp; // provinsi
-//
-//    @Column(name = "address_domicile")
-//    private String addressDomicile;
-//
-//    private String subDistrictDomicile;
-//
-//    private String districtDomicile;
-//
-//    private String cityDomicile;
-//
-//    private String provinceDomicile;
-
-    // OFFERING
-
-//    @Column(name = "expectation_salary")
-//    private BigDecimal expectationSalary;
-//
-//    // bersedia ditempatkan dimana saja, Ya atau Tidak
-//    @Column(name = "agreed_placement")
-//    private String agreedPlacement;
-
-
-//    KONTAK TERDEKAT
-
-    // status hubungan
-    // private no kontak
-
-//    @Column(name = "is_deleted")
-//    private boolean isDeleted;
 
     @MapsId
     @OneToOne
@@ -129,4 +77,13 @@ public class Employee extends UserAudit {
     @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
     private Set<WorkExperience> workExperiences = new HashSet<>();
 
+    @Override
+    public boolean equals(Object o) {
+        return super.equals(o);
+    }
+
+    @Override
+    public int hashCode() {
+        return super.hashCode();
+    }
 }
