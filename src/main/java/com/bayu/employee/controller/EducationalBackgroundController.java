@@ -6,6 +6,7 @@ import com.bayu.employee.payload.education.EducationDTO;
 import com.bayu.employee.payload.education.UpdateEducationRequest;
 import com.bayu.employee.service.EducationalBackgroundService;
 import com.bayu.employee.service.UserService;
+import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.core.Authentication;
@@ -24,17 +25,14 @@ import static com.bayu.employee.util.ValidationUtil.validationChecksForCreateEdu
 import static com.bayu.employee.util.ValidationUtil.validationChecksForUpdateEducationRequests;
 
 @Controller
+@RequiredArgsConstructor
 public class EducationalBackgroundController {
 
     private static final Logger log = LoggerFactory.getLogger(EducationalBackgroundController.class);
 
     private final EducationalBackgroundService educationalBackgroundService;
-    private final UserService userService;
 
-    public EducationalBackgroundController(EducationalBackgroundService educationalBackgroundService, UserService userService) {
-        this.educationalBackgroundService = educationalBackgroundService;
-        this.userService = userService;
-    }
+    private final UserService userService;
 
     @GetMapping("/education")
     public String educationMenu(Model model, Authentication authentication, RedirectAttributes redirectAttributes) {
