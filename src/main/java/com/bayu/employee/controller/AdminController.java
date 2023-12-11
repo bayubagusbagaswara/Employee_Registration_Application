@@ -7,6 +7,7 @@ import com.bayu.employee.payload.employee.EmployeeDTO;
 import com.bayu.employee.payload.training.TrainingDTO;
 import com.bayu.employee.payload.work.WorkExperienceDTO;
 import com.bayu.employee.service.*;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,15 +18,12 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import java.util.List;
 
 @Controller
+@RequiredArgsConstructor
 public class AdminController {
 
     private final UserService userService;
-    private final AdminService adminService;
 
-    public AdminController(UserService userService, AdminService adminService) {
-        this.userService = userService;
-        this.adminService = adminService;
-    }
+    private final AdminService adminService;
 
     @GetMapping("/admin")
     public String homeAdmin() {
