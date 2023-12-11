@@ -148,3 +148,30 @@ array = [1, 2, 3, 4]
 - Karena table-table tersebut berelasi terhadap data Employee, bukan data User
 - Anggap saja Data Employee adalah sama dengan User Information
 - Sedangkan data table User adalah table Parent untuk semua table child nya
+
+
+@Configuration
+public class ThymeleafConfig {
+
+    @Autowired
+    private SpringTemplateEngine templateEngine;
+
+    @PostConstruct
+    public void configureTemplateEngine() {
+        // Additional configuration for the template engine if needed
+        templateEngine.addDialect(new LayoutDialect());
+    }
+}
+
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Thymeleaf RESTful Example</title>
+</head>
+<body>
+
+    <h1 th:text="${message}"></h1>
+
+</body>
+</html>
