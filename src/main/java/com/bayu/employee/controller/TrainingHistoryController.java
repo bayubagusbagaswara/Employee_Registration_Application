@@ -6,6 +6,7 @@ import com.bayu.employee.payload.training.TrainingDTO;
 import com.bayu.employee.payload.training.UpdateTrainingRequest;
 import com.bayu.employee.service.TrainingHistoryService;
 import com.bayu.employee.service.UserService;
+import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.core.Authentication;
@@ -24,17 +25,14 @@ import static com.bayu.employee.util.ValidationUtil.validationChecksForCreateTra
 import static com.bayu.employee.util.ValidationUtil.validationChecksForUpdateTrainingRequests;
 
 @Controller
+@RequiredArgsConstructor
 public class TrainingHistoryController {
 
-    private final static Logger log = LoggerFactory.getLogger(TrainingHistoryController.class);
+    private static final Logger log = LoggerFactory.getLogger(TrainingHistoryController.class);
 
     private final TrainingHistoryService trainingHistoryService;
-    private final UserService userService;
 
-    public TrainingHistoryController(TrainingHistoryService trainingHistoryService, UserService userService) {
-        this.trainingHistoryService = trainingHistoryService;
-        this.userService = userService;
-    }
+    private final UserService userService;
 
     @GetMapping("/training")
     public String trainingMenu(Authentication authentication, Model model, RedirectAttributes redirectAttributes) {
@@ -44,7 +42,7 @@ public class TrainingHistoryController {
 
         User user = userService.findByUsername(username);
 
-        if (user.getUserInformation().getTrainingHistories().size() == 0) {
+        if (user.getUserInformation().getTrainingHistories().isEmpty()) {
             return "redirect:/training/home";
         }
 
