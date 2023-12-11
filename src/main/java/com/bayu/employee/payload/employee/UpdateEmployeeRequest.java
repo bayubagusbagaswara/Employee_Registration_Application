@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDate;
 
@@ -15,7 +16,8 @@ import java.time.LocalDate;
 @AllArgsConstructor
 public class UpdateEmployeeRequest implements Serializable {
 
-    private final static long serialVersionUID = -6862284935683901056L;
+    @Serial
+    private static final long serialVersionUID = -6862284935683901056L;
 
     private String position;
 
