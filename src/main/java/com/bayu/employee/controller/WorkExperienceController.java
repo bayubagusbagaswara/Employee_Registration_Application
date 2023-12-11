@@ -126,12 +126,13 @@ public class WorkExperienceController {
 
         WorkExperienceDTO workExperience = workExperienceService.getWorkExperienceById(workExperienceId);
 
-        UpdateWorkExperienceRequest updateWorkExperienceRequest = new UpdateWorkExperienceRequest();
-        updateWorkExperienceRequest.setPosition(workExperience.getPosition());
-        updateWorkExperienceRequest.setCompanyName(workExperience.getCompanyName());
-        updateWorkExperienceRequest.setSalary(workExperience.getSalary());
-        updateWorkExperienceRequest.setYearOfEmployment(workExperience.getYearOfEmployment());
-        updateWorkExperienceRequest.setYearOfResignation(workExperience.getYearOfResignation());
+        UpdateWorkExperienceRequest updateWorkExperienceRequest = UpdateWorkExperienceRequest.builder()
+                .position(workExperience.getPosition())
+                .companyName(workExperience.getCompanyName())
+                .salary(workExperience.getSalary())
+                .yearOfEmployment(workExperience.getYearOfEmployment())
+                .yearOfResignation(workExperience.getYearOfResignation())
+                .build();
 
         model.addAttribute("updateWorkExperienceRequest", updateWorkExperienceRequest);
         model.addAttribute("workExperienceId", workExperience.getId());
