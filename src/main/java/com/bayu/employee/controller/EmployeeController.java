@@ -7,6 +7,7 @@ import com.bayu.employee.payload.employee.EmployeeDTO;
 import com.bayu.employee.payload.employee.UpdateEmployeeRequest;
 import com.bayu.employee.service.EmployeeService;
 import com.bayu.employee.service.UserService;
+import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.core.Authentication;
@@ -22,17 +23,14 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import static com.bayu.employee.util.ValidationUtil.validationChecksForUpdateEmployeeRequests;
 
 @Controller
+@RequiredArgsConstructor
 public class EmployeeController {
 
-    private final static Logger log = LoggerFactory.getLogger(EmployeeController.class);
+    private static final Logger log = LoggerFactory.getLogger(EmployeeController.class);
 
     private final EmployeeService employeeService;
-    private final UserService userService;
 
-    public EmployeeController(EmployeeService employeeService, UserService userService) {
-        this.employeeService = employeeService;
-        this.userService = userService;
-    }
+    private final UserService userService;
 
     @GetMapping("/employees")
     public String homeEmployee(Model model,
@@ -120,16 +118,17 @@ public class EmployeeController {
 
         UserInformation userInformation = employeeService.findById(employeeId);
 
-        UpdateEmployeeRequest updateEmployeeRequest = new UpdateEmployeeRequest();
-        updateEmployeeRequest.setPosition(userInformation.getPosition());
-        updateEmployeeRequest.setNik(userInformation.getNik());
-        updateEmployeeRequest.setFirstName(userInformation.getFirstName());
-        updateEmployeeRequest.setLastName(userInformation.getLastName());
-        updateEmployeeRequest.setGender(userInformation.getGender());
-        updateEmployeeRequest.setAge(String.valueOf(userInformation.getAge()));
-        updateEmployeeRequest.setPlaceOfBirth(userInformation.getPlaceOfBirth());
-        updateEmployeeRequest.setDateOfBirth(userInformation.getDateOfBirth());
-        updateEmployeeRequest.setSalary(String.valueOf(userInformation.getSalary()));
+        UpdateEmployeeRequest updateEmployeeRequest = UpdateEmployeeRequest.builder()
+                .position(userInformation.getPosition())
+                .nik(userInformation.getNik())
+                .firstName(userInformation.getFirstName())
+                .lastName(userInformation.getLastName())
+                .gender(userInformation.getGender())
+                .age(String.valueOf(userInformation.getAge()))
+                .placeOfBirth(userInformation.getPlaceOfBirth())
+                .dateOfBirth(userInformation.getDateOfBirth())
+                .salary(String.valueOf(userInformation.getSalary()))
+                .build();
 
         model.addAttribute("updateEmployeeRequest", updateEmployeeRequest);
         model.addAttribute("employeeId", employeeId);
