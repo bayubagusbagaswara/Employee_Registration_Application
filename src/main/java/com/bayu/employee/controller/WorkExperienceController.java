@@ -34,6 +34,17 @@ public class WorkExperienceController {
 
     private final WorkExperienceService workExperienceService;
 
+    private static final String REDIRECT_URL = "redirect:";
+    private static final String WORK_URL = "/work";
+
+    private static final String EMPLOYEE_URL = "/employee";
+
+    private static final String WORK_DIRECTORY = "work";
+
+    private static final String USERNAME = "username";
+
+    private static final String EMPLOYEE_ID = "employeeId";
+
     @GetMapping("/work")
     public String workExperienceMenu(Authentication authentication,
                                      Model model,
@@ -48,17 +59,19 @@ public class WorkExperienceController {
             return "redirect:/work/home";
         }
 
-        model.addAttribute("username", username);
-        redirectAttributes.addAttribute("employeeId", user.getUserInformation().getId());
+        model.addAttribute(USERNAME, username);
+        redirectAttributes.addAttribute(EMPLOYEE_ID, user.getUserInformation().getId());
 
-        return "redirect:/work/employee/{employeeId}";
+//        return "redirect:/work/employee/{employeeId}";
+        return REDIRECT_URL.concat(WORK_URL).concat(EMPLOYEE_URL).concat("/{employeeId}");
     }
 
     @GetMapping("/work/home")
     public String workExperienceHome(Authentication authentication, Model model) {
         String username = authentication.getName();
-        model.addAttribute("username", username);
-        return "work/home_work";
+        model.addAttribute(USERNAME, username);
+//        return "work/home_work";
+        return WORK_DIRECTORY.concat("/home_work");
     }
 
     @GetMapping("/work/show-add-form")
@@ -75,10 +88,11 @@ public class WorkExperienceController {
         // do calculate process in service layer
 
         model.addAttribute("createWorkExperienceRequest", createWorkExperienceRequest);
-        model.addAttribute("employeeId", user.getUserInformation().getId());
-        model.addAttribute("username", username);
+        model.addAttribute(EMPLOYEE_ID, user.getUserInformation().getId());
+        model.addAttribute(USERNAME, username);
 
-        return "work/add_work";
+//        return "work/add_work";
+        return WORK_DIRECTORY.concat("/add_work");
     }
 
     @PostMapping("/work/save/{employeeId}")
@@ -96,7 +110,7 @@ public class WorkExperienceController {
 
         WorkExperienceDTO workExperience = workExperienceService.createWorkExperience(employeeId, createWorkExperienceRequest);
 
-        redirectAttributes.addAttribute("employeeId", workExperience.getEmployeeId());
+        redirectAttributes.addAttribute(EMPLOYEE_ID, workExperience.getEmployeeId());
 
         return "redirect:/work/employee/{employeeId}";
     }
@@ -112,7 +126,7 @@ public class WorkExperienceController {
         List<WorkExperienceDTO> workExperienceList = workExperienceService.getAllWorkExperiencesByEmployeeId(employeeId);
 
         model.addAttribute("workList", workExperienceList);
-        model.addAttribute("username", username);
+        model.addAttribute(USERNAME, username);
 
         return "work/data_work";
     }
@@ -136,7 +150,7 @@ public class WorkExperienceController {
 
         model.addAttribute("updateWorkExperienceRequest", updateWorkExperienceRequest);
         model.addAttribute("workExperienceId", workExperience.getId());
-        model.addAttribute("username", username);
+        model.addAttribute(USERNAME, username);
 
         log.info("Work Experience DTO : {}", workExperience.toString());
 
@@ -161,8 +175,8 @@ public class WorkExperienceController {
 
         WorkExperienceDTO workExperienceDTO = workExperienceService.updateWorkExperience(workExperienceId, updateWorkExperienceRequest);
 
-        model.addAttribute("username", username);
-        redirectAttributes.addAttribute("employeeId", workExperienceDTO.getEmployeeId());
+        model.addAttribute(USERNAME, username);
+        redirectAttributes.addAttribute(EMPLOYEE_ID, workExperienceDTO.getEmployeeId());
 
         return "redirect:/work/employee/{employeeId}";
     }
@@ -180,10 +194,10 @@ public class WorkExperienceController {
 
         workExperienceService.deleteWorkExperience(workExperienceDTO.getId());
 
-        redirectAttributes.addAttribute("employeeId", workExperienceDTO.getEmployeeId());
-        model.addAttribute("username", username);
+        redirectAttributes.addAttribute(EMPLOYEE_ID, workExperienceDTO.getEmployeeId());
+        model.addAttribute(USERNAME, username);
 
-        if (workExperienceService.getAllWorkExperiencesByEmployeeId(workExperienceDTO.getEmployeeId()).size() == 0) {
+        if (workExperienceService.getAllWorkExperiencesByEmployeeId(workExperienceDTO.getEmployeeId()).isEmpty()) {
             return "redirect:/work/home";
         }
 
